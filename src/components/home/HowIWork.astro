@@ -274,7 +274,7 @@ const STAGES = [
 
   const ic = document.querySelector<HTMLElement>('[data-ic]');
   if (ic) {
-    const { run } = playOnce(ic, { threshold: 0.3, duration: 1700, delay: 120 });
+    const { run } = playOnce(ic, { duration: 1700, delay: 140 });
     document.querySelector('[data-ic-replay]')?.addEventListener('click', run);
   }
 </script>

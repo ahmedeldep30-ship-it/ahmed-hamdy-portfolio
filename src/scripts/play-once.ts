@@ -1,31 +1,33 @@
 /**
- * Play a one-shot animation WHEN IT IS ACTUALLY ON SCREEN — once.
+ * Play a one-shot animation WHEN THE VISITOR CAN ACTUALLY SEE IT — once.
  *
- * Why this exists: the hero previously fired on a timer ~370ms after paint.
- * Measured on the live deployment, the diagram sat 785px down on desktop and
- * 1213px down on mobile, so the animation ran at 13% visibility (desktop) or
- * completely off-screen (mobile) and was finished before the visitor scrolled
- * to it. The motion worked; nobody could see it.
+ * History, because it went wrong twice and the reason matters:
+ *  1. v1 fired on a setTimeout ~370ms after paint. Measured on the live
+ *     deployment, the diagram sat 785px down on desktop and 1213px down on
+ *     mobile, so it played at 13% visibility or entirely off-screen and was
+ *     static before anyone scrolled to it.
+ *  2. v2 fired at `intersectionRatio >= 0.25`, which on a ~700px diagram means
+ *     the top ~175px sliver. Same failure, milder — the transformation ran
+ *     while the departments and findings were still below the fold.
  *
- * Rules encoded here:
- *  · Fire only when a meaningful fraction of the element is really visible.
- *  · Fire once. Never re-run on scroll-back.
- *  · Respect prefers-reduced-motion — the base state is already the resolved
- *    diagram, so doing nothing is the correct reduced-motion behaviour.
- *  · Replay stays available on demand.
+ * So the rule is not a ratio. It is: **the middle of the diagram is on screen**
+ * — i.e. you are looking at it, not at its top edge — with a fallback for
+ * diagrams taller than the viewport, whose midpoint may never comfortably sit
+ * inside it.
+ *
+ * Also: fires once, never on scroll-back, and is inert under reduced motion
+ * (the base state is already the resolved diagram, so doing nothing is right).
  */
 
 export interface PlayOnceOptions {
-  /** Fraction of the element that must be visible before it plays. */
-  threshold?: number;
   /** How long the sequence runs before `.play` is removed. */
   duration?: number;
-  /** Extra delay once visible, so it starts after the eye lands. */
+  /** Settle time once the condition is met, so it starts after the eye lands. */
   delay?: number;
 }
 
 export function playOnce(el: HTMLElement, opts: PlayOnceOptions = {}) {
-  const { threshold = 0.25, duration = 1500, delay = 80 } = opts;
+  const { duration = 1500, delay = 140 } = opts;
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
   let timer: number | undefined;
 
@@ -40,22 +42,44 @@ export function playOnce(el: HTMLElement, opts: PlayOnceOptions = {}) {
 
   if (reduce.matches) return { run };
 
-  // A tall element can never reach a high visibility fraction on a short
-  // viewport, so accept EITHER enough of the element being visible OR the
-  // element filling most of the viewport.
-  const io = new IntersectionObserver(
-    (entries) => {
-      for (const e of entries) {
-        const fillsViewport = e.intersectionRect.height >= window.innerHeight * 0.5;
-        if (e.isIntersecting && (e.intersectionRatio >= threshold || fillsViewport)) {
-          io.disconnect();
-          window.setTimeout(run, delay);
-        }
-      }
-    },
-    { threshold: [0, threshold, 0.5, 0.75] }
-  );
+  function readyToPlay(): boolean {
+    const r = el.getBoundingClientRect();
+    const vh = window.innerHeight;
+    if (r.bottom <= 0 || r.top >= vh) return false;
 
+    const visible = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+    // The element's own midpoint has entered the viewport…
+    const mid = r.top + r.height / 2;
+    const midOnScreen = mid > 0 && mid < vh * 0.9;
+    // …or it is taller than the screen and now dominates it.
+    const dominates = visible >= vh * 0.6;
+    return midOnScreen || dominates;
+  }
+
+  let done = false;
+  const fire = () => {
+    if (done || !readyToPlay()) return;
+    done = true;
+    io.disconnect();
+    window.removeEventListener('scroll', onScroll);
+    window.removeEventListener('resize', onScroll);
+    window.setTimeout(run, delay);
+  };
+
+  // Scroll listener does the real evaluation (a ratio threshold is unreliable
+  // on tall elements); the observer just wakes it up and covers the case where
+  // the element is already in place on load. Both detach after the single fire.
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => { ticking = false; fire(); });
+  };
+
+  const io = new IntersectionObserver(() => fire(), { threshold: [0, 0.25, 0.5, 0.75, 1] });
   io.observe(el);
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
+
   return { run };
 }

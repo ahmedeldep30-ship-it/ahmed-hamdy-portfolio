@@ -393,7 +393,7 @@ const FINDINGS = [
     // Fires when the diagram is genuinely on screen — NOT on a load timer.
     // Measured on live: a timer fired it at 13% visibility on desktop and fully
     // off-screen on mobile, so it finished before anyone could see it.
-    const { run } = playOnce(seam, { threshold: 0.25, duration: 1500, delay: 80 });
+    const { run } = playOnce(seam, { duration: 1500, delay: 140 });
     document.querySelector('[data-seam-replay]')?.addEventListener('click', run);
   }
 </script>
