@@ -44,7 +44,9 @@ for (const fam of ['Manrope', 'Inter']) {
 // ── Computed families actually applied ────────────────────────────────────
 const applied = await page.evaluate(() => {
   const h1 = document.querySelector('h1');
-  const p = document.querySelector('.lede');
+  // Any real body paragraph — NOT a specific class. Tying this to `.lede` meant
+  // a class rename silently reported "Body not Inter" with an empty value.
+  const p = document.querySelector('main p:not([class*="eyebrow"])');
   const canvas = document.createElement('canvas').getContext('2d');
   const width = (text, font) => { canvas.font = font; return canvas.measureText(text).width; };
   return {

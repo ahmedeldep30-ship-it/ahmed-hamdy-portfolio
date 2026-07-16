@@ -99,11 +99,14 @@ import { withBase, cta, external } from '@config/site';
             class="pf__img"
           />
         </div>
-        <p class="pf__cap">
-          <span class="pf__dot" aria-hidden="true"></span>
-          <span>Founder — <strong>Formula4You</strong>, live</span>
-        </p>
       </div>
+      {/* Caption sits BELOW the portrait, not on it. Over the image it landed on
+          his jacket and read as text colliding with the photo — a scrim only
+          made the photo worse to hide a placement problem. */}
+      <p class="pf__cap">
+        <span class="pf__dot" aria-hidden="true"></span>
+        <span>Founder — <strong>Formula4You</strong>, live</span>
+      </p>
       </div>
     </div>
   </div>
@@ -119,9 +122,6 @@ import { withBase, cta, external } from '@config/site';
   /* At 360×780 the arrival has ~713px after the header. Every reclaimed pixel
      is the difference between the CTA being on the first screen or clipped by
      the fold edge, which reads as broken. */
-  @media (max-width: 400px) {
-    .intro { padding-block: var(--s5) var(--s7); }
-  }
 
   /* Low-contrast gradient field. Gives the ink depth without a "dark SaaS"
      gradient hero — no banding, no saturation, nothing that reads as a splash. */
@@ -203,8 +203,11 @@ import { withBase, cta, external } from '@config/site';
   .intro__portrait { display: flex; justify-content: center; perspective: 1100px; }
   @media (max-width: 940px) { .intro__portrait { justify-content: flex-start; } }
 
-  /* Parallax layer — no transition, so it tracks the scroll exactly. */
+  /* Parallax layer — no transition, so it tracks the scroll exactly.
+     --accent-off lives here because BOTH the frame and the caption below it
+     need it, and the caption is a sibling of .pf, not a child. */
   .pf__par {
+    --accent-off: 18px;
     transform: translate3d(0, var(--py, 0px), 0);
     transform-style: preserve-3d;
     will-change: transform;
@@ -221,23 +224,36 @@ import { withBase, cta, external } from '@config/site';
   }
   /* Smaller when it leads: big enough to read as a person, not so big that the
      claim is pushed off the first screen. */
-  @media (max-width: 940px) { .pf { width: min(248px, 58vw); } }
-  /* At 360 the whole arrival — face, name, claim, action — has to fit 780px. */
-  @media (max-width: 400px) { .pf { width: min(200px, 54vw); } }
+  /* Sizing here is governed by a hard constraint, not taste: the whole arrival
+     — face, name, role, claim, action — must fit one screen. Moving the caption
+     below the photo added ~34px and pushed the CTA off at 390 and 360, so the
+     portrait pays that back. verify-hero-fold.mjs is the arbiter. */
+  @media (max-width: 940px) {
+    .pf { width: min(216px, 52vw); }
+    .pf__par { --accent-off: 12px; }
+  }
+  @media (max-width: 400px) {
+    .pf { width: min(180px, 50vw); }
+    .pf__par { --accent-off: 9px; }
+  }
 
-  /* Offset accent frame BEHIND the image — the thing that makes the stack read
-     as layered rather than as one flat rectangle. */
+  /* Offset accent frame BEHIND the image.
+     NO translateZ. Under the parent's `perspective`, translateZ(-40px) scaled
+     this ~3.5% smaller and pushed it toward the perspective origin, so its
+     offset stopped being parallel to the image and simply read as a
+     misalignment — because it was one. A flat, exactly-parallel offset reads as
+     deliberate. Depth on tilt still comes from the layers above it. */
   .pf__accent {
-    position: absolute; inset: 22px -22px -22px 22px;
+    position: absolute;
+    inset: var(--accent-off) calc(var(--accent-off) * -1) calc(var(--accent-off) * -1) var(--accent-off);
     border: 1px solid var(--teal-signal);
     border-radius: var(--r-lg);
-    opacity: 0.5;
-    transform: translateZ(-40px);
+    opacity: 0.45;
   }
   .pf__glow {
     position: absolute; inset: -12% -18% -6% -18%;
     background: radial-gradient(50% 50% at 50% 45%, rgba(61, 194, 186, 0.16), transparent 70%);
-    transform: translateZ(-70px);
+    transform: translateZ(-60px);
     pointer-events: none;
   }
 
@@ -247,27 +263,18 @@ import { withBase, cta, external } from '@config/site';
     overflow: hidden;
     border: 1px solid var(--hairline-strong);
     background: var(--surface-raise);
-    transform: translateZ(20px);
+    /* Lifted above the accent so the tilt still produces a differential —
+       which is what actually reads as dimensional. */
+    transform: translateZ(28px);
   }
   .pf__img { width: 100%; height: auto; display: block; }
-  /* A restrained scrim at the base so the caption always has ground to sit on,
-     without dulling the face. */
-  .pf__frame::after {
-    content: ''; position: absolute; inset: auto 0 0 0; height: 38%;
-    background: linear-gradient(to top, rgba(10, 21, 31, 0.72), transparent);
-    pointer-events: none;
-  }
 
-  /* One line, never wrapping — a caption that breaks mid-phrase and orphans its
-     status dot reads as a bug, not a detail. */
+  /* Below the portrait, in normal flow. Clears the accent frame's offset. */
   .pf__cap {
-    position: absolute; left: var(--s4); bottom: var(--s4);
-    display: inline-flex; align-items: center; gap: var(--s2);
-    white-space: nowrap;
+    display: flex; align-items: center; gap: var(--s2);
+    margin-top: calc(var(--accent-off) + var(--s3));
     font-family: var(--font-head); font-size: var(--fs-caption); font-weight: 600;
-    color: var(--text);
-    transform: translateZ(48px);
-    text-shadow: 0 1px 10px rgba(10, 21, 31, 0.95);
+    color: var(--text-muted);
   }
   .pf__cap strong { color: var(--teal-bright); font-weight: 700; }
   .pf__dot {
@@ -293,6 +300,24 @@ import { withBase, cta, external } from '@config/site';
 
   @media (prefers-reduced-motion: reduce) {
     .pf { transition: none; transform: none !important; }
+  }
+
+  /* ══ SMALL SCREENS — LAST ON PURPOSE ═══════════════════════════════════
+     These must come after the base rules. Same specificity means source order
+     decides, and an identical block placed higher up silently lost to the
+     `clamp()` on .intro__head — the override simply never applied, and the
+     headline stayed 141px instead of ~86px.
+
+     360×780 leaves ~713px after the header for face, name, role, the claim,
+     the lede AND a button. Every value here buys back pixels so the CTA is not
+     clipped by the fold edge. verify-hero-fold.mjs is the arbiter.          */
+  @media (max-width: 400px) {
+    .intro { padding-block: var(--s4) var(--s7); }
+    .intro__copy { gap: var(--s3); }
+    .intro__head { font-size: 1.75rem; }
+    .intro__lede { font-size: 0.9375rem; }
+    .intro__meta { gap: var(--s5); padding-top: var(--s4); }
+    .pf__cap { margin-top: calc(var(--accent-off) + var(--s2)); }
   }
 </style>
 
