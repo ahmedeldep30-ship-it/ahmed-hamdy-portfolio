@@ -1,0 +1,343 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '@/assets/portrait/ahmed-hamdy-portrait-approved.webp';
+import { withBase, cta, external } from '@config/site';
+
+/**
+ * INTRO — the arrival.
+ *
+ * Why this exists: the home page opened with a systems diagram and no person in
+ * it. A visitor met an instrument instead of Ahmed. For a personal portfolio
+ * that is a failure of the first five seconds, however legible the argument is.
+ *
+ * Depth here is CSS, not WebGL (approved Gate 2.2). It comes from:
+ *  · a layered portrait — offset accent frame behind, image in front, so the
+ *    composition has real z-order rather than a flat rectangle
+ *  · pointer-reactive perspective: the stack tilts a few degrees toward the
+ *    cursor, and the layers move by different amounts, which is what actually
+ *    reads as dimensional
+ *  · scroll parallax between copy and portrait
+ *  · film grain over a low-contrast gradient field, so the dark canvas has
+ *    texture instead of being flat ink
+ *  · a choreographed arrival — name, then claim, then face, then action
+ *
+ * All of it degrades: no JS → static composition, still correct. Reduced motion
+ * → no tilt, no parallax, no reveal. Nothing here carries meaning that is not
+ * also in the text.
+ */
+---
+
+<section class="intro" data-intro>
+  <div class="intro__field" aria-hidden="true"></div>
+  <div class="intro__grain" aria-hidden="true"></div>
+
+  <div class="wrap intro__grid">
+    <div class="intro__copy">
+      <div class="intro__id intro__r intro__r--1">
+        <span class="intro__name">Ahmed Hamdy</span>
+        <span class="intro__role">Business Growth &amp; Operations Specialist</span>
+      </div>
+
+      <h1 class="intro__head intro__r intro__r--2">
+        I trace the system<br />
+        behind the problem<span class="intro__dash">—</span><br />
+        <em>then redesign it.</em>
+      </h1>
+
+      {/* Deliberately two sentences. The earlier version listed every capability
+          here, which the brief explicitly forbids ("do not place the complete
+          capability list in the hero") — and at 360px it ran to seven lines and
+          pushed the CTA off the first screen. The breadth belongs to the
+          connected-business-system section. */}
+      <p class="intro__lede intro__r intro__r--3">
+        Most business problems are not where they appear. I find where the system actually
+        loses value — and design the simplest change that stops the loss.
+      </p>
+
+      <div class="intro__ctas intro__r intro__r--4">
+        <a class="btn btn--primary" href={withBase('/work/formula4you')}>
+          Explore selected work
+          <svg class="btn__arrow" viewBox="0 0 14 10" width="14" height="10" aria-hidden="true">
+            <path d="M0 5h12M8.5 1.5 12 5l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a class="btn btn--ghost" href={withBase(cta.business.href)} data-cta>{cta.business.label}</a>
+      </div>
+
+      <dl class="intro__meta intro__r intro__r--5">
+        <div>
+          <dt>Based in</dt>
+          <dd>Alexandria, Egypt</dd>
+        </div>
+        <div>
+          <dt>Languages</dt>
+          <dd>Arabic · English</dd>
+        </div>
+        <div>
+          <dt>Founder of</dt>
+          <dd><a href={external.formula4you} rel="noopener">Formula4You ↗</a></dd>
+        </div>
+      </dl>
+    </div>
+
+    <div class="intro__portrait intro__r intro__r--p" data-tilt>
+      {/* Parallax and tilt live on SEPARATE layers on purpose: the tilt needs a
+          transition to ease back on pointer-leave, and a transition on the
+          parallax would make it lag the scroll by 420ms. */}
+      <div class="pf__par" data-tilt-par>
+      <div class="pf" data-tilt-stack>
+        <span class="pf__accent" aria-hidden="true"></span>
+        <span class="pf__glow" aria-hidden="true"></span>
+        <div class="pf__frame">
+          <Image
+            src={portrait}
+            alt="Ahmed Hamdy, Business Growth and Operations Specialist, in a dark suit and white shirt."
+            widths={[380, 560, 760]}
+            sizes="(max-width: 900px) 62vw, 420px"
+            loading="eager"
+            fetchpriority="high"
+            class="pf__img"
+          />
+        </div>
+        <p class="pf__cap">
+          <span class="pf__dot" aria-hidden="true"></span>
+          <span>Founder — <strong>Formula4You</strong>, live</span>
+        </p>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .intro {
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+    padding-block: clamp(2.5rem, 6vw, 5.5rem) clamp(3rem, 6vw, 5rem);
+  }
+  /* At 360×780 the arrival has ~713px after the header. Every reclaimed pixel
+     is the difference between the CTA being on the first screen or clipped by
+     the fold edge, which reads as broken. */
+  @media (max-width: 400px) {
+    .intro { padding-block: var(--s5) var(--s7); }
+  }
+
+  /* Low-contrast gradient field. Gives the ink depth without a "dark SaaS"
+     gradient hero — no banding, no saturation, nothing that reads as a splash. */
+  .intro__field {
+    position: absolute; inset: -20% -10% auto; height: 150%; z-index: -2;
+    background:
+      radial-gradient(58% 46% at 68% 18%, rgba(61, 194, 186, 0.10), transparent 62%),
+      radial-gradient(42% 38% at 12% 8%, rgba(16, 42, 67, 0.55), transparent 70%),
+      radial-gradient(38% 44% at 92% 72%, rgba(215, 101, 85, 0.05), transparent 66%);
+    pointer-events: none;
+  }
+
+  /* Film grain — data URI, no external request. Texture is most of what makes a
+     dark canvas feel like a surface rather than an absence. */
+  .intro__grain {
+    position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    opacity: 0.32; mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
+  }
+
+  .intro__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+    gap: clamp(2rem, 5vw, 5rem);
+    align-items: center;
+  }
+  /* On mobile the portrait LEADS. Stacked in source order it landed below the
+     whole pitch — you scrolled past everything before meeting the person, which
+     is the exact failure this section exists to fix. Source order stays
+     copy-first (the claim is what a crawler and a screen reader should meet
+     first); only the visual order flips. */
+  @media (max-width: 940px) {
+    .intro__grid { grid-template-columns: 1fr; gap: var(--s5); }
+    .intro__portrait { order: -1; justify-content: flex-start; }
+  }
+
+  .intro__copy { display: flex; flex-direction: column; gap: var(--s5); }
+
+  .intro__id { display: flex; flex-direction: column; gap: 2px; }
+  .intro__name {
+    font-family: var(--font-head); font-weight: 800;
+    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+    letter-spacing: -0.01em; color: var(--text);
+  }
+  .intro__role {
+    font-family: var(--font-head); font-size: 0.6875rem; font-weight: 700;
+    letter-spacing: 0.18em; text-transform: uppercase; color: var(--teal-bright);
+  }
+
+  .intro__head {
+    font-family: var(--font-head); font-weight: 800;
+    font-size: clamp(2.125rem, 1.1rem + 3.9vw, 4rem);
+    line-height: 1.03; letter-spacing: -0.035em;
+    color: var(--text); margin: 0;
+  }
+  .intro__head em {
+    font-family: var(--font-serif); font-style: italic; font-weight: 400;
+    letter-spacing: -0.02em; color: var(--teal-bright);
+  }
+  .intro__dash { color: var(--coral-bright); padding-left: 0.1em; }
+
+  .intro__lede { font-size: clamp(1rem, 0.95rem + 0.25vw, 1.125rem); color: var(--text-muted); max-width: 52ch; }
+  .intro__ctas { display: flex; gap: var(--s3); flex-wrap: wrap; }
+
+  .intro__meta {
+    display: flex; flex-wrap: wrap; gap: var(--s6);
+    margin: var(--s2) 0 0; padding-top: var(--s5);
+    border-top: 1px solid var(--hairline);
+  }
+  .intro__meta dt {
+    font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint);
+  }
+  .intro__meta dd { margin: 3px 0 0; font-size: var(--fs-caption); color: var(--text); }
+  .intro__meta a { color: var(--teal-bright); text-decoration: none; }
+  .intro__meta a:hover { text-decoration: underline; }
+
+  /* ── Portrait stack ─────────────────────────────────────────────────── */
+  .intro__portrait { display: flex; justify-content: center; perspective: 1100px; }
+  @media (max-width: 940px) { .intro__portrait { justify-content: flex-start; } }
+
+  /* Parallax layer — no transition, so it tracks the scroll exactly. */
+  .pf__par {
+    transform: translate3d(0, var(--py, 0px), 0);
+    transform-style: preserve-3d;
+    will-change: transform;
+  }
+
+  .pf {
+    position: relative;
+    width: min(420px, 100%);
+    transform-style: preserve-3d;
+    /* --rx/--ry are written by the pointer handler; 0 until then. */
+    transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 420ms var(--ease-out);
+    will-change: transform;
+  }
+  /* Smaller when it leads: big enough to read as a person, not so big that the
+     claim is pushed off the first screen. */
+  @media (max-width: 940px) { .pf { width: min(248px, 58vw); } }
+  /* At 360 the whole arrival — face, name, claim, action — has to fit 780px. */
+  @media (max-width: 400px) { .pf { width: min(200px, 54vw); } }
+
+  /* Offset accent frame BEHIND the image — the thing that makes the stack read
+     as layered rather than as one flat rectangle. */
+  .pf__accent {
+    position: absolute; inset: 22px -22px -22px 22px;
+    border: 1px solid var(--teal-signal);
+    border-radius: var(--r-lg);
+    opacity: 0.5;
+    transform: translateZ(-40px);
+  }
+  .pf__glow {
+    position: absolute; inset: -12% -18% -6% -18%;
+    background: radial-gradient(50% 50% at 50% 45%, rgba(61, 194, 186, 0.16), transparent 70%);
+    transform: translateZ(-70px);
+    pointer-events: none;
+  }
+
+  .pf__frame {
+    position: relative;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    border: 1px solid var(--hairline-strong);
+    background: var(--surface-raise);
+    transform: translateZ(20px);
+  }
+  .pf__img { width: 100%; height: auto; display: block; }
+  /* A restrained scrim at the base so the caption always has ground to sit on,
+     without dulling the face. */
+  .pf__frame::after {
+    content: ''; position: absolute; inset: auto 0 0 0; height: 38%;
+    background: linear-gradient(to top, rgba(10, 21, 31, 0.72), transparent);
+    pointer-events: none;
+  }
+
+  /* One line, never wrapping — a caption that breaks mid-phrase and orphans its
+     status dot reads as a bug, not a detail. */
+  .pf__cap {
+    position: absolute; left: var(--s4); bottom: var(--s4);
+    display: inline-flex; align-items: center; gap: var(--s2);
+    white-space: nowrap;
+    font-family: var(--font-head); font-size: var(--fs-caption); font-weight: 600;
+    color: var(--text);
+    transform: translateZ(48px);
+    text-shadow: 0 1px 10px rgba(10, 21, 31, 0.95);
+  }
+  .pf__cap strong { color: var(--teal-bright); font-weight: 700; }
+  .pf__dot {
+    width: 6px; height: 6px; border-radius: 50%; flex: none;
+    background: var(--teal-bright);
+    box-shadow: 0 0 0 3px rgba(61, 194, 186, 0.22);
+  }
+
+  /* ══ ARRIVAL ═══════════════════════════════════════════════════════════
+     Name, then claim, then face, then action. Runs once, on load, ~1.1s.
+     The global reduced-motion clamp collapses these to instant — the content
+     is never dependent on them.                                            */
+  @keyframes intro-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  @keyframes intro-face { from { opacity: 0; transform: translateY(20px) scale(0.97); } to { opacity: 1; transform: none; } }
+
+  .intro__r { animation: intro-rise 620ms var(--ease-out) both; }
+  .intro__r--1 { animation-delay: 60ms; }
+  .intro__r--2 { animation-delay: 180ms; }
+  .intro__r--3 { animation-delay: 420ms; }
+  .intro__r--4 { animation-delay: 560ms; }
+  .intro__r--5 { animation-delay: 680ms; }
+  .intro__r--p { animation: intro-face 820ms var(--ease-out) both; animation-delay: 300ms; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pf { transition: none; transform: none !important; }
+  }
+</style>
+
+<script>
+  const intro = document.querySelector<HTMLElement>('[data-intro]');
+  const stack = document.querySelector<HTMLElement>('[data-tilt-stack]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  // Pointer-reactive perspective. Deliberately small (max ~4.5°): enough to read
+  // as dimensional, not enough to become a gimmick. Pointer only — never on
+  // touch, where it would fight the scroll.
+  if (intro && stack && !reduce.matches && window.matchMedia('(hover: hover)').matches) {
+    let raf = 0;
+    intro.addEventListener('pointermove', (e) => {
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        raf = 0;
+        const r = intro.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width - 0.5;
+        const py = (e.clientY - r.top) / r.height - 0.5;
+        stack.style.setProperty('--ry', `${(px * 9).toFixed(2)}deg`);
+        stack.style.setProperty('--rx', `${(-py * 5).toFixed(2)}deg`);
+      });
+    });
+    intro.addEventListener('pointerleave', () => {
+      stack.style.setProperty('--ry', '0deg');
+      stack.style.setProperty('--rx', '0deg');
+    });
+  }
+
+  // Scroll parallax: the portrait drifts slower than the copy. Passive, rAF-
+  // throttled, and it does no work once the section is off screen.
+  const par = document.querySelector<HTMLElement>('[data-tilt-par]');
+  if (intro && par && !reduce.matches) {
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        ticking = false;
+        const r = intro.getBoundingClientRect();
+        if (r.bottom < 0 || r.top > window.innerHeight) return;
+        par.style.setProperty('--py', `${(-window.scrollY * 0.05).toFixed(1)}px`);
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+</script>

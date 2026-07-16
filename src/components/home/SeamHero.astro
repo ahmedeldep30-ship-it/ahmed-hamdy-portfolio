@@ -1,6 +1,4 @@
 ---
-import { withBase, cta } from '@config/site';
-
 /**
  * SEAM DIAGNOSIS — the hero.
  *
@@ -68,28 +66,18 @@ const M_STAGES = [
 ];
 ---
 
-<section class="hero">
-  <div class="wrap hero__top">
-    <div class="hero__copy">
-      <p class="eyebrow">Business Growth &amp; Operations Specialist</p>
-      <h1>I trace the system behind the problem — then redesign it.</h1>
-      <p class="lede">Most business problems are not where they appear.</p>
-      <div class="cluster hero__ctas">
-        <a class="btn btn--primary" href={withBase('/work/formula4you')}>
-          Explore selected work
-          <svg class="btn__arrow" viewBox="0 0 14 10" width="14" height="10" aria-hidden="true">
-            <path d="M0 5h12M8.5 1.5 12 5l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <a class="btn btn--ghost" href={withBase(cta.business.href)} data-cta>{cta.business.label}</a>
-      </div>
+<section class="section seam-sec" id="diagnosis" aria-labelledby="dx-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">A worked diagnosis</span>
+      <h2 id="dx-h" class="sec-head__q">Support volume is rising after purchase. Watch where the problem actually lives.</h2>
+      <p class="muted">
+        Not a case study — a demonstration. This is the reasoning I run on any business, in
+        about four seconds.
+      </p>
     </div>
 
     <figure class="seam" data-seam>
-      <figcaption class="seam__cap">
-        <span class="eyebrow">A worked diagnosis</span>
-        <span class="faint">Support volume is rising after purchase. Watch where the problem actually lives.</span>
-      </figcaption>
 
       <!-- Meaning lives here: always in the DOM, always crawlable, always in the
            accessibility tree regardless of which SVG variant is displayed. -->
@@ -237,51 +225,10 @@ const M_STAGES = [
       </div>
     </figure>
 
-    <!-- Proof strip: moved BELOW the instrument. It used to occupy the hero's
-         right column, which pushed the diagram past the fold. -->
-    <aside class="hero__proof" aria-label="At a glance">
-      <p class="eyebrow hero__proof-l">At a glance</p>
-      <ul class="hero__proof-l2">
-        <li>
-          <span class="hero__p-k">Founder — Formula4You</span>
-          <span class="hero__p-v">A live vertical-commerce platform for Egypt's fragrance market.</span>
-        </li>
-        <li>
-          <span class="hero__p-k">Owned end to end</span>
-          <span class="hero__p-v">Market gap, business model, product priorities, operating design, and go-to-market.</span>
-        </li>
-        <li>
-          <span class="hero__p-k">UK remote fintech</span>
-          <span class="hero__p-v">High-volume customer exposure and hundreds of five-star reviews.</span>
-        </li>
-        <li>
-          <span class="hero__p-k">Commercial work</span>
-          <span class="hero__p-v">Conversion journeys, offer structure, and order operations before scaling spend.</span>
-        </li>
-      </ul>
-    </aside>
   </div>
 </section>
 
 <style>
-  .hero { padding-block: clamp(1.75rem, 3vw, 2.5rem) var(--section-y); }
-  .hero__top { display: flex; flex-direction: column; gap: clamp(1.25rem, 2.5vw, 2rem); }
-
-  /* Tight on purpose: every pixel here pushes the instrument toward the fold. */
-  .hero__copy { max-width: 30ch; display: flex; flex-direction: column; gap: var(--s4); }
-  .hero__copy h1 {
-    font-size: clamp(2rem, 1.2rem + 3vw, 3.25rem);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-    max-width: 18ch;
-  }
-  .hero__copy .lede { max-width: 46ch; }
-  .hero__ctas { margin-top: var(--s1); }
-  @media (min-width: 1100px) {
-    .hero__copy { max-width: none; }
-    .hero__copy h1 { max-width: 22ch; }
-  }
-
   .seam { margin: 0; }
   .seam__cap {
     display: flex; align-items: baseline; gap: var(--s3); flex-wrap: wrap;
@@ -356,19 +303,6 @@ const M_STAGES = [
     transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
   }
   .seam__replay:hover { border-color: var(--teal-bright); color: var(--teal-bright); }
-
-  /* ── Proof strip — below the instrument, horizontal ─────────────────── */
-  .hero__proof { margin-top: var(--s6); padding-top: var(--s5); border-top: 1px solid var(--hairline); }
-  .hero__proof-l { margin-bottom: var(--s4); }
-  .hero__proof-l2 {
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s5);
-    padding: 0; list-style: none;
-  }
-  .hero__proof-l2 li { display: flex; flex-direction: column; gap: 3px; }
-  .hero__p-k { font-family: var(--font-head); font-size: var(--fs-caption); font-weight: 700; color: var(--teal-bright); }
-  .hero__p-v { font-size: var(--fs-caption); color: var(--text-muted); line-height: 1.5; }
-  @media (max-width: 900px) { .hero__proof-l2 { grid-template-columns: 1fr 1fr; gap: var(--s4); } }
-  @media (max-width: 560px) { .hero__proof-l2 { grid-template-columns: 1fr; } }
 
   /* ══ MOTION ════════════════════════════════════════════════════════════
      Base state = the finished diagram. `.play` re-reveals it in reasoning

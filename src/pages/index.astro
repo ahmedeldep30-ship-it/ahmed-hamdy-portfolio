@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import Intro from '@components/home/Intro.astro';
 import SeamHero from '@components/home/SeamHero.astro';
 import AudienceGateway from '@components/home/AudienceGateway.astro';
 import BusinessSystem from '@components/home/BusinessSystem.astro';
@@ -58,6 +59,7 @@ import { site, absoluteUrl } from '@config/site';
     },
   ]}
 >
+  <Intro />
   <SeamHero />
   <AudienceGateway />
   <BusinessSystem />

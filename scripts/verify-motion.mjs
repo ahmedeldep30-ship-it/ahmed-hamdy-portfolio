@@ -29,12 +29,20 @@ async function check(label, contextOpts, path, sel) {
     window.__fired = null;
     const watch = () => {
       document.querySelectorAll('[data-seam],[data-seam2],[data-ic]').forEach((el) => {
+        // Measure the DIAGRAM, not the whole <figure>. The figure also holds the
+        // findings and conclusion (~900px), so measuring it reports 34% visible
+        // when the diagram itself is fully on screen. The play trigger watches
+        // the diagram; the assertion must watch the same thing.
+        const measured = el.querySelector('[data-seam-stage]') ?? el;
         new MutationObserver(() => {
-          if (!el.classList.contains('play') || window.__fired?.[el.dataset.seam2 !== undefined ? 'x' : 'y']) return;
-          const r = el.getBoundingClientRect();
+          if (!el.classList.contains('play')) return;
+          const r = measured.getBoundingClientRect();
+          if (r.height === 0) return;
           const vis = Math.max(0, Math.min(r.bottom, innerHeight) - Math.max(r.top, 0));
           (window.__fired ??= {});
-          window.__fired[el.getAttribute('data-seam') !== null ? 'seam' : el.getAttribute('data-seam2') !== null ? 'seam2' : 'ic'] ??= {
+          const key = el.getAttribute('data-seam') !== null ? 'seam'
+            : el.getAttribute('data-seam2') !== null ? 'seam2' : 'ic';
+          window.__fired[key] ??= {
             visibleFrac: +(vis / r.height).toFixed(2),
             visiblePx: Math.round(vis),
             viewportFrac: +(vis / innerHeight).toFixed(2),
