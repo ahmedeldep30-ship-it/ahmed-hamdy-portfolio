@@ -2,18 +2,24 @@
 import { withBase, cta } from '@config/site';
 
 /**
- * SEAM DIAGNOSIS — primary hero motion.
+ * SEAM DIAGNOSIS — the hero.
  *
  * The customer experiences one continuous journey. The company is organised as
  * five separate functions. The break falls in a HANDOFF — a place no single
  * department owns and no dashboard measures.
  *
+ * PLACEMENT IS THE FEATURE, not decoration. Measured before this rewrite, the
+ * figure sat 780px down with the SVG starting at 878px — below the fold at
+ * 1920, 1440, 1366 and 1024. It could never play on arrival, so the argument
+ * only existed for people who scrolled. The copy is now tight enough that the
+ * instrument lands inside the first viewport and plays as the page opens.
+ * scripts/verify-hero-fold.mjs holds that line.
+ *
  * Contract:
  *  · Base state IS the complete, annotated, resolved diagram. Killing the
  *    animation never leaves a blank frame — it leaves the whole argument.
- *  · The animation only reveals that diagram in reasoning order.
- *  · Headline is readable before anything moves (motion starts after paint).
- *  · Plays once. Never loops. Replayable. ≤1.15s. Never blocks interaction.
+ *  · Six beats over ~4.4s, paced to be read. Plays once. Never loops.
+ *  · Reduced motion never autoplays; the control still works on request.
  *  · Meaning lives in semantic HTML; SVG is aria-hidden illustration.
  */
 
@@ -27,14 +33,13 @@ const STAGES = [
 ];
 
 const DEPTS = [
-  { x: 40, cx: 127, label: 'Marketing', state: 'cause' },
-  { x: 226, cx: 313, label: 'Website & Product', state: 'cause' },
-  { x: 412, cx: 499, label: 'Sales & Checkout', state: 'ok' },
-  { x: 598, cx: 685, label: 'Operations', state: 'cause' },
-  { x: 784, cx: 871, label: 'Support & Retention', state: 'symptom' },
+  { x: 40, cx: 127, label: 'Marketing', state: 'cause', note: 'contributes' },
+  { x: 226, cx: 313, label: 'Website & Product', state: 'cause', note: 'contributes' },
+  { x: 412, cx: 499, label: 'Sales & Checkout', state: 'ok', note: 'working correctly' },
+  { x: 598, cx: 685, label: 'Operations', state: 'cause', note: 'contributes' },
+  { x: 784, cx: 871, label: 'Support & Retention', state: 'symptom', note: 'symptom shows here' },
 ];
 
-// stage index → owning department centre
 const OWNS: [number, number][] = [
   [70, 127], [242, 313], [414, 313], [586, 499], [758, 685], [930, 871],
 ];
@@ -45,6 +50,22 @@ const FINDINGS = [
   { n: 3, dept: 'Operations', text: 'The real delay lives here — fulfilment takes three days.' },
   { n: 4, dept: 'Support', text: 'The symptom only surfaces here — “Where is my order?”' },
 ];
+
+/* Mobile: same reasoning, laid out HORIZONTALLY and compactly.
+   The old mobile variant was a 560-tall vertical stack — correct but
+   interminable, and it made the page feel like a column of unrelated bits.
+   Here the journey stays a horizontal line (which is the whole metaphor:
+   the customer experiences ONE line), labels alternate above/below so each
+   gets double the room, and the five functions are carried by the HTML
+   findings below rather than crammed into unreadable 8px chips. */
+const M_STAGES = [
+  { x: 28, label: 'Discover', y: 74 },
+  { x: 85, label: 'Understand', y: 92 },
+  { x: 142, label: 'Decide', y: 74 },
+  { x: 199, label: 'Buy', y: 92 },
+  { x: 256, label: 'Receive', y: 74 },
+  { x: 314, label: 'Return', y: 92 },
+];
 ---
 
 <section class="hero">
@@ -52,49 +73,22 @@ const FINDINGS = [
     <div class="hero__copy">
       <p class="eyebrow">Business Growth &amp; Operations Specialist</p>
       <h1>I trace the system behind the problem — then redesign it.</h1>
-      <hr class="resolve-rule" />
-      <p class="lede">
-        Most business problems are not where they appear. I find where the system actually
-        loses value — across market, operations, customer experience, conversion, and product —
-        and design the simplest change that stops the loss.
-      </p>
+      <p class="lede">Most business problems are not where they appear.</p>
       <div class="cluster hero__ctas">
-        <a class="btn btn--primary" href={withBase('/work/formula4you')}>Explore selected work</a>
+        <a class="btn btn--primary" href={withBase('/work/formula4you')}>
+          Explore selected work
+          <svg class="btn__arrow" viewBox="0 0 14 10" width="14" height="10" aria-hidden="true">
+            <path d="M0 5h12M8.5 1.5 12 5l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
         <a class="btn btn--ghost" href={withBase(cta.business.href)} data-cta>{cta.business.label}</a>
       </div>
     </div>
 
-    <!-- Proof strip (Brief §08). Safe wording only — no number carries a claim
-         its evidence cannot support. -->
-    <aside class="hero__proof" aria-label="At a glance">
-      <p class="eyebrow hero__proof-l">At a glance</p>
-      <ul class="hero__proof-l2">
-        <li>
-          <span class="hero__p-k">Founder — Formula4You</span>
-          <span class="hero__p-v">A live vertical-commerce platform for Egypt's fragrance market.</span>
-        </li>
-        <li>
-          <span class="hero__p-k">Owned end to end</span>
-          <span class="hero__p-v">Market gap, business model, product priorities, operating design, and go-to-market.</span>
-        </li>
-        <li>
-          <span class="hero__p-k">UK remote fintech</span>
-          <span class="hero__p-v">High-volume customer exposure and hundreds of five-star reviews.</span>
-        </li>
-        <li>
-          <span class="hero__p-k">Commercial work</span>
-          <span class="hero__p-v">Conversion journeys, offer structure, and order operations before scaling spend.</span>
-        </li>
-      </ul>
-      <p class="hero__proof-n">Alexandria, Egypt · English &amp; Arabic</p>
-    </aside>
-
     <figure class="seam" data-seam>
       <figcaption class="seam__cap">
         <span class="eyebrow">A worked diagnosis</span>
-        <p class="faint">
-          Support volume is rising after purchase. Here is where the problem actually lives.
-        </p>
+        <span class="faint">Support volume is rising after purchase. Watch where the problem actually lives.</span>
       </figcaption>
 
       <!-- Meaning lives here: always in the DOM, always crawlable, always in the
@@ -111,113 +105,103 @@ const FINDINGS = [
         owner for post-purchase certainty and three timed updates — not a new product.
       </p>
 
+      <!-- One stage wrapping both variants: its box always tracks whichever
+           diagram is actually displayed, so the play trigger works at every
+           width without knowing which SVG is visible. -->
+      <div class="seam__stage" data-seam-stage>
       <!-- ── DESKTOP INSTRUMENT ──────────────────────────────────────────── -->
-      <svg class="seam__svg seam__svg--wide" viewBox="0 0 1000 344" aria-hidden="true" focusable="false">
-        <!-- customer journey: one continuous line -->
+      <svg class="seam__svg seam__svg--wide" viewBox="0 0 1000 272" aria-hidden="true" focusable="false">
         <g class="s-journey">
-          <path class="s-line s-fx-line" pathLength="1" d="M 70 52 L 596 52" />
-          <path class="s-line s-fx-line s-fx-line--b" pathLength="1" d="M 748 52 L 930 52" />
+          <text class="s-lab" x="0" y="12">THE CUSTOMER EXPERIENCES ONE JOURNEY</text>
+          <path class="s-line s-fx-line" pathLength="1" d="M 70 40 L 596 40" />
+          <path class="s-line s-fx-line s-fx-line--b" pathLength="1" d="M 748 40 L 930 40" />
 
-          <!-- the break: the gap the customer feels and no box owns -->
           <g class="s-fx-break">
-            <path class="s-break" d="M 596 52 L 748 52" />
-            <path class="s-break-cap" d="M 596 42 L 596 62" />
-            <path class="s-break-cap" d="M 748 42 L 748 62" />
-            <text class="s-t s-t--f" x="672" y="34" text-anchor="middle">the break</text>
+            <path class="s-break" d="M 596 40 L 748 40" />
+            <path class="s-break-cap" d="M 596 30 L 596 50" />
+            <path class="s-break-cap" d="M 748 30 L 748 50" />
+            <text class="s-t s-t--f" x="672" y="24" text-anchor="middle">the break</text>
           </g>
 
           {STAGES.map((s) => (
             <g class="s-fx-stage">
-              <circle class="s-dot" cx={s.x} cy="52" r="4.5" />
-              <text class="s-t" x={s.x} y="80" text-anchor="middle">{s.label}</text>
+              <circle class="s-dot" cx={s.x} cy="40" r="4.5" />
+              <text class="s-t" x={s.x} y="66" text-anchor="middle">{s.label}</text>
             </g>
           ))}
-          <text class="s-lab" x="0" y="16">THE CUSTOMER EXPERIENCES ONE JOURNEY</text>
         </g>
 
-        <!-- ownership connectors -->
         <g class="s-fx-own">
           {OWNS.map(([sx, dx]) => (
-            <path class="s-own" d={`M ${sx} 58 C ${sx} 130, ${dx} 130, ${dx} 198`} />
+            <path class="s-own" d={`M ${sx} 46 C ${sx} 108, ${dx} 108, ${dx} 148`} />
           ))}
         </g>
 
-        <!-- the seam itself -->
         <g class="s-fx-break">
-          <path class="s-seam-line" d="M 592 60 L 592 276" />
-          <text class="s-t s-t--f" x="592" y="292" text-anchor="middle">no owner in this gap</text>
+          <path class="s-seam-line" d="M 592 48 L 592 208" />
+          <text class="s-t s-t--f" x="592" y="224" text-anchor="middle">no owner in this gap</text>
         </g>
 
-        <!-- departments: five separate systems -->
         <g class="s-fx-dept">
-          <text class="s-lab" x="0" y="182">THE COMPANY IS ORGANISED AS FIVE SEPARATE FUNCTIONS</text>
+          <text class="s-lab" x="0" y="134">THE COMPANY IS ORGANISED AS FIVE SEPARATE FUNCTIONS</text>
           {DEPTS.map((d) => (
             <g>
-              <rect
-                class={`s-box s-box--${d.state}`}
-                x={d.x} y="198" width="174" height="62" rx="8"
-              />
-              <text class="s-t s-t--box" x={d.cx} y="226" text-anchor="middle">{d.label}</text>
-              {d.state === 'cause' && (
-                <text class="s-t s-t--f s-t--micro" x={d.cx} y="245" text-anchor="middle">contributes</text>
-              )}
-              {d.state === 'symptom' && (
-                <text class="s-t s-t--f s-t--micro" x={d.cx} y="245" text-anchor="middle">symptom shows here</text>
-              )}
-              {d.state === 'ok' && (
-                <text class="s-t s-t--micro s-t--mute" x={d.cx} y="245" text-anchor="middle">working correctly</text>
-              )}
+              <rect class={`s-box s-box--${d.state}`} x={d.x} y="148" width="174" height="52" rx="8" />
+              <text class="s-t s-t--box" x={d.cx} y="171" text-anchor="middle">{d.label}</text>
+              <text class={`s-t s-t--micro ${d.state === 'ok' ? 's-t--mute' : 's-t--f'}`} x={d.cx} y="188" text-anchor="middle">{d.note}</text>
             </g>
           ))}
         </g>
 
-        <!-- resolution: the redesigned connection -->
         <g class="s-fx-resolve">
           <path class="s-connect" pathLength="1"
-                d="M 127 300 C 300 300, 300 314, 499 314 C 700 314, 700 300, 871 300" />
-          <circle class="s-cnode" cx="127" cy="300" r="4" />
-          <circle class="s-cnode" cx="313" cy="306" r="4" />
-          <circle class="s-cnode" cx="685" cy="306" r="4" />
-          <circle class="s-cnode" cx="871" cy="300" r="4" />
-          <text class="s-t s-t--ok" x="499" y="332" text-anchor="middle">one connected path — one owner, three timed updates</text>
+                d="M 127 240 C 300 240, 300 250, 499 250 C 700 250, 700 240, 871 240" />
+          <circle class="s-cnode" cx="127" cy="240" r="4" />
+          <circle class="s-cnode" cx="313" cy="245" r="4" />
+          <circle class="s-cnode" cx="685" cy="245" r="4" />
+          <circle class="s-cnode" cx="871" cy="240" r="4" />
+          <text class="s-t s-t--ok" x="499" y="268" text-anchor="middle">one connected path — one owner, three timed updates</text>
         </g>
       </svg>
 
-      <!-- ── MOBILE INSTRUMENT: same reasoning order, stacked ─────────────── -->
-      <svg class="seam__svg seam__svg--tall" viewBox="0 0 340 560" aria-hidden="true" focusable="false">
-        <text class="s-lab" x="0" y="14">ONE CUSTOMER JOURNEY</text>
-        <g class="s-fx-line">
-          <path class="s-line" pathLength="1" d="M 22 34 L 22 250" />
-          <path class="s-line" pathLength="1" d="M 22 330 L 22 500" />
-        </g>
+      <!-- ── MOBILE INSTRUMENT: horizontal, compact, same reasoning order ─── -->
+      <svg class="seam__svg seam__svg--tall" viewBox="0 0 342 168" aria-hidden="true" focusable="false">
+        <text class="s-lab" x="0" y="12">THE CUSTOMER EXPERIENCES ONE JOURNEY</text>
+
+        <path class="s-line s-fx-line" pathLength="1" d="M 28 50 L 205 50" />
+        <path class="s-line s-fx-line s-fx-line--b" pathLength="1" d="M 250 50 L 314 50" />
+
         <g class="s-fx-break">
-          <path class="s-break" d="M 22 250 L 22 330" />
-          <path class="s-break-cap" d="M 12 250 L 32 250" />
-          <path class="s-break-cap" d="M 12 330 L 32 330" />
-          <text class="s-t s-t--f" x="42" y="294">the break — no owner</text>
+          <path class="s-break" d="M 205 50 L 250 50" />
+          <path class="s-break-cap" d="M 205 42 L 205 58" />
+          <path class="s-break-cap" d="M 250 42 L 250 58" />
+          <text class="s-t s-t--f s-t--micro" x="227" y="34" text-anchor="middle">the break</text>
         </g>
-        {[
-          ['Discover', 34, 'Marketing', 'cause'],
-          ['Understand', 88, 'Website & Product', 'cause'],
-          ['Decide', 142, 'Website & Product', 'cause'],
-          ['Buy', 196, 'Sales & Checkout', 'ok'],
-          ['Receive', 384, 'Operations', 'cause'],
-          ['Return', 470, 'Support & Retention', 'symptom'],
-        ].map(([label, y, dept, state]) => (
+
+        {M_STAGES.map((s) => (
           <g class="s-fx-stage">
-            <circle class="s-dot" cx="22" cy={y as number} r="4" />
-            <text class="s-t" x="42" y={(y as number) + 4}>{label}</text>
-            <rect class={`s-box s-box--${state}`} x="150" y={(y as number) - 13} width="186" height="26" rx="6" />
-            <text class="s-t s-t--micro s-t--box" x="243" y={(y as number) + 4} text-anchor="middle">{dept}</text>
+            <circle class="s-dot" cx={s.x} cy="50" r="3.5" />
+            <text class="s-t s-t--micro" x={s.x} y={s.y} text-anchor="middle">{s.label}</text>
           </g>
         ))}
+
+        <g class="s-fx-break">
+          <text class="s-t s-t--f s-t--micro" x="171" y="116" text-anchor="middle">nobody owns this handoff</text>
+        </g>
+
         <g class="s-fx-resolve">
-          <path class="s-connect" pathLength="1" d="M 340 524 L 0 524" />
-          <text class="s-t s-t--ok" x="0" y="548">one connected path — one owner, three timed updates</text>
+          <path class="s-connect" pathLength="1" d="M 28 134 L 314 134" />
+          <circle class="s-cnode" cx="28" cy="134" r="3.5" />
+          <circle class="s-cnode" cx="123" cy="134" r="3.5" />
+          <circle class="s-cnode" cx="219" cy="134" r="3.5" />
+          <circle class="s-cnode" cx="314" cy="134" r="3.5" />
+          <text class="s-t s-t--ok s-t--micro" x="171" y="158" text-anchor="middle">one owner, three timed updates</text>
         </g>
       </svg>
+      </div>
 
-      <!-- Findings: HTML, not SVG. Readable, crawlable, responsive. -->
+      <!-- Findings: HTML, not SVG. Readable, crawlable, responsive — and on
+           mobile these carry the five functions the compact diagram omits. -->
       <ol class="seam__find">
         {FINDINGS.map((f) => (
           <li class="seam__f s-fx-find">
@@ -244,7 +228,7 @@ const FINDINGS = [
           <span class="seam__rm">Play the diagnosis</span>
         </button>
         <span class="faint">
-          <span class="seam__default">Plays once when it reaches you · full static diagram without motion</span>
+          <span class="seam__default">Plays once on arrival · full static diagram without motion</span>
           <span class="seam__rm">
             Your system asks for reduced motion, so nothing plays on its own —
             the full diagram is already shown above. Press play to watch it build.
@@ -252,74 +236,81 @@ const FINDINGS = [
         </span>
       </div>
     </figure>
+
+    <!-- Proof strip: moved BELOW the instrument. It used to occupy the hero's
+         right column, which pushed the diagram past the fold. -->
+    <aside class="hero__proof" aria-label="At a glance">
+      <p class="eyebrow hero__proof-l">At a glance</p>
+      <ul class="hero__proof-l2">
+        <li>
+          <span class="hero__p-k">Founder — Formula4You</span>
+          <span class="hero__p-v">A live vertical-commerce platform for Egypt's fragrance market.</span>
+        </li>
+        <li>
+          <span class="hero__p-k">Owned end to end</span>
+          <span class="hero__p-v">Market gap, business model, product priorities, operating design, and go-to-market.</span>
+        </li>
+        <li>
+          <span class="hero__p-k">UK remote fintech</span>
+          <span class="hero__p-v">High-volume customer exposure and hundreds of five-star reviews.</span>
+        </li>
+        <li>
+          <span class="hero__p-k">Commercial work</span>
+          <span class="hero__p-v">Conversion journeys, offer structure, and order operations before scaling spend.</span>
+        </li>
+      </ul>
+    </aside>
   </div>
 </section>
 
 <style>
-  .hero { padding-block: clamp(2.5rem, 6vw, 4.5rem) var(--section-y); }
-  .hero__top {
-    display: grid;
-    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
-    gap: var(--s9);
-    align-items: start;
-  }
-  @media (max-width: 1100px) { .hero__top { grid-template-columns: 1fr; gap: var(--s7); } }
+  .hero { padding-block: clamp(1.75rem, 3vw, 2.5rem) var(--section-y); }
+  .hero__top { display: flex; flex-direction: column; gap: clamp(1.25rem, 2.5vw, 2rem); }
 
-  .hero__copy { max-width: 62ch; display: flex; flex-direction: column; gap: var(--s5); }
-  .hero__copy h1 { font-size: var(--fs-display); }
-  .hero__ctas { margin-top: var(--s2); }
+  /* Tight on purpose: every pixel here pushes the instrument toward the fold. */
+  .hero__copy { max-width: 30ch; display: flex; flex-direction: column; gap: var(--s4); }
+  .hero__copy h1 {
+    font-size: clamp(2rem, 1.2rem + 3vw, 3.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    max-width: 18ch;
+  }
+  .hero__copy .lede { max-width: 46ch; }
+  .hero__ctas { margin-top: var(--s1); }
+  @media (min-width: 1100px) {
+    .hero__copy { max-width: none; }
+    .hero__copy h1 { max-width: 22ch; }
+  }
 
-  .hero__proof { padding-top: var(--s2); }
-  .hero__proof-l { margin-bottom: var(--s4); }
-  .hero__proof-l2 {
-    display: flex; flex-direction: column; gap: 0;
-    padding: 0; list-style: none; border-top: 1px solid var(--hairline);
+  .seam { margin: 0; }
+  .seam__cap {
+    display: flex; align-items: baseline; gap: var(--s3); flex-wrap: wrap;
+    padding-bottom: var(--s3); margin-bottom: var(--s4);
+    border-bottom: 1px solid var(--hairline);
   }
-  .hero__proof-l2 li {
-    display: flex; flex-direction: column; gap: 3px;
-    padding: var(--s3) 0; border-bottom: 1px solid var(--hairline);
-  }
-  .hero__p-k { font-family: var(--font-head); font-size: var(--fs-caption); font-weight: 700; color: var(--teal-bright); }
-  .hero__p-v { font-size: var(--fs-caption); color: var(--text-muted); line-height: 1.5; }
-  .hero__proof-n { margin-top: var(--s3); font-size: var(--fs-caption); color: var(--text-faint); }
-  @media (max-width: 1100px) { .hero__proof-l2 { display: grid; grid-template-columns: 1fr 1fr; } }
-  @media (max-width: 620px) { .hero__proof-l2 { grid-template-columns: 1fr; } }
-
-  .seam {
-    /* The instrument spans the full grid — it is the widest thing on the page
-       and must not be trapped in the copy column. */
-    grid-column: 1 / -1;
-    margin: var(--s8) 0 0;
-    padding: var(--s5);
-    background: var(--surface-raise);
-    border: 1px solid var(--hairline);
-    border-radius: var(--r-lg);
-  }
-  .seam__cap { display: flex; flex-direction: column; gap: var(--s2); margin-bottom: var(--s5); }
-  .seam__svg { width: 100%; height: auto; overflow: visible; }
+  .seam__svg { width: 100%; height: auto; overflow: visible; display: block; }
   .seam__svg--tall { display: none; }
 
   @media (max-width: 900px) {
     .seam__svg--wide { display: none; }
-    .seam__svg--tall { display: block; max-width: 340px; margin-inline: auto; }
+    .seam__svg--tall { display: block; }
   }
 
   /* ── SVG semantics ─────────────────────────────────────────────────── */
-  .s-lab { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; fill: var(--text-faint); }
+  .s-lab { font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 0.12em; fill: var(--text-faint); }
   .s-t { font-family: var(--font-body); font-size: 13px; fill: var(--text-muted); }
   .s-t--box { font-family: var(--font-head); font-weight: 600; fill: var(--text); font-size: 12.5px; }
   .s-t--micro { font-size: 10.5px; }
   .s-t--mute { fill: var(--text-faint); }
   .s-t--f { fill: var(--coral-bright); font-weight: 600; }
   .s-t--ok { fill: var(--teal-bright); font-weight: 600; font-size: 12px; }
+  .seam__svg--tall .s-t--ok { font-size: 10.5px; }
 
   .s-line { fill: none; stroke: var(--text-muted); stroke-width: 2; }
   .s-dot { fill: var(--text); }
   .s-break { fill: none; stroke: var(--coral-signal); stroke-width: 2; stroke-dasharray: 4 5; }
   .s-break-cap { stroke: var(--coral-signal); stroke-width: 2; }
   .s-seam-line { fill: none; stroke: var(--coral-signal); stroke-width: 1; stroke-dasharray: 3 4; opacity: 0.75; }
-  /* Ownership connectors carry the "who owns this stage" argument — they were
-     invisible at hairline weight against the dark canvas. */
   .s-own { fill: none; stroke: rgba(168, 182, 194, 0.4); stroke-width: 1.2; }
 
   .s-box { fill: var(--tint-raise); stroke: var(--hairline-strong); stroke-width: 1; }
@@ -331,7 +322,7 @@ const FINDINGS = [
 
   /* ── Findings ──────────────────────────────────────────────────────── */
   .seam__find {
-    display: grid; gap: 0; margin: var(--s6) 0 0;
+    display: grid; gap: 0; margin: var(--s5) 0 0;
     border-top: 1px solid var(--hairline);
     grid-template-columns: 1fr 1fr;
   }
@@ -362,8 +353,22 @@ const FINDINGS = [
     font-family: var(--font-head); font-size: 0.8125rem; font-weight: 600;
     background: none; border: 1px solid var(--border-control); color: var(--text);
     padding: 0.45rem 0.8rem; border-radius: var(--r-sm); cursor: pointer;
+    transition: border-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
   }
   .seam__replay:hover { border-color: var(--teal-bright); color: var(--teal-bright); }
+
+  /* ── Proof strip — below the instrument, horizontal ─────────────────── */
+  .hero__proof { margin-top: var(--s6); padding-top: var(--s5); border-top: 1px solid var(--hairline); }
+  .hero__proof-l { margin-bottom: var(--s4); }
+  .hero__proof-l2 {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s5);
+    padding: 0; list-style: none;
+  }
+  .hero__proof-l2 li { display: flex; flex-direction: column; gap: 3px; }
+  .hero__p-k { font-family: var(--font-head); font-size: var(--fs-caption); font-weight: 700; color: var(--teal-bright); }
+  .hero__p-v { font-size: var(--fs-caption); color: var(--text-muted); line-height: 1.5; }
+  @media (max-width: 900px) { .hero__proof-l2 { grid-template-columns: 1fr 1fr; gap: var(--s4); } }
+  @media (max-width: 560px) { .hero__proof-l2 { grid-template-columns: 1fr; } }
 
   /* ══ MOTION ════════════════════════════════════════════════════════════
      Base state = the finished diagram. `.play` re-reveals it in reasoning
@@ -372,25 +377,19 @@ const FINDINGS = [
   @keyframes s-in   { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
   @keyframes s-pop  { from { opacity: 0; } to { opacity: 1; } }
 
-  /* Six beats, paced to be READ rather than glimpsed.
-     The whole diagnosis previously ran in ~1.26s — about 200ms per beat, faster
-     than the eye can follow an argument. Each beat now lands, holds, and hands
-     over to the next. It plays once, so deliberate beats a blur.
-
-       0.00s  the customer's journey draws — one continuous line
+  /* Six beats, paced to be READ rather than glimpsed. ~4.4s total, once.
+       0.00s  the journey draws — one continuous line
        0.55s  the six stages label themselves
        1.05s  the five functions appear beneath
        1.60s  ownership connectors trace stage → function
-       2.10s  THE BREAK — the beat that matters, given room
+       2.10s  THE BREAK — the beat that matters, given the longest reveal
        2.75s  four findings, one at a time
-       3.70s  the resolution connects, then the conclusion
-       ~4.3s  end                                                            */
+       3.70s  the resolution connects, then the conclusion                  */
   [data-seam].play .s-fx-line       { stroke-dasharray: 1; animation: s-draw 620ms var(--ease-out) both; }
   [data-seam].play .s-fx-line--b    { animation-delay: 260ms; }
   [data-seam].play .s-fx-stage      { animation: s-in 380ms var(--ease) both; animation-delay: 550ms; }
   [data-seam].play .s-fx-dept       { animation: s-in 460ms var(--ease) both; animation-delay: 1050ms; }
   [data-seam].play .s-fx-own        { animation: s-pop 420ms var(--ease) both; animation-delay: 1600ms; }
-  /* The break gets the longest reveal in the sequence. It is the finding. */
   [data-seam].play .s-fx-break      { animation: s-pop 560ms var(--ease) both; animation-delay: 2100ms; }
   [data-seam].play .s-fx-find       { animation: s-in 340ms var(--ease) both; }
   [data-seam].play .s-fx-find:nth-child(1) { animation-delay: 2750ms; }
@@ -419,12 +418,14 @@ const FINDINGS = [
 
   const seam = document.querySelector<HTMLElement>('[data-seam]');
   if (seam) {
-    // Fires when the diagram is genuinely on screen — NOT on a load timer.
-    // Measured on live: a timer fired it at 13% visibility on desktop and fully
-    // off-screen on mobile, so it finished before anyone could see it.
+    // Animate the whole figure, but TRIGGER on the diagram alone. The figure is
+    // ~900px tall (findings + conclusion), so its midpoint sits below the fold
+    // even when the diagram is fully on screen — watching it meant the hero
+    // never played on arrival at 1366 or 1280.
+    const stage = seam.querySelector<HTMLElement>('[data-seam-stage]');
     // duration MUST outlast the last keyframe (3950ms + 420ms). `.play` is
     // removed when it elapses, so a short value amputates the sequence.
-    const { run } = playOnce(seam, { duration: 4600, delay: 160 });
+    const { run } = playOnce(seam, { duration: 4600, delay: 160, trigger: stage });
     document.querySelector('[data-seam-replay]')?.addEventListener('click', run);
   }
 </script>

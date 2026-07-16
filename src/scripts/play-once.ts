@@ -26,6 +26,16 @@ export interface PlayOnceOptions {
   duration?: number;
   /** Settle time once the condition is met, so it starts after the eye lands. */
   delay?: number;
+  /**
+   * Element whose visibility decides when to play. Defaults to `el`.
+   *
+   * These are different jobs and conflating them broke the hero: `.play` must
+   * go on the whole figure (the findings and conclusion animate too), but that
+   * figure is ~900px tall, so ITS midpoint sits far below the fold even when
+   * the diagram is fully on screen. Watching the diagram and animating the
+   * figure is the correct split.
+   */
+  trigger?: HTMLElement | SVGElement | null;
 }
 
 export interface PlayOnceHandle {
@@ -37,6 +47,7 @@ export interface PlayOnceHandle {
 
 export function playOnce(el: HTMLElement, opts: PlayOnceOptions = {}): PlayOnceHandle {
   const { duration = 1500, delay = 140 } = opts;
+  const watched: Element = opts.trigger ?? el;
   const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
   let timer: number | undefined;
 
@@ -66,17 +77,21 @@ export function playOnce(el: HTMLElement, opts: PlayOnceOptions = {}): PlayOnceH
 
   if (!mq.matches) {
     function readyToPlay(): boolean {
-      const r = el.getBoundingClientRect();
+      const r = watched.getBoundingClientRect();
       const vh = window.innerHeight;
+      // A hidden variant (e.g. the desktop SVG on mobile) has no box.
+      if (r.height === 0) return false;
       if (r.bottom <= 0 || r.top >= vh) return false;
 
       const visible = Math.min(r.bottom, vh) - Math.max(r.top, 0);
-      // The element's own midpoint has entered the viewport…
+      // Most of the watched thing is actually on screen…
+      const mostlyVisible = visible >= r.height * 0.6;
+      // …or its midpoint has entered the viewport…
       const mid = r.top + r.height / 2;
       const midOnScreen = mid > 0 && mid < vh * 0.9;
       // …or it is taller than the screen and now dominates it.
       const dominates = visible >= vh * 0.6;
-      return midOnScreen || dominates;
+      return mostlyVisible || midOnScreen || dominates;
     }
 
     let done = false;
@@ -101,7 +116,7 @@ export function playOnce(el: HTMLElement, opts: PlayOnceOptions = {}): PlayOnceH
     };
 
     var io = new IntersectionObserver(() => fire(), { threshold: [0, 0.25, 0.5, 0.75, 1] });
-    io.observe(el);
+    io.observe(watched);
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
   }
