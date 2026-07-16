@@ -1,0 +1,97 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase, site } from '@config/site';
+
+const entries = (await getCollection('work', ({ data }) => !data.draft)).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+const UPCOMING = [
+  { t: 'E-commerce Conversion & UI/UX', tier: 'Anonymized Real Work', q: 'Why buy more traffic before the journey can convert it?' },
+  { t: 'Alpha Capital Group', tier: 'Verified Evidence', q: 'What do hundreds of conversations reveal that one cannot?' },
+  { t: 'Commercial Growth & Funnel', tier: 'Anonymized Real Work', q: 'When is the constraint the offer rather than the budget?' },
+];
+---
+
+<BaseLayout
+  title={`Work — ${site.name}`}
+  description="Selected real work: founder-led platform strategy, conversion and journey design, operational insight, and commercial growth."
+  path="/work"
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Work', path: '/work' }]}
+>
+  <section class="section">
+    <div class="wrap">
+      <div class="sec-head">
+        <span class="eyebrow">Selected real work</span>
+        <h1 class="sec-head__q">Where the reasoning has already been tested.</h1>
+        <p class="muted">
+          Each case study shows the context, the evidence, the diagnosis, the decision, what was
+          rejected, what shipped, and exactly how far the evidence goes.
+        </p>
+      </div>
+
+      <ul class="wl">
+        {entries.map((e) => (
+          <li>
+            <a class="wl__c" href={withBase(`/work/${e.id}`)}>
+              <div class="cluster">
+                <span class="badge badge--founder">Founder-Led Work</span>
+                {e.data.liveUrl && <span class="badge badge--verified">Live Platform</span>}
+              </div>
+              <h2 class="wl__t">{e.data.title}</h2>
+              <p class="wl__s">{e.data.subtitle}</p>
+              <p class="muted wl__d">{e.data.summary}</p>
+              <ul class="wl__caps">
+                {e.data.capabilities.map((c) => <li>{c}</li>)}
+              </ul>
+              <span class="wl__go">Read the case study →</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+
+      <div class="wl__up">
+        <p class="eyebrow">In preparation</p>
+        <ul class="wl__ul">
+          {UPCOMING.map((u) => (
+            <li class="wl__uc">
+              <span class="badge badge--anonymized">{u.tier}</span>
+              <h3 class="wl__ut">{u.t}</h3>
+              <p class="faint">{u.q}</p>
+            </li>
+          ))}
+        </ul>
+        <p class="faint wl__note">
+          These are real engagements being written up. They appear when their evidence and
+          anonymisation are settled — not before.
+        </p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .wl { display: flex; flex-direction: column; gap: var(--s5); padding: 0; list-style: none; }
+  .wl__c {
+    display: flex; flex-direction: column; gap: var(--s3);
+    padding: var(--s6); background: var(--surface-raise);
+    border: 1px solid var(--hairline-strong); border-radius: var(--r-lg);
+    text-decoration: none; color: inherit;
+    transition: border-color var(--dur-mid) var(--ease);
+  }
+  .wl__c:hover { border-color: var(--teal-signal); }
+  .wl__t { font-size: var(--fs-h2); }
+  .wl__s { font-family: var(--font-head); font-size: var(--fs-h4); font-weight: 600; color: var(--teal-bright); }
+  .wl__d { max-width: 68ch; }
+  .wl__caps { display: flex; flex-wrap: wrap; gap: var(--s2); padding: 0; list-style: none; margin-top: var(--s2); }
+  .wl__caps li { font-size: 0.75rem; font-family: var(--font-head); font-weight: 600; color: var(--text-muted); border: 1px solid var(--hairline-strong); padding: 0.2rem 0.55rem; border-radius: 999px; }
+  .wl__go { font-family: var(--font-head); font-weight: 700; font-size: var(--fs-small); color: var(--teal-bright); margin-top: var(--s3); }
+
+  .wl__up { margin-top: var(--s8); padding-top: var(--s6); border-top: 1px solid var(--hairline); }
+  .wl__ul { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s4); padding: 0; list-style: none; margin-top: var(--s4); }
+  @media (max-width: 900px) { .wl__ul { grid-template-columns: 1fr; } }
+  .wl__uc { display: flex; flex-direction: column; gap: var(--s3); padding: var(--s5); border: 1px dashed var(--hairline-strong); border-radius: var(--r-md); }
+  .wl__ut { font-size: var(--fs-h4); color: var(--text-muted); }
+  .wl__note { margin-top: var(--s5); max-width: var(--measure); }
+</style>

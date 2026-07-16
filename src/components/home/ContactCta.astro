@@ -1,0 +1,57 @@
+---
+import { withBase, contact, cta } from '@config/site';
+---
+
+<section class="section cc" id="contact-cta" aria-labelledby="cc-h">
+  <div class="wrap">
+    <div class="cc__panel">
+      <div class="cc__l">
+        <span class="eyebrow">Next step</span>
+        <h2 id="cc-h" class="cc__h">Tell me what is not working. I will tell you where it actually lives.</h2>
+        <p class="muted cc__d">
+          The first reply is honest about scope: whether the problem fits what I do, and what
+          evidence I would need to answer it properly. If it is not a fit, I will say so.
+        </p>
+        <div class="cluster cc__ctas">
+          <a class="btn btn--primary" href={withBase(cta.business.href)} data-cta>{cta.business.label}</a>
+          <a class="btn btn--ghost" href={withBase(cta.employer.href)}>{cta.employer.label}</a>
+        </div>
+      </div>
+
+      <div class="cc__r">
+        <p class="eyebrow cc__rl">Or go direct</p>
+        <ul class="cc__ch">
+          <li><a href={contact.whatsapp} rel="noopener"><span>WhatsApp</span><span class="faint">Fastest route</span></a></li>
+          <li><a href={contact.emailHref}><span>Email</span><span class="faint">{contact.email}</span></a></li>
+          <li><a href={contact.phoneHref}><span>Phone</span><span class="faint tnum">{contact.phoneDisplay}</span></a></li>
+          <li><a href={contact.linkedin} rel="noopener"><span>LinkedIn</span><span class="faint">Profile</span></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cc__panel {
+    display: grid; grid-template-columns: 1fr 300px; gap: var(--s8);
+    padding: var(--s7); background: var(--surface-raise);
+    border: 1px solid var(--hairline-strong); border-radius: var(--r-lg);
+  }
+  @media (max-width: 900px) { .cc__panel { grid-template-columns: 1fr; gap: var(--s6); padding: var(--s5); } }
+  .cc__l { display: flex; flex-direction: column; gap: var(--s4); }
+  .cc__h { font-size: var(--fs-h2); max-width: 22ch; }
+  .cc__d { max-width: 56ch; }
+  .cc__ctas { margin-top: var(--s2); }
+  .cc__r { border-left: 1px solid var(--hairline); padding-left: var(--s5); }
+  @media (max-width: 900px) { .cc__r { border-left: 0; border-top: 1px solid var(--hairline); padding-left: 0; padding-top: var(--s5); } }
+  .cc__rl { margin-bottom: var(--s4); }
+  .cc__ch { display: flex; flex-direction: column; gap: 0; padding: 0; list-style: none; }
+  .cc__ch li { border-bottom: 1px solid var(--hairline); }
+  .cc__ch li:last-child { border-bottom: 0; }
+  .cc__ch a {
+    display: flex; justify-content: space-between; gap: var(--s3); align-items: baseline;
+    padding: var(--s3) 0; text-decoration: none; color: var(--text);
+    font-family: var(--font-head); font-size: var(--fs-small); font-weight: 600;
+  }
+  .cc__ch a:hover span:first-child { color: var(--teal-bright); }
+</style>

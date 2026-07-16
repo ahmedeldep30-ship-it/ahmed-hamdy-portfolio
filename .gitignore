@@ -1,0 +1,22 @@
+# ── Private evidence & source material — NEVER commit ────────────────
+# Original screenshots, the approved portrait master, briefs, CV sources.
+# Only optimized, approved copies may enter the public repository.
+source-assets/
+
+# ── Build output ─────────────────────────────────────────────────────
+dist/
+.astro/
+node_modules/
+
+# ── Environment & secrets ────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── OS / editor noise ────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+*.log
+
+# ── Verification artefacts (regenerated, not source of truth) ────────
+verification/

@@ -1,0 +1,1133 @@
+<title>Phase 1 — Creative Direction · Ahmed Hamdy Portfolio</title>
+
+<style>
+  /* ============================================================
+     AHMED HAMDY PORTFOLIO — PHASE 1 CREATIVE DIRECTION
+     Locked palette from Master Brief v3 §06 + approved AA extensions.
+     Light institutional theme, single-theme by design (Brief §16: "no theme toggle").
+     ============================================================ */
+
+  :root {
+    /* Locked canvas + ink */
+    --ivory:      #F7F6F2;
+    --ivory-sunk: #F1EFE9;
+    --navy:       #102A43;
+    --charcoal:   #1D2A35;
+    --slate:      #617181;
+
+    /* Locked signal colours — NON-TEXT roles only (fills, strokes, diagram) */
+    --teal:       #0B8F8A;
+    --coral:      #D76555;
+
+    /* Approved AA text/control extensions (Gate 1 §8) */
+    --teal-700:   #08716D;
+    --coral-700:  #B44636;
+
+    /* Derived structural neutrals — navy-biased, never pure grey */
+    --rule:       rgba(16, 42, 67, 0.10);
+    --rule-firm:  rgba(16, 42, 67, 0.18);
+    --tint-teal:  rgba(11, 143, 138, 0.06);
+    --tint-coral: rgba(215, 101, 85, 0.07);
+    --tint-navy:  rgba(16, 42, 67, 0.04);
+
+    /* Type — production self-hosts Manrope + Inter subsets.
+       CSP blocks font CDNs, so this presentation falls back to a system stack. */
+    --font-head: "Manrope", "Segoe UI Variable Display", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-body: "Inter", "Segoe UI Variable Text", "Segoe UI", system-ui, -apple-system, sans-serif;
+    --font-serif: "Source Serif 4", "Iowan Old Style", Georgia, "Times New Roman", serif;
+
+    /* Space — 4px base */
+    --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px; --s5: 24px;
+    --s6: 32px; --s7: 48px; --s8: 64px; --s9: 96px; --s10: 128px;
+
+    /* Radius — 10/12/16 only */
+    --r-sm: 10px; --r-md: 12px; --r-lg: 16px;
+
+    --measure: 68ch;
+    --page: 1180px;
+  }
+
+  /* Single-theme commitment: the site is light-institutional by locked decision.
+     Pin tokens against the viewer's dark toggle so specimens stay colour-accurate. */
+  :root[data-theme="dark"], :root[data-theme="light"] {
+    --ivory: #F7F6F2; --navy: #102A43; --charcoal: #1D2A35;
+  }
+
+  * { box-sizing: border-box; }
+
+  .doc {
+    background: var(--ivory);
+    color: var(--charcoal);
+    font-family: var(--font-body);
+    font-size: 17px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    padding: var(--s7) var(--s5) var(--s10);
+  }
+
+  .wrap { max-width: var(--page); margin-inline: auto; }
+  .read { max-width: var(--measure); }
+
+  h1, h2, h3, h4 { font-family: var(--font-head); color: var(--navy); text-wrap: balance; margin: 0; }
+  h1 { font-size: clamp(32px, 4.2vw, 46px); line-height: 1.1; letter-spacing: -0.02em; font-weight: 700; }
+  h2 { font-size: clamp(24px, 2.6vw, 31px); line-height: 1.2; letter-spacing: -0.015em; font-weight: 700; }
+  h3 { font-size: 21px; line-height: 1.3; letter-spacing: -0.01em; font-weight: 600; }
+  h4 { font-size: 16px; line-height: 1.4; font-weight: 600; }
+  p { margin: 0; }
+
+  .eyebrow {
+    font-family: var(--font-head);
+    font-size: 11.5px; font-weight: 700;
+    letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--slate);
+  }
+  .eyebrow--teal { color: var(--teal-700); }
+
+  .lede { font-size: 19px; line-height: 1.6; color: var(--charcoal); }
+  .muted { color: var(--slate); }
+  .small { font-size: 15px; line-height: 1.55; }
+  .cap { font-size: 14px; line-height: 1.5; color: var(--slate); }
+
+  .stack { display: flex; flex-direction: column; }
+  .stack > * + * { margin-top: var(--gap, var(--s4)); }
+
+  /* ---- Masthead ---- */
+  .masthead { border-bottom: 2px solid var(--navy); padding-bottom: var(--s6); }
+  .masthead__meta {
+    display: flex; flex-wrap: wrap; gap: var(--s5);
+    margin-top: var(--s5); padding-top: var(--s4);
+    border-top: 1px solid var(--rule);
+  }
+  .masthead__meta div { font-size: 14px; }
+  .masthead__meta dt { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--slate); }
+  .masthead__meta dd { margin: 2px 0 0; color: var(--navy); font-weight: 600; }
+
+  /* ---- Plates (numbered: the deliverable list IS an ordered sequence) ---- */
+  .plate { margin-top: var(--s10); scroll-margin-top: var(--s5); }
+  .plate__head { display: flex; gap: var(--s4); align-items: baseline; border-bottom: 1px solid var(--rule-firm); padding-bottom: var(--s3); margin-bottom: var(--s6); }
+  .plate__num {
+    font-family: var(--font-head); font-variant-numeric: tabular-nums;
+    font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
+    color: var(--teal-700); padding-top: 6px;
+  }
+
+  /* ---- Panels ---- */
+  .panel {
+    background: #fff; border: 1px solid var(--rule); border-radius: var(--r-lg);
+    padding: var(--s5);
+  }
+  .panel--sunk { background: var(--ivory-sunk); border-color: var(--rule); }
+  .panel--flush { padding: 0; overflow: hidden; }
+
+  .grid2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--s4); }
+  .grid3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--s4); }
+
+  /* ---- Swatches ---- */
+  .sw { border: 1px solid var(--rule); border-radius: var(--r-md); overflow: hidden; background: #fff; }
+  .sw__chip { height: 74px; }
+  .sw__body { padding: var(--s3) var(--s4) var(--s4); }
+  .sw__name { font-family: var(--font-head); font-weight: 700; font-size: 14px; color: var(--navy); }
+  .sw__hex { font-variant-numeric: tabular-nums; font-size: 13px; color: var(--slate); letter-spacing: 0.02em; }
+  .sw__role { font-size: 13px; line-height: 1.45; color: var(--slate); margin-top: var(--s2); }
+
+  /* ---- Tables ---- */
+  .tablewrap { overflow-x: auto; border: 1px solid var(--rule); border-radius: var(--r-md); background: #fff; }
+  table { border-collapse: collapse; width: 100%; font-size: 14.5px; }
+  th, td { text-align: left; padding: 11px var(--s4); border-bottom: 1px solid var(--rule); }
+  th { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); background: var(--ivory-sunk); }
+  tbody tr:last-child td { border-bottom: 0; }
+  .num { font-variant-numeric: tabular-nums; text-align: right; font-weight: 600; }
+  .pass { color: var(--teal-700); font-weight: 700; }
+  .fail { color: var(--coral-700); font-weight: 700; }
+
+  /* ---- Type specimen ---- */
+  .type-row { display: grid; grid-template-columns: 128px 1fr; gap: var(--s4); align-items: baseline; padding: var(--s3) 0; border-bottom: 1px solid var(--rule); }
+  .type-row:last-child { border-bottom: 0; }
+  .type-row__meta { font-size: 12px; color: var(--slate); font-variant-numeric: tabular-nums; }
+  .statement { font-family: var(--font-serif); font-size: clamp(21px, 2.4vw, 27px); line-height: 1.35; color: var(--navy); font-style: italic; }
+
+  /* ---- Nav prototype ---- */
+  .navproto { background: var(--ivory); border: 1px solid var(--rule); border-radius: var(--r-md); padding: var(--s4) var(--s5); display: flex; align-items: center; gap: var(--s5); flex-wrap: wrap; }
+  .navproto__brand { font-family: var(--font-head); font-weight: 700; font-size: 16px; color: var(--navy); letter-spacing: -0.01em; white-space: nowrap; }
+  .navproto__links { display: flex; gap: var(--s5); flex: 1; flex-wrap: wrap; }
+  .navproto__links a { font-family: var(--font-head); font-size: 14.5px; font-weight: 600; color: var(--charcoal); text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
+  .navproto__links a:hover, .navproto__links a:focus-visible { color: var(--teal-700); border-bottom-color: var(--teal); outline: none; }
+
+  .switch { display: inline-flex; border: 1px solid var(--rule-firm); border-radius: 999px; padding: 3px; background: #fff; }
+  .switch button {
+    font-family: var(--font-head); font-size: 13px; font-weight: 600;
+    border: 0; background: transparent; color: var(--slate);
+    padding: 6px 13px; border-radius: 999px; cursor: pointer; white-space: nowrap;
+  }
+  .switch button[aria-pressed="true"] { background: var(--navy); color: var(--ivory); }
+  .switch button:focus-visible { outline: 2px solid var(--teal-700); outline-offset: 2px; }
+
+  .btn {
+    font-family: var(--font-head); font-size: 14px; font-weight: 700;
+    background: var(--teal-700); color: var(--ivory);
+    border: 0; border-radius: var(--r-sm); padding: 10px 16px;
+    cursor: pointer; white-space: nowrap; text-decoration: none; display: inline-block;
+  }
+  .btn:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+  .btn--ghost { background: transparent; color: var(--navy); border: 1px solid var(--rule-firm); }
+
+  /* ---- Hero hi-fi ---- */
+  .hero { background: var(--ivory); border: 1px solid var(--rule); border-radius: var(--r-lg); overflow: hidden; }
+  .hero__inner { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr); gap: var(--s7); padding: var(--s8) var(--s7); align-items: center; }
+  @media (max-width: 900px) { .hero__inner { grid-template-columns: 1fr; gap: var(--s6); padding: var(--s6) var(--s5); } }
+  .hero h2 { font-size: clamp(27px, 3.3vw, 40px); line-height: 1.12; letter-spacing: -0.022em; }
+  .hero__sub { max-width: 52ch; }
+  .hero__ctas { display: flex; gap: var(--s3); flex-wrap: wrap; }
+  .hero__rule { height: 1px; background: var(--rule-firm); }
+
+  /* ---- Diagram frame ---- */
+  .dgframe { background: #fff; border: 1px solid var(--rule); border-radius: var(--r-md); padding: var(--s4); }
+  .dg { display: block; width: 100%; height: auto; }
+  .dg text { font-family: var(--font-body); }
+
+  /* SVG semantic classes */
+  .n-band      { fill: var(--tint-navy); stroke: var(--rule); }
+  .n-lab       { font-family: var(--font-head); font-size: 9px; font-weight: 700; letter-spacing: 0.09em; fill: var(--slate); }
+  .n-chip      { fill: #fff; stroke: var(--rule-firm); }
+  .n-chip--f   { fill: var(--tint-coral); stroke: rgba(215,101,85,0.4); }
+  .n-chip--ok  { fill: var(--tint-teal); stroke: rgba(11,143,138,0.45); }
+  .n-txt       { font-size: 10.5px; fill: var(--charcoal); }
+  .n-txt--sm   { font-size: 9.5px; fill: var(--slate); }
+  .n-txt--ok   { fill: var(--teal-700); font-weight: 600; }
+  .n-txt--f    { fill: var(--coral-700); font-weight: 600; }
+  .n-trace     { fill: none; stroke: var(--teal); stroke-width: 1.6; }
+  .n-strike    { stroke: var(--coral-700); stroke-width: 1.2; }
+  .n-scan      { stroke: var(--teal); stroke-width: 1; opacity: 0; }
+
+  /* ---- Motion concept cards ---- */
+  .concepts { display: flex; flex-direction: column; gap: var(--s6); }
+  .concept { border: 1px solid var(--rule); border-radius: var(--r-lg); background: #fff; overflow: hidden; }
+  .concept__head { display: flex; align-items: flex-start; gap: var(--s4); justify-content: space-between; padding: var(--s5); border-bottom: 1px solid var(--rule); background: var(--ivory-sunk); flex-wrap: wrap; }
+  .concept__body { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: var(--s5); padding: var(--s5); }
+  @media (max-width: 860px) { .concept__body { grid-template-columns: 1fr; } }
+  .concept__tag { font-family: var(--font-head); font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; }
+  .tag--rec { background: var(--teal-700); color: var(--ivory); }
+  .tag--alt { background: var(--navy); color: var(--ivory); }
+  .tag--std { background: transparent; color: var(--slate); border: 1px solid var(--rule-firm); }
+
+  .kv { font-size: 14px; }
+  .kv dt { font-family: var(--font-head); font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); margin-top: var(--s3); }
+  .kv dd { margin: 3px 0 0; }
+
+  .toolbar { display: flex; align-items: center; gap: var(--s3); flex-wrap: wrap; padding: var(--s4); background: var(--tint-navy); border: 1px solid var(--rule); border-radius: var(--r-md); }
+  .replay { font-family: var(--font-head); font-size: 13px; font-weight: 600; background: #fff; color: var(--navy); border: 1px solid var(--rule-firm); border-radius: var(--r-sm); padding: 7px 12px; cursor: pointer; }
+  .replay:hover { border-color: var(--teal); color: var(--teal-700); }
+  .replay:focus-visible { outline: 2px solid var(--teal-700); outline-offset: 2px; }
+
+  /* ---- Wireframes ---- */
+  .wfrow { display: flex; gap: var(--s6); align-items: flex-start; overflow-x: auto; padding-bottom: var(--s3); }
+  .wf { background: #fff; border: 1px solid var(--rule-firm); border-radius: var(--r-sm); padding: var(--s3); flex: 0 0 auto; }
+  .wf--desk { width: 660px; }
+  .wf--mob { width: 288px; }
+  .wfb { border: 1px dashed var(--rule-firm); border-radius: 6px; padding: var(--s3); margin-bottom: 6px; background: var(--ivory); }
+  .wfb__t { font-family: var(--font-head); font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; color: var(--navy); display: flex; gap: 7px; align-items: baseline; }
+  .wfb__t span { font-variant-numeric: tabular-nums; color: var(--teal-700); }
+  .wfb__d { font-size: 10.5px; color: var(--slate); line-height: 1.4; margin-top: 3px; }
+  .wfb__sk { display: flex; gap: 5px; margin-top: 7px; }
+  .sk { background: var(--rule); border-radius: 3px; height: 100%; }
+  .wfb__dom { font-family: var(--font-head); font-size: 9px; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; color: var(--slate); margin-top: 6px; }
+
+  /* ---- Gateway specimen ---- */
+  .gw { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s4); }
+  .gwcard { border: 1px solid var(--rule-firm); border-radius: var(--r-md); padding: var(--s5); background: #fff; display: flex; flex-direction: column; gap: var(--s3); cursor: pointer; text-align: left; font: inherit; color: inherit; }
+  .gwcard:hover { border-color: var(--teal); background: var(--tint-teal); }
+  .gwcard:focus-visible { outline: 2px solid var(--teal-700); outline-offset: 2px; }
+  .gwcard__q { font-family: var(--font-head); font-size: 17px; font-weight: 700; color: var(--navy); }
+
+  /* ---- Evidence rail specimen ---- */
+  .rail { display: grid; grid-template-columns: 200px 1fr; gap: var(--s6); }
+  @media (max-width: 780px) { .rail { grid-template-columns: 1fr; } }
+  .railcol { border-left: 2px solid var(--navy); padding-left: var(--s4); }
+  .railitem { padding: var(--s3) 0; border-bottom: 1px solid var(--rule); position: relative; }
+  .railitem:last-child { border-bottom: 0; }
+  .railitem::before { content: ""; position: absolute; left: calc(var(--s4) * -1 - 5px); top: 20px; width: 7px; height: 7px; border-radius: 50%; background: var(--teal); border: 1.5px solid #fff; }
+  .railitem__k { font-family: var(--font-head); font-size: 9.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--slate); }
+  .railitem__v { font-size: 14px; color: var(--charcoal); margin-top: 2px; }
+
+  .badge { display: inline-flex; align-items: center; gap: 5px; font-family: var(--font-head); font-size: 10.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 8px; border-radius: 999px; }
+  .badge--ver { background: var(--tint-teal); color: var(--teal-700); border: 1px solid rgba(11,143,138,0.35); }
+  .badge--ill { background: var(--tint-coral); color: var(--coral-700); border: 1px solid rgba(215,101,85,0.35); }
+  .badge--ua  { background: var(--tint-navy); color: var(--navy); border: 1px solid var(--rule-firm); }
+
+  /* ---- SAB framework ---- */
+  .sab { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 0; border: 1px solid var(--rule-firm); border-radius: var(--r-md); overflow: hidden; background: #fff; }
+  .sabcol { padding: var(--s5); border-right: 1px solid var(--rule); }
+  .sabcol:last-child { border-right: 0; }
+  .sabcol__n { font-family: var(--font-head); font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-700); }
+  .sabcol__t { font-family: var(--font-head); font-size: 19px; font-weight: 700; color: var(--navy); margin-top: 3px; }
+  .sabcol__r { font-size: 13.5px; color: var(--slate); margin-top: var(--s2); line-height: 1.5; }
+  .gate { margin-top: var(--s4); padding-top: var(--s3); border-top: 1px solid var(--rule); }
+  .gate li { font-size: 13px; margin-bottom: 5px; color: var(--charcoal); }
+  ul { margin: 0; padding-left: 1.1em; }
+  li { margin-bottom: var(--s2); }
+
+  .callout { border-left: 3px solid var(--teal); background: var(--tint-teal); padding: var(--s4) var(--s5); border-radius: 0 var(--r-md) var(--r-md) 0; }
+  .callout--risk { border-left-color: var(--coral); background: var(--tint-coral); }
+  .callout--navy { border-left-color: var(--navy); background: var(--tint-navy); }
+
+  .ck { list-style: none; padding: 0; }
+  .ck li { display: flex; gap: var(--s3); align-items: flex-start; padding: var(--s3) 0; border-bottom: 1px solid var(--rule); margin: 0; font-size: 15px; }
+  .ck li:last-child { border-bottom: 0; }
+  .ck__m { font-family: var(--font-head); font-weight: 700; font-size: 11px; letter-spacing: 0.08em; color: var(--teal-700); padding-top: 4px; white-space: nowrap; }
+  .ck__m--wait { color: var(--slate); }
+
+  a { color: var(--teal-700); }
+
+  /* ---- Motion: base state IS the final/static state. .play replays it. ---- */
+  @keyframes fadeUp   { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+  @keyframes drawIn   { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes scanDown { 0% { transform: translateY(0); opacity: 0; } 12% { opacity: 1; } 100% { transform: translateY(252px); opacity: 0; } }
+  @keyframes rejectFx { 0%, 45% { opacity: 1; } 100% { opacity: 0.42; } }
+  @keyframes collapse { 0% { opacity: 1; transform: none; } 60% { opacity: 0.25; } 100% { opacity: 0; transform: translateX(-14px) scaleY(0.2); } }
+  @keyframes settle   { from { transform: translateY(var(--from, 0)); } to { transform: none; } }
+  @keyframes breakIn  { 0%, 60% { opacity: 0; } 100% { opacity: 1; } }
+
+  .concept.play .fx-band  { animation: fadeUp 300ms ease both; }
+  .concept.play .fx-b1 { animation-delay: 40ms; }
+  .concept.play .fx-b2 { animation-delay: 220ms; }
+  .concept.play .fx-b3 { animation-delay: 400ms; }
+  .concept.play .fx-b4 { animation-delay: 620ms; }
+  .concept.play .fx-b5 { animation-delay: 840ms; }
+  .concept.play .fx-scan  { animation: scanDown 1050ms cubic-bezier(.4,0,.2,1) both; }
+  .concept.play .fx-trace { animation: drawIn 760ms 340ms cubic-bezier(.4,0,.2,1) both; }
+  .concept.play .fx-reject { animation: rejectFx 620ms 400ms ease both; }
+  .concept.play .fx-strike { animation: drawIn 300ms 560ms ease both; }
+  .concept.play .fx-drop  { animation: collapse 420ms ease both; }
+  .concept.play .fx-break { animation: breakIn 900ms ease both; }
+  .concept.play .fx-node  { animation: fadeUp 320ms ease both; }
+
+  .fx-trace, .fx-strike { stroke-dasharray: 1; stroke-dashoffset: 0; }
+
+  /* Reduced motion: OS preference OR the reviewer's forced toggle.
+     Base state is already the complete static diagram, so killing animation
+     leaves the full, readable end state — never a blank frame. */
+  @media (prefers-reduced-motion: reduce) {
+    .concept.play *, .hero * { animation: none !important; }
+  }
+  [data-motion="off"] .concept.play *,
+  [data-motion="off"] .hero * { animation: none !important; }
+
+  .rm-note { font-size: 13px; color: var(--slate); }
+  [data-motion="off"] .rm-live { display: none; }
+  .rm-static { display: none; }
+  [data-motion="off"] .rm-static { display: inline; }
+</style>
+
+<div class="doc">
+<div class="wrap">
+
+  <!-- ================= MASTHEAD ================= -->
+  <header class="masthead">
+    <p class="eyebrow">Ahmed Hamdy · Business Growth &amp; Operations Specialist</p>
+    <h1 style="margin-top:var(--s3)">Phase 1 — Creative direction</h1>
+    <p class="lede muted read" style="margin-top:var(--s4)">
+      Design tokens, home wireframes, one high-fidelity direction, four motion concepts, and the
+      Audience Gateway, Evidence Rail, and Simplify → Automate → Build specimens. Submitted for Gate 1 visual approval.
+      <strong style="color:var(--navy)">No site build has started.</strong>
+    </p>
+    <dl class="masthead__meta">
+      <div><dt>Authority</dt><dd>Master Brief v3 · Codex Prompt v3</dd></div>
+      <div><dt>Concept</dt><dd>From Noise to System</dd></div>
+      <div><dt>Flagship</dt><dd>Formula4You — live</dd></div>
+      <div><dt>Deploy target</dt><dd>Project site · configurable</dd></div>
+      <div><dt>Gate</dt><dd>1 of 4 — awaiting approval</dd></div>
+    </dl>
+  </header>
+
+  <!-- ================= 01 TOKENS ================= -->
+  <section class="plate">
+    <div class="plate__head">
+      <span class="plate__num">01</span>
+      <div><h2>Design tokens</h2><p class="cap">The locked palette, measured — not assumed.</p></div>
+    </div>
+
+    <div class="stack" style="--gap:var(--s5)">
+      <div class="grid3">
+        <div class="sw"><div class="sw__chip" style="background:#102A43"></div><div class="sw__body">
+          <div class="sw__name">Midnight navy</div><div class="sw__hex">#102A43</div>
+          <p class="sw__role">Headings, navigation, evidence panels, structural rules.</p></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#1D2A35"></div><div class="sw__body">
+          <div class="sw__name">Charcoal</div><div class="sw__hex">#1D2A35</div>
+          <p class="sw__role">Body copy and dense information.</p></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#F7F6F2;border-bottom:1px solid var(--rule)"></div><div class="sw__body">
+          <div class="sw__name">Warm ivory</div><div class="sw__hex">#F7F6F2</div>
+          <p class="sw__role">Main canvas. Warmer and more institutional than pure white.</p></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#617181"></div><div class="sw__body">
+          <div class="sw__name">Slate</div><div class="sw__hex">#617181</div>
+          <p class="sw__role">Captions, metadata, secondary content. Never below 14px.</p></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#0B8F8A"></div><div class="sw__body">
+          <div class="sw__name">Signal teal</div><div class="sw__hex">#0B8F8A</div>
+          <p class="sw__role">Diagnosis, connections, decisions, positive system flow. <strong style="color:var(--coral-700)">Non-text roles only.</strong></p></div></div>
+        <div class="sw"><div class="sw__chip" style="background:#D76555"></div><div class="sw__body">
+          <div class="sw__name">Friction coral</div><div class="sw__hex">#D76555</div>
+          <p class="sw__role">Blocked paths, risk, repeated work, evidence of failure. Sparing. <strong style="color:var(--coral-700)">Non-text roles only.</strong></p></div></div>
+        <div class="sw" style="border-color:var(--teal)"><div class="sw__chip" style="background:#08716D"></div><div class="sw__body">
+          <div class="sw__name">Teal 700 <span class="badge badge--ver">Approved</span></div><div class="sw__hex">#08716D</div>
+          <p class="sw__role">Accessible teal <em>text</em>, links, and control fills carrying ivory labels.</p></div></div>
+        <div class="sw" style="border-color:var(--coral)"><div class="sw__chip" style="background:#B44636"></div><div class="sw__body">
+          <div class="sw__name">Coral 700 <span class="badge badge--ver">Approved</span></div><div class="sw__hex">#B44636</div>
+          <p class="sw__role">Accessible coral <em>text</em> and friction labels.</p></div></div>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom:var(--s3)">Contrast — recomputed against the WCAG 2.2 formula</h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Pair</th><th class="num">Ratio</th><th>AA normal (4.5)</th><th>Permitted role</th></tr></thead>
+            <tbody>
+              <tr><td>Navy on ivory</td><td class="num">13.54</td><td class="pass">Pass — AAA</td><td>Headings, nav, panels</td></tr>
+              <tr><td>Charcoal on ivory</td><td class="num">13.53</td><td class="pass">Pass — AAA</td><td>Body, dense information</td></tr>
+              <tr><td>Slate on ivory</td><td class="num">4.64</td><td class="pass">Pass</td><td>Captions ≥14px. Thin margin — fails AAA.</td></tr>
+              <tr style="background:var(--tint-coral)"><td>Signal teal on ivory</td><td class="num">3.66</td><td class="fail">Fail</td><td>Fills, strokes, diagram, large text ≥24px, UI borders</td></tr>
+              <tr style="background:var(--tint-coral)"><td><strong>Ivory on signal teal</strong></td><td class="num">3.66</td><td class="fail">Fail</td><td><strong>A teal button with an ivory label fails AA</strong></td></tr>
+              <tr style="background:var(--tint-coral)"><td>Friction coral on ivory</td><td class="num">3.30</td><td class="fail">Fail</td><td>Fills, strokes, risk markers, large text</td></tr>
+              <tr style="background:var(--tint-teal)"><td>Teal 700 on ivory</td><td class="num">5.40</td><td class="pass">Pass</td><td>Teal text, links, buttons</td></tr>
+              <tr style="background:var(--tint-teal)"><td>Ivory on teal 700</td><td class="num">5.40</td><td class="pass">Pass</td><td>Primary button</td></tr>
+              <tr style="background:var(--tint-teal)"><td>Coral 700 on ivory</td><td class="num">5.02</td><td class="pass">Pass</td><td>Friction text</td></tr>
+              <tr><td>Signal teal on navy</td><td class="num">3.70</td><td class="fail">Fail</td><td>Diagram strokes on navy panels only</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cap" style="margin-top:var(--s3)">
+          Ratios computed from sRGB→linear, L = 0.2126R + 0.7152G + 0.0722B, (L₁+0.05)/(L₂+0.05). Verified in code, not estimated.
+        </p>
+      </div>
+
+      <div class="callout callout--navy">
+        <p class="eyebrow">Structural finding — designed for, not discovered in QA</p>
+        <p style="margin-top:var(--s2)">
+          Navy (L ≈ 0.021713) and charcoal (L ≈ 0.021742) are <strong>luminance-identical</strong>. Heading-versus-body
+          hierarchy therefore cannot rely on contrast — it comes from size, weight, and spacing. Their hue separation
+          only reads at large sizes. Every heading in this system earns its hierarchy typographically.
+        </p>
+      </div>
+
+      <div class="panel">
+        <h3>Type scale</h3>
+        <p class="cap" style="margin-top:var(--s2);margin-bottom:var(--s4)">
+          Manrope headings · Inter body · Source Serif 4 for one strategic statement per page (approved).
+          <strong style="color:var(--coral-700)">Rendered here in a system stand-in</strong> — the Artifact CSP blocks font CDNs. Production self-hosts subset woff2.
+        </p>
+        <div class="type-row"><div class="type-row__meta">Display · 56/60</div><div style="font-family:var(--font-head);font-size:44px;line-height:1.05;font-weight:700;letter-spacing:-0.025em;color:var(--navy)">From noise to system</div></div>
+        <div class="type-row"><div class="type-row__meta">H2 · 32/38</div><div style="font-family:var(--font-head);font-size:31px;line-height:1.2;font-weight:700;letter-spacing:-0.015em;color:var(--navy)">Customers experience one business</div></div>
+        <div class="type-row"><div class="type-row__meta">H3 · 24/30</div><div style="font-family:var(--font-head);font-size:23px;line-height:1.3;font-weight:600;color:var(--navy)">The opportunity I identified</div></div>
+        <div class="type-row"><div class="type-row__meta">Body · 17/28</div><div style="max-width:60ch">I connect these signals before deciding where the problem actually belongs.</div></div>
+        <div class="type-row"><div class="type-row__meta">Caption · 14/22</div><div class="cap">Formula4You — supplier profile. Live platform, captured 2026-07.</div></div>
+        <div class="type-row"><div class="type-row__meta">Serif statement<br>≤1 per page</div><div class="statement">I do not optimize the symptom. I trace the system that keeps producing it.</div></div>
+      </div>
+
+      <div class="grid2">
+        <div class="panel">
+          <h3>Space &amp; shape</h3>
+          <p class="small muted" style="margin-top:var(--s2)">4px base. Radius 10 / 12 / 16 only.</p>
+          <div style="display:flex;gap:6px;align-items:flex-end;margin-top:var(--s4);height:64px">
+            <div style="width:4px;height:4px;background:var(--navy)"></div>
+            <div style="width:8px;height:8px;background:var(--navy)"></div>
+            <div style="width:12px;height:12px;background:var(--navy)"></div>
+            <div style="width:16px;height:16px;background:var(--navy)"></div>
+            <div style="width:24px;height:24px;background:var(--navy)"></div>
+            <div style="width:32px;height:32px;background:var(--navy)"></div>
+            <div style="width:48px;height:48px;background:var(--navy)"></div>
+            <div style="width:64px;height:64px;background:var(--navy)"></div>
+          </div>
+          <p class="cap" style="margin-top:var(--s3);font-variant-numeric:tabular-nums">4 · 8 · 12 · 16 · 24 · 32 · 48 · 64 · 96 · 128</p>
+        </div>
+        <div class="panel">
+          <h3>Elevation</h3>
+          <p class="small muted" style="margin-top:var(--s2)">Hairline borders and tint fills. Functional shadow only where it materially clarifies interaction — never as decoration.</p>
+          <div style="display:flex;gap:var(--s3);margin-top:var(--s4);flex-wrap:wrap">
+            <div style="flex:1;min-width:110px;border:1px solid var(--rule);border-radius:var(--r-md);padding:var(--s3);background:#fff"><span class="cap">Hairline — default</span></div>
+            <div style="flex:1;min-width:110px;border:1px solid var(--rule);border-radius:var(--r-md);padding:var(--s3);background:var(--tint-teal)"><span class="cap">Tint — active</span></div>
+            <div style="flex:1;min-width:110px;border:1px solid var(--rule-firm);border-radius:var(--r-md);padding:var(--s3);background:#fff;box-shadow:0 3px 10px rgba(16,42,67,.09)"><span class="cap">Functional — overlay only</span></div>
+          </div>
+          <p class="cap" style="margin-top:var(--s3)">Shadows and glass are precisely what make generated portfolios legible as generated. This is the main defence.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 02 NAV ================= -->
+  <section class="plate">
+    <div class="plate__head">
+      <span class="plate__num">02</span>
+      <div><h2>Navigation prototype</h2><p class="cap">Five links · audience switch · one contextual CTA. Try the switch — the CTA and the active path change.</p></div>
+    </div>
+
+    <div class="navproto">
+      <span class="navproto__brand">Ahmed Hamdy</span>
+      <nav class="navproto__links" aria-label="Primary">
+        <a href="#0">Work</a><a href="#0">Playbooks</a><a href="#0">Insights</a><a href="#0">About</a><a href="#0" id="nav-4th">Method</a>
+      </nav>
+      <div class="switch" role="group" aria-label="Audience">
+        <button type="button" data-aud="biz" aria-pressed="true">For businesses</button>
+        <button type="button" data-aud="emp" aria-pressed="false">For employers</button>
+      </div>
+      <a class="btn" href="#0" id="nav-cta">Request a Business Diagnostic</a>
+    </div>
+
+    <div class="grid2" style="margin-top:var(--s4)">
+      <div class="callout">
+        <p class="small"><strong style="color:var(--navy)">Why five, not eight.</strong> The brief locks eight IA entries. Eight header links plus a CTA fails the five-second role-clarity gate and collapses at 360px. Contact becomes the persistent audience-aware CTA; <em>For Businesses</em> / <em>For Employers</em> become the switch. All eight remain reachable at depth ≤1.</p>
+      </div>
+      <div class="callout callout--navy">
+        <p class="small"><strong style="color:var(--navy)">The switch curates, it never gates.</strong> It changes labels and CTAs via <code>localStorage</code> only. No content is hidden from crawlers, gated, or duplicated per audience. Every approved page stays directly accessible and indexable.</p>
+      </div>
+    </div>
+    <p class="cap" style="margin-top:var(--s3)">Per Gate 1 §7: the Strategic Audit <em>Method</em> sits under Insights/Playbooks at launch. It is not presented as a populated audit library until the first complete audit is published.</p>
+  </section>
+
+  <!-- ================= 03 HERO ================= -->
+  <section class="plate">
+    <div class="plate__head">
+      <span class="plate__num">03</span>
+      <div><h2>Home hero — high fidelity</h2><p class="cap">Locked copy from Brief §08. Recommended motion running live.</p></div>
+    </div>
+
+    <div class="hero" id="hero">
+      <div class="hero__inner">
+        <div class="stack" style="--gap:var(--s5)">
+          <p class="eyebrow--teal eyebrow">Business Growth &amp; Operations Specialist</p>
+          <h2>I trace the system behind the problem — then redesign it for clearer growth, smoother operations, and better customer decisions.</h2>
+          <div class="hero__rule"></div>
+          <p class="hero__sub muted">
+            I work across market strategy, business models, operations, customer support, customer experience,
+            conversion-focused UI/UX, product priorities, and execution. The goal is not to add more work or more
+            software. It is to identify where the business loses value and build the simplest system that stops the loss.
+          </p>
+          <div class="hero__ctas">
+            <a class="btn" href="#0">Explore selected work</a>
+            <a class="btn btn--ghost" href="#0">Choose your path</a>
+          </div>
+        </div>
+
+        <div class="dgframe concept" id="hero-dg">
+          <svg class="dg" viewBox="0 0 640 300" role="img" aria-labelledby="hdg-t hdg-d">
+            <title id="hdg-t">Root-cause excavation: rising support volume traced to a help-article title</title>
+            <desc id="hdg-d">A visible symptom — rising support volume — is traced downward through measured evidence and three candidate causes. Two candidates, adding agents and buying a chatbot, are rejected. The root cause is that the answer exists but its title uses internal company language and it is not surfaced at the moment of doubt. The intervention is to rewrite the title in customer language and surface it earlier.</desc>
+
+            <g class="fx-band fx-b1">
+              <rect class="n-band" x="0" y="6" width="640" height="46" rx="8"/>
+              <text class="n-lab" x="12" y="33">SYMPTOM</text>
+              <rect class="n-chip--f n-chip" x="106" y="17" width="216" height="24" rx="6"/>
+              <text class="n-txt" x="118" y="33">Support volume is rising</text>
+              <text class="n-txt--sm" x="340" y="33">Leadership asks: hire agents, or buy a bot?</text>
+            </g>
+
+            <g class="fx-band fx-b2">
+              <rect class="n-band" x="0" y="60" width="640" height="46" rx="8"/>
+              <text class="n-lab" x="12" y="87">EVIDENCE</text>
+              <rect class="n-chip" x="106" y="71" width="152" height="24" rx="6"/>
+              <text class="n-txt" x="116" y="87">One topic dominates</text>
+              <rect class="n-chip" x="266" y="71" width="122" height="24" rx="6"/>
+              <text class="n-txt" x="276" y="87">The article exists</text>
+              <rect class="n-chip" x="396" y="71" width="168" height="24" rx="6"/>
+              <text class="n-txt" x="406" y="87">Customers use other words</text>
+            </g>
+
+            <g class="fx-band fx-b3">
+              <rect class="n-band" x="0" y="114" width="640" height="46" rx="8"/>
+              <text class="n-lab" x="12" y="141">CANDIDATES</text>
+              <g class="fx-reject">
+                <rect class="n-chip" x="106" y="125" width="118" height="24" rx="6"/>
+                <text class="n-txt" x="116" y="141">Agents too slow</text>
+                <line class="n-strike fx-strike" x1="112" y1="137" x2="218" y2="137" pathLength="1"/>
+              </g>
+              <g class="fx-reject">
+                <rect class="n-chip" x="232" y="125" width="112" height="24" rx="6"/>
+                <text class="n-txt" x="242" y="141">Buy a chatbot</text>
+                <line class="n-strike fx-strike" x1="238" y1="137" x2="338" y2="137" pathLength="1"/>
+              </g>
+              <rect class="n-chip--ok n-chip" x="352" y="125" width="212" height="24" rx="6"/>
+              <text class="n-txt n-txt--ok" x="362" y="141">Customers can't find the answer</text>
+            </g>
+
+            <g class="fx-band fx-b4">
+              <rect class="n-band" x="0" y="168" width="640" height="46" rx="8"/>
+              <text class="n-lab" x="12" y="195">ROOT CAUSE</text>
+              <rect class="n-chip--ok n-chip" x="106" y="179" width="458" height="24" rx="6"/>
+              <text class="n-txt" x="116" y="195">The title uses internal language, and the answer never appears at the moment of doubt</text>
+            </g>
+
+            <g class="fx-band fx-b5">
+              <rect class="n-band" x="0" y="222" width="640" height="46" rx="8" style="fill:var(--tint-teal);stroke:rgba(11,143,138,.35)"/>
+              <text class="n-lab" x="12" y="249" style="fill:var(--teal-700)">INTERVENTION</text>
+              <rect class="n-chip--ok n-chip" x="106" y="233" width="330" height="24" rx="6"/>
+              <text class="n-txt n-txt--ok" x="116" y="249">Rewrite the title in customer language. Surface it earlier.</text>
+              <text class="n-txt--sm" x="450" y="249">No new headcount. No bot.</text>
+            </g>
+
+            <path class="n-trace fx-trace" pathLength="1" d="M 88 29 L 96 29 Q 100 29 100 33 L 100 137 Q 100 141 104 141 L 348 141 Q 352 141 352 145 L 352 191 Q 352 195 348 195 L 100 195 Q 96 195 96 199 L 96 245 Q 96 249 100 249 L 104 249"/>
+            <line class="n-scan fx-scan" x1="0" y1="8" x2="640" y2="8"/>
+
+            <text class="n-txt--sm" x="0" y="288">Trace: symptom → evidence → rejected alternatives → root cause → smallest effective intervention</text>
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <div class="toolbar" style="margin-top:var(--s4)">
+      <button class="replay" data-replay="hero-dg" type="button">▸ Replay hero</button>
+      <span class="rm-note">Plays once on load, 1,050 ms, never blocks the headline. <span class="rm-live">Motion live.</span><span class="rm-static">Static equivalent shown.</span></span>
+    </div>
+  </section>
+
+  <!-- ================= 04 MOTION CONCEPTS ================= -->
+  <section class="plate">
+    <div class="plate__head">
+      <span class="plate__num">04</span>
+      <div><h2>Motion concepts</h2><p class="cap">Four concepts. Three from your directions, one alternative. Each replays; each has a complete static equivalent.</p></div>
+    </div>
+
+    <div class="toolbar" style="margin-bottom:var(--s5)">
+      <button class="replay" id="rm-toggle" type="button" aria-pressed="false">Force reduced motion: <strong>Off</strong></button>
+      <span class="rm-note">Turn this on to verify every concept's static equivalent. The base state <em>is</em> the resolved diagram — killing animation never leaves a blank frame.</span>
+    </div>
+
+    <div class="concepts" id="concepts">
+
+      <!-- A -->
+      <article class="concept" id="c-a">
+        <div class="concept__head">
+          <div>
+            <p class="eyebrow">Concept A · your direction 1</p>
+            <h3 style="margin-top:4px">Root-Cause Excavation</h3>
+          </div>
+          <span class="concept__tag tag--rec">Recommended — hero</span>
+        </div>
+        <div class="concept__body">
+          <div>
+            <div class="dgframe">
+              <svg class="dg" viewBox="0 0 640 300" role="img" aria-labelledby="ca-t ca-d">
+                <title id="ca-t">Root-Cause Excavation</title>
+                <desc id="ca-d">The same excavation shown in the hero, at review scale.</desc>
+                <g class="fx-band fx-b1"><rect class="n-band" x="0" y="6" width="640" height="46" rx="8"/><text class="n-lab" x="12" y="33">SYMPTOM</text><rect class="n-chip--f n-chip" x="106" y="17" width="216" height="24" rx="6"/><text class="n-txt" x="118" y="33">Support volume is rising</text></g>
+                <g class="fx-band fx-b2"><rect class="n-band" x="0" y="60" width="640" height="46" rx="8"/><text class="n-lab" x="12" y="87">EVIDENCE</text><rect class="n-chip" x="106" y="71" width="152" height="24" rx="6"/><text class="n-txt" x="116" y="87">One topic dominates</text><rect class="n-chip" x="266" y="71" width="122" height="24" rx="6"/><text class="n-txt" x="276" y="87">The article exists</text><rect class="n-chip" x="396" y="71" width="168" height="24" rx="6"/><text class="n-txt" x="406" y="87">Customers use other words</text></g>
+                <g class="fx-band fx-b3"><rect class="n-band" x="0" y="114" width="640" height="46" rx="8"/><text class="n-lab" x="12" y="141">CANDIDATES</text>
+                  <g class="fx-reject"><rect class="n-chip" x="106" y="125" width="118" height="24" rx="6"/><text class="n-txt" x="116" y="141">Agents too slow</text><line class="n-strike fx-strike" x1="112" y1="137" x2="218" y2="137" pathLength="1"/></g>
+                  <g class="fx-reject"><rect class="n-chip" x="232" y="125" width="112" height="24" rx="6"/><text class="n-txt" x="242" y="141">Buy a chatbot</text><line class="n-strike fx-strike" x1="238" y1="137" x2="338" y2="137" pathLength="1"/></g>
+                  <rect class="n-chip--ok n-chip" x="352" y="125" width="212" height="24" rx="6"/><text class="n-txt n-txt--ok" x="362" y="141">Customers can't find the answer</text></g>
+                <g class="fx-band fx-b4"><rect class="n-band" x="0" y="168" width="640" height="46" rx="8"/><text class="n-lab" x="12" y="195">ROOT CAUSE</text><rect class="n-chip--ok n-chip" x="106" y="179" width="458" height="24" rx="6"/><text class="n-txt" x="116" y="195">The title uses internal language, and the answer never appears at the moment of doubt</text></g>
+                <g class="fx-band fx-b5"><rect class="n-band" x="0" y="222" width="640" height="46" rx="8" style="fill:var(--tint-teal);stroke:rgba(11,143,138,.35)"/><text class="n-lab" x="12" y="249" style="fill:var(--teal-700)">INTERVENTION</text><rect class="n-chip--ok n-chip" x="106" y="233" width="330" height="24" rx="6"/><text class="n-txt n-txt--ok" x="116" y="249">Rewrite the title in customer language. Surface it earlier.</text></g>
+                <path class="n-trace fx-trace" pathLength="1" d="M 88 29 L 96 29 Q 100 29 100 33 L 100 137 Q 100 141 104 141 L 348 141 Q 352 141 352 145 L 352 191 Q 352 195 348 195 L 100 195 Q 96 195 96 199 L 96 245 Q 96 249 100 249 L 104 249"/>
+                <line class="n-scan fx-scan" x1="0" y1="8" x2="640" y2="8"/>
+              </svg>
+            </div>
+            <div class="toolbar" style="margin-top:var(--s3)"><button class="replay" data-replay="c-a" type="button">▸ Replay</button><span class="rm-note">1,050 ms · plays once</span></div>
+          </div>
+          <div>
+            <p class="small">A visible symptom is traced downward through causal strata. Rejected alternatives are <em>shown being rejected</em> — they don't vanish, they get struck. The descent ends on the smallest intervention.</p>
+            <dl class="kv">
+              <dt>Why it earns the hero</dt><dd>It is the headline made visible. "I trace the system behind the problem — then redesign it." The motion is the sentence.</dd>
+              <dt>What it proves</dt><dd>Root-cause thinking, and the discipline to reject the expensive obvious answer.</dd>
+              <dt>Originality</dt><dd>A core sample / forensic section — geology and engineering, not startup. No dots, no grid.</dd>
+              <dt>Risk</dt><dd>Densest of the four. Mitigated: the hero renders it at review scale on desktop and as three stacked strata on mobile.</dd>
+            </dl>
+          </div>
+        </div>
+      </article>
+
+      <!-- B -->
+      <article class="concept" id="c-b">
+        <div class="concept__head">
+          <div>
+            <p class="eyebrow">Concept B · your direction 2</p>
+            <h3 style="margin-top:4px">Signal Reconstruction</h3>
+          </div>
+          <span class="concept__tag tag--std">Section device</span>
+        </div>
+        <div class="concept__body">
+          <div>
+            <div class="dgframe">
+              <svg class="dg" viewBox="0 0 640 300" role="img" aria-labelledby="cb-t cb-d">
+                <title id="cb-t">Signal Reconstruction</title>
+                <desc id="cb-d">Five disconnected signals — an advertisement promising next-day delivery, a page that hides delivery time until checkout, an operation that takes three days, repeated "where is my order" contacts, and a request to build a tracking page — are threaded onto one continuous operating spine that reveals the promise, the page, and the operation disagree.</desc>
+
+                <g class="fx-node fx-b1"><text class="n-lab" x="0" y="30">MARKETING</text><rect class="n-chip--f n-chip" x="92" y="16" width="150" height="22" rx="6" transform="rotate(-4 167 27)"/><text class="n-txt" x="102" y="31" transform="rotate(-4 167 27)">Ad promises next-day</text></g>
+                <g class="fx-node fx-b2"><text class="n-lab" x="0" y="66">WEBSITE</text><rect class="n-chip--f n-chip" x="300" y="52" width="196" height="22" rx="6" transform="rotate(3 398 63)"/><text class="n-txt" x="310" y="67" transform="rotate(3 398 63)">Delivery time hidden until checkout</text></g>
+                <g class="fx-node fx-b3"><text class="n-lab" x="0" y="102">OPERATIONS</text><rect class="n-chip--f n-chip" x="130" y="88" width="164" height="22" rx="6" transform="rotate(-2 212 99)"/><text class="n-txt" x="140" y="103" transform="rotate(-2 212 99)">Fulfilment takes three days</text></g>
+                <g class="fx-node fx-b4"><text class="n-lab" x="0" y="138">SUPPORT</text><rect class="n-chip--f n-chip" x="380" y="124" width="176" height="22" rx="6" transform="rotate(5 468 135)"/><text class="n-txt" x="390" y="139" transform="rotate(5 468 135)">"Where is my order?" ×412</text></g>
+                <g class="fx-node fx-b5"><text class="n-lab" x="0" y="174">PRODUCT</text><rect class="n-chip n-chip" x="180" y="160" width="180" height="22" rx="6" transform="rotate(-3 270 171)"/><text class="n-txt" x="190" y="175" transform="rotate(-3 270 171)">"Build a tracking page?"</text></g>
+
+                <path class="n-trace fx-trace" pathLength="1" d="M 20 230 L 620 230"/>
+                <g class="fx-band fx-b5">
+                  <circle cx="100" cy="230" r="5" fill="var(--coral)"/><circle cx="230" cy="230" r="5" fill="var(--coral)"/>
+                  <circle cx="360" cy="230" r="5" fill="var(--coral)"/><circle cx="490" cy="230" r="5" fill="var(--coral)"/>
+                  <circle cx="600" cy="230" r="6" fill="var(--teal)"/>
+                  <text class="n-txt--sm" x="72" y="252">promise</text><text class="n-txt--sm" x="204" y="252">page</text>
+                  <text class="n-txt--sm" x="330" y="252">operation</text><text class="n-txt--sm" x="466" y="252">contact</text>
+                  <text class="n-txt--sm" x="560" y="252">feature ask</text>
+                </g>
+                <text class="n-txt n-txt--ok fx-band fx-b5" x="20" y="286">One chain: the promise, the page, and the operation disagree. The tracking page is not the fix.</text>
+              </svg>
+            </div>
+            <div class="toolbar" style="margin-top:var(--s3)"><button class="replay" data-replay="c-b" type="button">▸ Replay</button><span class="rm-note">1,100 ms</span></div>
+          </div>
+          <div>
+            <p class="small">Five sources emit contradictory signals. Rather than deleting the noise, the motion <em>threads</em> it — each signal keeps its identity and becomes a node in one causal chain, in the order it actually occurs.</p>
+            <dl class="kv">
+              <dt>Where it belongs</dt><dd>Home §3, the connected business-system section. It renders the locked copy: "I connect these signals before deciding where the problem actually belongs."</dd>
+              <dt>Your originality constraint</dt><dd>This is <strong>not</strong> dots aligning into a grid. The output is a single causal spine, not a lattice — and the punchline is that the requested feature is the wrong answer.</dd>
+              <dt>Risk</dt><dd>Competes with Concept D for the same section. Pick one.</dd>
+            </dl>
+          </div>
+        </div>
+      </article>
+
+      <!-- C -->
+      <article class="concept" id="c-c">
+        <div class="concept__head">
+          <div>
+            <p class="eyebrow">Concept C · your direction 3</p>
+            <h3 style="margin-top:4px">Intervention Compression</h3>
+          </div>
+          <span class="concept__tag tag--std">Method &amp; framework</span>
+        </div>
+        <div class="concept__body">
+          <div>
+            <div class="dgframe">
+              <svg class="dg" viewBox="0 0 640 300" role="img" aria-labelledby="cc-t cc-d">
+                <title id="cc-t">Intervention Compression</title>
+                <desc id="cc-d">Nine candidate interventions, drawn at widths proportional to their cost, are evaluated and removed until two remain: rewrite the title in customer language, and move the answer earlier in the journey.</desc>
+                <text class="n-lab" x="0" y="14">NINE CANDIDATE INTERVENTIONS — BAR WIDTH = COST</text>
+
+                <g class="fx-drop" style="animation-delay:120ms"><rect class="n-chip--f n-chip" x="0" y="24" width="520" height="20" rx="5"/><text class="n-txt" x="10" y="38">Hire four more agents</text></g>
+                <g class="fx-drop" style="animation-delay:200ms"><rect class="n-chip--f n-chip" x="0" y="48" width="470" height="20" rx="5"/><text class="n-txt" x="10" y="62">Buy a chatbot</text></g>
+                <g class="fx-drop" style="animation-delay:280ms"><rect class="n-chip--f n-chip" x="0" y="72" width="600" height="20" rx="5"/><text class="n-txt" x="10" y="86">Rebuild the checkout</text></g>
+                <g class="fx-drop" style="animation-delay:360ms"><rect class="n-chip--f n-chip" x="0" y="96" width="430" height="20" rx="5"/><text class="n-txt" x="10" y="110">Increase advertising spend</text></g>
+                <g class="fx-drop" style="animation-delay:440ms"><rect class="n-chip" x="0" y="120" width="360" height="20" rx="5"/><text class="n-txt" x="10" y="134">Add a reporting dashboard</text></g>
+                <g class="fx-drop" style="animation-delay:520ms"><rect class="n-chip" x="0" y="144" width="410" height="20" rx="5"/><text class="n-txt" x="10" y="158">Replace the ticketing tool</text></g>
+                <g class="fx-drop" style="animation-delay:600ms"><rect class="n-chip" x="0" y="168" width="300" height="20" rx="5"/><text class="n-txt" x="10" y="182">Rewrite the whole help centre</text></g>
+
+                <g class="fx-node" style="animation-delay:760ms">
+                  <rect class="n-chip--ok n-chip" x="0" y="200" width="150" height="20" rx="5"/>
+                  <text class="n-txt n-txt--ok" x="10" y="214">Move the answer earlier</text>
+                  <text class="n-txt--sm" x="162" y="214">next — sequenced, not simultaneous</text>
+                </g>
+                <g class="fx-node" style="animation-delay:880ms">
+                  <rect class="n-chip--ok n-chip" x="0" y="228" width="112" height="20" rx="5" style="fill:var(--teal)"/>
+                  <text class="n-txt" x="10" y="242" style="fill:#fff;font-weight:600">Rewrite the title</text>
+                  <text class="n-txt--sm" x="124" y="242">do first — cheapest change that removes the cause</text>
+                </g>
+                <text class="n-txt n-txt--ok fx-node" style="animation-delay:1000ms" x="0" y="278">Nine options → two moves. The winner is a sentence, not a system.</text>
+              </svg>
+            </div>
+            <div class="toolbar" style="margin-top:var(--s3)"><button class="replay" data-replay="c-c" type="button">▸ Replay</button><span class="rm-note">1,150 ms</span></div>
+          </div>
+          <div>
+            <p class="small">The only <em>subtractive</em> concept. Candidates are drawn at widths proportional to cost, then evaluated away. What survives is the narrowest bar.</p>
+            <dl class="kv">
+              <dt>Why it matters</dt><dd>It animates the locked decision principle: "Build only when the problem requires building. The best solution may be a clearer sentence." Removing work is the argument.</dd>
+              <dt>Where it belongs</dt><dd>Home §9 Working Method, and as the closing frame of the Simplify → Automate → Build framework.</dd>
+              <dt>Deliberate honesty</dt><dd>It ends on <strong>two</strong> moves, not one. A single magic bullet would be the less credible story.</dd>
+            </dl>
+          </div>
+        </div>
+      </article>
+
+      <!-- D -->
+      <article class="concept" id="c-d">
+        <div class="concept__head">
+          <div>
+            <p class="eyebrow">Concept D · my alternative</p>
+            <h3 style="margin-top:4px">Seam Diagnosis</h3>
+          </div>
+          <span class="concept__tag tag--alt">Strongest original idea</span>
+        </div>
+        <div class="concept__body">
+          <div>
+            <div class="dgframe">
+              <svg class="dg" viewBox="0 0 640 300" role="img" aria-labelledby="cd-t cd-d">
+                <title id="cd-t">Seam Diagnosis</title>
+                <desc id="cd-d">The customer experiences one continuous journey. The company is organised as five separate departments. The break in the customer's line falls in the gap between Operations and Support — nobody owns the silence after the sale. The fix is three timed updates, not a new product.</desc>
+
+                <text class="n-lab" x="0" y="16">THE CUSTOMER EXPERIENCES ONE LINE</text>
+                <path class="n-trace fx-trace" pathLength="1" d="M 40 62 L 300 62"/>
+                <path class="n-trace fx-trace" pathLength="1" style="animation-delay:640ms" d="M 372 62 L 600 62"/>
+                <g class="fx-break">
+                  <line x1="300" y1="48" x2="300" y2="76" stroke="var(--coral)" stroke-width="1.5"/>
+                  <line x1="372" y1="48" x2="372" y2="76" stroke="var(--coral)" stroke-width="1.5"/>
+                  <line x1="300" y1="62" x2="372" y2="62" stroke="var(--coral)" stroke-width="1.5" stroke-dasharray="3 3"/>
+                  <text class="n-txt n-txt--f" x="306" y="42">the break</text>
+                </g>
+                <g class="fx-node fx-b2">
+                  <circle cx="40" cy="62" r="4" fill="var(--navy)"/><text class="n-txt--sm" x="24" y="86">Sees ad</text>
+                  <circle cx="170" cy="62" r="4" fill="var(--navy)"/><text class="n-txt--sm" x="146" y="86">Reads page</text>
+                  <circle cx="300" cy="62" r="4" fill="var(--navy)"/><text class="n-txt--sm" x="286" y="86">Buys</text>
+                  <circle cx="440" cy="62" r="4" fill="var(--navy)"/><text class="n-txt--sm" x="404" y="86">Asks "where is it?"</text>
+                  <circle cx="600" cy="62" r="4" fill="var(--navy)"/><text class="n-txt--sm" x="556" y="86">Decides to return</text>
+                </g>
+
+                <text class="n-lab" x="0" y="124">THE COMPANY IS ORGANISED AS FIVE BOXES</text>
+                <g class="fx-node fx-b3">
+                  <rect class="n-chip" x="0" y="136" width="116" height="40" rx="7"/><text class="n-txt--sm" x="26" y="160">Marketing</text>
+                  <rect class="n-chip" x="126" y="136" width="116" height="40" rx="7"/><text class="n-txt--sm" x="156" y="160">Website</text>
+                  <rect class="n-chip" x="252" y="136" width="116" height="40" rx="7"/><text class="n-txt--sm" x="278" y="160">Operations</text>
+                  <rect class="n-chip" x="378" y="136" width="116" height="40" rx="7"/><text class="n-txt--sm" x="412" y="160">Support</text>
+                  <rect class="n-chip" x="504" y="136" width="116" height="40" rx="7"/><text class="n-txt--sm" x="536" y="160">Product</text>
+                </g>
+                <g class="fx-break">
+                  <path d="M 336 90 L 336 130" stroke="var(--coral)" stroke-width="1" stroke-dasharray="3 3"/>
+                  <rect x="368" y="136" width="12" height="40" fill="var(--tint-coral)"/>
+                  <text class="n-txt n-txt--f" x="252" y="200">The gap between two boxes — not inside either one</text>
+                </g>
+
+                <g class="fx-node fx-b5">
+                  <rect class="n-chip--ok n-chip" x="0" y="222" width="620" height="26" rx="7" style="fill:var(--tint-teal);stroke:rgba(11,143,138,.4)"/>
+                  <text class="n-txt n-txt--ok" x="12" y="239">Nobody owns the silence after the sale. Three timed updates close it — no tracking product, no extra agents.</text>
+                </g>
+                <text class="n-txt--sm" x="0" y="278">The defect is in the handoff. Departments were each doing their job correctly.</text>
+              </svg>
+            </div>
+            <div class="toolbar" style="margin-top:var(--s3)"><button class="replay" data-replay="c-d" type="button">▸ Replay</button><span class="rm-note">1,150 ms</span></div>
+          </div>
+          <div>
+            <p class="small">The customer's line is continuous. The org chart is not. The motion locates the break <em>in the gap between two boxes</em> — a place no department owns and no dashboard measures.</p>
+            <dl class="kv">
+              <dt>Why I propose it</dt><dd>It is the most distinctive idea in the set and the hardest to mistake for any other portfolio. It renders the locked home copy exactly: "Customers experience one business — not separate departments."</dd>
+              <dt>What it proves</dt><dd>That Ahmed looks at seams, not silos — and that the fix was never a feature. This is the single clearest argument against the "he's a support person" misread.</dd>
+              <dt>Recommendation</dt><dd>Give it Home §3 over Concept B. B threads evidence; D locates blame correctly. D is the sharper claim.</dd>
+            </dl>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= 05 GATEWAY ================= -->
+  <section class="plate">
+    <div class="plate__head">
+      <span class="plate__num">05</span>
+      <div><h2>Audience Gateway specimen</h2><p class="cap">Two professional entry paths. One brand.</p></div>
+    </div>
+    <div class="gw">
+      <button class="gwcard" type="button">
+        <p class="eyebrow--teal eyebrow">Pathway A</p>
+        <span class="gwcard__q">Evaluating Ahmed for a role</span>
+        <span class="small muted">Role fit, selected work, capabilities, verified evidence, working method, CV, and contact.</span>
+        <span class="small" style="color:var(--teal-700);font-weight:600;margin-top:auto">Discuss a Role →</span>
+      </button>
+      <button class="gwcard" type="button">
+        <p class="eyebrow--teal eyebrow">Pathway B</p>
+        <span class="gwcard__q">Looking to improve a business</span>
+        <span class="small muted">Common business blockers, transformation playbooks, sample deliverables, the Business Diagnostic process, and contact.</span>
+        <span class="small" style="color:var(--teal-700);font-weight:600;margin-top:auto">Request a Business Diagnostic →</span>
+      </button>
+    </div>
+    <p class="cap" style="margin-top:var(--s3)">Choosing a path curates labels and CTAs. It never creates two brands, never hides content, and never affects what a crawler sees.</p>
+  </section>
+
+  <!-- ================= 06 EVIDENCE RAIL ================= -->
+  <section class="plate">
+    <div class="plate__head">
+      <span class="plate__num">06</span>
+      <div><h2>Evidence Rail specimen</h2><p class="cap">The component that keeps every claim inside its evidence. Shown on the flagship.</p></div>
+    </div>
+    <div class="panel">
+      <div class="rail">
+        <div class="railcol">
+          <div class="railitem"><div class="railitem__k">Real asset</div><div class="railitem__v">Live platform — formula4you.com</div></div>
+          <div class="railitem"><div class="railitem__k">Ahmed's role</div><div class="railitem__v">Founder &amp; Business Growth / Product Operations Lead</div></div>
+          <div class="railitem"><div class="railitem__k">Decision</div><div class="railitem__v">Depth over breadth — a category platform, not another store builder</div></div>
+          <div class="railitem"><div class="railitem__k">Implementation</div><div class="railitem__v">Live · supply-first sequence in progress</div></div>
+          <div class="railitem"><div class="railitem__k">Metric status</div><div class="railitem__v"><span class="badge badge--ua">No scale claimed</span></div></div>
+          <div class="railitem"><div class="railitem__k">Confidentiality</div><div class="railitem__v">Public</div></div>
+        </div>
+        <div class="stack" style="--gap:var(--s4)">
+          <h3>From a fragmented market to a vertical commerce platform</h3>
+          <p class="small muted">How I turned a category insight into a live operating system for Egypt's fragrance ecosystem.</p>
+          <div class="callout">
+            <p class="small"><strong style="color:var(--navy)">The rail is the credibility engine.</strong> It sits beside every case study and answers, before the visitor reads a word of narrative: what is real, what Ahmed owned, what was decided, what shipped, what is measured, and what cannot be shown. A reader who only scans the rail still leaves with an accurate impression.</p>
+          </div>
+          <div>
+            <p class="eyebrow" style="margin-bottom:var(--s3)">Claim badges — the full enum</p>
+            <div style="display:flex;gap:var(--s2);flex-wrap:wrap">
+              <span class="badge badge--ver">Verified</span>
+              <span class="badge badge--ua">User-asserted</span>
+              <span class="badge badge--ill">Illustrative</span>
+              <span class="badge badge--ua">Proposed</span>
+              <span class="badge badge--ua">Public observation</span>
+              <span class="badge badge--ua">Confidential</span>
+            </div>
+            <p class="cap" style="margin-top:var(--s3)">Only <strong style="color:var(--teal-700)">Verified</strong> may enter a prominent metric card — enforced at build time, not by discipline. A <code>MetricCard</code> holding any other status fails the build.</p>
+          </div>
+          <div class="callout callout--risk">
+            <p class="small"><strong style="color:var(--coral-700)">Live now, per your instruction:</strong> the platform is presented as live and founder-led. No user scale, revenue, transaction volume, supplier count, or commercial performance is inferred from the live site. The rail says so explicitly rather than leaving the omission to be noticed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 07 SAB ================= -->
+  <section class="plate">
+    <div class="plate__head">
+      <span class="plate__num">07</span>
+      <div><h2>Simplify → Automate → Build</h2><p class="cap">The AI-aware decision framework. Its point is knowing when <em>not</em> to automate or build.</p></div>
+    </div>
+
+    <div class="sab">
+      <div class="sabcol" style="background:var(--tint-teal)">
+        <div class="sabcol__n">Gate 1 · always first</div>
+        <div class="sabcol__t">Simplify</div>
+        <p class="sabcol__r">Remove the work. Fix the sentence, the field, the owner, the policy. Most problems end here — and the ones that do were never technology problems.</p>
+        <div class="gate"><ul>
+          <li>Is the cause content, policy, ownership, or process?</li>
+          <li>Can a clearer sentence remove the contact entirely?</li>
+          <li>What stops existing if we do nothing?</li>
+        </ul></div>
+      </div>
+      <div class="sabcol">
+        <div class="sabcol__n">Gate 2 · only if it recurs</div>
+        <div class="sabcol__t">Automate</div>
+        <p class="sabcol__r">Only after the work is already simple. Automating a bad process makes the waste faster and harder to see.</p>
+        <div class="gate"><ul>
+          <li>Is it frequent, repeatable, and stable?</li>
+          <li>Is the data ready and trustworthy?</li>
+          <li>Is human judgment genuinely absent?</li>
+          <li>What is the cost of being confidently wrong?</li>
+        </ul></div>
+      </div>
+      <div class="sabcol">
+        <div class="sabcol__n">Gate 3 · last resort</div>
+        <div class="sabcol__t">Build</div>
+        <p class="sabcol__r">Only when simplifying and automating both fail, and the value clears the total cost — including who maintains it in year two.</p>
+        <div class="gate"><ul>
+          <li>Implementation cost vs. ongoing operating cost</li>
+          <li>Who owns it after launch?</li>
+          <li>How will success be measured — and when do we stop?</li>
+          <li>What does it make harder to change later?</li>
+        </ul></div>
+      </div>
+    </div>
+
+    <div class="grid2" style="margin-top:var(--s4)">
+      <div class="callout">
+        <p class="eyebrow">The framework's real argument</p>
+        <p class="small" style="margin-top:var(--s2)">AI awareness is not enthusiasm. The support playbook's strongest moment is leadership considering a chatbot, and the disciplined answer being <em>rewrite the article title</em>. <strong style="color:var(--navy)">The decision not to automate is the proof of judgment</strong> — and it's the one thing a generated portfolio never says.</p>
+      </div>
+      <div class="callout callout--navy">
+        <p class="eyebrow">Every gate evaluates</p>
+        <p class="small" style="margin-top:var(--s2)">Recurrence and frequency · business impact · root cause · information and data readiness · whether human judgment is required · risk of incorrect automation · implementation cost · ongoing operating and maintenance cost · ownership after launch · success measurement.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 08/09 WIREFRAMES ================= -->
+  <section class="plate">
+    <div class="plate__head">
+      <span class="plate__num">08</span>
+      <div><h2>Home wireframes — desktop &amp; mobile</h2><p class="cap">All twelve locked sections. Domain tags verify the balance rule: no two consecutive sections share a functional domain.</p></div>
+    </div>
+
+    <div class="wfrow">
+      <div class="wf wf--desk">
+        <p class="eyebrow" style="margin-bottom:var(--s3)">Desktop · 1280 max · 12-col</p>
+
+        <div class="wfb"><div class="wfb__t"><span>01</span>Navigation + transformation hero</div>
+          <div class="wfb__d">Eyebrow · headline · rule · supporting copy · two CTAs | Root-Cause Excavation, right column</div>
+          <div class="wfb__sk" style="height:52px"><div class="sk" style="flex:1"></div><div class="sk" style="flex:1;background:var(--tint-teal);border:1px solid rgba(11,143,138,.3)"></div></div>
+          <div class="wfb__dom">Positioning</div></div>
+
+        <div class="wfb"><div class="wfb__t"><span>02</span>Audience gateway</div>
+          <div class="wfb__d">Two equal cards. No hierarchy between them.</div>
+          <div class="wfb__sk" style="height:30px"><div class="sk" style="flex:1"></div><div class="sk" style="flex:1"></div></div>
+          <div class="wfb__dom">Routing</div></div>
+
+        <div class="wfb"><div class="wfb__t"><span>03</span>One connected business-system map</div>
+          <div class="wfb__d">Seam Diagnosis (Concept D). Locked copy: "Customers experience one business — not separate departments."</div>
+          <div class="wfb__sk" style="height:44px"><div class="sk" style="flex:1;background:var(--tint-teal);border:1px solid rgba(11,143,138,.3)"></div></div>
+          <div class="wfb__dom">Cross-functional · system</div></div>
+
+        <div class="wfb"><div class="wfb__t"><span>04</span>Selected real work</div>
+          <div class="wfb__d">Formula4You wide · three supporting cases. Each card carries its evidence tier.</div>
+          <div class="wfb__sk" style="height:34px"><div class="sk" style="flex:2"></div><div class="sk" style="flex:1"></div><div class="sk" style="flex:1"></div><div class="sk" style="flex:1"></div></div>
+          <div class="wfb__dom">Market · product · CX · growth</div></div>
+
+        <div class="wfb"><div class="wfb__t"><span>05</span>Capability proof matrix</div>
+          <div class="wfb__d">Hovering a capability highlights the work and playbooks that prove it. Ten capabilities, each ≥3 surfaces.</div>
+          <div class="wfb__sk" style="height:38px"><div class="sk" style="flex:1"></div><div class="sk" style="flex:1"></div><div class="sk" style="flex:1"></div><div class="sk" style="flex:1"></div></div>
+          <div class="wfb__dom">All — the map</div></div>
+
+        <div class="wfb"><div class="wfb__t"><span>06</span>Transformation playbooks</div>
+          <div class="wfb__d">Four cards: Support &amp; CX · Digital buying system · Operations &amp; workflows · Growth &amp; expansion</div>
+          <div class="wfb__sk" style="height:30px"><div class="sk" style="flex:1"></div><div class="sk" style="flex:1"></div><div class="sk" style="flex:1"></div><div class="sk" style="flex:1"></div></div>
+          <div class="wfb__dom">Operations · CX · conversion · growth</div></div>
+
+        <div class="wfb" style="border-color:var(--coral);background:var(--tint-coral)"><div class="wfb__t"><span>07</span>Strategic audit method <span style="color:var(--coral-700)">— revised per Gate 1 §7</span></div>
+          <div class="wfb__d">Not an audit library. The publishing standard: disclaimer, observation date, facts vs hypotheses, limitations. Accessible from Insights/Playbooks.</div>
+          <div class="wfb__sk" style="height:26px"><div class="sk" style="flex:1"></div></div>
+          <div class="wfb__dom">Market strategy · judgment</div></div>
+
+        <div class="wfb"><div class="wfb__t"><span>08</span>Latest Insights &amp; applied frameworks</div>
+          <div class="wfb__d">Three articles + the Simplify → Automate → Build framework</div>
+          <div class="wfb__sk" style="height:30px"><div class="sk" style="flex:1"></div><div class="sk" style="flex:1"></div><div class="sk" style="flex:1"></div></div>
+          <div class="wfb__dom">Mixed · AI decisions</div></div>
+
+        <div class="wfb"><div class="wfb__t"><span>09</span>Working method &amp; sample deliverables</div>
+          <div class="wfb__d">Five stages. Intervention Compression (Concept C) plays here.</div>
+          <div class="wfb__sk" style="height:34px"><div class="sk" style="flex:1;background:var(--tint-teal);border:1px solid rgba(11,143,138,.3)"></div><div class="sk" style="flex:1"></div></div>
+          <div class="wfb__dom">Execution · measurement</div></div>
+
+        <div class="wfb"><div class="wfb__t"><span>10</span>Credibility &amp; evidence strip</div>
+          <div class="wfb__d">Safe wording only until evidence lands. No metric cards at launch.</div>
+          <div class="wfb__sk" style="height:24px"><div class="sk" style="flex:1"></div></div>
+          <div class="wfb__dom">Proof</div></div>
+
+        <div class="wfb"><div class="wfb__t"><span>11</span>About / career narrative</div>
+          <div class="wfb__d">Approved portrait. Customer evidence → business insight → founder-led platform.</div>
+          <div class="wfb__sk" style="height:34px"><div class="sk" style="flex:0 0 60px"></div><div class="sk" style="flex:1"></div></div>
+          <div class="wfb__dom">Narrative</div></div>
+
+        <div class="wfb"><div class="wfb__t"><span>12</span>Context-aware CTA &amp; contact</div>
+          <div class="wfb__d">Audience-aware primary + full channel grid. Works without JavaScript.</div>
+          <div class="wfb__sk" style="height:28px"><div class="sk" style="flex:1;background:var(--tint-teal);border:1px solid rgba(11,143,138,.3)"></div></div>
+          <div class="wfb__dom">Conversion</div></div>
+      </div>
+
+      <div class="wf wf--mob">
+        <p class="eyebrow" style="margin-bottom:var(--s3)">Mobile · 360–390</p>
+        <div class="wfb"><div class="wfb__t"><span>01</span>Hero</div><div class="wfb__d">Headline first. Diagram below, three strata only.</div><div class="wfb__sk" style="height:56px"><div class="sk" style="flex:1"></div></div></div>
+        <div class="wfb"><div class="wfb__t"><span>02</span>Gateway</div><div class="wfb__d">Stacked</div><div class="wfb__sk" style="height:36px"><div class="sk" style="flex:1"></div></div></div>
+        <div class="wfb"><div class="wfb__t"><span>03</span>System map</div><div class="wfb__d">Seam → two stacked diagrams</div><div class="wfb__sk" style="height:44px"><div class="sk" style="flex:1;background:var(--tint-teal);border:1px solid rgba(11,143,138,.3)"></div></div></div>
+        <div class="wfb"><div class="wfb__t"><span>04</span>Work</div><div class="wfb__d">Flagship first, then 3</div><div class="wfb__sk" style="height:40px"><div class="sk" style="flex:1"></div></div></div>
+        <div class="wfb"><div class="wfb__t"><span>05</span>Capabilities</div><div class="wfb__d">Accordion, not hover</div><div class="wfb__sk" style="height:30px"><div class="sk" style="flex:1"></div></div></div>
+        <div class="wfb"><div class="wfb__t"><span>06</span>Playbooks</div><div class="wfb__d">Stacked ×4</div><div class="wfb__sk" style="height:30px"><div class="sk" style="flex:1"></div></div></div>
+        <div class="wfb" style="border-color:var(--coral);background:var(--tint-coral)"><div class="wfb__t"><span>07</span>Audit method</div><div class="wfb__d">Single panel</div><div class="wfb__sk" style="height:22px"><div class="sk" style="flex:1"></div></div></div>
+        <div class="wfb"><div class="wfb__t"><span>08</span>Insights</div><div class="wfb__d">Stacked ×3</div><div class="wfb__sk" style="height:28px"><div class="sk" style="flex:1"></div></div></div>
+        <div class="wfb"><div class="wfb__t"><span>09</span>Method</div><div class="wfb__d">Compression → vertical list</div><div class="wfb__sk" style="height:34px"><div class="sk" style="flex:1"></div></div></div>
+        <div class="wfb"><div class="wfb__t"><span>10</span>Credibility</div><div class="wfb__d">Stacked</div><div class="wfb__sk" style="height:22px"><div class="sk" style="flex:1"></div></div></div>
+        <div class="wfb"><div class="wfb__t"><span>11</span>About</div><div class="wfb__d">Portrait then copy</div><div class="wfb__sk" style="height:34px"><div class="sk" style="flex:1"></div></div></div>
+        <div class="wfb"><div class="wfb__t"><span>12</span>Contact</div><div class="wfb__d">Sticky action only after real scroll. Never covers content.</div><div class="wfb__sk" style="height:28px"><div class="sk" style="flex:1;background:var(--tint-teal);border:1px solid rgba(11,143,138,.3)"></div></div></div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:var(--s4)">
+      <p class="small"><strong style="color:var(--navy)">Balance rule verified.</strong> Reading the domain tags top to bottom: Positioning · Routing · Cross-functional · Market/product/CX/growth · All · Operations/CX/conversion/growth · Market strategy · Mixed · Execution · Proof · Narrative · Conversion. No two consecutive sections share a dominant domain, and any three adjacent sections span ≥3 capability domains. Mobile preserves reasoning order; wide diagrams become stacked steps, never pinch-zoom.</p>
+    </div>
+  </section>
+
+  <!-- ================= 09 DECISIONS ================= -->
+  <section class="plate">
+    <div class="plate__head">
+      <span class="plate__num">09</span>
+      <div><h2>Recommendation, deviations &amp; what happens next</h2></div>
+    </div>
+
+    <div class="stack" style="--gap:var(--s5)">
+      <div class="panel" style="border-color:var(--teal);border-width:2px">
+        <p class="eyebrow--teal eyebrow">Recommended final direction</p>
+        <h3 style="margin-top:var(--s2)">Don't pick one motion concept. Assign each to the section where it does work.</h3>
+        <p class="small" style="margin-top:var(--s3);max-width:var(--measure)">
+          Four one-off animations would be decoration. Four related grammars — descend, thread, subtract, locate — are a
+          <strong>motion vocabulary</strong>, and a vocabulary is an identity. Each concept earns its place by explaining
+          something that section actually needs to say:
+        </p>
+        <div class="tablewrap" style="margin-top:var(--s4)">
+          <table>
+            <thead><tr><th>Concept</th><th>Grammar</th><th>Home section</th><th>Why it earns it</th></tr></thead>
+            <tbody>
+              <tr><td><strong>A · Root-Cause Excavation</strong></td><td>Descend</td><td>§1 Hero</td><td>It is the headline made visible</td></tr>
+              <tr><td><strong>D · Seam Diagnosis</strong></td><td>Locate</td><td>§3 Business-system map</td><td>Renders the locked "one business, not departments" copy</td></tr>
+              <tr><td><strong>C · Intervention Compression</strong></td><td>Subtract</td><td>§9 Working method + SAB</td><td>Animates "build only when the problem requires building"</td></tr>
+              <tr><td><strong>B · Signal Reconstruction</strong></td><td>Thread</td><td>§5 Capability map + dividers</td><td>Threading grammar becomes the section rule; full play reserved for the capability map</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="cap" style="margin-top:var(--s3)">If you want a leaner launch: A and D alone carry the identity. C and B can arrive in Phase 3 without redesign.</p>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom:var(--s3)">Deviations from the approved plan</h3>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Deviation</th><th>Why</th><th>Status</th></tr></thead>
+            <tbody>
+              <tr><td>Type shown in a system stand-in, not Manrope/Inter</td><td>The Artifact CSP blocks font CDNs. Presentation-only — production self-hosts subset woff2.</td><td>Presentation artefact only</td></tr>
+              <tr><td>Home §7 is the audit <em>method</em>, not an audits preview</td><td>Your Gate 1 §7 instruction. The wireframe is marked in coral.</td><td>Applied</td></tr>
+              <tr><td>Single-theme (light) presentation</td><td>Brief §16 locks a light institutional theme with no toggle. Tokens are pinned so specimens stay colour-accurate under a dark viewer.</td><td>By design</td></tr>
+              <tr><td>Concept C ends on two moves, not one</td><td>A single magic bullet is the less credible story, and sequencing is the actual method.</td><td>Proposed</td></tr>
+              <tr><td>Portrait not shown in this presentation</td><td>Brief §06 places the portrait in About/Contact, not the home hero. It is approved and will appear there and in both PDFs.</td><td>Correct per brief</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="callout callout--risk">
+        <p class="eyebrow">New asset &amp; evidence requirements surfaced by Phase 1</p>
+        <ul class="small" style="margin-top:var(--s3)">
+          <li><strong>Formula4You screenshots + logo</strong> — still the largest gap. Concept A/D prove reasoning; only real screens prove the platform. Needed before Gate 2.</li>
+          <li><strong>Only one portrait file exists</strong> in the project (<code>صورتي.png</code>). You approved "the final professional portrait" and said not to use an earlier placeholder — I'm treating that single file as the approved final. <strong>Confirm if a different file was intended.</strong></li>
+          <li><strong>Employee of the Month + Trustpilot evidence</strong> — until supplied, "hundreds of five-star reviews", no number, no metric card.</li>
+          <li><strong>Alpha Capital contribution specifics</strong> — the Arabic-audience content and Arab-market positioning work you named is <em>user-asserted</em>. I will present it as contribution, with no fabricated project names, dates, metrics, or approvals.</li>
+          <li><strong>Formula4You favicon / brand colours</strong> — if fixed brand colours exist, they must not fight the portfolio palette in screenshots.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h3 style="margin-bottom:var(--s3)">Built only after Gate 1 visual approval</h3>
+        <ul class="ck">
+          <li><span class="ck__m">PHASE 2</span><span>Repository <code>ahmed-hamdy-portfolio</code>, git init, Astro 5 + strict TypeScript, hand-authored CSS token layer, content collections with Zod claim/evidence schema, component library, navigation, responsive system, metadata, draft controls, GitHub Actions → Pages.</span></li>
+          <li><span class="ck__m">PHASE 3</span><span>Full home page · Formula4You flagship · contact system · first live deploy to the project-site base path · desktop/tablet/mobile previews.</span></li>
+          <li><span class="ck__m ck__m--wait">GATE 2</span><span>Your approval of narrative, visual quality, Formula4You framing, and evidence treatment — before any supporting page exists.</span></li>
+          <li><span class="ck__m ck__m--wait">LATER</span><span>Supporting cases · four playbooks · audience pathways · audit framework · Insights system · both PDFs · QA gates · search onboarding.</span></li>
+        </ul>
+        <div class="callout callout--navy" style="margin-top:var(--s4)">
+          <p class="small"><strong style="color:var(--navy)">Canonical identity stays provisional.</strong> <code>SITE_URL</code> and <code>BASE_PATH</code> remain fully configurable. The temporary <code>ahmedeldep30-ship-it.github.io/ahmed-hamdy-portfolio/</code> address is not treated as the permanent canonical identity until Gate 4. Private evidence, original source assets, and unapproved files stay gitignored and are never committed — the repository may be public from day one without risk.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</div>
+
+<script>
+  (function () {
+    // --- Audience switch: curates label + CTA only. Never gates content. ---
+    var CTA = { biz: "Request a Business Diagnostic", emp: "Discuss a Role" };
+    var FOURTH = { biz: "Method", emp: "For employers" };
+    var cta = document.getElementById("nav-cta");
+    var fourth = document.getElementById("nav-4th");
+    document.querySelectorAll(".switch button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        document.querySelectorAll(".switch button").forEach(function (o) {
+          o.setAttribute("aria-pressed", String(o === b));
+        });
+        var k = b.dataset.aud;
+        cta.textContent = CTA[k];
+        fourth.textContent = FOURTH[k];
+      });
+    });
+
+    // --- Replay: add .play, strip it once the longest animation is done. ---
+    function play(el) {
+      if (!el) return;
+      el.classList.remove("play");
+      void el.offsetWidth; // force reflow so the animation restarts
+      el.classList.add("play");
+      window.setTimeout(function () { el.classList.remove("play"); }, 1500);
+    }
+    document.querySelectorAll("[data-replay]").forEach(function (b) {
+      b.addEventListener("click", function () { play(document.getElementById(b.dataset.replay)); });
+    });
+
+    // --- Forced reduced-motion toggle, so the static equivalent is reviewable
+    //     without changing OS settings. ---
+    var t = document.getElementById("rm-toggle");
+    t.addEventListener("click", function () {
+      var on = document.documentElement.getAttribute("data-motion") === "off";
+      document.documentElement.setAttribute("data-motion", on ? "on" : "off");
+      t.setAttribute("aria-pressed", String(!on));
+      t.innerHTML = "Force reduced motion: <strong>" + (on ? "Off" : "On") + "</strong>";
+    });
+
+    // --- Hero plays once on load, honouring the OS preference. ---
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!reduce) window.setTimeout(function () { play(document.getElementById("hero-dg")); }, 260);
+  })();
+</script>

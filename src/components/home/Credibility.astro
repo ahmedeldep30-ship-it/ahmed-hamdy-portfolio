@@ -1,0 +1,100 @@
+---
+import { external } from '@config/site';
+
+/**
+ * §10 — Credibility and Evidence.
+ *
+ * NO METRIC CARDS. Every EVIDENCE_REQUIRED claim uses the brief's approved safe
+ * fallback wording verbatim until proof is attached:
+ *   · "300+ verified five-star reviews" → "hundreds of five-star reviews" (no number)
+ *   · "Employee of the Month"           → omitted entirely, not softened
+ *   · "thousands of completed orders"   → the approved high-volume fallback
+ * This section is deliberately the least impressive one on the page. That is the point.
+ */
+
+const EVIDENCED = [
+  {
+    t: 'A live, founder-led platform',
+    d: 'Formula4You is real, running, and open to inspection. The screens in the case study are the actual product.',
+    link: external.formula4you,
+    linkLabel: 'formula4you.com',
+  },
+  {
+    t: 'A complete business system, not a feature list',
+    d: 'Participant model, onboarding, subscriptions, listings, governance, search visibility, and phased execution — the completeness is the evidence.',
+  },
+  {
+    t: 'High-volume customer exposure, UK remote fintech',
+    d: 'Hundreds of five-star customer reviews across a high-volume environment, and the pattern-reading habit that came with them.',
+  },
+  {
+    t: 'Commercial work behind the reasoning',
+    d: 'Supported high-volume retail initiatives by improving offer structure, purchase journeys, campaign-to-page consistency, and order handling before acquisition spend was scaled.',
+  },
+];
+---
+
+<section class="section zone-deep cred" id="credibility" aria-labelledby="cred-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Credibility &amp; evidence</span>
+      <h2 id="cred-h" class="sec-head__q">A smaller verified result is stronger than a larger unsupported one.</h2>
+      <p class="muted">
+        There are no statistic cards on this page. Not because there is nothing to say — because
+        a number without a source, a baseline, a period, and a calculation is decoration.
+      </p>
+    </div>
+
+    <div class="cred__grid">
+      {EVIDENCED.map((e) => (
+        <article class="cred__item">
+          <h3 class="cred__t">{e.t}</h3>
+          <p class="cred__d">{e.d}</p>
+          {e.link && (
+            <a class="cred__l" href={e.link} rel="noopener">{e.linkLabel} ↗</a>
+          )}
+        </article>
+      ))}
+    </div>
+
+    <div class="cred__hold">
+      <p class="cred__hold-l">Held back until the evidence is attached</p>
+      <p class="cred__hold-t">
+        Exact review counts, recognition, order totals, conversion lift, cost or time savings,
+        and any Formula4You scale figure — suppliers, listings, sign-ups, traffic, transactions,
+        or revenue. Each one is either documented or it does not appear. When the proof arrives,
+        the wording upgrades. Until then it stays as you see it.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cred__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border-top: 1px solid var(--hairline); }
+  @media (max-width: 1000px) { .cred__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .cred__grid { grid-template-columns: 1fr; } }
+  .cred__item {
+    padding: var(--s5) var(--s5) var(--s5) 0;
+    border-bottom: 1px solid var(--hairline);
+    border-right: 1px solid var(--hairline);
+    display: flex; flex-direction: column; gap: var(--s3);
+  }
+  .cred__item:last-child { border-right: 0; }
+  .cred__item:not(:first-child) { padding-left: var(--s5); }
+  .cred__t { font-size: var(--fs-h4); }
+  .cred__d { font-size: var(--fs-small); color: var(--text-muted); }
+  .cred__l { font-family: var(--font-head); font-size: var(--fs-small); font-weight: 700; margin-top: auto; }
+  @media (max-width: 620px) { .cred__item { border-right: 0; padding-left: 0 !important; } }
+
+  .cred__hold {
+    margin-top: var(--s6); padding: var(--s5);
+    border: 1px dashed var(--hairline-strong); border-radius: var(--r-md);
+    max-width: 92ch;
+  }
+  .cred__hold-l {
+    font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);
+    margin-bottom: var(--s3);
+  }
+  .cred__hold-t { font-size: var(--fs-small); color: var(--text-muted); }
+</style>

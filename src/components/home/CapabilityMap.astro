@@ -1,0 +1,240 @@
+---
+/**
+ * §5 — Capability Proof Map.
+ * Selecting a capability reveals what proves it. Signal Reconstruction in its
+ * restrained form: the connection is drawn, not decorated.
+ *
+ * Rule: every capability must name real proof. Nothing here is aspirational —
+ * where proof is still being written, it says so.
+ */
+
+type Proof = { label: string; state: 'live' | 'soon' };
+
+const CAPS: { id: string; name: string; claim: string; proof: Proof[] }[] = [
+  {
+    id: 'growth', name: 'Business growth & strategy',
+    claim: 'Finding where growth is actually constrained — which is rarely the ad budget.',
+    proof: [
+      { label: 'Formula4You — market gap → vertical strategy', state: 'live' },
+      { label: 'Growth & Market Expansion playbook', state: 'soon' },
+      { label: 'Commercial Growth case study', state: 'soon' },
+    ],
+  },
+  {
+    id: 'ops', name: 'Operations & process improvement',
+    claim: 'Removing repeated work, owner dependency, and unclear handoffs before automating anything.',
+    proof: [
+      { label: 'Formula4You — listing lifecycle, admin review, governance', state: 'live' },
+      { label: 'Operations & Workflow playbook', state: 'soon' },
+      { label: 'Alpha Capital — friction → operational insight', state: 'soon' },
+    ],
+  },
+  {
+    id: 'cx', name: 'Customer experience & support transformation',
+    claim: 'Treating contact volume as evidence, not as a staffing problem.',
+    proof: [
+      { label: 'Support & CX Transformation playbook', state: 'soon' },
+      { label: 'Alpha Capital — contact drivers', state: 'soon' },
+      { label: 'Seam Diagnosis — post-purchase silence', state: 'live' },
+    ],
+  },
+  {
+    id: 'uiux', name: 'Conversion-focused UI/UX',
+    claim: 'Judging interface by commercial clarity and information timing — never by visual taste.',
+    proof: [
+      { label: 'Formula4You — storefront & discovery requirements', state: 'live' },
+      { label: 'E-commerce Conversion case study', state: 'soon' },
+      { label: 'Digital Buying-System playbook', state: 'soon' },
+    ],
+  },
+  {
+    id: 'journey', name: 'Customer journey optimization',
+    claim: 'Designing the whole path — including the silence customers feel after paying.',
+    proof: [
+      { label: 'Seam Diagnosis — the break lives in the handoff', state: 'live' },
+      { label: 'Formula4You — onboarding to first order', state: 'live' },
+      { label: 'E-commerce Conversion case study', state: 'soon' },
+    ],
+  },
+  {
+    id: 'product', name: 'Product & feature strategy',
+    claim: 'Deciding what earns a build — and what earns a sentence instead.',
+    proof: [
+      { label: 'Formula4You — phased scope, feature-bloat prevention', state: 'live' },
+      { label: 'Simplify → Automate → Build framework', state: 'live' },
+      { label: 'Intervention Compression — nine options to two', state: 'live' },
+    ],
+  },
+  {
+    id: 'gtm', name: 'Go-to-market planning',
+    claim: 'Sequencing a launch so it survives its own first month.',
+    proof: [
+      { label: 'Formula4You — supply-first launch sequence', state: 'live' },
+      { label: 'Formula4You — participant value propositions', state: 'live' },
+      { label: 'Growth & Market Expansion playbook', state: 'soon' },
+    ],
+  },
+  {
+    id: 'market', name: 'Market-gap analysis & expansion',
+    claim: 'Testing whether a gap is structural before committing resources to it.',
+    proof: [
+      { label: 'Formula4You — the gap is the case study', state: 'live' },
+      { label: 'Strategic Audit Method', state: 'live' },
+      { label: 'Market-expansion diagnostic', state: 'soon' },
+    ],
+  },
+  {
+    id: 'exec', name: 'Cross-functional execution',
+    claim: 'Turning a decision into briefs, sequence, QA, and a measurement defined before launch.',
+    proof: [
+      { label: 'Formula4You — design, content, technical, QA, SEO coordination', state: 'live' },
+      { label: 'Formula4You — requirements & acceptance logic', state: 'live' },
+      { label: 'Commercial Growth — feedback loop', state: 'soon' },
+    ],
+  },
+  {
+    id: 'ai', name: 'AI-aware business decisions',
+    claim: 'Knowing when not to automate. The restraint is the skill.',
+    proof: [
+      { label: 'Simplify → Automate → Build — three gates', state: 'live' },
+      { label: 'Intervention Compression — the chatbot gets rejected', state: 'live' },
+      { label: 'Formula4You — AI-assisted research, docs, QA', state: 'live' },
+    ],
+  },
+];
+---
+
+<section class="section cmap" id="capabilities" aria-labelledby="cmap-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Capability proof map</span>
+      <h2 id="cmap-h" class="sec-head__q">Every capability has to name what proves it.</h2>
+      <p class="muted">
+        A capability list is free to write. Select one and it has to show its evidence —
+        including where that evidence is still being written.
+      </p>
+    </div>
+
+    <div class="cmap__ui">
+      <div class="cmap__list" role="tablist" aria-orientation="vertical" aria-label="Capabilities">
+        {CAPS.map((c, i) => (
+          <button
+            class="cmap__btn" role="tab" type="button"
+            id={`cap-t-${c.id}`} aria-controls={`cap-p-${c.id}`}
+            aria-selected={i === 0 ? 'true' : 'false'}
+            tabindex={i === 0 ? 0 : -1}
+            data-cap={c.id}
+          >
+            <span class="cmap__dot" aria-hidden="true"></span>
+            {c.name}
+          </button>
+        ))}
+      </div>
+
+      <div class="cmap__panels">
+        {CAPS.map((c, i) => (
+          <div
+            class="cmap__panel" role="tabpanel"
+            id={`cap-p-${c.id}`} aria-labelledby={`cap-t-${c.id}`}
+            hidden={i !== 0}
+          >
+            <p class="cmap__claim">{c.claim}</p>
+            <p class="eyebrow cmap__pl">Proved by</p>
+            <ul class="cmap__proof">
+              {c.proof.map((p) => (
+                <li class={`cmap__p cmap__p--${p.state}`}>
+                  <span class="cmap__p-line" aria-hidden="true"></span>
+                  <span class="cmap__p-l">{p.label}</span>
+                  {p.state === 'soon' && <span class="cmap__p-s">in preparation</span>}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cmap__ui { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: var(--s7); align-items: start; }
+  @media (max-width: 900px) { .cmap__ui { grid-template-columns: 1fr; gap: var(--s5); } }
+
+  .cmap__list { display: flex; flex-direction: column; border-top: 1px solid var(--hairline); }
+  .cmap__btn {
+    display: flex; align-items: center; gap: var(--s3);
+    text-align: left; background: none; border: 0;
+    border-bottom: 1px solid var(--hairline);
+    padding: var(--s4) var(--s2);
+    font-family: var(--font-head); font-size: var(--fs-small); font-weight: 600;
+    color: var(--text-muted); cursor: pointer;
+    transition: color var(--dur-fast) var(--ease), padding-left var(--dur-fast) var(--ease);
+  }
+  .cmap__btn:hover { color: var(--text); }
+  .cmap__btn[aria-selected='true'] { color: var(--teal-bright); padding-left: var(--s4); }
+  .cmap__dot {
+    width: 7px; height: 7px; border-radius: 50%; flex: none;
+    border: 1px solid var(--border-control); background: transparent;
+    transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  }
+  .cmap__btn[aria-selected='true'] .cmap__dot { background: var(--teal-bright); border-color: var(--teal-bright); }
+
+  .cmap__panel {
+    padding: var(--s5); background: var(--surface-raise);
+    border: 1px solid var(--hairline); border-radius: var(--r-lg);
+  }
+  .cmap__claim { font-size: var(--fs-h4); font-family: var(--font-head); font-weight: 600; color: var(--text); margin-bottom: var(--s5); }
+  .cmap__pl { margin-bottom: var(--s3); }
+  .cmap__proof { display: flex; flex-direction: column; gap: var(--s3); padding: 0; list-style: none; }
+  .cmap__p { display: flex; align-items: center; gap: var(--s3); font-size: var(--fs-small); }
+  .cmap__p-line { width: 20px; height: 1px; background: var(--teal-signal); flex: none; }
+  .cmap__p--soon .cmap__p-line { background: var(--border-control); }
+  .cmap__p-l { color: var(--text); }
+  .cmap__p--soon .cmap__p-l { color: var(--text-muted); }
+  .cmap__p-s {
+    font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700;
+    letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-faint);
+    border: 1px solid var(--hairline-strong); border-radius: 999px; padding: 0.1rem 0.45rem;
+  }
+
+  /* Restrained Signal Reconstruction: the connector threads in once. */
+  @keyframes cmap-thread { from { width: 0; opacity: 0; } to { width: 20px; opacity: 1; } }
+  .cmap__panel:not([hidden]) .cmap__p-line { animation: cmap-thread var(--dur-slow) var(--ease-out) both; }
+  .cmap__panel:not([hidden]) .cmap__p:nth-child(2) .cmap__p-line { animation-delay: 60ms; }
+  .cmap__panel:not([hidden]) .cmap__p:nth-child(3) .cmap__p-line { animation-delay: 120ms; }
+</style>
+
+<script>
+  const tabs = Array.from(document.querySelectorAll<HTMLButtonElement>('.cmap__btn'));
+  const panels = Array.from(document.querySelectorAll<HTMLElement>('.cmap__panel'));
+
+  function select(id: string) {
+    tabs.forEach((t) => {
+      const on = t.dataset.cap === id;
+      t.setAttribute('aria-selected', String(on));
+      t.tabIndex = on ? 0 : -1;
+    });
+    panels.forEach((p) => { p.hidden = p.id !== `cap-p-${id}`; });
+  }
+
+  tabs.forEach((t) => {
+    t.addEventListener('click', () => select(t.dataset.cap!));
+    // Hover reveals on pointer devices without stealing focus.
+    t.addEventListener('mouseenter', () => {
+      if (window.matchMedia('(hover: hover)').matches) select(t.dataset.cap!);
+    });
+    t.addEventListener('keydown', (e) => {
+      const i = tabs.indexOf(t);
+      let n = -1;
+      if (e.key === 'ArrowDown') n = (i + 1) % tabs.length;
+      if (e.key === 'ArrowUp') n = (i - 1 + tabs.length) % tabs.length;
+      if (e.key === 'Home') n = 0;
+      if (e.key === 'End') n = tabs.length - 1;
+      if (n < 0) return;
+      e.preventDefault();
+      const next = tabs[n]!;
+      select(next.dataset.cap!);
+      next.focus();
+    });
+  });
+</script>

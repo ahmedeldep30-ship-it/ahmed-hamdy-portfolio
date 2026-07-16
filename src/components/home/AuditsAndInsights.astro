@@ -1,0 +1,141 @@
+---
+/**
+ * §7 Strategic Audit Method + §8 Insights.
+ *
+ * §7 is deliberately the METHOD, not an audit library (Gate 1 §7). Nothing here
+ * implies a populated set of published audits exists — because it does not.
+ */
+
+const AUDIT_STRUCTURE = [
+  'Executive thesis — the single opportunity or risk worth investigating',
+  'Public evidence and the observation date',
+  'The journey a specific audience actually experiences',
+  'Friction map — fact, interpretation, and uncertainty kept separate',
+  'Multiple root-cause hypotheses, not one confident assumption',
+  'Recommendations — smallest test first, with owners and dependencies',
+  '90-day pilot, measurement, and stop / scale criteria',
+  'Risks, limitations, and what the company would need to supply to validate it',
+];
+
+const CATEGORIES = [
+  'Business Growth & Market Strategy',
+  'Operations & Process Improvement',
+  'Customer Support & CX Transformation',
+  'E-commerce Conversion & UI/UX',
+  'AI, Product & Business Decisions',
+  'Independent Strategic Audits',
+];
+---
+
+<section class="section ai2" id="audits" aria-labelledby="ai2-h">
+  <div class="wrap ai2__grid">
+    <!-- §7 — Strategic Audit Method -->
+    <div>
+      <div class="sec-head" style="margin-bottom: var(--s5)">
+        <span class="eyebrow">Strategic audit method</span>
+        <h2 id="ai2-h" class="sec-head__q">The standard I hold public analysis to.</h2>
+      </div>
+
+      <div class="ai2__disc">
+        <p class="ai2__disc-l">Mandatory on every published audit</p>
+        <p class="ai2__disc-t">
+          “Independent analysis based only on publicly available information. This work was not
+          commissioned by, affiliated with, or approved by the featured company. Observations
+          reflect the public experience on the review date and may change.”
+        </p>
+      </div>
+
+      <ol class="ai2__st">
+        {AUDIT_STRUCTURE.map((s, i) => (
+          <li>
+            <span class="ai2__n tnum">{String(i + 1).padStart(2, '0')}</span>
+            <span>{s}</span>
+          </li>
+        ))}
+      </ol>
+
+      <p class="ai2__note">
+        <strong>No audits are published yet.</strong> Analysing a company I have never worked
+        with is one of the strongest things a portfolio can show — and one of the easiest to do
+        badly. I will not claim a company lacks a partnership or market activity merely because
+        a quick search did not surface it. Audits appear here when the research, sources, dates,
+        and limitations are complete — not before.
+      </p>
+    </div>
+
+    <!-- §8 — Insights -->
+    <div id="insights">
+      <div class="sec-head" style="margin-bottom: var(--s5)">
+        <span class="eyebrow">Insights &amp; applied frameworks</span>
+        <h2 class="sec-head__q">A knowledge hub, not a blog.</h2>
+      </div>
+
+      <p class="muted ai2__ip">
+        Two defensible articles a month rather than a volume of generic posts. Every article
+        names a reader and a decision, then covers the symptom, evidence, root cause, method,
+        trade-offs, and limitations — and has to survive an interview question.
+      </p>
+
+      <ul class="ai2__cats">
+        {CATEGORIES.map((c) => <li>{c}</li>)}
+      </ul>
+
+      <div class="ai2__fw">
+        <span class="eyebrow">Applied framework — live now</span>
+        <h3 class="ai2__fw-t">Simplify → Automate → Build</h3>
+        <p class="muted">
+          The decision gate behind every recommendation on this site, including the refusal to
+          automate. It runs further up this page.
+        </p>
+        <a class="ai2__fw-go" href="#sab">See the framework →</a>
+      </div>
+
+      <p class="faint ai2__note2">
+        The publishing system, article template, category filtering, RSS, and the first approved
+        articles are a later stage. The architecture is built; the content is not bulk-generated.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .ai2__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s9); }
+  @media (max-width: 960px) { .ai2__grid { grid-template-columns: 1fr; gap: var(--s8); } }
+
+  .ai2__disc {
+    padding: var(--s4) var(--s5); border-left: 3px solid var(--coral-signal);
+    background: var(--tint-coral); border-radius: 0 var(--r-md) var(--r-md) 0;
+    margin-bottom: var(--s5);
+  }
+  .ai2__disc-l {
+    font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral-bright);
+    margin-bottom: var(--s2);
+  }
+  .ai2__disc-t { font-size: var(--fs-small); color: var(--text-muted); font-style: italic; }
+
+  .ai2__st { display: flex; flex-direction: column; gap: 0; padding: 0; list-style: none; border-top: 1px solid var(--hairline); }
+  .ai2__st li {
+    display: grid; grid-template-columns: auto 1fr; gap: var(--s3);
+    padding: var(--s3) 0; border-bottom: 1px solid var(--hairline);
+    font-size: var(--fs-small); color: var(--text-muted);
+  }
+  .ai2__n { font-family: var(--font-head); font-size: 0.6875rem; font-weight: 700; color: var(--teal-bright); padding-top: 0.25em; }
+  .ai2__note {
+    margin-top: var(--s5); font-size: var(--fs-small); color: var(--text-muted);
+    padding: var(--s4) var(--s5); border-left: 3px solid var(--teal-signal);
+    background: var(--tint-teal); border-radius: 0 var(--r-md) var(--r-md) 0;
+  }
+  .ai2__note strong { color: var(--text); }
+
+  .ai2__ip { margin-bottom: var(--s5); }
+  .ai2__cats { display: flex; flex-direction: column; gap: 0; padding: 0; list-style: none; border-top: 1px solid var(--hairline); margin-bottom: var(--s5); }
+  .ai2__cats li {
+    padding: var(--s3) 0; border-bottom: 1px solid var(--hairline);
+    font-family: var(--font-head); font-size: var(--fs-small); font-weight: 600; color: var(--text);
+  }
+  .ai2__fw { padding: var(--s5); background: var(--surface-raise); border: 1px solid var(--hairline); border-radius: var(--r-md); display: flex; flex-direction: column; gap: var(--s3); }
+  .ai2__fw-t { font-size: var(--fs-h3); }
+  .ai2__fw-go { font-family: var(--font-head); font-weight: 700; font-size: var(--fs-small); text-decoration: none; }
+  .ai2__note2 { margin-top: var(--s4); }
+</style>

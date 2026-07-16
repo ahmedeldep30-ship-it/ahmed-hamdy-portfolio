@@ -1,0 +1,229 @@
+/* ============================================================================
+   BASE — reset, typography, layout primitives, shared components.
+   Hand-authored. No utility framework: the rendered result must read as
+   authored, not generated.
+   ============================================================================ */
+
+/**
+ * Layer order matters and is load-bearing.
+ *
+ * `zones` MUST come after `components`: the light-stone zone re-points text and
+ * accent tokens to their accessible light-surface variants, and if it lost to
+ * `components` the dark-surface colours would render on stone at failing
+ * contrast. Do not reorder without re-running scripts/verify-a11y.mjs.
+ */
+@layer reset, base, layout, components, zones, utilities;
+
+@layer reset {
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { -webkit-font-smoothing: antialiased; }
+  img, picture, svg, video { display: block; max-width: 100%; }
+  input, button, textarea, select { font: inherit; color: inherit; }
+  p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
+  h1, h2, h3, h4 { text-wrap: balance; }
+  p { text-wrap: pretty; }
+  ul[class], ol[class] { list-style: none; padding: 0; }
+
+  /* Any `display` declaration beats the UA's [hidden] rule, so a component with
+     display:flex ignores hidden entirely — panels render when they should not.
+     This makes the attribute authoritative. */
+  [hidden] { display: none !important; }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    background: var(--surface);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: var(--fs-body);
+    line-height: var(--lh-body);
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4 { font-family: var(--font-head); color: var(--text); font-weight: 700; }
+  h1 { font-size: var(--fs-h1); line-height: var(--lh-tight); letter-spacing: -0.022em; }
+  h2 { font-size: var(--fs-h2); line-height: var(--lh-head); letter-spacing: -0.016em; }
+  h3 { font-size: var(--fs-h3); line-height: 1.3; letter-spacing: -0.01em; font-weight: 600; }
+  h4 { font-size: var(--fs-h4); line-height: 1.4; font-weight: 600; }
+
+  a { color: var(--teal-bright); text-underline-offset: 0.2em; }
+  a:hover { text-decoration-thickness: 2px; }
+
+  :focus-visible {
+    outline: 2px solid var(--focus-dark);
+    outline-offset: 2px;
+    border-radius: 3px;
+  }
+  .on-stone :focus-visible { outline-color: var(--focus-light); }
+
+  ::selection { background: var(--teal-signal); color: #fff; }
+
+  /* Skip link — first tab stop. */
+  .skip {
+    position: absolute; top: -100px; left: var(--s4); z-index: 100;
+    background: var(--teal-deep); color: #fff; padding: var(--s3) var(--s4);
+    border-radius: var(--r-sm); font-family: var(--font-head); font-weight: 700;
+  }
+  .skip:focus { top: var(--s4); }
+}
+
+@layer layout {
+  .wrap { width: 100%; max-width: var(--page); margin-inline: auto; padding-inline: var(--gutter); }
+  .measure { max-width: var(--measure); }
+  .section { padding-block: var(--section-y); }
+
+  .zone-deep { background: var(--surface-deep); }
+
+  .stack { display: flex; flex-direction: column; gap: var(--stack-gap, var(--s4)); }
+  .cluster { display: flex; flex-wrap: wrap; gap: var(--cluster-gap, var(--s3)); align-items: center; }
+  .grid-auto {
+    display: grid; gap: var(--s4);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--col, 260px)), 1fr));
+  }
+  /* Wide content never scrolls the page sideways. */
+  .scroll-x { overflow-x: auto; overscroll-behavior-x: contain; }
+}
+
+@layer components {
+  .eyebrow {
+    font-family: var(--font-head);
+    font-size: var(--fs-label);
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--teal-bright);
+  }
+  .muted { color: var(--text-muted); }
+  .faint { color: var(--text-faint); font-size: var(--fs-caption); }
+  .lede { font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem); color: var(--text-muted); }
+
+  .statement {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.375rem, 1.1rem + 1.2vw, 2rem);
+    line-height: 1.35;
+    color: var(--text);
+  }
+
+  /* ── Buttons ─────────────────────────────────────────────────────────── */
+  .btn {
+    display: inline-flex; align-items: center; gap: var(--s2);
+    font-family: var(--font-head); font-size: var(--fs-small); font-weight: 700;
+    padding: 0.7rem 1.15rem; border-radius: var(--r-sm);
+    border: 1px solid transparent; cursor: pointer; text-decoration: none;
+    transition: background var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease),
+                color var(--dur-fast) var(--ease);
+  }
+  /* 8.44:1 — deep ink on bright teal. */
+  .btn--primary { background: var(--teal-bright); color: var(--surface-deep); }
+  .btn--primary:hover { background: var(--focus-dark); }
+  .btn--ghost { border-color: var(--border-control); color: var(--text); }
+  .btn--ghost:hover { border-color: var(--teal-bright); color: var(--teal-bright); }
+  /* 5.22:1 — stone on deep teal, for light zones. */
+  .zone-stone .btn--primary { background: var(--teal-deep); color: var(--surface-stone); }
+  .zone-stone .btn--ghost { border-color: var(--border-stone); color: var(--stone-ink); }
+  .zone-stone .btn--ghost:hover { border-color: var(--teal-deep); color: var(--teal-deep); }
+
+  /* ── Panels ──────────────────────────────────────────────────────────── */
+  .panel {
+    background: var(--surface-raise);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    padding: var(--s5);
+  }
+  .zone-stone .panel {
+    background: #fff;
+    border-color: var(--hairline-stone);
+  }
+
+  /* ── Claim badges — public editorial labels ──────────────────────────── */
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.4em;
+    font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700;
+    letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.25em 0.6em; border-radius: 999px; white-space: nowrap;
+  }
+  .badge--verified   { background: var(--tint-teal);  color: var(--teal-bright);  border: 1px solid rgba(61,194,186,.4); }
+  .badge--founder    { background: var(--tint-teal);  color: var(--teal-bright);  border: 1px solid rgba(61,194,186,.4); }
+  .badge--anonymized { background: var(--tint-raise); color: var(--text-muted);   border: 1px solid var(--hairline-strong); }
+  .badge--illustrative { background: var(--tint-coral); color: var(--coral-bright); border: 1px solid rgba(224,132,117,.4); }
+  .badge--independent  { background: var(--tint-raise); color: var(--text-muted); border: 1px solid var(--hairline-strong); }
+  .badge--confidential { background: var(--tint-raise); color: var(--text-faint); border: 1px solid var(--hairline-strong); }
+
+  .zone-stone .badge--verified,
+  .zone-stone .badge--founder { color: var(--teal-deep); background: rgba(8,113,109,.08); border-color: rgba(8,113,109,.35); }
+  .zone-stone .badge--illustrative { color: var(--coral-deep); background: rgba(180,70,54,.08); border-color: rgba(180,70,54,.35); }
+  .zone-stone .badge--anonymized,
+  .zone-stone .badge--independent,
+  .zone-stone .badge--confidential { color: var(--stone-muted); background: rgba(16,42,67,.05); border-color: var(--hairline-stone); }
+
+  /* ── Section heading block ───────────────────────────────────────────── */
+  .sec-head { display: flex; flex-direction: column; gap: var(--s3); margin-bottom: var(--s7); max-width: 62ch; }
+  .sec-head__q { font-size: var(--fs-h2); }
+
+  /* ── Hairline rule that resolves left→right: the noise-to-system motif ─ */
+  .resolve-rule {
+    height: 1px; border: 0; margin: 0;
+    background: linear-gradient(to right,
+      transparent 0, var(--hairline) 6%, transparent 9%,
+      var(--hairline) 14%, transparent 17%, var(--hairline) 26%,
+      var(--hairline-strong) 45%, var(--hairline-strong) 100%);
+  }
+  .zone-stone .resolve-rule {
+    background: linear-gradient(to right,
+      transparent 0, var(--hairline-stone) 6%, transparent 9%,
+      var(--hairline-stone) 14%, transparent 17%, var(--hairline-stone) 26%,
+      rgba(16,42,67,.22) 45%, rgba(16,42,67,.22) 100%);
+  }
+}
+
+/* ============================================================================
+   ZONES — must win over `components`.
+   The light evidence zone re-points every text/accent token to its measured
+   light-surface variant. Alternates by narrative need, never zebra-striping.
+   ============================================================================ */
+@layer zones {
+  .zone-stone {
+    background: var(--surface-stone);
+    color: var(--stone-body);
+  }
+  .zone-stone h1, .zone-stone h2, .zone-stone h3, .zone-stone h4 { color: var(--stone-ink); }
+  .zone-stone p { color: var(--stone-body); }
+  .zone-stone a { color: var(--teal-deep); }              /* 5.22 on stone */
+  .zone-stone .eyebrow { color: var(--teal-deep); }       /* 5.22 — NOT teal-bright (2.2) */
+  .zone-stone .muted { color: var(--stone-muted); }       /* 4.92 — NOT text-muted (1.9) */
+  .zone-stone .faint { color: var(--stone-muted); }       /* 4.92 — NOT text-faint */
+  .zone-stone .lede { color: var(--stone-muted); }
+  .zone-stone .statement { color: var(--stone-ink); }
+  .zone-stone .resolve-rule { border: 0; }
+}
+
+@layer utilities {
+  .visually-hidden {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+  }
+  .tnum { font-variant-numeric: tabular-nums; }
+  .no-js-hide { display: none; }
+  :root.js .no-js-hide { display: revert; }
+  :root.js .js-hide { display: none; }
+}
+
+/* ============================================================================
+   REDUCED MOTION — global contract.
+   Every diagram's BASE state is its resolved end state, so disabling animation
+   never leaves a blank frame. This kills transitions, not meaning.
+   ============================================================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}

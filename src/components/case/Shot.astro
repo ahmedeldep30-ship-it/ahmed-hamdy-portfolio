@@ -1,0 +1,78 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+/**
+ * Annotated screenshot.
+ *
+ * `proves` is REQUIRED and is the whole point of the component: every published
+ * screen must answer "what decision does this screen prove?". A screenshot that
+ * cannot answer it does not belong in the case study.
+ *
+ * `alt` describes the screen for someone who cannot see it. `caption` states
+ * what it is. `proves` states why it is here. They are three different jobs.
+ */
+interface Props {
+  src: ImageMetadata;
+  alt: string;
+  caption: string;
+  proves: string;
+  /** Only state what is directly observable in the frame. Never infer scale. */
+  observed?: string[];
+  wide?: boolean;
+}
+const { src, alt, caption, proves, observed = [], wide = false } = Astro.props;
+---
+
+<figure class:list={['shot', wide && 'shot--wide']}>
+  <div class="shot__frame">
+    <Image
+      src={src}
+      alt={alt}
+      widths={[640, 960, 1400]}
+      sizes={wide ? '(max-width: 900px) 92vw, 1100px' : '(max-width: 900px) 92vw, 720px'}
+      loading="lazy"
+      class="shot__img"
+    />
+  </div>
+  <figcaption class="shot__cap">
+    <p class="shot__proves">
+      <span class="shot__proves-l">Proves</span>
+      {proves}
+    </p>
+    <p class="shot__c">{caption}</p>
+    {observed.length > 0 && (
+      <ul class="shot__obs">
+        {observed.map((o) => <li>{o}</li>)}
+      </ul>
+    )}
+  </figcaption>
+</figure>
+
+<style>
+  .shot { margin: var(--s7) 0; }
+  .shot__frame {
+    border: 1px solid var(--hairline-strong);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    background: var(--surface-deep);
+  }
+  .shot__img { width: 100%; height: auto; }
+  .shot__cap { margin-top: var(--s4); display: flex; flex-direction: column; gap: var(--s2); }
+  .shot__proves {
+    font-family: var(--font-head); font-size: var(--fs-small); font-weight: 600;
+    color: var(--text); display: flex; gap: var(--s3); align-items: baseline; flex-wrap: wrap;
+  }
+  .shot__proves-l {
+    font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--teal-bright);
+    border: 1px solid rgba(61, 194, 186, 0.4); border-radius: 999px;
+    padding: 0.1rem 0.5rem; flex: none;
+  }
+  .shot__c { font-size: var(--fs-caption); color: var(--text-faint); }
+  .shot__obs { display: flex; flex-wrap: wrap; gap: var(--s2); padding: 0; list-style: none; margin-top: var(--s1); }
+  .shot__obs li {
+    font-size: 0.75rem; color: var(--text-muted);
+    border: 1px solid var(--hairline); border-radius: 999px; padding: 0.15rem 0.5rem;
+  }
+</style>

@@ -1,0 +1,306 @@
+---
+title: Formula4You
+subtitle: From a fragmented fragrance market to a specialized commerce platform
+question: What do you build when an entire market is running on messaging threads?
+order: 1
+featured: true
+draft: false
+tier: founder_led
+role: Founder — Business Strategy, Product & Operations
+period: 2025 — Present
+market: Egyptian fragrance ecosystem
+liveUrl: https://www.formula4you.com/
+capabilities:
+  - Market-gap identification
+  - Vertical platform strategy
+  - Business model & participant economics
+  - Product & feature strategy
+  - Operating design & governance
+  - Go-to-market sequencing
+  - Conversion & journey design
+  - Cross-functional execution
+summary: >-
+  I identified a structural gap in Egypt's fragrance market, chose vertical depth over
+  general breadth, designed the participant model and operating rules, sequenced supply
+  before demand, and translated the strategy into a live platform.
+claims:
+  - text: Formula4You is a live, founder-led platform serving merchants and suppliers in Egypt's fragrance market.
+    status: verified
+    source: https://www.formula4you.com/ — public live platform, plus product screens supplied by Ahmed.
+  - text: The platform charges no commission on merchant sales; revenue comes from subscription with trial periods.
+    status: verified
+    source: Stated on the platform's own public landing page and pricing chips (captured 2026-07).
+  - text: Supplier and merchant registration completes in two steps.
+    status: verified
+    source: Platform registration flow, step indicator reads "خطوة 2 من 2" (captured 2026-07).
+  - text: Approximately 90% of the essential supplier information is captured in the store-creation interface.
+    status: user_asserted
+    fallback: The store-creation form captures the supplier's identity, contact, brand, and location in a single two-step flow.
+  - text: Formula4You scale — suppliers, listings, sign-ups, traffic, transactions, or revenue.
+    status: confidential
+    fallback: No scale metric is published. The live platform and its screens are the evidence; commercial performance is not claimed.
+rail:
+  realAsset: Live platform at formula4you.com plus six real product screens
+  ownership: Market research, market-gap identification, business model, product strategy, operating design, supplier and store journeys, platform requirements, go-to-market sequencing, and cross-functional execution
+  decision: Build a specialized category platform rather than another general store builder
+  implementation: Live platform with continuing phased development
+  metricStatus: No scale metric published without evidence
+  confidentiality: Public
+---
+
+import Shot from '@components/case/Shot.astro';
+import Decision from '@components/case/Decision.astro';
+import home from '@/assets/formula4you/formula4you-platform-home.webp';
+import store from '@/assets/formula4you/formula4you-brand-store-customer-view.webp';
+import onboarding from '@/assets/formula4you/formula4you-supplier-onboarding.webp';
+import pathways from '@/assets/formula4you/formula4you-supplier-merchant-pathways.webp';
+import journey from '@/assets/formula4you/formula4you-onboarding-selling-journey.webp';
+import market from '@/assets/formula4you/formula4you-market-development-visual.webp';
+
+The Egyptian fragrance market is not small, and it is not quiet. Oil suppliers, manufacturers,
+independent brands, retail sellers, and customers all trade actively — across Facebook pages,
+WhatsApp threads, Instagram DMs, and the occasional generic online store. The activity is real.
+The infrastructure is not.
+
+That gap is the whole project.
+
+## What I actually observed
+
+Before framing an opportunity, I mapped who was in the market and what each group needed before
+they would join anything:
+
+- **Suppliers and manufacturers** hold the raw materials, but have no structured way to be found
+  by the merchants who need them. Their catalogue lives in a chat history.
+- **Merchants and brand owners** want to sell finished perfume, but sourcing runs on personal
+  relationships, and building a store means choosing a general tool that knows nothing about
+  fragrance.
+- **Customers** cannot easily compare, verify authenticity, or trust a seller whose entire
+  storefront is a social page.
+- **Everyone** repeats the same conversation — availability, price, minimum order, delivery —
+  because none of it is structured data.
+
+I had years of direct exposure to this category, which is the only reason the language,
+workflows, and behaviours in the platform are right. That domain knowledge is not decoration on
+this project; it is why the diagnosis holds.
+
+## The diagnosis: fragmentation is structural, not cosmetic
+
+It is tempting to read this market as "these businesses need websites." That reading produces a
+store builder, and a store builder would fail here.
+
+The problems were **trust**, **fragmented data**, **inconsistent presentation**, and
+**marketplace liquidity**. Those are not website features. A merchant with a beautiful generic
+store still cannot find a supplier. A supplier with a Shopify page still cannot be discovered by
+the merchants who would buy from them. The gap sits *between* participants — which means no
+single-participant tool can close it.
+
+<Decision
+  label="The strategic decision"
+  chose="Build a category-focused vertical platform for one market, deep enough that every participant group has a reason to join."
+  instead="Compete as another general-purpose e-commerce store builder, where the market is larger, the tooling is commoditised, and the incumbents are enormous."
+  because="Depth in one category creates relevance, better data, stronger discovery, and a defensible ecosystem. Breadth would have meant competing on features against companies with a thousand times the resources — and still not solving what actually blocks this market."
+/>
+
+## Who participates, and why they join
+
+A two-sided market fails if either side's value proposition is vague. So the pathways are not a
+marketing section — they are the business model, made explicit and public.
+
+<Shot
+  src={pathways}
+  alt="Formula4You landing page section titled 'For whoever sells or distributes perfumes', showing two side-by-side cards: a dark card for suppliers headed 'Deliver your products to merchants ready to buy', and a light card for merchants headed 'Open your store and start selling in minutes', each with four benefit lines and its own call to action."
+  caption="Formula4You — the supplier and merchant pathways, as published on the platform. Arabic-first, RTL."
+  proves="The participant model is a designed business decision, not an afterthought. Each side gets a distinct value proposition, a distinct offer, and its own entry point."
+  observed={[
+    'Supplier path: catalogue exposure, price/quantity/minimum-order control, wholesale orders, analytics',
+    'Merchant path: themed storefront, sourcing from vetted suppliers inside the platform, orders/inventory/shipping, COD + payment links',
+    'Wholesale ordering supports direct, approval, and request-for-quote modes',
+    'Both sides carry a trial period — the revenue model is subscription, not commission',
+  ]}
+  wide
+/>
+
+Two things in that screen matter more than they look.
+
+**First: B2B supply and B2C retail live in the same platform.** The supplier sells raw materials
+to the merchant; the merchant sells finished perfume to the customer. Most platforms pick one.
+Running both is harder — and it is the only way to close a gap that exists *between* those
+groups.
+
+**Second: no commission.** That single choice sets the entire operating model. Commission means
+policing every transaction, and it punishes your best merchants for growing. Subscription means
+the platform earns by being continuously useful, which is a harder promise and a cleaner
+alignment. It also means the whole lifecycle — trial, activation, renewal, expiry, reactivation
+— becomes core product surface rather than a billing detail.
+
+## The supply-first problem
+
+Every marketplace faces the same trap: buyers will not come before there is supply worth
+browsing, and suppliers will not join before there is visibility worth having. Whichever side
+you court first, the other one is your justification for existing — and it is empty.
+
+So the sequence was decided before the build, and it is deliberately slow at the front:
+
+1. **Supply quality first.** Onboard credible suppliers and sellers. Define the data standards.
+   Make profiles worth discovering at all.
+2. **Platform usefulness.** Improve inventory, search, category structure, store presentation,
+   and trust signals until the experience justifies arriving.
+3. **Demand growth.** Expand customer acquisition only once the platform can actually deliver a
+   useful discovery and purchase experience.
+4. **Retention and ecosystem.** Strengthen renewals, recurring value, content, reviews, and the
+   relationships between participant groups.
+
+The discipline here is resisting step 3. Spending on customer acquisition early would have
+produced traffic, a good-looking chart, and a bad first impression that you only get to make
+once.
+
+## Onboarding: the cheapest place to lose a supplier
+
+If step 1 is supply quality, then supplier registration is the highest-leverage screen in the
+product. Every additional field is a chance to lose someone who was willing.
+
+<Shot
+  src={onboarding}
+  alt="Formula4You supplier and merchant registration screen, step two of two, progress bar at 100 percent. Fields shown: full name, email, password, mobile, brand or store name, governorate dropdown, and optional address. A terms and privacy checkbox sits above a 'Start your journey' button. The right panel shows Formula4You branding and feature chips."
+  caption="Formula4You — the account and store-creation step. Placeholder values shown; no real customer data."
+  proves="Onboarding friction was treated as a business risk, not a UX preference. The entire flow is two steps and seven fields — five required — and it still captures identity, contact, brand, and location."
+  observed={[
+    'Step indicator reads "step 2 of 2" at 100%',
+    'Seven fields total; five required',
+    'Governorate is captured because it drives local discovery — the field earns its place',
+    'Address is explicitly optional',
+  ]}
+/>
+
+The governorate field is the one I would defend hardest. It looks like an extra question — the
+kind of thing a "reduce the form" instinct would delete. It stays because it feeds discovery:
+a nearby customer finding a nearby store is the platform doing its job. Removing friction is not
+the goal. Removing friction *that buys nothing* is the goal.
+
+<Decision
+  label="A claim I will not make"
+  chose="State only what the screen itself shows: two steps, seven fields, five required."
+  instead="Publish the internal estimate that this form captures roughly 90% of the essential supplier information."
+  because="That figure is my own assessment, not a measured one — there is no baseline or calculation behind it. It stays in the internal record as a founder statement. On a public page it would be a number pretending to be evidence, and one unsupported number is enough to make a reader question every supported one."
+/>
+
+## From registration to first order
+
+Onboarding is not finished when the account exists. It is finished when the participant has
+done the thing they came to do.
+
+<Shot
+  src={journey}
+  alt="Formula4You landing page section headed 'From registration to first order in four steps', with four numbered cards reading right to left: register and choose your type — merchant or supplier, free and takes a minute; prepare your store or catalogue with a simple editor; activate payment and shipping including cash on delivery and payment links; start receiving orders with orders, inventory and analytics in one dashboard."
+  caption="Formula4You — the published activation path from account to first order."
+  proves="Activation was designed as one sequence with a defined end state — the first order — rather than as a set of features the user is left to assemble."
+  observed={[
+    'Role selection is step 1: the participant model is built into activation, not bolted on',
+    'Payment and shipping are an activation step, not a settings page to discover later',
+    'Orders, inventory, and analytics resolve into one dashboard',
+  ]}
+  wide
+/>
+
+Step 1 is the tell. Asking "merchant or supplier?" first means the participant model shapes
+every screen that follows. A general builder cannot ask that question, because it does not know
+there are two answers.
+
+## What the platform actually produces
+
+Strategy is easy to describe and hard to prove. This is the proof: a real storefront, as a
+customer sees it, generated through Formula4You.
+
+<Shot
+  src={store}
+  alt="A customer-facing perfume storefront built on Formula4You, with its own brand identity, a full-width brand banner, gender filters for all, unisex, men's and women's, and three product cards showing name, concentration, gender, price in Egyptian pounds, bottle size in millilitres, and an add-to-cart action."
+  caption="A brand storefront created through Formula4You, viewed as a customer. Storefront branding belongs to the merchant, not the platform."
+  proves="The vertical bet, made visible. The product data model is fragrance-native — concentration, gender, and volume are first-class fields, not custom attributes bolted onto a generic product."
+  observed={[
+    'Storefront carries the merchant\'s identity, not Formula4You chrome — white-label by design',
+    'Concentration (EDT / EDP) is a native field',
+    'Gender segmentation is a native filter',
+    'Volume in millilitres sits on the card, where a fragrance buyer looks for it',
+  ]}
+/>
+
+This is the clearest answer to "why not just use a general store builder?"
+
+On a general platform, "EDT vs EDP" is a custom attribute somebody types into a text box, and
+it means nothing to search, filtering, or comparison. Here it is structure. That difference
+compounds: structured category data is what makes discovery work, what makes comparison
+possible, and what eventually makes the data itself the moat.
+
+## The live platform
+
+<Shot
+  src={home}
+  alt="The Formula4You platform home page in Arabic, right-to-left. Headline reads 'Create your online perfume store and start selling'. Supporting copy describes an Egyptian platform specialised in perfume commerce. Feature chips list no commission on sales, store plus orders plus payment plus shipping in one dashboard, Paymob with InstaPay and Visa, Bosta and Mylerz shipping, and Arabic support seven days a week. Two calls to action read 'Start your store free' and 'Join as a supplier'."
+  caption="Formula4You — the live platform home page, captured 2026-07. Public at formula4you.com."
+  proves="The operating decisions reached implementation. Payments, shipping, language, support model, and the dual call-to-action are all live commitments the business now has to honour — not slideware."
+  observed={[
+    'Payments: Paymob, InstaPay, Visa, cash on delivery',
+    'Shipping: Bosta and Mylerz integrated',
+    'Arabic-first with RTL throughout; English toggle present',
+    'Dual CTA — start a store, or join as a supplier — matching the participant model',
+    'Support commitment stated publicly: Arabic, seven days',
+  ]}
+  wide
+/>
+
+Every chip on that page is an operational obligation. "Arabic support, seven days" is a staffing
+model. "Cash on delivery" is a reconciliation and failed-delivery problem. "Bosta + Mylerz" is
+two integrations and two exception paths. Choosing them was a business decision about what
+Egyptian buyers actually require to trust a purchase — and each one costs something to keep.
+
+## Governance is the unglamorous half
+
+A marketplace is only as useful as its worst listing. The parts nobody photographs are the parts
+that decide whether this works:
+
+- **Structured business identities** — supplier, manufacturer, and store profiles with real data
+  standards, because discovery is only as good as what it indexes.
+- **Subscription and listing lifecycle** — activation, renewal, expiry, discontinued profiles,
+  reactivation. With no commission, this *is* the revenue system.
+- **Admin review and approval queues** — someone has to own quality before it reaches a customer.
+- **Trust infrastructure** — review controls, content standards, moderation. In a market that
+  ran on personal reputation, importing that trust is the product.
+- **Search visibility** — built into the operating model, not appended as a marketing task
+  after launch.
+
+## Preventing feature bloat
+
+Early platforms die from ambition more often than from competition. Every proposed feature was
+put through the same four questions: what user value does it create, does it fit the strategy,
+what does it cost to *operate* — not just build — and can the underlying problem be solved more
+simply?
+
+That last question killed more features than the other three combined. It is the same gate as
+[Simplify → Automate → Build](/#sab): most requests are a symptom of something a rule, a
+sequence, or a clearer sentence could resolve. Building it would have felt like progress and
+added permanent maintenance.
+
+## What the platform is for
+
+<Shot
+  src={market}
+  alt="Formula4You mission section headed 'We are building the future of the perfume sector', with three supporting points: we support artisans with tools that let them focus on the perfume rather than the logistics; we connect the market by bringing merchant and supplier into one place and reducing the steps; and we preserve taste through authentic brands and clean raw materials. A photograph shows a perfumer's workbench with an F4U sign."
+  caption="Formula4You — the published market-development position."
+  proves="The market thesis is stated publicly and consistently: connect a fragmented market and reduce the steps between its participants. The platform is positioned as infrastructure for a craft, not as a store builder."
+  wide
+/>
+
+## The business effect
+
+Formula4You is a live, category-focused platform built around the real operating needs of
+Egypt's fragrance ecosystem. The strongest evidence here is not a growth number — it is the
+**completeness of the system**: a participant model with two coherent sides, an onboarding path
+short enough to survive, a revenue model that aligns the platform with its merchants, a launch
+sequence that refuses to buy demand it cannot yet serve, governance for the boring failure
+modes, and a live product where all of it is visible.
+
+I will not tell you how many suppliers are on it, how much has been sold through it, or how many
+people visit. Not because those numbers are bad — because I have not published a source, a
+baseline, a period, and a calculation for them, and without those a number is just a mood.
+
+The platform is public. You can go and look.

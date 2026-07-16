@@ -1,0 +1,125 @@
+---
+import { site, contact, sameAs, absoluteUrl, withBase } from '@config/site';
+import Header from '@components/nav/Header.astro';
+import Footer from '@components/nav/Footer.astro';
+import '../styles/tokens.css';
+import '../styles/base.css';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  /** Drafts and incomplete audits. Also forced site-wide until Gate 4. */
+  noindex?: boolean;
+  type?: 'website' | 'article' | 'profile';
+  breadcrumbs?: { name: string; path: string }[];
+  jsonLd?: Record<string, unknown>[];
+}
+
+const {
+  title,
+  description,
+  path,
+  noindex = false,
+  type = 'website',
+  breadcrumbs = [],
+  jsonLd = [],
+} = Astro.props;
+
+const canonical = absoluteUrl(path);
+
+/**
+ * Site-wide noindex until Gate 4.
+ *
+ * The github.io address is explicitly provisional. If search engines index it
+ * now, that temporary URL becomes the established canonical identity and the
+ * later custom-domain move starts from a worse position. Indexing is switched
+ * on in one place — site.canonicalApproved — once Ahmed approves the host.
+ */
+const blockIndexing = noindex || !site.canonicalApproved;
+
+const graph: Record<string, unknown>[] = [
+  {
+    '@type': 'WebSite',
+    '@id': `${site.url}#website`,
+    url: absoluteUrl('/'),
+    name: site.title,
+    description: site.description,
+    inLanguage: 'en',
+    publisher: { '@id': `${site.url}#person` },
+  },
+  {
+    '@type': 'Person',
+    '@id': `${site.url}#person`,
+    name: site.name,
+    jobTitle: site.role,
+    description: site.description,
+    email: contact.email,
+    telephone: contact.phoneDisplay,
+    url: absoluteUrl('/'),
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: site.location.city,
+      addressCountry: site.location.countryCode,
+    },
+    sameAs: [...sameAs],
+  },
+  ...(breadcrumbs.length
+    ? [{
+        '@type': 'BreadcrumbList',
+        itemListElement: breadcrumbs.map((b, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: b.name,
+          item: absoluteUrl(b.path),
+        })),
+      }]
+    : []),
+  ...jsonLd,
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {blockIndexing && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:locale" content="en_US" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <meta name="author" content={site.name} />
+    <meta name="theme-color" content="#0E1C28" />
+    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
+
+    <!-- Search Console / Bing verification slots — filled at Gate 4 (Phase 10). -->
+    <!-- <meta name="google-site-verification" content="" /> -->
+    <!-- <meta name="msvalidate.01" content="" /> -->
+
+    <script
+      type="application/ld+json"
+      is:inline
+      set:html={JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}
+    />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Header path={path} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

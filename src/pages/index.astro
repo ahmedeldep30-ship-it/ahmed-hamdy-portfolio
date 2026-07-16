@@ -1,0 +1,66 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SeamHero from '@components/home/SeamHero.astro';
+import AudienceGateway from '@components/home/AudienceGateway.astro';
+import BusinessSystem from '@components/home/BusinessSystem.astro';
+import SelectedWork from '@components/home/SelectedWork.astro';
+import CapabilityMap from '@components/home/CapabilityMap.astro';
+import Playbooks from '@components/home/Playbooks.astro';
+import AuditsAndInsights from '@components/home/AuditsAndInsights.astro';
+import HowIWork from '@components/home/HowIWork.astro';
+import Credibility from '@components/home/Credibility.astro';
+import About from '@components/home/About.astro';
+import ContactCta from '@components/home/ContactCta.astro';
+import { site, absoluteUrl } from '@config/site';
+
+/**
+ * Home — a curated decision page.
+ *
+ * Each section answers one question and points to deeper evidence. It is not a
+ * summary of every case study and playbook: it should create enough confidence
+ * to open the real pages, and no more.
+ *
+ * Section order + dominant domain (balance rule: no two consecutive sections
+ * share a dominant functional domain):
+ *   1 Hero .................. positioning
+ *   2 Audience gateway ...... routing
+ *   3 Business system ....... cross-functional / system
+ *   4 Selected work ......... market · product · CX · growth
+ *   5 Capability map ........ all (the map itself)
+ *   6 Playbooks ............. operations · CX · conversion · growth
+ *   7 Audit method .......... market strategy / judgment
+ *   8 Insights .............. mixed, incl. AI decisions
+ *   9 How I work + SAB ...... execution · measurement
+ *  10 Credibility ........... proof
+ *  11 About ................. narrative
+ *  12 Contact CTA ........... conversion
+ */
+---
+
+<BaseLayout
+  title={site.title}
+  description={site.description}
+  path="/"
+  type="profile"
+  jsonLd={[
+    {
+      '@type': 'ProfilePage',
+      '@id': `${absoluteUrl('/')}#profilepage`,
+      mainEntity: { '@id': `${site.url}#person` },
+      name: site.title,
+      description: site.description,
+    },
+  ]}
+>
+  <SeamHero />
+  <AudienceGateway />
+  <BusinessSystem />
+  <SelectedWork />
+  <CapabilityMap />
+  <Playbooks />
+  <AuditsAndInsights />
+  <HowIWork />
+  <Credibility />
+  <About />
+  <ContactCta />
+</BaseLayout>

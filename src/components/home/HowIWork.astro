@@ -1,0 +1,303 @@
+---
+/**
+ * §9 — How I Work + Simplify → Automate → Build.
+ * Carries INTERVENTION COMPRESSION: the second substantial animation.
+ *
+ * The motion is subtractive. Nine candidate interventions are drawn at widths
+ * proportional to cost, evaluated, and removed until two sequenced actions
+ * remain. The argument is that removing work — not adding it — is the job.
+ */
+
+type Opt = { label: string; w: number; verdict: string; keep?: 'first' | 'next' };
+
+/**
+ * Bar width encodes cost, so the proportions carry meaning and must be kept.
+ * They are capped at VERDICT_X - 20 so the verdict column never collides with a
+ * bar: the verdicts sit in one aligned column rather than ragged off each bar's
+ * end, which also stops the longest bar from pushing its verdict out of frame.
+ */
+const VERDICT_X = 500;
+
+const OPTIONS: Opt[] = [
+  { label: 'Rebuild the checkout', w: 470, verdict: 'The doubt does not start at checkout' },
+  { label: 'Hire four more support agents', w: 436, verdict: 'Permanent cost for an avoidable contact' },
+  { label: 'Build a customer tracking portal', w: 413, verdict: 'A product for a communication gap' },
+  { label: 'Buy a chatbot', w: 396, verdict: 'Automates a question nobody should need to ask' },
+  { label: 'Increase advertising spend', w: 367, verdict: 'Acquisition is not the constraint' },
+  { label: 'Replace the ticketing tool', w: 344, verdict: 'Handles avoidable contacts faster' },
+  { label: 'Add an operations dashboard', w: 298, verdict: 'Measures the problem, does not remove it' },
+  { label: 'Show delivery time on the product page', w: 109, verdict: 'Moves certainty earlier', keep: 'next' },
+  { label: 'Three timed post-purchase updates', w: 80, verdict: 'Removes the reason to ask', keep: 'first' },
+];
+
+const GATES = [
+  {
+    n: 'Gate 1', t: 'Simplify', rule: 'Always first. Most problems end here — and they were never technology problems.',
+    qs: ['Is the cause content, policy, ownership, sequence, or interface clarity?',
+         'Is the information simply arriving too late?',
+         'Can a clearer sentence remove the contact entirely?',
+         'What stops existing if we do nothing?'],
+  },
+  {
+    n: 'Gate 2', t: 'Automate', rule: 'Only after the process is already simple and stable. Automating a bad process makes the waste faster and harder to see.',
+    qs: ['Is it frequent, repeatable, and stable?',
+         'Is the data quality and exception rate good enough?',
+         'Is human judgment genuinely absent?',
+         'What is the cost of a confidently wrong result?',
+         'Who monitors it, and who owns it?'],
+  },
+  {
+    n: 'Gate 3', t: 'Build', rule: 'Last resort. Only if simplifying and automating both fail and the value clears the total cost.',
+    qs: ['Implementation cost versus maintenance and operational burden',
+         'What future flexibility does it remove?',
+         'What governance and risk does it introduce?',
+         'Who owns it in year two?',
+         'How is success measured — and when do we stop?'],
+  },
+];
+
+const STAGES = [
+  ['Discover', 'Business model, customer, goals, constraints, and what is actually being decided.'],
+  ['Diagnose', 'Map the journey and process, gather evidence, separate symptom from structure.'],
+  ['Prioritize', 'Impact, confidence, effort, cost, risk, urgency, and speed of validation.'],
+  ['Design & execute', 'Future-state journey, workflow, requirements, ownership, and the brief.'],
+  ['Measure & refine', 'Success defined before launch. Refine the system rather than adding features.'],
+];
+---
+
+<section class="section zone-stone hiw" id="how-i-work" aria-labelledby="hiw-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">How I work</span>
+      <h2 id="hiw-h" class="sec-head__q">Build only when the problem requires building.</h2>
+      <p class="muted">
+        The best solution may be a clearer sentence, fewer fields, better ownership, an automated
+        update, a simpler process — or no new feature at all.
+      </p>
+    </div>
+
+    <!-- ── Five-stage method ─────────────────────────────────────────────── -->
+    <ol class="hiw__stages">
+      {STAGES.map(([t, d], i) => (
+        <li class="hiw__stage">
+          <span class="hiw__n tnum">{String(i + 1).padStart(2, '0')}</span>
+          <h3 class="hiw__st">{t}</h3>
+          <p class="hiw__sd">{d}</p>
+        </li>
+      ))}
+    </ol>
+
+    <!-- ── Intervention Compression ──────────────────────────────────────── -->
+    <figure class="ic" data-ic>
+      <figcaption class="ic__cap">
+        <span class="eyebrow">Intervention compression</span>
+        <h3>Nine ways to answer “where is my order?” — eight of them cost money.</h3>
+        <p class="muted">
+          Bar width is cost. The evaluation removes anything that does not address the actual
+          cause. What survives is the cheapest change that removes the reason to ask.
+        </p>
+      </figcaption>
+
+      <p class="visually-hidden">
+        Nine candidate interventions are evaluated against the root cause. Rejected: rebuild the
+        checkout, because the doubt does not start at checkout; hire four more support agents,
+        a permanent cost for an avoidable contact; build a customer tracking portal, a product
+        for a communication gap; buy a chatbot, which automates a question nobody should need to
+        ask; increase advertising spend, because acquisition is not the constraint; replace the
+        ticketing tool, which only handles avoidable contacts faster; add an operations
+        dashboard, which measures the problem without removing it. Two survive: first, three
+        timed post-purchase updates, which remove the reason to ask; next, showing delivery time
+        on the product page, which moves certainty earlier.
+      </p>
+
+      <!-- The chart scrolls horizontally below ~660px, so it needs to be a
+           focusable, labelled region or keyboard users cannot reach the part
+           that is off-screen. -->
+      <div
+        class="ic__chart scroll-x"
+        tabindex="0"
+        role="group"
+        aria-label="Intervention evaluation chart — scroll horizontally to see the full evaluation"
+      >
+        <svg viewBox="0 0 900 336" aria-hidden="true" focusable="false" class="ic__svg">
+          <text class="ic-lab" x="0" y="12">NINE CANDIDATE INTERVENTIONS — BAR WIDTH = COST</text>
+          <text class="ic-lab" x={VERDICT_X} y="12">EVALUATION</text>
+          {OPTIONS.map((o, i) => (
+            <g class={o.keep ? 'ic-keep' : 'ic-drop'} style={`--i:${i}`}>
+              <rect
+                class={`ic-bar ${o.keep ? 'ic-bar--keep' : 'ic-bar--drop'}`}
+                x="0" y={26 + i * 32} width={o.w} height="24" rx="5"
+              />
+              {/* Surviving bars are narrow because they are cheap — too narrow to
+                  hold their own label. Setting the label outside keeps it readable
+                  (inside, white-on-teal would run onto white) and makes the point:
+                  the winning interventions are smaller than their own names. */}
+              <text
+                class={`ic-t ${o.keep ? 'ic-t--keep' : ''}`}
+                x={o.keep ? o.w + 12 : 12}
+                y={42 + i * 32}
+              >{o.label}</text>
+              <text class={`ic-v ${o.keep ? 'ic-v--keep' : ''}`} x={VERDICT_X} y={42 + i * 32}>
+                {o.keep === 'first'
+                  ? `Do first — ${o.verdict}`
+                  : o.keep === 'next'
+                    ? `Then this — ${o.verdict}`
+                    : o.verdict}
+              </text>
+              {!o.keep && (
+                <line class="ic-strike" x1="6" y1={38 + i * 32} x2={o.w - 6} y2={38 + i * 32} pathLength="1" />
+              )}
+            </g>
+          ))}
+          <text class="ic-sum" x="0" y="328">Nine options → two sequenced moves. The winner is a message, not a system.</text>
+        </svg>
+      </div>
+
+      <div class="ic__bar">
+        <button class="ic__replay" type="button" data-ic-replay>▸ Replay evaluation</button>
+        <span class="faint">Static without motion — the full evaluation stays on screen</span>
+      </div>
+    </figure>
+
+    <!-- ── Simplify → Automate → Build ───────────────────────────────────── -->
+    <div class="sab" id="sab">
+      <div class="sec-head" style="margin-bottom: var(--s5)">
+        <span class="eyebrow">The decision framework</span>
+        <h3 class="sab__h">Simplify → Automate → Build</h3>
+        <p class="muted">
+          Being AI-aware is not enthusiasm. It is knowing which of these three gates a problem
+          actually belongs to — and being willing to stop at the first one.
+        </p>
+      </div>
+
+      <div class="sab__grid">
+        {GATES.map((g, i) => (
+          <article class={`sab__col ${i === 0 ? 'sab__col--first' : ''}`}>
+            <span class="sab__n">{g.n}</span>
+            <h4 class="sab__t">{g.t}</h4>
+            <p class="sab__r">{g.rule}</p>
+            <ul class="sab__qs">
+              {g.qs.map((q) => <li>{q}</li>)}
+            </ul>
+          </article>
+        ))}
+      </div>
+
+      <p class="sab__note">
+        <strong>The chatbot is the test case.</strong> Leadership asks for one; the evidence says
+        customers cannot find an answer that already exists. Buying the bot automates a question
+        nobody should need to ask. Gate 1 answers it — and Gate 2 never opens.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hiw__stages {
+    display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+    list-style: none; padding: 0; margin: 0 0 var(--s8);
+    border-top: 1px solid var(--hairline-stone);
+  }
+  .hiw__stage { padding: var(--s5) var(--s4) var(--s5) 0; border-right: 1px solid var(--hairline-stone); }
+  .hiw__stage:last-child { border-right: 0; }
+  .hiw__stage:not(:first-child) { padding-left: var(--s4); }
+  .hiw__n { font-family: var(--font-head); font-size: 0.75rem; font-weight: 700; color: var(--teal-deep); }
+  .hiw__st { font-size: var(--fs-h4); margin: var(--s2) 0; }
+  .hiw__sd { font-size: var(--fs-caption); color: var(--stone-muted); line-height: 1.55; }
+  @media (max-width: 900px) {
+    .hiw__stages { grid-template-columns: 1fr; }
+    .hiw__stage { border-right: 0; border-bottom: 1px solid var(--hairline-stone); padding-left: 0 !important; }
+  }
+
+  .ic { margin: 0 0 var(--s8); padding: var(--s6); background: #fff; border: 1px solid var(--hairline-stone); border-radius: var(--r-lg); }
+  .ic__cap { display: flex; flex-direction: column; gap: var(--s3); margin-bottom: var(--s5); max-width: 66ch; }
+  .ic__cap h3 { font-size: var(--fs-h3); }
+  .ic__svg { width: 100%; min-width: 660px; height: auto; }
+
+  .ic-lab { font-family: var(--font-head); font-size: 10px; font-weight: 700; letter-spacing: 0.1em; fill: var(--stone-muted); }
+  .ic-t { font-family: var(--font-body); font-size: 12.5px; fill: var(--stone-body); }
+  .ic-t--keep { fill: var(--teal-deep); font-weight: 700; }
+  .ic-v { font-family: var(--font-body); font-size: 11px; fill: var(--stone-muted); }
+  .ic-v--keep { fill: var(--teal-deep); font-weight: 700; }
+  .ic-bar--drop { fill: rgba(180, 70, 54, 0.09); stroke: rgba(180, 70, 54, 0.3); stroke-width: 1; }
+  .ic-bar--keep { fill: var(--teal-deep); }
+  .ic-strike { stroke: var(--coral-deep); stroke-width: 1.2; opacity: 0.75; }
+  .ic-sum { font-family: var(--font-head); font-size: 12.5px; font-weight: 700; fill: var(--teal-deep); }
+
+  .ic__bar { display: flex; gap: var(--s4); align-items: center; flex-wrap: wrap; margin-top: var(--s4); }
+  .ic__replay {
+    font-family: var(--font-head); font-size: 0.8125rem; font-weight: 600;
+    background: none; border: 1px solid var(--border-stone); color: var(--stone-ink);
+    padding: 0.45rem 0.8rem; border-radius: var(--r-sm); cursor: pointer;
+  }
+  .ic__replay:hover { border-color: var(--teal-deep); color: var(--teal-deep); }
+  .zone-stone .faint { color: var(--stone-muted); }
+
+  .sab__h { font-size: var(--fs-h2); }
+  .sab__grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--hairline-stone); border-radius: var(--r-lg); overflow: hidden; background: #fff; }
+  .sab__col { padding: var(--s6); border-right: 1px solid var(--hairline-stone); }
+  .sab__col:last-child { border-right: 0; }
+  .sab__col--first { background: rgba(8, 113, 109, 0.05); }
+  .sab__n { font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--teal-deep); }
+  .sab__t { font-size: var(--fs-h3); margin: var(--s2) 0 var(--s3); }
+  .sab__r { font-size: var(--fs-small); color: var(--stone-muted); margin-bottom: var(--s4); }
+  .sab__qs { display: flex; flex-direction: column; gap: var(--s2); padding: 0; list-style: none; border-top: 1px solid var(--hairline-stone); padding-top: var(--s4); }
+  .sab__qs li { font-size: var(--fs-caption); color: var(--stone-body); padding-left: var(--s4); position: relative; }
+  .sab__qs li::before { content: ''; position: absolute; left: 0; top: 0.62em; width: 6px; height: 1px; background: var(--teal-deep); }
+  .sab__note {
+    margin-top: var(--s5); padding: var(--s4) var(--s5);
+    border-left: 3px solid var(--teal-deep); background: rgba(8, 113, 109, 0.06);
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+    font-size: var(--fs-small); color: var(--stone-muted); max-width: 92ch;
+  }
+  .sab__note strong { color: var(--stone-ink); }
+  @media (max-width: 900px) {
+    .sab__grid { grid-template-columns: 1fr; }
+    .sab__col { border-right: 0; border-bottom: 1px solid var(--hairline-stone); }
+  }
+
+  /* ══ Intervention Compression motion — subtractive, once ══════════════ */
+  @keyframes ic-strike-in { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes ic-fade { 0% { opacity: 1; } 100% { opacity: 0.32; } }
+  @keyframes ic-rise { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: none; } }
+
+  [data-ic].play .ic-strike { stroke-dasharray: 1; animation: ic-strike-in 260ms var(--ease) both; animation-delay: calc(120ms + var(--i) * 70ms); }
+  [data-ic].play .ic-drop { animation: ic-fade 300ms var(--ease) both; animation-delay: calc(240ms + var(--i) * 70ms); }
+  [data-ic].play .ic-keep { animation: ic-rise 320ms var(--ease-out) both; animation-delay: calc(760ms + (var(--i) - 7) * 120ms); }
+  [data-ic].play .ic-sum { animation: ic-rise 300ms var(--ease-out) both; animation-delay: 1080ms; }
+
+  @media (prefers-reduced-motion: reduce) { [data-ic].play * { animation: none !important; } }
+</style>
+
+<script>
+  const ic = document.querySelector<HTMLElement>('[data-ic]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function playIc() {
+    if (!ic || reduce.matches) return;
+    ic.classList.remove('play');
+    void ic.offsetWidth;
+    ic.classList.add('play');
+    window.setTimeout(() => ic!.classList.remove('play'), 1600);
+  }
+
+  document.querySelector('[data-ic-replay]')?.addEventListener('click', playIc);
+
+  // Runs once when the section is genuinely on screen. Never on scroll-back.
+  if (ic && !reduce.matches && 'IntersectionObserver' in window) {
+    let done = false;
+    const io = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting && !done) {
+            done = true;
+            playIc();
+            io.disconnect();
+          }
+        }
+      },
+      { threshold: 0.35 }
+    );
+    io.observe(ic);
+  }
+</script>

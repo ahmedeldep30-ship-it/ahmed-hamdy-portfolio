@@ -1,0 +1,79 @@
+---
+import { withBase, cta } from '@config/site';
+---
+
+<section class="section gw" id="paths" aria-labelledby="gw-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Choose your path</span>
+      <h2 id="gw-h" class="sec-head__q">What brought you here?</h2>
+    </div>
+
+    <div class="gw__grid">
+      <article class="gw__card">
+        <span class="eyebrow">Pathway A</span>
+        <h3>Evaluating Ahmed for a role</h3>
+        <p class="muted">
+          Role fit, selected work, the full capability range, working method, evidence
+          standards, and the CV.
+        </p>
+        <ul class="gw__list">
+          <li>Where the career shift actually happened — and why it holds</li>
+          <li>What Ahmed owned versus recommended versus coordinated</li>
+          <li>Reasoning you can question in an interview</li>
+        </ul>
+        <a class="btn btn--ghost gw__go" href={withBase(cta.employer.href)}>
+          {cta.employer.label} →
+        </a>
+      </article>
+
+      <article class="gw__card">
+        <span class="eyebrow">Pathway B</span>
+        <h3>Looking to improve a business</h3>
+        <p class="muted">
+          Common growth blockers, how the diagnosis runs, what you receive, and what it
+          would cost you to find out.
+        </p>
+        <ul class="gw__list">
+          <li>Traffic but low conversion · support volume · disorganised operations</li>
+          <li>Founder dependency · new launch · new market</li>
+          <li>A diagnosis before a build — often the cheapest answer wins</li>
+        </ul>
+        <a class="btn btn--primary gw__go" href={withBase(cta.business.href)}>
+          {cta.business.label} →
+        </a>
+      </article>
+    </div>
+
+    <p class="faint gw__note">
+      Choosing a path adjusts emphasis only. Every page stays open, indexable, and identical
+      underneath — no gates, no duplicate site.
+    </p>
+  </div>
+</section>
+
+<style>
+  .gw__grid { display: grid; gap: var(--s5); grid-template-columns: 1fr 1fr; }
+  @media (max-width: 860px) { .gw__grid { grid-template-columns: 1fr; } }
+
+  .gw__card {
+    display: flex; flex-direction: column; gap: var(--s4);
+    padding: var(--s6);
+    background: var(--surface-raise);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+    transition: border-color var(--dur-mid) var(--ease);
+  }
+  .gw__card:hover { border-color: var(--hairline-strong); }
+  .gw__list { display: flex; flex-direction: column; gap: var(--s2); padding: 0; list-style: none; }
+  .gw__list li {
+    font-size: var(--fs-small); color: var(--text-muted);
+    padding-left: var(--s4); position: relative;
+  }
+  .gw__list li::before {
+    content: ''; position: absolute; left: 0; top: 0.6em;
+    width: 6px; height: 1px; background: var(--teal-signal);
+  }
+  .gw__go { margin-top: auto; align-self: flex-start; }
+  .gw__note { margin-top: var(--s5); }
+</style>

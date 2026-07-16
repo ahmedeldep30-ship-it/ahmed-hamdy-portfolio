@@ -1,0 +1,134 @@
+---
+import { withBase } from '@config/site';
+
+/**
+ * §4 — Selected Real Work.
+ * Flagship is live. The three supporting cases are Phase 4 and are shown
+ * honestly as in preparation rather than faked or silently omitted.
+ */
+const UPCOMING = [
+  {
+    label: 'E-commerce Conversion & UI/UX',
+    tier: 'Anonymized Real Work',
+    q: 'Why buy more traffic before the journey can convert it?',
+    domains: 'Customer behaviour · information hierarchy · checkout · post-purchase · operational readiness',
+  },
+  {
+    label: 'Alpha Capital Group',
+    tier: 'Verified Evidence',
+    q: 'What do 300+ conversations reveal that one conversation cannot?',
+    domains: 'Contact drivers · knowledge gaps · escalation · service design · prioritisation',
+  },
+  {
+    label: 'Commercial Growth & Funnel',
+    tier: 'Anonymized Real Work',
+    q: 'When is the constraint the offer rather than the budget?',
+    domains: 'Offer · pricing · funnel · order operations · margin · measurement',
+  },
+];
+---
+
+<section class="section work" id="work" aria-labelledby="work-h">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Selected real work</span>
+      <h2 id="work-h" class="sec-head__q">Where the reasoning has already been tested.</h2>
+    </div>
+
+    <a class="fw" href={withBase('/work/formula4you')}>
+      <div class="fw__body">
+        <div class="cluster">
+          <span class="badge badge--founder">Founder-Led Work</span>
+          <span class="badge badge--verified">Live Platform</span>
+        </div>
+        <h3 class="fw__t">Formula4You</h3>
+        <p class="fw__s">From a fragmented fragrance market to a specialized commerce platform</p>
+        <p class="muted fw__d">
+          I identified a structural gap in Egypt's fragrance ecosystem, chose vertical depth
+          over general breadth, designed the participant model and operating rules, sequenced
+          supply before demand, and translated the strategy into a live platform.
+        </p>
+        <ul class="fw__caps">
+          {['Market gap', 'Vertical strategy', 'Business model', 'Product priorities', 'Marketplace operations', 'Trust & governance', 'Go-to-market', 'Cross-functional execution'].map((c) => (
+            <li>{c}</li>
+          ))}
+        </ul>
+        <span class="fw__go">Read the flagship case study →</span>
+      </div>
+      <div class="fw__side">
+        <dl class="fw__meta">
+          <div><dt>Role</dt><dd>Founder — Business Strategy, Product &amp; Operations</dd></div>
+          <div><dt>Period</dt><dd>2025 — Present</dd></div>
+          <div><dt>Market</dt><dd>Egyptian fragrance ecosystem</dd></div>
+          <div><dt>Status</dt><dd>Live · phased development continuing</dd></div>
+          <div><dt>Evidence</dt><dd>Live platform + real screens</dd></div>
+        </dl>
+      </div>
+    </a>
+
+    <div class="work__up">
+      {UPCOMING.map((u) => (
+        <article class="upc">
+          <div class="cluster">
+            <span class="badge badge--anonymized">{u.tier}</span>
+            <span class="upc__soon">In preparation</span>
+          </div>
+          <h3 class="upc__t">{u.label}</h3>
+          <p class="upc__q">{u.q}</p>
+          <p class="faint">{u.domains}</p>
+        </article>
+      ))}
+    </div>
+
+    <p class="faint work__note">
+      Three supporting case studies are being written for the next review stage. They are listed
+      here because they exist — not to pad the page. Nothing is published before the evidence for
+      it is settled.
+    </p>
+  </div>
+</section>
+
+<style>
+  .fw {
+    display: grid; grid-template-columns: 1fr 280px; gap: var(--s7);
+    padding: var(--s6);
+    background: var(--surface-raise);
+    border: 1px solid var(--hairline-strong);
+    border-radius: var(--r-lg);
+    text-decoration: none; color: inherit;
+    transition: border-color var(--dur-mid) var(--ease);
+  }
+  .fw:hover { border-color: var(--teal-signal); }
+  .fw:hover .fw__go { color: var(--focus-dark); }
+  .fw__body { display: flex; flex-direction: column; gap: var(--s4); }
+  .fw__t { font-size: var(--fs-h2); }
+  .fw__s { font-family: var(--font-head); font-size: var(--fs-h4); color: var(--teal-bright); font-weight: 600; }
+  .fw__d { max-width: 62ch; }
+  .fw__caps { display: flex; flex-wrap: wrap; gap: var(--s2); padding: 0; list-style: none; }
+  .fw__caps li {
+    font-size: 0.75rem; font-family: var(--font-head); font-weight: 600;
+    color: var(--text-muted); border: 1px solid var(--hairline-strong);
+    padding: 0.2rem 0.55rem; border-radius: 999px;
+  }
+  .fw__go { font-family: var(--font-head); font-weight: 700; font-size: var(--fs-small); color: var(--teal-bright); margin-top: var(--s2); }
+  .fw__side { border-left: 1px solid var(--hairline); padding-left: var(--s5); }
+  .fw__meta { display: flex; flex-direction: column; gap: var(--s4); }
+  .fw__meta dt { font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); }
+  .fw__meta dd { margin: 0.15rem 0 0; font-size: var(--fs-small); color: var(--text); }
+  @media (max-width: 900px) {
+    .fw { grid-template-columns: 1fr; gap: var(--s5); }
+    .fw__side { border-left: 0; border-top: 1px solid var(--hairline); padding-left: 0; padding-top: var(--s5); }
+  }
+
+  .work__up { display: grid; gap: var(--s4); grid-template-columns: repeat(3, 1fr); margin-top: var(--s5); }
+  @media (max-width: 900px) { .work__up { grid-template-columns: 1fr; } }
+  .upc {
+    display: flex; flex-direction: column; gap: var(--s3);
+    padding: var(--s5); border: 1px dashed var(--hairline-strong);
+    border-radius: var(--r-md); background: transparent;
+  }
+  .upc__soon { font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); }
+  .upc__t { font-size: var(--fs-h4); color: var(--text-muted); }
+  .upc__q { font-size: var(--fs-small); color: var(--text-muted); }
+  .work__note { margin-top: var(--s5); max-width: var(--measure); }
+</style>

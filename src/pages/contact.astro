@@ -1,0 +1,373 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { contact, site } from '@config/site';
+
+/**
+ * Contact + consultation builder.
+ *
+ * Static host, so there is no server to post to. The builder assembles a
+ * structured message from the visitor's answers, shows it for review, then
+ * opens WhatsApp or email pre-filled.
+ *
+ *  · Nothing is stored. Nothing is sent to any third party.
+ *  · The direct WhatsApp/email/phone actions are plain server-rendered links
+ *    and work with JavaScript disabled. The form is progressive enhancement.
+ *  · Submission sits behind an adapter (src/scripts/consultation.ts) so a real
+ *    backend can replace it later without redesigning the form.
+ */
+
+const VISITOR = [
+  ['founder', 'Founder / business owner'],
+  ['company', 'Company team'],
+  ['employer', 'Employer / recruiter'],
+  ['collaborator', 'Collaborator'],
+  ['other', 'Other'],
+];
+
+const CHALLENGE = [
+  ['growth', 'Growth has slowed'],
+  ['conversion', 'Traffic but low conversion'],
+  ['support', 'Customers contact us too often'],
+  ['cx', 'Customer experience is inconsistent'],
+  ['operations', 'Operations are disorganised'],
+  ['founder-dep', 'The business depends on me'],
+  ['product', 'Unclear product or feature priorities'],
+  ['launch', 'Launching something new'],
+  ['market', 'Entering a new market'],
+  ['unclear', 'Something is wrong — not sure what'],
+];
+
+const STAGE = [
+  ['idea', 'Idea / pre-launch'],
+  ['early', 'Early — first customers'],
+  ['growing', 'Growing steadily'],
+  ['established', 'Established'],
+  ['na', 'Not applicable'],
+];
+
+const URGENCY = [
+  ['exploring', 'Exploring — no deadline'],
+  ['weeks', 'Next few weeks'],
+  ['now', 'Urgent'],
+];
+---
+
+<BaseLayout
+  title={`Contact — ${site.name}`}
+  description="Request a Business Diagnostic or discuss a role. Direct WhatsApp, email, phone, and LinkedIn."
+  path="/contact"
+  breadcrumbs={[{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }]}
+>
+  <section class="section">
+    <div class="wrap ct__grid">
+      <!-- ── Direct channels: always work, no JavaScript required ───────── -->
+      <aside class="ct__direct">
+        <div class="sec-head" style="margin-bottom: var(--s5)">
+          <span class="eyebrow">Go direct</span>
+          <h1 class="ct__h">Talk to me.</h1>
+          <p class="muted">
+            No form required. These work right now, and they reach me personally.
+          </p>
+        </div>
+
+        <ul class="ct__ch">
+          <li>
+            <a class="ct__c ct__c--p" href={contact.whatsapp} rel="noopener">
+              <span class="ct__c-l">WhatsApp</span>
+              <span class="faint">Fastest route — usually the same day</span>
+            </a>
+          </li>
+          <li>
+            <a class="ct__c" href={contact.emailHref}>
+              <span class="ct__c-l">Email</span>
+              <span class="faint">{contact.email}</span>
+            </a>
+          </li>
+          <li>
+            <a class="ct__c" href={contact.phoneHref}>
+              <span class="ct__c-l">Phone</span>
+              <span class="faint tnum">{contact.phoneDisplay}</span>
+            </a>
+          </li>
+          <li>
+            <a class="ct__c" href={contact.linkedin} rel="noopener">
+              <span class="ct__c-l">LinkedIn ↗</span>
+              <span class="faint">Professional profile</span>
+            </a>
+          </li>
+          <li>
+            <a class="ct__c" href={contact.facebook} rel="noopener">
+              <span class="ct__c-l">Facebook ↗</span>
+              <span class="faint">Arabic-language content</span>
+            </a>
+          </li>
+        </ul>
+
+        <div class="ct__note">
+          <p class="ct__note-t">
+            <strong>No response time is promised.</strong> Messages are read personally, not by a
+            team. The first reply is honest about scope — whether the problem fits what I do, and
+            what evidence I would need to answer it properly.
+          </p>
+        </div>
+      </aside>
+
+      <!-- ── Consultation builder: progressive enhancement ──────────────── -->
+      <div class="ct__builder">
+        <div class="sec-head" style="margin-bottom: var(--s5)">
+          <span class="eyebrow">Or build a structured brief</span>
+          <h2 class="ct__bh">Answer a few questions and I will arrive already understanding the problem.</h2>
+          <p class="muted">
+            This builds a message you review before anything is sent. Nothing is stored, and
+            nothing goes to a third party — it opens your own WhatsApp or email client with the
+            message written.
+          </p>
+        </div>
+
+        <noscript>
+          <div class="ct__ns">
+            <p>
+              The brief builder needs JavaScript. Every channel on the left works without it —
+              use WhatsApp or email and include your business, the challenge, and a link if you
+              have one.
+            </p>
+          </div>
+        </noscript>
+
+        <form class="ct__form js-hide" id="cf" novalidate>
+          <fieldset class="fs">
+            <legend class="fs__l">About you</legend>
+            <div class="fs__g">
+              <label class="f">
+                <span class="f__l">Name <abbr title="required">*</abbr></span>
+                <input class="f__i" name="name" required autocomplete="name" />
+              </label>
+              <label class="f">
+                <span class="f__l">Company or brand</span>
+                <input class="f__i" name="company" autocomplete="organization" />
+              </label>
+              <label class="f">
+                <span class="f__l">Email</span>
+                <input class="f__i" type="email" name="email" autocomplete="email" />
+              </label>
+              <label class="f">
+                <span class="f__l">Website or product link</span>
+                <input class="f__i" type="url" name="url" placeholder="https://" />
+              </label>
+            </div>
+            <label class="f">
+              <span class="f__l">You are a <abbr title="required">*</abbr></span>
+              <select class="f__i" name="visitor" required>
+                {VISITOR.map(([v, l]) => <option value={v}>{l}</option>)}
+              </select>
+            </label>
+          </fieldset>
+
+          <fieldset class="fs">
+            <legend class="fs__l">The problem</legend>
+            <label class="f">
+              <span class="f__l">What is blocking you? <abbr title="required">*</abbr></span>
+              <select class="f__i" name="challenge" required>
+                {CHALLENGE.map(([v, l]) => <option value={v}>{l}</option>)}
+              </select>
+            </label>
+            <div class="fs__g">
+              <label class="f">
+                <span class="f__l">Business stage</span>
+                <select class="f__i" name="stage">
+                  {STAGE.map(([v, l]) => <option value={v}>{l}</option>)}
+                </select>
+              </label>
+              <label class="f">
+                <span class="f__l">Timing</span>
+                <select class="f__i" name="urgency">
+                  {URGENCY.map(([v, l]) => <option value={v}>{l}</option>)}
+                </select>
+              </label>
+            </div>
+            <label class="f">
+              <span class="f__l">What would a good outcome look like?</span>
+              <textarea class="f__i" name="outcome" rows="2"></textarea>
+            </label>
+            <label class="f">
+              <span class="f__l">Anything else worth knowing</span>
+              <textarea class="f__i" name="context" rows="3"
+                placeholder="What you have already tried, what data exists, who is involved."></textarea>
+            </label>
+            <p class="f__hint">
+              Please do not include confidential financials, customer data, or credentials. If the
+              problem needs them, we will handle that properly later.
+            </p>
+          </fieldset>
+
+          <fieldset class="fs">
+            <legend class="fs__l">Where should it go?</legend>
+            <div class="ct__radios">
+              <label class="rad">
+                <input type="radio" name="channel" value="whatsapp" checked />
+                <span>WhatsApp</span>
+              </label>
+              <label class="rad">
+                <input type="radio" name="channel" value="email" />
+                <span>Email</span>
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="ct__actions">
+            <button class="btn btn--primary" type="submit">Review the message →</button>
+            <p class="f__err" id="cf-err" role="alert" hidden></p>
+          </div>
+        </form>
+
+        <!-- Review step — visible before anything opens -->
+        <div class="rev" id="rev" hidden>
+          <div class="rev__hd">
+            <span class="eyebrow">Review before sending</span>
+            <p class="muted rev__i">
+              This is exactly what will be pre-filled. Nothing has been sent or stored yet —
+              you can edit it in your own app afterwards.
+            </p>
+          </div>
+          <pre class="rev__p" id="rev-p"></pre>
+          <div class="cluster rev__a">
+            <a class="btn btn--primary" id="rev-go" href="#" rel="noopener">Open WhatsApp →</a>
+            <button class="btn btn--ghost" type="button" id="rev-back">← Edit answers</button>
+          </div>
+          <p class="faint rev__n">
+            Opening your app is the only thing that happens. This page never transmits your
+            answers anywhere.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .ct__grid { display: grid; grid-template-columns: 340px minmax(0, 1fr); gap: var(--s9); align-items: start; }
+  @media (max-width: 960px) { .ct__grid { grid-template-columns: 1fr; gap: var(--s7); } }
+
+  .ct__h { font-size: var(--fs-h1); }
+  .ct__ch { display: flex; flex-direction: column; gap: 0; padding: 0; list-style: none; border-top: 1px solid var(--hairline); }
+  .ct__ch li { border-bottom: 1px solid var(--hairline); }
+  .ct__c { display: flex; flex-direction: column; gap: 2px; padding: var(--s4) 0; text-decoration: none; color: var(--text); }
+  .ct__c-l { font-family: var(--font-head); font-weight: 700; font-size: var(--fs-small); }
+  .ct__c:hover .ct__c-l { color: var(--teal-bright); }
+  .ct__c--p .ct__c-l { color: var(--teal-bright); }
+  .ct__note { margin-top: var(--s5); padding: var(--s4); border: 1px dashed var(--hairline-strong); border-radius: var(--r-md); }
+  .ct__note-t { font-size: var(--fs-caption); color: var(--text-muted); }
+  .ct__note-t strong { color: var(--text); }
+
+  .ct__bh { font-size: var(--fs-h2); max-width: 30ch; }
+  .ct__ns { padding: var(--s5); border: 1px solid var(--coral-signal); border-radius: var(--r-md); background: var(--tint-coral); }
+  .ct__ns p { font-size: var(--fs-small); color: var(--text-muted); }
+
+  .ct__form { display: flex; flex-direction: column; gap: var(--s6); }
+  .fs { border: 0; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--s4); }
+  .fs__l {
+    font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-bright);
+    padding: 0 0 var(--s3); border-bottom: 1px solid var(--hairline); width: 100%;
+  }
+  .fs__g { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); }
+  @media (max-width: 640px) { .fs__g { grid-template-columns: 1fr; } }
+
+  .f { display: flex; flex-direction: column; gap: var(--s2); }
+  .f__l { font-family: var(--font-head); font-size: var(--fs-caption); font-weight: 600; color: var(--text); }
+  .f__l abbr { color: var(--coral-bright); text-decoration: none; }
+  .f__i {
+    background: var(--surface-deep);
+    border: 1px solid var(--border-control);  /* 3.34:1 — identifies the control */
+    border-radius: var(--r-sm);
+    padding: 0.6rem 0.75rem;
+    color: var(--text); font-size: var(--fs-small); font-family: var(--font-body);
+    width: 100%;
+  }
+  .f__i:focus-visible { outline: 2px solid var(--focus-dark); outline-offset: 1px; border-color: var(--teal-bright); }
+  select.f__i { cursor: pointer; }
+  textarea.f__i { resize: vertical; min-height: 3.5rem; }
+  .f__hint { font-size: var(--fs-caption); color: var(--text-faint); }
+  .f__err { font-size: var(--fs-caption); color: var(--coral-bright); font-weight: 600; }
+
+  .ct__radios { display: flex; gap: var(--s5); flex-wrap: wrap; }
+  .rad { display: flex; align-items: center; gap: var(--s2); font-size: var(--fs-small); cursor: pointer; }
+  .rad input { accent-color: var(--teal-bright); width: 1rem; height: 1rem; }
+
+  .ct__actions { display: flex; flex-direction: column; gap: var(--s3); align-items: flex-start; }
+
+  .rev { display: flex; flex-direction: column; gap: var(--s4); }
+  .rev__hd { display: flex; flex-direction: column; gap: var(--s2); }
+  .rev__i { font-size: var(--fs-small); }
+  .rev__p {
+    background: var(--surface-deep); border: 1px solid var(--hairline-strong);
+    border-radius: var(--r-md); padding: var(--s5);
+    font-family: var(--font-body); font-size: var(--fs-caption); line-height: 1.7;
+    color: var(--text); white-space: pre-wrap; word-break: break-word;
+    max-height: 420px; overflow-y: auto; margin: 0;
+  }
+  .rev__n { font-size: var(--fs-caption); }
+</style>
+
+<script>
+  import { buildMessage, adapterFor, type Payload } from '@/scripts/consultation';
+
+  const form = document.getElementById('cf') as HTMLFormElement | null;
+  const rev = document.getElementById('rev');
+  const pre = document.getElementById('rev-p');
+  const go = document.getElementById('rev-go') as HTMLAnchorElement | null;
+  const back = document.getElementById('rev-back');
+  const err = document.getElementById('cf-err');
+
+  function labelOf(sel: HTMLSelectElement): string {
+    return sel.options[sel.selectedIndex]?.text ?? sel.value;
+  }
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!form || !rev || !pre || !go || !err) return;
+
+    const fd = new FormData(form);
+    const name = String(fd.get('name') ?? '').trim();
+    if (!name) {
+      err.textContent = 'Please add your name so I know who I am replying to.';
+      err.hidden = false;
+      form.querySelector<HTMLInputElement>('[name="name"]')?.focus();
+      return;
+    }
+    err.hidden = true;
+
+    const payload: Payload = {
+      name,
+      company: String(fd.get('company') ?? '').trim(),
+      email: String(fd.get('email') ?? '').trim(),
+      url: String(fd.get('url') ?? '').trim(),
+      visitor: labelOf(form.elements.namedItem('visitor') as HTMLSelectElement),
+      challenge: labelOf(form.elements.namedItem('challenge') as HTMLSelectElement),
+      stage: labelOf(form.elements.namedItem('stage') as HTMLSelectElement),
+      urgency: labelOf(form.elements.namedItem('urgency') as HTMLSelectElement),
+      outcome: String(fd.get('outcome') ?? '').trim(),
+      context: String(fd.get('context') ?? '').trim(),
+    };
+
+    const channel = String(fd.get('channel') ?? 'whatsapp') as 'whatsapp' | 'email';
+    const message = buildMessage(payload);
+    const adapter = adapterFor(channel);
+
+    pre.textContent = message;
+    go.href = adapter.href(payload, message);
+    go.textContent = adapter.label;
+
+    form.hidden = true;
+    rev.hidden = false;
+    rev.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    (rev.querySelector('.eyebrow') as HTMLElement | null)?.focus();
+  });
+
+  back?.addEventListener('click', () => {
+    if (!form || !rev) return;
+    rev.hidden = true;
+    form.hidden = false;
+    form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>

@@ -1,0 +1,147 @@
+---
+import { withBase, cta } from '@config/site';
+
+interface Props { path: string }
+const { path } = Astro.props;
+
+/**
+ * Five primary links + audience switch + one contextual CTA (Gate 1 §8).
+ *
+ * Playbooks / Insights / How I Work point at home-page previews until their
+ * full routes ship in Phase 4–5. Nothing links to a page that does not exist.
+ */
+const links = [
+  { label: 'Work', href: '/work' },
+  { label: 'Playbooks', href: '/#playbooks' },
+  { label: 'Insights', href: '/#insights' },
+  { label: 'How I Work', href: '/#how-i-work' },
+  { label: 'About', href: '/#about' },
+];
+const isActive = (href: string) => href === '/work' && path.startsWith('/work');
+---
+
+<header class="hdr">
+  <div class="wrap hdr__in">
+    <a class="hdr__brand" href={withBase('/')}>
+      <span class="hdr__name">Ahmed Hamdy</span>
+      <span class="hdr__role">Business Growth &amp; Operations</span>
+    </a>
+
+    <nav class="hdr__nav" aria-label="Primary">
+      {links.map((l) => (
+        <a
+          href={l.href.startsWith('/#') ? withBase('/') + l.href.slice(1) : withBase(l.href)}
+          aria-current={isActive(l.href) ? 'page' : undefined}
+        >{l.label}</a>
+      ))}
+    </nav>
+
+    <div class="hdr__right">
+      <!-- Curates labels + CTA only. Never gates content or alters crawler access. -->
+      <div class="aud no-js-hide" role="group" aria-label="Choose your path">
+        <button type="button" data-aud="business" aria-pressed="true">For Businesses</button>
+        <button type="button" data-aud="employer" aria-pressed="false">For Employers</button>
+      </div>
+      <a class="btn btn--primary hdr__cta" href={withBase(cta.business.href)} data-cta>
+        {cta.business.label}
+      </a>
+    </div>
+
+    <button class="hdr__burger no-js-hide" type="button" aria-expanded="false" aria-controls="hdr-m">
+      <span class="visually-hidden">Menu</span>
+      <svg viewBox="0 0 20 14" aria-hidden="true" width="20" height="14">
+        <path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.6" fill="none" />
+      </svg>
+    </button>
+  </div>
+
+  <div class="hdr__m" id="hdr-m" hidden>
+    <div class="wrap stack">
+      {links.map((l) => (
+        <a href={l.href.startsWith('/#') ? withBase('/') + l.href.slice(1) : withBase(l.href)}>{l.label}</a>
+      ))}
+      <hr class="resolve-rule" />
+      <div class="aud aud--m" role="group" aria-label="Choose your path">
+        <button type="button" data-aud="business" aria-pressed="true">For Businesses</button>
+        <button type="button" data-aud="employer" aria-pressed="false">For Employers</button>
+      </div>
+      <a class="btn btn--primary" href={withBase(cta.business.href)} data-cta>{cta.business.label}</a>
+    </div>
+  </div>
+</header>
+
+<style>
+  .hdr {
+    position: sticky; top: 0; z-index: 50;
+    background: color-mix(in srgb, var(--surface-deep) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--hairline);
+  }
+  .hdr__in { display: flex; align-items: center; gap: var(--s5); min-height: 66px; }
+  .hdr__brand { display: flex; flex-direction: column; text-decoration: none; color: var(--text); flex: none; }
+  .hdr__name { font-family: var(--font-head); font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; }
+  .hdr__role { font-size: 0.6875rem; color: var(--text-faint); letter-spacing: 0.04em; }
+
+  .hdr__nav { display: flex; gap: var(--s5); margin-inline-start: auto; }
+  .hdr__nav a {
+    font-family: var(--font-head); font-size: var(--fs-small); font-weight: 600;
+    color: var(--text-muted); text-decoration: none; padding: 0.4rem 0;
+    border-bottom: 2px solid transparent;
+    transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
+  }
+  .hdr__nav a:hover { color: var(--text); border-bottom-color: var(--teal-signal); }
+  .hdr__nav a[aria-current='page'] { color: var(--teal-bright); border-bottom-color: var(--teal-bright); }
+
+  .hdr__right { display: flex; align-items: center; gap: var(--s3); flex: none; }
+
+  .aud { display: inline-flex; padding: 3px; gap: 2px; border: 1px solid var(--border-control); border-radius: 999px; }
+  .aud button {
+    font-family: var(--font-head); font-size: 0.75rem; font-weight: 600;
+    background: none; border: 0; color: var(--text-muted); cursor: pointer;
+    padding: 0.35rem 0.7rem; border-radius: 999px; white-space: nowrap;
+    transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+  }
+  .aud button[aria-pressed='true'] { background: var(--teal-bright); color: var(--surface-deep); }
+
+  .hdr__burger, .hdr__m { display: none; }
+  .hdr__burger { background: none; border: 1px solid var(--border-control); border-radius: var(--r-sm); padding: 0.5rem; color: var(--text); cursor: pointer; }
+
+  @media (max-width: 1080px) {
+    .hdr__nav, .hdr__right { display: none; }
+    .hdr__burger { display: block; margin-inline-start: auto; }
+    .hdr__m { display: block; border-top: 1px solid var(--hairline); padding-block: var(--s4) var(--s5); background: var(--surface-deep); }
+    .hdr__m[hidden] { display: none; }
+    .hdr__m .wrap { --stack-gap: var(--s4); }
+    .hdr__m a:not(.btn) { font-family: var(--font-head); font-weight: 600; color: var(--text); text-decoration: none; padding: 0.35rem 0; }
+    .aud--m { align-self: flex-start; }
+  }
+</style>
+
+<script>
+  import { getAudience, setAudience, onAudience, CTA_COPY } from '@/scripts/audience';
+
+  const burger = document.querySelector<HTMLButtonElement>('.hdr__burger');
+  const menu = document.getElementById('hdr-m');
+  burger?.addEventListener('click', () => {
+    const open = burger.getAttribute('aria-expanded') === 'true';
+    burger.setAttribute('aria-expanded', String(!open));
+    if (menu) menu.hidden = open;
+  });
+
+  function paint(aud: 'business' | 'employer') {
+    document.querySelectorAll<HTMLButtonElement>('.aud button').forEach((b) => {
+      b.setAttribute('aria-pressed', String(b.dataset.aud === aud));
+    });
+    document.querySelectorAll<HTMLAnchorElement>('[data-cta]').forEach((a) => {
+      a.textContent = CTA_COPY[aud].label;
+      a.setAttribute('href', CTA_COPY[aud].href);
+    });
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.aud button').forEach((b) => {
+    b.addEventListener('click', () => setAudience(b.dataset.aud as 'business' | 'employer'));
+  });
+
+  paint(getAudience());
+  onAudience(paint);
+</script>

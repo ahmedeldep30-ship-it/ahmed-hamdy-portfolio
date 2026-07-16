@@ -1,0 +1,55 @@
+---
+/**
+ * A named decision with its rejected alternative and the trade-off.
+ * The rejected alternative is required — a decision without one is a preference.
+ */
+interface Props {
+  label?: string;
+  chose: string;
+  instead: string;
+  because: string;
+}
+const { label = 'Decision', chose, instead, because } = Astro.props;
+---
+
+<div class="dec">
+  <p class="dec__l">{label}</p>
+  <p class="dec__c">{chose}</p>
+  <div class="dec__g">
+    <div class="dec__x">
+      <span class="dec__k">Rejected</span>
+      <p class="dec__t">{instead}</p>
+    </div>
+    <div class="dec__x">
+      <span class="dec__k">Trade-off</span>
+      <p class="dec__t">{because}</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .dec {
+    margin: var(--s7) 0;
+    padding: var(--s5);
+    background: var(--surface-raise);
+    border: 1px solid var(--hairline-strong);
+    border-left: 3px solid var(--teal-signal);
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+  }
+  .dec__l {
+    font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-bright);
+  }
+  .dec__c {
+    font-family: var(--font-head); font-size: var(--fs-h3); font-weight: 600;
+    color: var(--text); margin: var(--s3) 0 var(--s5); max-width: 46ch; line-height: 1.35;
+  }
+  .dec__g { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s5); border-top: 1px solid var(--hairline); padding-top: var(--s4); }
+  @media (max-width: 720px) { .dec__g { grid-template-columns: 1fr; gap: var(--s4); } }
+  .dec__k {
+    font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--coral-bright);
+  }
+  .dec__x:last-child .dec__k { color: var(--text-faint); }
+  .dec__t { margin-top: var(--s2); font-size: var(--fs-small); color: var(--text-muted); }
+</style>

@@ -1,0 +1,104 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '@/assets/portrait/ahmed-hamdy-portrait-approved.webp';
+import { withBase, contact } from '@config/site';
+
+/**
+ * §11 — About / career narrative. Uses the approved portrait (Gate 1 §13).
+ * The portrait appears here and on Contact — never in the hero.
+ *
+ * Career-shift rule: this must not return the portfolio to a customer-support
+ * identity. Close customer exposure is framed as the evidence source that made
+ * the operational judgment possible.
+ */
+---
+
+<section class="section zone-stone abt" id="about" aria-labelledby="abt-h">
+  <div class="wrap abt__grid">
+    <div class="abt__media">
+      <Image
+        src={portrait}
+        alt="Ahmed Hamdy, Business Growth and Operations Specialist, in a dark suit and white shirt."
+        widths={[280, 420, 560]}
+        sizes="(max-width: 900px) 220px, 320px"
+        loading="lazy"
+        class="abt__img"
+      />
+      <div class="abt__meta">
+        <div><span class="abt__k">Based in</span><span class="abt__v">Alexandria, Egypt</span></div>
+        <div><span class="abt__k">Languages</span><span class="abt__v">Arabic (native) · English (professional)</span></div>
+        <div><span class="abt__k">Education</span><span class="abt__v">Faculty of Al-Alsun, Ain Shams University — two academic years completed</span></div>
+      </div>
+    </div>
+
+    <div class="abt__body">
+      <div class="sec-head" style="margin-bottom: var(--s5)">
+        <span class="eyebrow">About</span>
+        <h2 id="abt-h" class="sec-head__q">The path is the argument, not the thing to hide.</h2>
+      </div>
+
+      <div class="abt__prose">
+        <p>
+          I started close to customers — a high volume of them, remotely, inside a UK fintech
+          environment. That is usually described as a starting point people move away from. I
+          think it is the reason the rest of this works.
+        </p>
+        <p>
+          Handling conversations at volume teaches something a report cannot: the difference
+          between one unhappy customer and a process that will keep producing unhappy customers.
+          The same question arriving three hundred times is not three hundred problems. It is one
+          design failure, wearing a customer's voice.
+        </p>
+        <p>
+          So I started tracing them backwards — to the article nobody could find, the policy that
+          was never explained, the handoff nobody owned, the promise made upstream by a team that
+          never saw the consequence. That habit turned into the work: diagnosing where a business
+          loses value, and designing the smallest change that stops the loss.
+        </p>
+        <p>
+          Formula4You is where the whole system came together at once. I saw a structural gap in
+          Egypt's fragrance market — suppliers, manufacturers, brands, and customers scattered
+          across social pages and messaging threads — and I did not solve it with a store. I
+          designed a specialized platform: who participates, why they join, what they pay for,
+          what order the launch has to happen in, and what deliberately does not get built.
+        </p>
+        <p class="abt__pull">
+          I am not a marketer who learned operations, or a support specialist who learned
+          strategy. I am someone who reads the whole system and can tell you which part of it is
+          actually broken.
+        </p>
+      </div>
+
+      <div class="cluster abt__ctas">
+        <a class="btn btn--primary" href={withBase('/work/formula4you')}>Read the flagship case study</a>
+        <a class="btn btn--ghost" href={contact.linkedin} rel="noopener">LinkedIn ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .abt__grid { display: grid; grid-template-columns: 320px 1fr; gap: var(--s9); align-items: start; }
+  @media (max-width: 900px) { .abt__grid { grid-template-columns: 1fr; gap: var(--s6); } }
+
+  .abt__media { display: flex; flex-direction: column; gap: var(--s5); }
+  .abt__img {
+    width: 100%; height: auto; border-radius: var(--r-lg);
+    border: 1px solid var(--hairline-stone);
+  }
+  @media (max-width: 900px) { .abt__img { max-width: 220px; } }
+  .abt__meta { display: flex; flex-direction: column; gap: var(--s3); border-top: 1px solid var(--hairline-stone); padding-top: var(--s4); }
+  .abt__meta div { display: flex; flex-direction: column; gap: 2px; }
+  .abt__k { font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--stone-muted); }
+  .abt__v { font-size: var(--fs-caption); color: var(--stone-body); }
+
+  .abt__prose { display: flex; flex-direction: column; gap: var(--s4); max-width: var(--measure); }
+  .abt__prose p { color: var(--stone-body); }
+  .abt__pull {
+    font-family: var(--font-serif); font-style: italic;
+    font-size: clamp(1.125rem, 1rem + 0.6vw, 1.375rem); line-height: 1.45;
+    color: var(--stone-ink) !important;
+    border-left: 3px solid var(--teal-deep); padding-left: var(--s5); margin-top: var(--s3);
+  }
+  .abt__ctas { margin-top: var(--s6); }
+</style>

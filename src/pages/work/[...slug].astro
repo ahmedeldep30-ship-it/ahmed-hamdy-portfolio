@@ -1,0 +1,193 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import EvidenceRail from '@components/case/EvidenceRail.astro';
+import { withBase, absoluteUrl, site, cta } from '@config/site';
+import { PUBLIC_LABEL, PUBLIC_LABEL_VARIANT } from '@/content.config';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('work', ({ data }) => !data.draft);
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await render(entry);
+
+const TIER_LABEL: Record<typeof data.tier, string> = {
+  founder_led: 'Founder-Led Work',
+  verified_real: 'Verified Evidence',
+  anonymized_real: 'Anonymized Real Work',
+};
+
+/** Claims that are published as-is vs. claims held back behind their fallback. */
+const shown = data.claims.filter((c) => c.status === 'verified');
+const held = data.claims.filter((c) => c.status !== 'verified' && c.fallback);
+---
+
+<BaseLayout
+  title={`${data.title} — ${data.subtitle} | ${site.name}`}
+  description={data.summary}
+  path={`/work/${entry.id}`}
+  type="article"
+  breadcrumbs={[
+    { name: 'Home', path: '/' },
+    { name: 'Work', path: '/work' },
+    { name: data.title, path: `/work/${entry.id}` },
+  ]}
+  jsonLd={[
+    {
+      '@type': 'CreativeWork',
+      '@id': `${absoluteUrl(`/work/${entry.id}`)}#work`,
+      name: `${data.title} — ${data.subtitle}`,
+      abstract: data.summary,
+      author: { '@id': `${site.url}#person` },
+      creator: { '@id': `${site.url}#person` },
+      about: data.market,
+      ...(data.liveUrl ? { sameAs: [data.liveUrl] } : {}),
+    },
+  ]}
+>
+  <article class="cs">
+    <!-- ── Header ──────────────────────────────────────────────────────── -->
+    <header class="cs__hd">
+      <div class="wrap">
+        <nav class="cs__crumb" aria-label="Breadcrumb">
+          <a href={withBase('/')}>Home</a>
+          <span aria-hidden="true">/</span>
+          <a href={withBase('/work')}>Work</a>
+          <span aria-hidden="true">/</span>
+          <span aria-current="page">{data.title}</span>
+        </nav>
+
+        <div class="cluster cs__badges">
+          <span class="badge badge--founder">{TIER_LABEL[data.tier]}</span>
+          {data.liveUrl && <span class="badge badge--verified">Live Platform</span>}
+        </div>
+
+        <p class="eyebrow cs__q">{data.question}</p>
+        <h1 class="cs__t">{data.title}</h1>
+        <p class="cs__s">{data.subtitle}</p>
+        <hr class="resolve-rule" />
+
+        <dl class="cs__meta">
+          <div><dt>Role</dt><dd>{data.role}</dd></div>
+          <div><dt>Period</dt><dd>{data.period}</dd></div>
+          {data.market && <div><dt>Market</dt><dd>{data.market}</dd></div>}
+          {data.liveUrl && (
+            <div>
+              <dt>Live</dt>
+              <dd><a href={data.liveUrl} rel="noopener">formula4you.com ↗</a></dd>
+            </div>
+          )}
+        </dl>
+      </div>
+    </header>
+
+    <!-- ── Body + rail ─────────────────────────────────────────────────── -->
+    <div class="wrap cs__grid">
+      <div class="cs__body">
+        <Content components={{ h2: 'h2', h3: 'h3' }} />
+
+        <!-- ── Evidence status ───────────────────────────────────────────── -->
+        <section class="est" aria-labelledby="est-h">
+          <h2 id="est-h">Evidence status</h2>
+          <p class="muted est__i">
+            What is published here, what is held back, and why. This section exists so nothing on
+            the page has to be taken on trust.
+          </p>
+
+          <div class="est__g">
+            <div>
+              <p class="eyebrow">Published — sourced</p>
+              <ul class="est__l">
+                {shown.map((c) => (
+                  <li class="est__c">
+                    <span class={`badge badge--${PUBLIC_LABEL_VARIANT[c.status]}`}>{PUBLIC_LABEL[c.status]}</span>
+                    <p class="est__t">{c.text}</p>
+                    {c.source && <p class="est__src">Source: {c.source}</p>}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <p class="eyebrow est__hl">Held back — insufficient evidence</p>
+              <ul class="est__l">
+                {held.map((c) => (
+                  <li class="est__c est__c--held">
+                    <p class="est__t est__t--strike">{c.text}</p>
+                    <p class="est__src">
+                      <strong>Published instead:</strong> {c.fallback}
+                    </p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Contextual CTA — after the business effect, never mid-read ── -->
+        <aside class="cs__cta">
+          <p class="eyebrow">Recognise the pattern?</p>
+          <h2 class="cs__cta-h">If your market looks fragmented, the gap is usually between people — not inside a product.</h2>
+          <div class="cluster">
+            <a class="btn btn--primary" href={withBase(cta.business.href)} data-cta>{cta.business.label}</a>
+            <a class="btn btn--ghost" href={withBase(cta.employer.href)}>{cta.employer.label}</a>
+          </div>
+        </aside>
+      </div>
+
+      <EvidenceRail rail={data.rail} />
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .cs__hd { padding-block: var(--s7) var(--s6); border-bottom: 1px solid var(--hairline); }
+  .cs__crumb { display: flex; gap: var(--s2); font-size: var(--fs-caption); color: var(--text-faint); margin-bottom: var(--s5); flex-wrap: wrap; }
+  .cs__crumb a { color: var(--text-muted); text-decoration: none; }
+  .cs__crumb a:hover { color: var(--teal-bright); }
+  .cs__badges { margin-bottom: var(--s4); }
+  .cs__q { margin-bottom: var(--s3); }
+  .cs__t { font-size: var(--fs-display); }
+  .cs__s { font-family: var(--font-head); font-size: var(--fs-h3); font-weight: 600; color: var(--teal-bright); margin: var(--s3) 0 var(--s5); max-width: 30ch; }
+  .cs__meta { display: flex; flex-wrap: wrap; gap: var(--s7); margin-top: var(--s5); }
+  .cs__meta dt { font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); }
+  .cs__meta dd { margin: var(--s1) 0 0; font-size: var(--fs-small); color: var(--text); }
+
+  .cs__grid { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: var(--s9); padding-block: var(--s8); align-items: start; }
+  @media (max-width: 1000px) { .cs__grid { grid-template-columns: 1fr; gap: var(--s7); } }
+  .cs__body { min-width: 0; max-width: 74ch; }
+
+  /* MDX prose */
+  .cs__body :global(h2) { font-size: var(--fs-h2); margin: var(--s8) 0 var(--s4); }
+  .cs__body :global(h2:first-child) { margin-top: 0; }
+  .cs__body :global(h3) { font-size: var(--fs-h3); margin: var(--s6) 0 var(--s3); }
+  .cs__body :global(p) { margin-bottom: var(--s4); color: var(--text-muted); }
+  .cs__body :global(strong) { color: var(--text); font-weight: 600; }
+  .cs__body :global(ul) { margin: 0 0 var(--s5); padding-left: var(--s5); display: flex; flex-direction: column; gap: var(--s2); }
+  .cs__body :global(li) { color: var(--text-muted); }
+  .cs__body :global(li::marker) { color: var(--teal-signal); }
+  .cs__body :global(a) { color: var(--teal-bright); }
+
+  /* Evidence status */
+  .est { margin-top: var(--s9); padding-top: var(--s6); border-top: 1px solid var(--hairline-strong); }
+  .est__i { margin: var(--s3) 0 var(--s5); }
+  .est__g { display: grid; grid-template-columns: 1fr; gap: var(--s6); }
+  .est__l { display: flex; flex-direction: column; gap: var(--s4); padding: 0; list-style: none; margin-top: var(--s4); }
+  .est__c { padding: var(--s4); border: 1px solid var(--hairline); border-radius: var(--r-md); background: var(--surface-raise); }
+  .est__c--held { border-style: dashed; background: transparent; }
+  .est__t { font-size: var(--fs-small); color: var(--text); margin-top: var(--s3); }
+  .est__t--strike { color: var(--text-faint); text-decoration: line-through; text-decoration-color: var(--coral-signal); margin-top: 0; }
+  .est__src { font-size: var(--fs-caption); color: var(--text-faint); margin-top: var(--s2); }
+  .est__src strong { color: var(--teal-bright); }
+  .est__hl { color: var(--coral-bright); }
+
+  .cs__cta {
+    margin-top: var(--s8); padding: var(--s6);
+    background: var(--surface-raise); border: 1px solid var(--hairline-strong);
+    border-radius: var(--r-lg); display: flex; flex-direction: column; gap: var(--s4);
+  }
+  .cs__cta-h { font-size: var(--fs-h3); max-width: 34ch; }
+</style>

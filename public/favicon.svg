@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Seam mark: one continuous line, broken at the handoff, reconnected below. -->
+  <rect width="32" height="32" rx="7" fill="#0E1C28"/>
+  <path d="M5 11 H14" stroke="#A8B6C2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M20 11 H27" stroke="#A8B6C2" stroke-width="2" stroke-linecap="round"/>
+  <path d="M14 11 H20" stroke="#D76555" stroke-width="2" stroke-linecap="round" stroke-dasharray="1.5 2.5"/>
+  <path d="M5 21 H27" stroke="#0B8F8A" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="17" cy="21" r="2.6" fill="#3DC2BA"/>
+</svg>

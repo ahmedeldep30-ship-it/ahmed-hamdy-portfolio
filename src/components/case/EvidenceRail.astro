@@ -1,0 +1,69 @@
+---
+interface Props {
+  rail: {
+    realAsset: string;
+    ownership: string;
+    decision: string;
+    implementation: string;
+    metricStatus: string;
+    confidentiality: string;
+  };
+}
+const { rail } = Astro.props;
+
+const ROWS = [
+  ['Real asset', rail.realAsset],
+  ["Ahmed's ownership", rail.ownership],
+  ['Decision', rail.decision],
+  ['Implementation', rail.implementation],
+  ['Metric status', rail.metricStatus],
+  ['Confidentiality', rail.confidentiality],
+] as const;
+---
+
+<aside class="rail" aria-label="Evidence rail">
+  <p class="rail__h">Evidence rail</p>
+  <dl class="rail__l">
+    {ROWS.map(([k, v]) => (
+      <div class="rail__i">
+        <dt class="rail__k">{k}</dt>
+        <dd class="rail__v">{v}</dd>
+      </div>
+    ))}
+  </dl>
+  <p class="rail__n">
+    Scanning only this rail should still leave you with an accurate impression of what is real
+    here — and what is not claimed.
+  </p>
+</aside>
+
+<style>
+  .rail {
+    position: sticky; top: 90px;
+    border-left: 2px solid var(--teal-signal);
+    padding-left: var(--s4);
+  }
+  .rail__h {
+    font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase; color: var(--teal-bright);
+    margin-bottom: var(--s4);
+  }
+  .rail__l { display: flex; flex-direction: column; gap: 0; }
+  .rail__i { padding: var(--s3) 0; border-bottom: 1px solid var(--hairline); position: relative; }
+  .rail__i:last-child { border-bottom: 0; }
+  .rail__i::before {
+    content: ''; position: absolute; left: calc(var(--s4) * -1 - 5px); top: 1.15em;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--teal-signal); outline: 2px solid var(--surface);
+  }
+  .rail__k {
+    font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint);
+  }
+  .rail__v { margin: 3px 0 0; font-size: var(--fs-caption); color: var(--text); line-height: 1.5; }
+  .rail__n { margin-top: var(--s4); font-size: var(--fs-caption); color: var(--text-faint); font-style: italic; }
+
+  @media (max-width: 1000px) {
+    .rail { position: static; }
+  }
+</style>

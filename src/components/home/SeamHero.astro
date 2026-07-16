@@ -1,0 +1,407 @@
+---
+import { withBase, cta } from '@config/site';
+
+/**
+ * SEAM DIAGNOSIS — primary hero motion.
+ *
+ * The customer experiences one continuous journey. The company is organised as
+ * five separate functions. The break falls in a HANDOFF — a place no single
+ * department owns and no dashboard measures.
+ *
+ * Contract:
+ *  · Base state IS the complete, annotated, resolved diagram. Killing the
+ *    animation never leaves a blank frame — it leaves the whole argument.
+ *  · The animation only reveals that diagram in reasoning order.
+ *  · Headline is readable before anything moves (motion starts after paint).
+ *  · Plays once. Never loops. Replayable. ≤1.15s. Never blocks interaction.
+ *  · Meaning lives in semantic HTML; SVG is aria-hidden illustration.
+ */
+
+const STAGES = [
+  { x: 70, label: 'Discover' },
+  { x: 242, label: 'Understand' },
+  { x: 414, label: 'Decide' },
+  { x: 586, label: 'Buy' },
+  { x: 758, label: 'Receive' },
+  { x: 930, label: 'Return' },
+];
+
+const DEPTS = [
+  { x: 40, cx: 127, label: 'Marketing', state: 'cause' },
+  { x: 226, cx: 313, label: 'Website & Product', state: 'cause' },
+  { x: 412, cx: 499, label: 'Sales & Checkout', state: 'ok' },
+  { x: 598, cx: 685, label: 'Operations', state: 'cause' },
+  { x: 784, cx: 871, label: 'Support & Retention', state: 'symptom' },
+];
+
+// stage index → owning department centre
+const OWNS: [number, number][] = [
+  [70, 127], [242, 313], [414, 313], [586, 499], [758, 685], [930, 871],
+];
+
+const FINDINGS = [
+  { n: 1, dept: 'Marketing', text: 'The promise started here — “next-day delivery”.' },
+  { n: 2, dept: 'Website & Product', text: 'The missing information sits here — delivery time only appears at checkout.' },
+  { n: 3, dept: 'Operations', text: 'The real delay lives here — fulfilment takes three days.' },
+  { n: 4, dept: 'Support', text: 'The symptom only surfaces here — “Where is my order?”' },
+];
+---
+
+<section class="hero">
+  <div class="wrap hero__top">
+    <div class="hero__copy">
+      <p class="eyebrow">Business Growth &amp; Operations Specialist</p>
+      <h1>I trace the system behind the problem — then redesign it.</h1>
+      <hr class="resolve-rule" />
+      <p class="lede">
+        Most business problems are not where they appear. I find where the system actually
+        loses value — across market, operations, customer experience, conversion, and product —
+        and design the simplest change that stops the loss.
+      </p>
+      <div class="cluster hero__ctas">
+        <a class="btn btn--primary" href={withBase('/work/formula4you')}>Explore selected work</a>
+        <a class="btn btn--ghost" href={withBase(cta.business.href)} data-cta>{cta.business.label}</a>
+      </div>
+    </div>
+
+    <!-- Proof strip (Brief §08). Safe wording only — no number carries a claim
+         its evidence cannot support. -->
+    <aside class="hero__proof" aria-label="At a glance">
+      <p class="eyebrow hero__proof-l">At a glance</p>
+      <ul class="hero__proof-l2">
+        <li>
+          <span class="hero__p-k">Founder — Formula4You</span>
+          <span class="hero__p-v">A live vertical-commerce platform for Egypt's fragrance market.</span>
+        </li>
+        <li>
+          <span class="hero__p-k">Owned end to end</span>
+          <span class="hero__p-v">Market gap, business model, product priorities, operating design, and go-to-market.</span>
+        </li>
+        <li>
+          <span class="hero__p-k">UK remote fintech</span>
+          <span class="hero__p-v">High-volume customer exposure and hundreds of five-star reviews.</span>
+        </li>
+        <li>
+          <span class="hero__p-k">Commercial work</span>
+          <span class="hero__p-v">Conversion journeys, offer structure, and order operations before scaling spend.</span>
+        </li>
+      </ul>
+      <p class="hero__proof-n">Alexandria, Egypt · English &amp; Arabic</p>
+    </aside>
+
+    <figure class="seam" data-seam>
+      <figcaption class="seam__cap">
+        <span class="eyebrow">A worked diagnosis</span>
+        <p class="faint">
+          Support volume is rising after purchase. Here is where the problem actually lives.
+        </p>
+      </figcaption>
+
+      <!-- Meaning lives here: always in the DOM, always crawlable, always in the
+           accessibility tree regardless of which SVG variant is displayed. -->
+      <p class="visually-hidden">
+        The customer experiences one continuous journey: discover, understand, decide, buy,
+        receive, return. The company is organised as five separate functions: marketing;
+        website and product; sales and checkout; operations; support and retention. The
+        customer's journey breaks between buying and receiving — in the handoff between sales
+        and operations. Four functions contribute: marketing promised next-day delivery, the
+        website reveals delivery time only at checkout, operations takes three days to fulfil,
+        and the symptom surfaces in support as repeated “where is my order?” contacts. No
+        single department owns the break. The resolution connects the four functions with one
+        owner for post-purchase certainty and three timed updates — not a new product.
+      </p>
+
+      <!-- ── DESKTOP INSTRUMENT ──────────────────────────────────────────── -->
+      <svg class="seam__svg seam__svg--wide" viewBox="0 0 1000 344" aria-hidden="true" focusable="false">
+        <!-- customer journey: one continuous line -->
+        <g class="s-journey">
+          <path class="s-line s-fx-line" pathLength="1" d="M 70 52 L 596 52" />
+          <path class="s-line s-fx-line s-fx-line--b" pathLength="1" d="M 748 52 L 930 52" />
+
+          <!-- the break: the gap the customer feels and no box owns -->
+          <g class="s-fx-break">
+            <path class="s-break" d="M 596 52 L 748 52" />
+            <path class="s-break-cap" d="M 596 42 L 596 62" />
+            <path class="s-break-cap" d="M 748 42 L 748 62" />
+            <text class="s-t s-t--f" x="672" y="34" text-anchor="middle">the break</text>
+          </g>
+
+          {STAGES.map((s) => (
+            <g class="s-fx-stage">
+              <circle class="s-dot" cx={s.x} cy="52" r="4.5" />
+              <text class="s-t" x={s.x} y="80" text-anchor="middle">{s.label}</text>
+            </g>
+          ))}
+          <text class="s-lab" x="0" y="16">THE CUSTOMER EXPERIENCES ONE JOURNEY</text>
+        </g>
+
+        <!-- ownership connectors -->
+        <g class="s-fx-own">
+          {OWNS.map(([sx, dx]) => (
+            <path class="s-own" d={`M ${sx} 58 C ${sx} 130, ${dx} 130, ${dx} 198`} />
+          ))}
+        </g>
+
+        <!-- the seam itself -->
+        <g class="s-fx-break">
+          <path class="s-seam-line" d="M 592 60 L 592 276" />
+          <text class="s-t s-t--f" x="592" y="292" text-anchor="middle">no owner in this gap</text>
+        </g>
+
+        <!-- departments: five separate systems -->
+        <g class="s-fx-dept">
+          <text class="s-lab" x="0" y="182">THE COMPANY IS ORGANISED AS FIVE SEPARATE FUNCTIONS</text>
+          {DEPTS.map((d) => (
+            <g>
+              <rect
+                class={`s-box s-box--${d.state}`}
+                x={d.x} y="198" width="174" height="62" rx="8"
+              />
+              <text class="s-t s-t--box" x={d.cx} y="226" text-anchor="middle">{d.label}</text>
+              {d.state === 'cause' && (
+                <text class="s-t s-t--f s-t--micro" x={d.cx} y="245" text-anchor="middle">contributes</text>
+              )}
+              {d.state === 'symptom' && (
+                <text class="s-t s-t--f s-t--micro" x={d.cx} y="245" text-anchor="middle">symptom shows here</text>
+              )}
+              {d.state === 'ok' && (
+                <text class="s-t s-t--micro s-t--mute" x={d.cx} y="245" text-anchor="middle">working correctly</text>
+              )}
+            </g>
+          ))}
+        </g>
+
+        <!-- resolution: the redesigned connection -->
+        <g class="s-fx-resolve">
+          <path class="s-connect" pathLength="1"
+                d="M 127 300 C 300 300, 300 314, 499 314 C 700 314, 700 300, 871 300" />
+          <circle class="s-cnode" cx="127" cy="300" r="4" />
+          <circle class="s-cnode" cx="313" cy="306" r="4" />
+          <circle class="s-cnode" cx="685" cy="306" r="4" />
+          <circle class="s-cnode" cx="871" cy="300" r="4" />
+          <text class="s-t s-t--ok" x="499" y="332" text-anchor="middle">one connected path — one owner, three timed updates</text>
+        </g>
+      </svg>
+
+      <!-- ── MOBILE INSTRUMENT: same reasoning order, stacked ─────────────── -->
+      <svg class="seam__svg seam__svg--tall" viewBox="0 0 340 560" aria-hidden="true" focusable="false">
+        <text class="s-lab" x="0" y="14">ONE CUSTOMER JOURNEY</text>
+        <g class="s-fx-line">
+          <path class="s-line" pathLength="1" d="M 22 34 L 22 250" />
+          <path class="s-line" pathLength="1" d="M 22 330 L 22 500" />
+        </g>
+        <g class="s-fx-break">
+          <path class="s-break" d="M 22 250 L 22 330" />
+          <path class="s-break-cap" d="M 12 250 L 32 250" />
+          <path class="s-break-cap" d="M 12 330 L 32 330" />
+          <text class="s-t s-t--f" x="42" y="294">the break — no owner</text>
+        </g>
+        {[
+          ['Discover', 34, 'Marketing', 'cause'],
+          ['Understand', 88, 'Website & Product', 'cause'],
+          ['Decide', 142, 'Website & Product', 'cause'],
+          ['Buy', 196, 'Sales & Checkout', 'ok'],
+          ['Receive', 384, 'Operations', 'cause'],
+          ['Return', 470, 'Support & Retention', 'symptom'],
+        ].map(([label, y, dept, state]) => (
+          <g class="s-fx-stage">
+            <circle class="s-dot" cx="22" cy={y as number} r="4" />
+            <text class="s-t" x="42" y={(y as number) + 4}>{label}</text>
+            <rect class={`s-box s-box--${state}`} x="150" y={(y as number) - 13} width="186" height="26" rx="6" />
+            <text class="s-t s-t--micro s-t--box" x="243" y={(y as number) + 4} text-anchor="middle">{dept}</text>
+          </g>
+        ))}
+        <g class="s-fx-resolve">
+          <path class="s-connect" pathLength="1" d="M 340 524 L 0 524" />
+          <text class="s-t s-t--ok" x="0" y="548">one connected path — one owner, three timed updates</text>
+        </g>
+      </svg>
+
+      <!-- Findings: HTML, not SVG. Readable, crawlable, responsive. -->
+      <ol class="seam__find">
+        {FINDINGS.map((f) => (
+          <li class="seam__f s-fx-find">
+            <span class="seam__f-n tnum">{String(f.n).padStart(2, '0')}</span>
+            <span class="seam__f-d">{f.dept}</span>
+            <span class="seam__f-t">{f.text}</span>
+          </li>
+        ))}
+      </ol>
+
+      <p class="seam__conc s-fx-conc">
+        <strong>No single department owns the problem.</strong> Each one was doing its job
+        correctly. The break is in the handoff — so the fix is not a new feature, and it is not
+        more support agents. It is one owner for post-purchase certainty and three timed updates.
+      </p>
+
+      <div class="seam__bar">
+        <button class="seam__replay" type="button" data-seam-replay>
+          <svg viewBox="0 0 12 12" width="11" height="11" aria-hidden="true">
+            <path d="M6 1a5 5 0 1 0 5 5" fill="none" stroke="currentColor" stroke-width="1.5" />
+            <path d="M6 -1.2 L6 3 L2.4 1" fill="currentColor" />
+          </svg>
+          Replay diagnosis
+        </button>
+        <span class="faint">Plays once · 1.15s · full static diagram without motion</span>
+      </div>
+    </figure>
+  </div>
+</section>
+
+<style>
+  .hero { padding-block: clamp(2.5rem, 6vw, 4.5rem) var(--section-y); }
+  .hero__top {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
+    gap: var(--s9);
+    align-items: start;
+  }
+  @media (max-width: 1100px) { .hero__top { grid-template-columns: 1fr; gap: var(--s7); } }
+
+  .hero__copy { max-width: 62ch; display: flex; flex-direction: column; gap: var(--s5); }
+  .hero__copy h1 { font-size: var(--fs-display); }
+  .hero__ctas { margin-top: var(--s2); }
+
+  .hero__proof { padding-top: var(--s2); }
+  .hero__proof-l { margin-bottom: var(--s4); }
+  .hero__proof-l2 {
+    display: flex; flex-direction: column; gap: 0;
+    padding: 0; list-style: none; border-top: 1px solid var(--hairline);
+  }
+  .hero__proof-l2 li {
+    display: flex; flex-direction: column; gap: 3px;
+    padding: var(--s3) 0; border-bottom: 1px solid var(--hairline);
+  }
+  .hero__p-k { font-family: var(--font-head); font-size: var(--fs-caption); font-weight: 700; color: var(--teal-bright); }
+  .hero__p-v { font-size: var(--fs-caption); color: var(--text-muted); line-height: 1.5; }
+  .hero__proof-n { margin-top: var(--s3); font-size: var(--fs-caption); color: var(--text-faint); }
+  @media (max-width: 1100px) { .hero__proof-l2 { display: grid; grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 620px) { .hero__proof-l2 { grid-template-columns: 1fr; } }
+
+  .seam {
+    /* The instrument spans the full grid — it is the widest thing on the page
+       and must not be trapped in the copy column. */
+    grid-column: 1 / -1;
+    margin: var(--s8) 0 0;
+    padding: var(--s5);
+    background: var(--surface-raise);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r-lg);
+  }
+  .seam__cap { display: flex; flex-direction: column; gap: var(--s2); margin-bottom: var(--s5); }
+  .seam__svg { width: 100%; height: auto; overflow: visible; }
+  .seam__svg--tall { display: none; }
+
+  @media (max-width: 900px) {
+    .seam__svg--wide { display: none; }
+    .seam__svg--tall { display: block; max-width: 340px; margin-inline: auto; }
+  }
+
+  /* ── SVG semantics ─────────────────────────────────────────────────── */
+  .s-lab { font-family: var(--font-head); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; fill: var(--text-faint); }
+  .s-t { font-family: var(--font-body); font-size: 13px; fill: var(--text-muted); }
+  .s-t--box { font-family: var(--font-head); font-weight: 600; fill: var(--text); font-size: 12.5px; }
+  .s-t--micro { font-size: 10.5px; }
+  .s-t--mute { fill: var(--text-faint); }
+  .s-t--f { fill: var(--coral-bright); font-weight: 600; }
+  .s-t--ok { fill: var(--teal-bright); font-weight: 600; font-size: 12px; }
+
+  .s-line { fill: none; stroke: var(--text-muted); stroke-width: 2; }
+  .s-dot { fill: var(--text); }
+  .s-break { fill: none; stroke: var(--coral-signal); stroke-width: 2; stroke-dasharray: 4 5; }
+  .s-break-cap { stroke: var(--coral-signal); stroke-width: 2; }
+  .s-seam-line { fill: none; stroke: var(--coral-signal); stroke-width: 1; stroke-dasharray: 3 4; opacity: 0.75; }
+  /* Ownership connectors carry the "who owns this stage" argument — they were
+     invisible at hairline weight against the dark canvas. */
+  .s-own { fill: none; stroke: rgba(168, 182, 194, 0.4); stroke-width: 1.2; }
+
+  .s-box { fill: var(--tint-raise); stroke: var(--hairline-strong); stroke-width: 1; }
+  .s-box--cause { fill: var(--tint-coral); stroke: rgba(215, 101, 85, 0.45); }
+  .s-box--symptom { fill: var(--tint-coral); stroke: var(--coral-signal); stroke-width: 1.5; }
+
+  .s-connect { fill: none; stroke: var(--teal-signal); stroke-width: 2; }
+  .s-cnode { fill: var(--teal-bright); }
+
+  /* ── Findings ──────────────────────────────────────────────────────── */
+  .seam__find {
+    display: grid; gap: 0; margin: var(--s6) 0 0;
+    border-top: 1px solid var(--hairline);
+    grid-template-columns: 1fr 1fr;
+  }
+  .seam__f {
+    display: grid; grid-template-columns: auto 1fr; gap: 0 var(--s3);
+    padding: var(--s3) var(--s4) var(--s3) 0;
+    border-bottom: 1px solid var(--hairline);
+    align-items: baseline;
+  }
+  .seam__f-n { font-family: var(--font-head); font-size: 0.75rem; font-weight: 700; color: var(--coral-bright); }
+  .seam__f-d { font-family: var(--font-head); font-size: var(--fs-small); font-weight: 700; color: var(--text); }
+  .seam__f-t { grid-column: 2; font-size: var(--fs-small); color: var(--text-muted); }
+  @media (max-width: 720px) { .seam__find { grid-template-columns: 1fr; } }
+
+  .seam__conc {
+    margin-top: var(--s5); padding: var(--s4) var(--s5);
+    border-left: 3px solid var(--teal-signal);
+    background: var(--tint-teal);
+    border-radius: 0 var(--r-md) var(--r-md) 0;
+    font-size: var(--fs-small); color: var(--text-muted);
+    max-width: 92ch;
+  }
+  .seam__conc strong { color: var(--text); }
+
+  .seam__bar { display: flex; align-items: center; gap: var(--s4); flex-wrap: wrap; margin-top: var(--s5); }
+  .seam__replay {
+    display: inline-flex; align-items: center; gap: var(--s2);
+    font-family: var(--font-head); font-size: 0.8125rem; font-weight: 600;
+    background: none; border: 1px solid var(--border-control); color: var(--text);
+    padding: 0.45rem 0.8rem; border-radius: var(--r-sm); cursor: pointer;
+  }
+  .seam__replay:hover { border-color: var(--teal-bright); color: var(--teal-bright); }
+
+  /* ══ MOTION ════════════════════════════════════════════════════════════
+     Base state = the finished diagram. `.play` re-reveals it in reasoning
+     order. Nothing here is required to understand the page.               */
+  @keyframes s-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+  @keyframes s-in   { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  @keyframes s-pop  { from { opacity: 0; } to { opacity: 1; } }
+
+  [data-seam].play .s-fx-line       { stroke-dasharray: 1; animation: s-draw 340ms var(--ease-out) both; }
+  [data-seam].play .s-fx-line--b    { animation-delay: 90ms; }
+  [data-seam].play .s-fx-stage      { animation: s-in 200ms var(--ease) both; animation-delay: 180ms; }
+  [data-seam].play .s-fx-dept       { animation: s-in 260ms var(--ease) both; animation-delay: 340ms; }
+  [data-seam].play .s-fx-own        { animation: s-pop 240ms var(--ease) both; animation-delay: 520ms; }
+  [data-seam].play .s-fx-break      { animation: s-pop 260ms var(--ease) both; animation-delay: 680ms; }
+  [data-seam].play .s-fx-find       { animation: s-in 220ms var(--ease) both; }
+  [data-seam].play .s-fx-find:nth-child(1) { animation-delay: 700ms; }
+  [data-seam].play .s-fx-find:nth-child(2) { animation-delay: 770ms; }
+  [data-seam].play .s-fx-find:nth-child(3) { animation-delay: 840ms; }
+  [data-seam].play .s-fx-find:nth-child(4) { animation-delay: 910ms; }
+  [data-seam].play .s-fx-resolve    { stroke-dasharray: 1; animation: s-pop 300ms var(--ease) both; animation-delay: 960ms; }
+  [data-seam].play .s-fx-resolve .s-connect { animation: s-draw 420ms var(--ease-out) both; animation-delay: 960ms; }
+  [data-seam].play .s-fx-conc       { animation: s-in 260ms var(--ease) both; animation-delay: 1000ms; }
+
+  @media (prefers-reduced-motion: reduce) {
+    [data-seam].play * { animation: none !important; }
+  }
+</style>
+
+<script>
+  const seam = document.querySelector<HTMLElement>('[data-seam]');
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+  function play() {
+    if (!seam || reduce.matches) return;
+    seam.classList.remove('play');
+    void seam.offsetWidth; // reflow so a replay actually restarts
+    seam.classList.add('play');
+    window.setTimeout(() => seam.classList.remove('play'), 1400);
+  }
+
+  document.querySelector('[data-seam-replay]')?.addEventListener('click', play);
+
+  // Play once, after first paint — the headline is readable before anything moves,
+  // and nothing here blocks interaction.
+  if (seam && !reduce.matches) {
+    requestAnimationFrame(() => requestAnimationFrame(() => window.setTimeout(play, 120)));
+  }
+</script>

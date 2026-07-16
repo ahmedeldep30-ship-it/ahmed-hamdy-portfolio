@@ -1,0 +1,36 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { withBase, site } from '@config/site';
+---
+
+<BaseLayout
+  title={`Page not found — ${site.name}`}
+  description="That page does not exist."
+  path="/404"
+  noindex
+>
+  <section class="section nf">
+    <div class="wrap">
+      <p class="eyebrow">404</p>
+      <h1 class="nf__h">This page does not exist.</h1>
+      <p class="lede nf__d">
+        Which is at least an honest error. Here is what does exist:
+      </p>
+      <ul class="nf__l">
+        <li><a href={withBase('/')}>Home — the diagnosis, the method, the evidence</a></li>
+        <li><a href={withBase('/work/formula4you')}>Formula4You — the flagship case study</a></li>
+        <li><a href={withBase('/work')}>All selected work</a></li>
+        <li><a href={withBase('/contact')}>Contact</a></li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf { padding-block: var(--s10); }
+  .nf__h { font-size: var(--fs-display); margin: var(--s3) 0 var(--s4); }
+  .nf__d { max-width: 46ch; }
+  .nf__l { display: flex; flex-direction: column; gap: var(--s3); padding: 0; list-style: none; margin-top: var(--s6); border-top: 1px solid var(--hairline); }
+  .nf__l li { border-bottom: 1px solid var(--hairline); }
+  .nf__l a { display: block; padding: var(--s4) 0; font-family: var(--font-head); font-weight: 600; text-decoration: none; }
+</style>
