@@ -25,10 +25,10 @@ export const site = {
    * a support career, when the consulting work across telecom, steel, petroleum
    * and education is the wider half of it. Consultant is the accurate word.
    */
-  title: 'Ahmed Hamdy — Business Operations & Process Consultant',
-  role: 'Business Operations & Process Consultant',
+  title: 'Ahmed Hamdy — Business Operations & Process Improvement Consultant',
+  role: 'Business Operations & Process Improvement Consultant',
   supportingLine:
-    'Business Operations | Process Improvement | Customer Experience | Support Operations | Service Quality',
+    'Business Operations | Process Diagnosis | Workflow Design | Customer Experience | Support Operations',
   description:
     'I work out where a business problem actually lives — usually a department away from where it shows up — and define the smallest change that removes it.',
   locale: 'en',

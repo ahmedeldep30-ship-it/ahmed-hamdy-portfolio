@@ -24,7 +24,7 @@ import Disclosure from '@/components/Disclosure.astro';
   <section class="hero" aria-labelledby="home-title">
     <div class="wrap hero__grid">
       <div class="hero__copy reveal is-visible">
-        <p class="eyebrow">Ahmed Hamdy · Business Operations &amp; Process Consultant</p>
+        <p class="eyebrow">Ahmed Hamdy · Business Operations &amp; Process Improvement Consultant</p>
         {/* Three beats, then the turn. The old headline — "Different teams see
             different problems, I connect the pattern" — was true of any
             consultant, which is why it read as generated. This one names three
@@ -36,15 +36,16 @@ import Disclosure from '@/components/Disclosure.astro';
             Capital, and the reason the whole page read as a two-year support
             career. The consulting work — telecom, steel, petroleum, education —
             is the wider half and was nowhere near the first screen. */}
-        <p class="hero__lede">That gap is my job. I have consulted on it inside a national telecom operator, one of Egypt's largest steel manufacturers, a state petroleum distributor and an academic institute — and I have run it myself, as the manager of a support team in a UK fintech. Different scales, same failure: the problem is almost never where it surfaces.</p>
-        <p class="hero__depth">Business Operations · Process Improvement · Customer Experience · Support Operations · Service Quality</p>
+        <p class="hero__lede">That gap is where I work. I trace an operational failure back past the department it lands in, and redesign the thing actually causing it — usually a process nobody owns, or a handoff nobody thought was theirs.</p>
+        <p class="hero__lede">Telecom, steel, petroleum distribution and education as a consultant; a UK fintech as the manager of its support team. Different industries, same pattern: the problem is almost never where it first becomes visible.</p>
+        <p class="hero__depth">Business Operations · Process Diagnosis · Workflow Design · Customer Experience · Support Operations</p>
         {/* Said on the first screen, in one line, without the halo. A visitor
             who does not know it is free will not ask. A visitor who is told it
             is a favour will also not ask. */}
         <p class="hero__free"><span></span>First conversation is free — I learn as much from it as you do</p>
         <div class="cluster hero__actions">
-          <a class="btn btn--primary" href="#diagnosis">See how I take it apart <span class="btn__arrow" aria-hidden="true">↓</span></a>
-          <a class="btn" href="#evidence">Where I have done it <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a class="btn btn--primary" href="#diagnosis">See how I diagnose it <span class="btn__arrow" aria-hidden="true">↓</span></a>
+          <a class="btn" href="#evidence">See the platform I built <span class="btn__arrow" aria-hidden="true">→</span></a>
         </div>
 
         {/* The whole page, on the first screen.
@@ -560,6 +561,8 @@ import Disclosure from '@/components/Disclosure.astro';
   .hero__copy h1 span { position: relative; display: inline; color: var(--signal); }
   .hero__copy h1 span::after { content: ''; position: absolute; left: 1%; right: -3%; bottom: -.12em; height: 12px; border-radius: 50%; border-top: 3px solid var(--coral); transform: rotate(-1.2deg); }
   .hero__lede { max-width: 650px; margin-top: 1.7rem; color: rgba(255,255,255,.68); font-size: clamp(1rem,.96rem + .3vw,1.2rem); }
+  /* The lede is two paragraphs now — the second one is the record. */
+  .hero__lede + .hero__lede { margin-top: .9rem; }
   .hero__depth { max-width: 660px; margin-top: 1.3rem; color: rgba(255,255,255,.45); font: 750 .7rem/1.7 var(--font-head); letter-spacing: .08em; text-transform: uppercase; }
   /* The free line. A pill, not a banner — it should read as a fact stated in
      passing, not as an offer being pushed. */
