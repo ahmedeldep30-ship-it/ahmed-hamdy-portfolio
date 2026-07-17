@@ -19,12 +19,18 @@ export const site = {
    */
   canonicalApproved: false,
   name: 'Ahmed Hamdy',
-  title: 'Ahmed Hamdy — Business Growth & Operations Specialist',
-  role: 'Business Growth & Operations Specialist',
+  /**
+   * "Business Growth & Operations Specialist" was the wrong door. It described
+   * the two years at Alpha Capital and nothing else — so the whole site read as
+   * a support career, when the consulting work across telecom, steel, petroleum
+   * and education is the wider half of it. Consultant is the accurate word.
+   */
+  title: 'Ahmed Hamdy — Business Operations & Process Consultant',
+  role: 'Business Operations & Process Consultant',
   supportingLine:
-    'Customer Experience | Support Operations | Process Improvement | Team Development | Service Quality',
+    'Business Operations | Process Improvement | Customer Experience | Support Operations | Service Quality',
   description:
-    'I connect customer, team, workflow, and performance signals to find the operating problem behind the visible symptom — then define a practical path forward.',
+    'I work out where a business problem actually lives — usually a department away from where it shows up — and define the smallest change that removes it.',
   locale: 'en',
   location: {
     city: 'Alexandria',

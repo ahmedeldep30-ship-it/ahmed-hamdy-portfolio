@@ -24,7 +24,7 @@ const capabilities = [
     teaser: 'The same question arriving hundreds of times is not hundreds of problems. It is one thing upstream that nobody fixed.',
     color: 'signal',
     body: [
-      'I spent two years answering Arabic-speaking customers for a UK fintech — remote, high volume, every day. You get fast at the answer. Then you notice the answer is not the point.',
+      'For two years I answered Arabic-speaking customers for a UK fintech — remote, high volume, every day — before I managed the team doing it. You get fast at the answer. Then you notice the answer is not the point.',
       'Somebody promised something in sales. A page never mentioned a delivery time. A process took three days and told nobody. The complaint lands on support. The cause almost never does.',
       'So I stopped trying to answer faster and started asking why the question existed at all.',
     ],
@@ -110,15 +110,20 @@ const lenses = [
   <section class="hero" aria-labelledby="home-title">
     <div class="wrap hero__grid">
       <div class="hero__copy reveal is-visible">
-        <p class="eyebrow">Ahmed Hamdy · Business Growth &amp; Operations Specialist</p>
+        <p class="eyebrow">Ahmed Hamdy · Business Operations &amp; Process Consultant</p>
         {/* Three beats, then the turn. The old headline — "Different teams see
             different problems, I connect the pattern" — was true of any
             consultant, which is why it read as generated. This one names three
             departments (the breadth) and lands on the insight that is actually
             his. */}
         <h1 id="home-title">It shows up in support. It slows down sales. <span>It started somewhere else.</span></h1>
-        <p class="hero__lede">That gap is my job. I spent two years in the seat where a company's failures arrive as complaints — the clearest view in the building of what is actually broken. I trace a problem back past the department it lands in, and design the smallest change that stops it.</p>
-        <p class="hero__depth">Customer Experience · Support Operations · Process Improvement · Team Development · Service Quality</p>
+        {/* This lede used to open "I spent two years in the seat where a
+            company's failures arrive as complaints." Accurate about Alpha
+            Capital, and the reason the whole page read as a two-year support
+            career. The consulting work — telecom, steel, petroleum, education —
+            is the wider half and was nowhere near the first screen. */}
+        <p class="hero__lede">That gap is my job. I have consulted on it inside a national telecom operator, one of Egypt's largest steel manufacturers, a state petroleum distributor and an academic institute — and I have run it myself, as the manager of a support team in a UK fintech. Different scales, same failure: the problem is almost never where it surfaces.</p>
+        <p class="hero__depth">Business Operations · Process Improvement · Customer Experience · Support Operations · Service Quality</p>
         <div class="cluster hero__actions">
           <a class="btn btn--primary" href="#diagnosis">See how I take it apart <span class="btn__arrow" aria-hidden="true">↓</span></a>
           <a class="btn" href="#evidence">Where I have done it <span class="btn__arrow" aria-hidden="true">→</span></a>
@@ -291,7 +296,7 @@ const lenses = [
         <article class="alpha-proof reveal">
           <span class="proof-label">Alpha Capital Group · UK fintech, remote · 2024 — present</span>
           <h3>I did not start as the manager. That is the whole point.</h3>
-          <p>The five-star reviews on my name are not a manager's metric. They are two years of being the person a frustrated customer actually reached — in Arabic, at the moment they were losing patience. You cannot delegate that view of a company. You have to sit in it.</p>
+          <p>Consulting shows you a company for a few months, from the outside, with everyone on their best behaviour. This was the opposite. The five-star reviews on my name are not a manager's metric — they are two years of being the person a frustrated customer actually reached, in Arabic, at the moment they were losing patience. You cannot delegate that view of a company. You have to sit in it.</p>
           <div class="alpha-proof__flow">
             <span>Answered it</span><i></i><span>Noticed the pattern</span><i></i><span>Built the system</span>
           </div>
@@ -329,27 +334,33 @@ const lenses = [
         </article>
       </div>
 
-      {/* Ahmed worked with a lot of small Egyptian companies and kept no
-          records of any of it. The tempting move is a vague "10+ businesses"
-          line nobody can check. The stronger move is to say out loud that he
-          will not do that — because a reader who watches him refuse an
-          unverifiable number has a reason to believe the verifiable ones. */}
+      {/* THE CONSULTING TRACK — the widest part of the record and, until now,
+          absent from the site entirely, which is why the page read as a
+          two-year support career.
+
+          Engagements were project-based, not employment, and the copy says so:
+          "consulted for", never "worked at". The sectors are described rather
+          than named — Ahmed's call, and the right one. A named employer is a
+          claim a recruiter can phone up and disprove; "a national telecom
+          operator" carries the same scale, needs no letter of proof, and cannot
+          blow up the rest of the page if it goes unanswered. */}
       <div class="field-notes reveal">
-        <span class="proof-label">Unverifiable by design</span>
-        <h3>Before either of these, there were a lot of small Egyptian companies.</h3>
+        <span class="proof-label">Independent consulting · project-based · sectors described, not named</span>
+        <h3>The support team was one room. Most of the work was in other people’s buildings.</h3>
         <div class="field-notes__grid">
           <div class="field-notes__say">
-            <p>I kept no records. No contracts I can show you, no dashboards, no before-and-after. So I am not going to name them, and I am not going to attach a number to any of it — a figure I cannot source is just a guess in a better suit.</p>
-            <p>What survived is the pattern. Small companies break in remarkably consistent ways, and almost never the way the founder thinks they do:</p>
+            <p>Project engagements, not jobs: a national telecom operator and one of Egypt’s largest steel manufacturers on business operations; a state petroleum distributor and an academic institute on IT and service desk. Under that, a long tail of small Egyptian businesses — founder-led, where the whole operating model is one person’s working memory.</p>
+            <p>I describe them rather than name them. That is deliberate: a named client is a claim you would have to take on trust, and I would rather you did not have to. The sector tells you the scale, which is the only part that matters for whether the pattern transfers.</p>
+            <p>And it does transfer. A telecom and a five-person business fail in the same shapes, at different volumes:</p>
           </div>
           <ul class="field-notes__list">
-            <li>The process exists. It lives in one person’s head, and that person is the founder.</li>
+            <li>The process exists. It lives in one person’s head — and the bigger the company, the more heads it is scattered across.</li>
             <li>Nobody is confused about the goal. They are confused about who decides.</li>
             <li>“Your prices are too high” almost always means “I don’t understand what I’m getting.”</li>
             <li>Everyone already knows what is broken. There is no room in which saying it out loud is safe.</li>
           </ul>
         </div>
-        <p class="field-notes__rule">That is not evidence, and I will not dress it up as evidence. It is where the instinct came from — and it is why the first thing I ask for is the raw conversations, not the summary.</p>
+        <p class="field-notes__rule">I am not attaching numbers to any of this. I did not keep the records, and a figure I cannot source is a guess in a better suit. What I kept is the judgment — and that is the thing you would actually be hiring.</p>
       </div>
     </div>
   </section>
@@ -387,7 +398,7 @@ const lenses = [
             and wider business decisions" — four nouns in a coat. It said
             nothing that could be false, which is another way of saying it
             said nothing. */}
-        <p>I learned this in the least glamorous way available: two years of being complained at, politely and impolitely, by people who were usually right.</p>
+        <p>Consulting teaches you to read a company quickly. Sitting inside its inbox teaches you what it is like to be on the other side of one — two years of being complained at, politely and impolitely, by people who were usually right.</p>
         <p>You cannot get this view from a dashboard. A dashboard tells you contacts are up eleven percent. It does not tell you that the same four words keep appearing, or that the customer is not actually angry about the delay — they are angry that nobody told them about it.</p>
         <p>So I start at the raw conversation and work backwards. By the time a problem reaches a meeting, everyone in the room is reading a summary of a summary.</p>
       </div>
