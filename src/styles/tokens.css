@@ -15,7 +15,7 @@
   --slate-soft: #71838a;
 
   --signal: #48e0bb;
-  --signal-deep: #117d6c;
+  --signal-deep: #0f7565; /* 4.92 on --paper. #117d6c was 4.42 — under AA. */
   --signal-soft: #d9f8ef;
   --sky: #79b7ff;
   --sky-soft: #dcecff;

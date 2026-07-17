@@ -181,25 +181,29 @@ const lenses = [
       <div class="wrap">
         <header class="section-head reveal">
           <div><span class="eyebrow">A worked diagnosis</span><h2>The question reaches support. The cause may sit somewhere else.</h2></div>
-          <div><p>Consider a customer asking, “Where is my order?” The answer can close one ticket. The pattern behind the question tells the business what needs to change.</p><span class="scenario-label">Illustrative operating pattern</span></div>
+          <div><p>A customer asks where their order is. You can answer that. You can answer it two hundred times. What you cannot do is answer your way out of the reason they had to ask.</p><span class="scenario-label">Illustrative operating pattern</span></div>
         </header>
 
+        {/* Four cards of identical length, each politely observing the same
+            thing, is what a generated page looks like. The teams do not see
+            the same amount — sales sees nothing at all — so the cards should
+            not be the same size or the same temperature. */}
         <div class="signal-map">
           <article class="signal-island signal-island--support reveal">
             <span>Support sees</span><h3>The same question, again.</h3>
-            <p>Agents repeat the same explanation and the queue grows, even when each conversation is handled well.</p>
+            <p>Two hundred conversations, each one handled well, each one ending with a customer who got their answer. By every measure the team is performing. The queue still grows.</p>
           </article>
           <article class="signal-island signal-island--sales reveal reveal-delay-1">
-            <span>Sales sees</span><h3>A promise that helped close the order.</h3>
-            <p>The offer sounds fast and simple, but the delivery expectation is not specific enough to survive the handoff.</p>
+            <span>Sales sees</span><h3>Nothing.</h3>
+            <p>The order closed. Nobody comes back to mention that the sentence which closed it — “quick delivery, don’t worry about it” — is now arriving in someone else’s inbox as a complaint.</p>
           </article>
           <article class="signal-island signal-island--ops reveal reveal-delay-2">
-            <span>Operations sees</span><h3>Status lives inside the team.</h3>
-            <p>The order is moving, but the customer cannot see the same information and ownership changes between steps.</p>
+            <span>Operations sees</span><h3>An order that is moving fine.</h3>
+            <p>Because it is. It is on schedule and the status is correct. It just lives somewhere the customer cannot look, and it changes hands twice on the way.</p>
           </article>
           <article class="signal-island signal-island--lead reveal reveal-delay-3">
-            <span>Management sees</span><h3>A support-volume problem.</h3>
-            <p>The pressure is visible in support. That does not mean it started there.</p>
+            <span>Management sees</span><h3>A headcount request.</h3>
+            <p>Support volume is up, so support needs people. It is the obvious read. It is also the one read that costs money and changes nothing.</p>
           </article>
           <div class="signal-map__core"><strong>Expectation + visibility + ownership</strong><small>The operating constraint</small></div>
         </div>
@@ -231,16 +235,19 @@ const lenses = [
     <section class="impact-section zone-paper">
       <div class="wrap">
         <header class="section-head reveal">
-          <div><span class="eyebrow">One system, several outcomes</span><h2>A useful fix improves more than the department where the problem appeared.</h2></div>
-          <p>The aim is not to optimize support at the expense of sales, or sales at the expense of operations. The change should strengthen the promise and the way the company delivers it.</p>
+          <div><span class="eyebrow">What that actually changed</span><h2>Three timed updates and one moved sentence. Here is who felt it — and who paid for it.</h2></div>
+          <p>Most fixes move a cost rather than remove it. Support goes quiet because operations quietly starts doing the chasing. The only honest test is whether the total work went down — not whether it moved somewhere you stopped measuring.</p>
         </header>
 
+        {/* Every department improving by exactly one tidy sentence is a
+            consultant's slide, not an outcome. Real changes have a loser.
+            Naming ours is the only reason to believe the rest. */}
         <div class="impact-system">
-          <article class="impact-petal impact-petal--support reveal"><span>Customer support</span><h3>Fewer avoidable contacts.</h3><p>Agents spend less time explaining information the journey should already provide.</p></article>
-          <article class="impact-petal impact-petal--sales reveal reveal-delay-1"><span>Sales</span><h3>A promise that survives the handoff.</h3><p>Expectation-setting becomes part of trust, not something operations has to repair later.</p></article>
-          <article class="impact-petal impact-petal--ops reveal reveal-delay-2"><span>Operations</span><h3>Work that is easier to own.</h3><p>Status, exceptions and responsibility are clearer across the complete flow.</p></article>
-          <article class="impact-petal impact-petal--lead reveal reveal-delay-3"><span>Leadership</span><h3>Better decisions from the same signals.</h3><p>Recurring demand becomes evidence for process, policy, product and capacity decisions.</p></article>
-          <div class="impact-core"><span>Shared result</span><strong>A clearer operating system</strong></div>
+          <article class="impact-petal impact-petal--support reveal"><span>Customer support</span><h3>The question mostly stops.</h3><p>Not because agents got faster. Because the customer already had the answer before they thought to ask for it.</p></article>
+          <article class="impact-petal impact-petal--sales reveal reveal-delay-1"><span>Sales</span><h3>The comfortable sentence goes away.</h3><p>“Quick delivery” becomes a specific number. That is a harder thing to say on a call — and it is the part of this that sales genuinely lost.</p></article>
+          <article class="impact-petal impact-petal--ops reveal reveal-delay-2"><span>Operations</span><h3>Three moments that belong to someone.</h3><p>Ownership stops being ambient and becomes a named person at a named point. That is new work. It is also why the rest of the work disappears.</p></article>
+          <article class="impact-petal impact-petal--lead reveal reveal-delay-3"><span>Leadership</span><h3>The headcount request never arrives.</h3><p>Not approved, not rejected — no longer a question. Which is a genuinely awkward win to present, because it looks like nothing happened.</p></article>
+          <div class="impact-core"><span>The net</span><strong>Less work overall. One team lost something.</strong></div>
         </div>
       </div>
     </section>
@@ -309,15 +316,40 @@ const lenses = [
           <div class="formula-proof__image"><Image src={formulaHome} alt="The live Formula4You specialist fragrance-commerce platform" widths={[520, 760, 1040]} sizes="(max-width: 900px) 100vw, 42vw" /></div>
           <div class="formula-proof__copy">
             <span class="proof-label">Verified live platform · founder-led work</span>
-            <h3>A market gap turned into a working business system.</h3>
-            <p>Formula4You proves a different part of the role: market diagnosis, participant journeys, onboarding, trust, operating rules, priorities and coordination across a live specialist platform.</p>
+            <h3>The other half of the job: deciding what gets built at all.</h3>
+            <p>Alpha Capital shows I can read a system from inside it. This shows the harder half — that when the decision is mine and there is nobody to escalate to, I still pick the boring correct thing over the impressive one.</p>
+            <p>Live, with real participants: who may list, what happens when a listing is wrong, what a buyer is owed, who fixes it. Operating rules are not documentation. They are what the business does at 2am when nobody is watching.</p>
             <p class="formula-proof__role">Founder — Business Growth, Customer Experience &amp; Platform Operations</p>
+
             <div class="cluster">
               <a class="btn btn--primary" href={withBase('/work/formula4you')}>Read the case</a>
               <a class="btn" href={external.formula4you} rel="noopener">Visit live platform ↗</a>
             </div>
           </div>
         </article>
+      </div>
+
+      {/* Ahmed worked with a lot of small Egyptian companies and kept no
+          records of any of it. The tempting move is a vague "10+ businesses"
+          line nobody can check. The stronger move is to say out loud that he
+          will not do that — because a reader who watches him refuse an
+          unverifiable number has a reason to believe the verifiable ones. */}
+      <div class="field-notes reveal">
+        <span class="proof-label">Unverifiable by design</span>
+        <h3>Before either of these, there were a lot of small Egyptian companies.</h3>
+        <div class="field-notes__grid">
+          <div class="field-notes__say">
+            <p>I kept no records. No contracts I can show you, no dashboards, no before-and-after. So I am not going to name them, and I am not going to attach a number to any of it — a figure I cannot source is just a guess in a better suit.</p>
+            <p>What survived is the pattern. Small companies break in remarkably consistent ways, and almost never the way the founder thinks they do:</p>
+          </div>
+          <ul class="field-notes__list">
+            <li>The process exists. It lives in one person’s head, and that person is the founder.</li>
+            <li>Nobody is confused about the goal. They are confused about who decides.</li>
+            <li>“Your prices are too high” almost always means “I don’t understand what I’m getting.”</li>
+            <li>Everyone already knows what is broken. There is no room in which saying it out loud is safe.</li>
+          </ul>
+        </div>
+        <p class="field-notes__rule">That is not evidence, and I will not dress it up as evidence. It is where the instinct came from — and it is why the first thing I ask for is the raw conversations, not the summary.</p>
       </div>
     </div>
   </section>
@@ -350,8 +382,14 @@ const lenses = [
         <blockquote>When the same question appears hundreds of times, I do not see hundreds of separate problems. I see one part of the system speaking through customers.</blockquote>
       </div>
       <div class="about-strip__copy reveal reveal-delay-1">
-        <p>My customer-facing foundation still shapes how I work. It helps me connect customer behaviour, team performance, operating processes and wider business decisions instead of treating each problem in isolation.</p>
-        
+        {/* This paragraph used to be "my customer-facing foundation helps me
+            connect customer behaviour, team performance, operating processes
+            and wider business decisions" — four nouns in a coat. It said
+            nothing that could be false, which is another way of saying it
+            said nothing. */}
+        <p>I learned this in the least glamorous way available: two years of being complained at, politely and impolitely, by people who were usually right.</p>
+        <p>You cannot get this view from a dashboard. A dashboard tells you contacts are up eleven percent. It does not tell you that the same four words keep appearing, or that the customer is not actually angry about the delay — they are angry that nobody told them about it.</p>
+        <p>So I start at the raw conversation and work backwards. By the time a problem reaches a meeting, everyone in the room is reading a summary of a summary.</p>
       </div>
     </div>
   </section>
@@ -381,7 +419,7 @@ const lenses = [
   /* The bottom padding is not whitespace — it is clearance. `.hero::after` is
      the paper curve, and it rises ~85px above the hero's own bottom edge. The
      index has to end above that line or the curve eats the last three labels. */
-  .hero { position: relative; min-height: 660px; padding: 6.5rem 0 7.25rem; overflow: hidden; color: var(--white); background: radial-gradient(circle at 84% 22%, rgba(121,183,255,.18), transparent 24rem), radial-gradient(circle at 7% 80%, rgba(72,224,187,.12), transparent 25rem), linear-gradient(135deg,#04151e 0%,#082632 63%,#0a303a 100%); }
+  .hero { position: relative; min-height: 660px; padding: 6.5rem 0 7.9rem; overflow: hidden; color: var(--white); background: radial-gradient(circle at 84% 22%, rgba(121,183,255,.18), transparent 24rem), radial-gradient(circle at 7% 80%, rgba(72,224,187,.12), transparent 25rem), linear-gradient(135deg,#04151e 0%,#082632 63%,#0a303a 100%); }
   .hero::before { content: ''; position: absolute; inset: 0; opacity: .19; background-image: radial-gradient(rgba(255,255,255,.28) .7px, transparent .7px); background-size: 24px 24px; mask-image: radial-gradient(circle at 36% 36%,black,transparent 66%); }
   .hero::after { content: ''; position: absolute; z-index: 3; left: -5%; right: -5%; bottom: -95px; height: 180px; border-radius: 52% 48% 0 0 / 58% 65% 0 0; background: var(--paper); transform: rotate(-1.2deg); box-shadow: 0 -22px 45px rgba(0,0,0,.08); }
   /* The copy column was 1.02fr against a 450px minimum, which left the headline
@@ -396,8 +434,8 @@ const lenses = [
   .hero__actions { margin-top: 2rem; }
   /* The page's shape, on the first screen. Quiet enough not to compete with
      the claim; complete enough to answer "how much is here?" */
-  .hero__index { display: flex; flex-wrap: wrap; gap: .35rem 1.6rem; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,.12); }
-  .hero__index a { display: flex; align-items: baseline; gap: .5rem; color: rgba(255,255,255,.62); text-decoration: none; font: 700 .72rem var(--font-head); transition: color var(--dur-fast) var(--ease); }
+  .hero__index { display: flex; flex-wrap: wrap; gap: 0 1.6rem; margin-top: 1.6rem; padding-top: 1.2rem; border-top: 1px solid rgba(255,255,255,.12); }
+  .hero__index a { display: flex; align-items: baseline; gap: .5rem; padding: .5rem 0; color: rgba(255,255,255,.62); text-decoration: none; font: 700 .72rem var(--font-head); transition: color var(--dur-fast) var(--ease); }
   .hero__index a:hover { color: var(--signal); }
   .hero__index span { color: var(--signal); font-size: .58rem; letter-spacing: .08em; font-variant-numeric: tabular-nums; }
   .system-lens { position: relative; min-height: 430px; }
@@ -421,23 +459,42 @@ const lenses = [
   .journey__line { fill: none; stroke: url(#journey-gradient); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 8 14; animation: dash 22s linear infinite; }
   .journey__spine circle { fill: var(--paper); stroke-width: 3; }
   .signal-section, .impact-section { position: relative; z-index: 3; padding: 2.2rem 0 2.8rem; }
-  .scenario-label { display: inline-block; margin-top: .9rem; color: var(--slate-soft); font: 750 .62rem var(--font-head); letter-spacing: .1em; text-transform: uppercase; }
-  .signal-map { position: relative; min-height: 470px; }
-  .signal-island { position: absolute; z-index: 3; width: 265px; min-height: 150px; padding: 1.4rem; border: 1px solid var(--paper-line); background: rgba(255,255,255,.77); box-shadow: var(--shadow-soft); backdrop-filter: blur(12px); }
+  .scenario-label { display: inline-block; margin-top: .9rem; color: #5c6e75; /* not --slate-soft: that token is 3.47 here. It stays as-is because the night zones need it light. */ font: 750 .62rem var(--font-head); letter-spacing: .1em; text-transform: uppercase; }
+  /* THE FOUR-ACTOR DIAGRAM — used twice: what each team sees, then what each
+     team felt. Both share this geometry on purpose. It is the same four people
+     before and after, and the rhyme is the argument.
+
+     The islands used to be absolutely positioned at fixed percentages, 265px
+     wide and capped at 150px tall. That is room for roughly twenty words — so
+     every card said twenty words, in the same shape, at the same temperature.
+     The layout was writing the copy, and it was writing it badly. Real
+     sentences of unequal length overflowed and the cards landed on top of each
+     other.
+
+     Now: a 2×2 grid that grows with whatever is written in it. The inner
+     padding is load-bearing, not decoration — the core sits exactly on the grid
+     intersection, so text has to be pushed clear of it or the two collide. */
+  .signal-map, .impact-system { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; padding: 0 2rem; align-items: start; }
+  /* The corner radii are px, not percentages, and that is the whole fix.
+     Percentages scale with the box, so every reflow moved the corner and the
+     text fell outside somewhere new — 1440 passed while 390 failed, then 390
+     passed and 560 failed. Fixed px corners cut a known amount, so one padding
+     value clears them at every width instead of at the width I screenshotted. */
+  .signal-island { position: relative; z-index: 3; min-height: 190px; padding: 3rem 4.25rem; border: 1px solid var(--paper-line); background: rgba(255,255,255,.77); box-shadow: var(--shadow-soft); backdrop-filter: blur(12px); }
   .signal-island span { color: var(--signal-deep); font: 850 .58rem var(--font-head); letter-spacing: .14em; text-transform: uppercase; }
-  .signal-island h3 { margin: 1.7rem 0 .65rem; font-size: 1.35rem; }
-  .signal-island p { color: var(--ink-soft); font-size: .84rem; }
-  .signal-island--support { left: 2%; top: 3%; border-radius: 64% 36% 54% 46% / 43% 60% 40% 57%; }
-  .signal-island--sales { right: 4%; top: 13%; border-radius: 38% 62% 66% 34% / 61% 38% 62% 39%; }
+  .signal-island h3 { margin: 1.5rem 0 .65rem; font-size: 1.35rem; }
+  .signal-island p { color: var(--ink-soft); font-size: .84rem; line-height: 1.6; }
+  .signal-island--support { border-radius: 148px 58px 112px 92px / 90px 62px 46px 86px; }
+  .signal-island--sales { border-radius: 56px 146px 96px 116px / 60px 88px 84px 48px; }
   .signal-island--sales span { color: #c84b38; }
-  .signal-island--ops { left: 12%; bottom: 0; border-radius: 43% 57% 34% 66% / 55% 43% 57% 45%; }
+  .signal-island--ops { border-radius: 104px 92px 54px 150px / 48px 84px 90px 62px; }
   .signal-island--ops span { color: #286cb5; }
-  .signal-island--lead { right: 11%; bottom: 1%; color: var(--white); border-color: transparent; border-radius: 59% 41% 44% 56% / 37% 63% 37% 63%; background: var(--night-soft); box-shadow: var(--shadow-deep); }
+  .signal-island--lead { color: var(--white); border-color: transparent; border-radius: 92px 118px 144px 56px / 86px 46px 62px 90px; background: var(--night-soft); box-shadow: var(--shadow-deep); }
   .signal-island--lead span { color: var(--acid); }
   .signal-island--lead p { color: rgba(255,255,255,.6); }
-  .signal-map__core { position: absolute; z-index: 5; left: 50%; top: 48%; width: 180px; height: 180px; display: grid; place-content: center; padding: 1.5rem; text-align: center; border-radius: 50%; background: var(--acid); box-shadow: 0 24px 58px rgba(77,105,27,.2),0 0 0 18px rgba(201,243,111,.15); transform: translate(-50%,-50%); }
+  .signal-map__core { position: absolute; z-index: 5; left: 50%; top: 50%; width: 180px; height: 180px; display: grid; place-content: center; padding: 1.4rem; text-align: center; border-radius: 50%; background: var(--acid); box-shadow: 0 24px 58px rgba(77,105,27,.2),0 0 0 18px rgba(201,243,111,.15); transform: translate(-50%,-50%); }
   .signal-map__core strong { font: 800 1rem/1.25 var(--font-head); }
-  .signal-map__core small { margin-top: .5rem; color: rgba(7,26,36,.58); font: 800 .55rem var(--font-head); letter-spacing: .12em; text-transform: uppercase; }
+  .signal-map__core small { margin-top: .5rem; color: rgba(7,26,36,.72); font: 800 .55rem var(--font-head); letter-spacing: .12em; text-transform: uppercase; }
   .decision-section { position: relative; z-index: 4; padding: 1.4rem 0; background: transparent; }
   .decision-shell { padding: clamp(2.6rem,6vw,5rem); border-radius: 72px 22px 82px 30px; background: radial-gradient(circle at 8% 45%,rgba(72,224,187,.12),transparent 20rem),radial-gradient(circle at 90% 80%,rgba(121,183,255,.13),transparent 23rem),var(--night); box-shadow: var(--shadow-deep); }
   .decision-path { position: relative; display: grid; grid-template-columns: repeat(6,1fr); gap: 1rem; }
@@ -453,18 +510,33 @@ const lenses = [
   .decision-path p { margin-top: .6rem; color: var(--slate); font-size: .74rem; line-height: 1.6; }
   .decision-note { max-width: 900px; margin: 2.5rem auto 0; padding: 1.2rem 1.5rem; color: var(--ink); border-radius: 28px 9px 30px 12px; background: var(--acid); text-align: center; font-size: .86rem; }
   .impact-section { padding-top: 2.6rem; padding-bottom: 3rem; }
-  .impact-system { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; padding: 0 3rem; }
-  .impact-petal { position: relative; min-height: 172px; padding: 1.7rem; box-shadow: var(--shadow-soft); }
-  .impact-petal span { color: rgba(7,26,36,.49); font: 850 .58rem var(--font-head); letter-spacing: .14em; text-transform: uppercase; }
+  .impact-petal { position: relative; min-height: 190px; padding: 3rem 4.25rem; box-shadow: var(--shadow-soft); }
+  .impact-petal span { color: rgba(7,26,36,.68); font: 850 .58rem var(--font-head); letter-spacing: .14em; text-transform: uppercase; }
   .impact-petal h3 { margin: 2rem 0 .7rem; font-size: 1.65rem; }
   .impact-petal p { color: var(--ink-soft); font-size: .84rem; }
-  .impact-petal--support { border-radius: 70% 30% 55% 45% / 39% 66% 34% 61%; background: var(--signal-soft); }
-  .impact-petal--sales { border-radius: 39% 61% 69% 31% / 64% 38% 62% 36%; background: var(--coral-soft); }
-  .impact-petal--ops { border-radius: 40% 60% 36% 64% / 57% 39% 61% 43%; background: var(--sky-soft); }
-  .impact-petal--lead { border-radius: 62% 38% 47% 53% / 42% 61% 39% 58%; background: #ece4ff; }
-  .impact-core { position: absolute; z-index: 4; left: 50%; top: 50%; width: 178px; height: 178px; display: grid; place-content: center; padding: 1.5rem; color: var(--white); border-radius: 52% 48% 55% 45% / 43% 60% 40% 57%; background: var(--night-soft); box-shadow: 0 25px 60px rgba(7,26,36,.28),0 0 0 17px rgba(7,26,36,.04); text-align: center; transform: translate(-50%,-50%); }
+  .impact-petal--support { border-radius: 150px 60px 108px 94px / 88px 64px 44px 90px; background: var(--signal-soft); }
+  .impact-petal--sales { border-radius: 58px 148px 92px 118px / 62px 90px 86px 46px; background: var(--coral-soft); }
+  .impact-petal--ops { border-radius: 108px 90px 56px 146px / 46px 86px 88px 64px; background: var(--sky-soft); }
+  .impact-petal--lead { border-radius: 94px 116px 150px 58px / 88px 44px 64px 92px; background: #ece4ff; }
+  .impact-core { position: absolute; z-index: 4; left: 50%; top: 50%; width: 196px; height: 196px; display: grid; place-content: center; padding: 1.5rem; color: var(--white); border-radius: 52% 48% 55% 45% / 43% 60% 40% 57%; background: var(--night-soft); box-shadow: 0 25px 60px rgba(7,26,36,.28),0 0 0 17px rgba(7,26,36,.04); text-align: center; transform: translate(-50%,-50%); }
   .impact-core span { color: var(--signal); font: 850 .55rem var(--font-head); letter-spacing: .13em; text-transform: uppercase; }
-  .impact-core strong { margin-top: .7rem; font: 780 1.1rem/1.25 var(--font-head); }
+  .impact-core strong { margin-top: .55rem; font: 780 .93rem/1.32 var(--font-head); }
+
+  /* Clearing the core, take two. Padding the text away from it worked but
+     stretched every card into a flat lozenge — the organic radii are
+     percentages, so a wide short box renders as an ellipse and the islands
+     stopped reading as islands.
+
+     Instead the cards keep their proportions and move outward, which opens a
+     gap down the middle for the core to live in. The width is derived, not
+     guessed: each card gives up 136px so the pair leaves ≥272px between them,
+     and the core is 196px. It holds at every column width rather than at the
+     one I happened to screenshot. */
+  .signal-island, .impact-petal { max-width: calc(100% - 8.5rem); }
+  .signal-island--support, .signal-island--ops,
+  .impact-petal--support, .impact-petal--ops { justify-self: start; }
+  .signal-island--sales, .signal-island--lead,
+  .impact-petal--sales, .impact-petal--lead { justify-self: end; }
   .capability-section { padding: 3rem 0 3.5rem; }
   .capability-list { max-width: 1000px; }
 
@@ -524,12 +596,25 @@ const lenses = [
   .formula-proof__image img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
   .formula-proof__copy { padding: 2rem; }
   .formula-proof h3 { margin: 1rem 0 .75rem; font-size: 1.9rem; }
-  .formula-proof p { color: var(--slate); font-size: .86rem; }
+  .formula-proof p { margin-bottom: .8rem; color: var(--slate); font-size: .86rem; line-height: 1.62; }
   .formula-proof__role { margin: 1rem 0 1.5rem; color: var(--signal) !important; font: 800 .7rem var(--font-head); }
   .formula-proof .btn { min-height: 42px; font-size: .72rem; }
   .close-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2.5rem; }
   .close-note { max-width: 60ch; margin-top: 1.8rem; color: var(--slate-soft); font-size: .82rem; }
   .alpha-note { margin-top: 1.6rem !important; padding: 1rem 1.2rem; border-left: 3px solid var(--signal-deep); background: rgba(17,125,108,.07); border-radius: 0 14px 14px 0; font-size: .8rem !important; }
+
+  /* Field notes — deliberately the plainest block on the page. It is the one
+     section with nothing to show, so dressing it up would undercut the point. */
+  .field-notes { margin-top: 1.8rem; padding: clamp(1.6rem,3vw,2.6rem); border: 1px dashed var(--hairline-strong); border-radius: 30px 66px 26px 70px; background: rgba(255,255,255,.03); }
+  .field-notes h3 { max-width: 30ch; margin: .9rem 0 1.6rem; color: var(--chalk); font-size: clamp(1.4rem,2.2vw,2.05rem); }
+  .field-notes__grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 1.4rem 2.6rem; align-items: start; }
+  .field-notes__say p { margin-bottom: .9rem; color: var(--slate); font-size: .87rem; line-height: 1.68; }
+  .field-notes__say p:last-child { margin-bottom: 0; }
+  .field-notes__list { display: grid; gap: .7rem; }
+  .field-notes__list li { position: relative; padding-left: 1.35rem; color: var(--chalk); font-size: .85rem; line-height: 1.55; }
+  .field-notes__list li::before { content: ''; position: absolute; left: 0; top: .62em; width: .42rem; height: .42rem; border-radius: 50%; background: var(--acid); }
+  .field-notes__rule { max-width: 78ch; margin-top: 1.7rem; padding-top: 1.3rem; border-top: 1px solid var(--hairline); color: var(--slate-soft); font-size: .82rem; line-height: 1.6; }
+  @media (max-width: 780px) { .field-notes__grid { grid-template-columns: 1fr; } }
   .lenses-section { padding: 3.6rem 0; }
   .lens-list { border-top: 1px solid var(--paper-line); }
   .lens-row { display: grid; grid-template-columns: 55px minmax(250px,.72fr) minmax(320px,1fr); gap: 1.5rem; padding: 1.4rem 0; border-bottom: 1px solid var(--paper-line); align-items: baseline; }
@@ -544,7 +629,8 @@ const lenses = [
   .about-strip { padding: 6rem 0; background: radial-gradient(circle at 10% 40%,rgba(187,165,255,.13),transparent 22rem),var(--night); }
   .about-strip__grid { display: grid; grid-template-columns: 1.2fr .65fr; gap: clamp(3rem,9vw,8rem); align-items: center; }
   .about-strip blockquote { margin-top: 1.4rem; font: italic clamp(2rem,3.5vw,3.8rem)/1.15 var(--font-serif); letter-spacing: -.025em; }
-  .about-strip__copy p { color: var(--slate); }
+  .about-strip__copy p { margin-bottom: .95rem; color: var(--slate); line-height: 1.7; }
+  .about-strip__copy p:last-child { margin-bottom: 0; color: var(--chalk); }
   .about-strip__copy a { display: inline-block; margin-top: 1.4rem; color: var(--signal); font: 850 .82rem var(--font-head); text-decoration: none; }
   .routes-section { padding: 3.4rem 0 4.5rem; }
   .route-fork { position: relative; display: grid; grid-template-columns: 1fr 135px 1fr; gap: 1.2rem; align-items: center; }
@@ -561,6 +647,14 @@ const lenses = [
   @keyframes orbit-shape { to { border-radius: 54% 46% 44% 56% / 47% 57% 43% 53%; transform: rotate(-7deg) scale(1.02); } }
   @keyframes core-pulse { 50% { box-shadow: 0 18px 45px rgba(0,0,0,.32),0 0 0 20px rgba(201,243,111,.04); transform: translate(-50%,-50%) scale(1.03); } }
   @media (max-width: 1020px) {
+    /* One column from here down. Two columns with a core in the middle needs
+       roughly 1100px to breathe; below that each card was squeezed to 200px
+       wide and 574px tall — a column of confetti, not a card. Stacked, the
+       core drops to the bottom and nothing has to dodge it. */
+    .signal-map, .impact-system { grid-template-columns: 1fr; gap: 1rem; padding: 0 0 150px; }
+    .signal-island, .impact-petal { max-width: none; min-height: auto; padding: 2.2rem 3.25rem; }
+    .signal-island:nth-child(even), .impact-petal:nth-child(even) { width: 94%; margin-left: 6%; }
+    .signal-map__core, .impact-core { top: auto; bottom: 0; width: 134px; height: 134px; transform: translate(-50%,0); }
     .hero { min-height: auto; }
     .hero__grid { grid-template-columns: 1fr; }
     .system-lens { width: min(100%,620px); margin-inline: auto; }
@@ -583,16 +677,10 @@ const lenses = [
     .orbit-node--sales { right: -1%; }
     .signal-section, .impact-section { padding-top: 2.4rem; }
     .journey__spine { opacity: .28; }
-    .signal-map { display: grid; gap: 1rem; min-height: auto; padding-bottom: 155px; }
-    .signal-island { position: relative; inset: auto !important; width: 100%; min-height: 150px; padding: 1.5rem; }
-    .signal-island:nth-child(even) { width: 94%; margin-left: 6%; }
+    /* One column: the core drops to the bottom, so nothing has to dodge it. */
     .signal-map__core { top: auto; bottom: 0; width: 128px; height: 128px; transform: translate(-50%,0); }
     .decision-shell { padding: 2.3rem 1.3rem; border-radius: 44px 18px 50px 21px; }
     .decision-path { grid-template-columns: 1fr 1fr; }
-    .impact-system { grid-template-columns: 1fr; padding: 0 0 160px; }
-    .impact-petal { min-height: 175px; }
-    .impact-petal:nth-child(even) { width: 94%; margin-left: 6%; }
-    .impact-core { top: auto; bottom: 0; width: 135px; height: 135px; transform: translate(-50%,0); }
     .capability-row { grid-template-columns: 1fr; gap: 1rem; }
     .capability-row ul { grid-column: auto; }
     .alpha-proof { border-radius: 48px 18px 54px 21px; }
