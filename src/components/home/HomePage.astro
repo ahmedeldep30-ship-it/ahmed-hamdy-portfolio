@@ -184,75 +184,169 @@ const lenses = [
 
     <section class="signal-section zone-paper">
       <div class="wrap">
+        {/* This whole section used to run on a made-up scenario labelled
+            "Illustrative operating pattern" — a hypothetical about a late
+            parcel, rendered in three beautiful diagrams across a third of the
+            page. It explained a concept and proved nothing, and a hiring
+            manager reading "illustrative" reads "this did not happen".
+
+            It is now one real category — withdrawals, at the fintech Ahmed
+            managed support for — followed from the first ticket to the status
+            mapping that was lying. The diagram survives because the case is
+            genuinely four departments looking at one event and each seeing
+            something that is true and useless. */}
         <header class="section-head reveal">
-          <div><span class="eyebrow">A worked diagnosis</span><h2>The question reaches support. The cause may sit somewhere else.</h2></div>
-          <div><p>A customer asks where their order is. You can answer that. You can answer it two hundred times. What you cannot do is answer your way out of the reason they had to ask.</p><span class="scenario-label">Illustrative operating pattern</span></div>
+          <div><span class="eyebrow">One category, followed all the way down</span><h2>Four teams looked at the same withdrawal. All four were right.</h2></div>
+          <div><p>“I made a withdrawal yesterday and the money still has not arrived. Where did my money go?” — near enough the same sentence, hundreds of times. Read as a delay, it is the payments team’s problem and support can only apologise. The transfers were mostly on time.</p><span class="scenario-label">Alpha Capital Group · UK fintech · support team of 13 on Zendesk</span></div>
         </header>
 
-        {/* Four cards of identical length, each politely observing the same
-            thing, is what a generated page looks like. The teams do not see
-            the same amount — sales sees nothing at all — so the cards should
-            not be the same size or the same temperature. */}
         <div class="signal-map">
           <article class="signal-island signal-island--support reveal">
-            <span>Support sees</span><h3>The same question, again.</h3>
-            <p>Two hundred conversations, each one handled well, each one ending with a customer who got their answer. By every measure the team is performing. The queue still grows.</p>
+            <span>Support sees</span><h3>The same person, twice.</h3>
+            <p>Not just the same question — the same customer coming back to ask it again, because the first answer gave them nothing they could act on. Volume is the visible cost. Repeat contact is the real one.</p>
           </article>
           <article class="signal-island signal-island--sales reveal reveal-delay-1">
-            <span>Sales sees</span><h3>Nothing.</h3>
-            <p>The order closed. Nobody comes back to mention that the sentence which closed it — “quick delivery, don’t worry about it” — is now arriving in someone else’s inbox as a complaint.</p>
+            <span>Payments sees</span><h3>A transaction that completed.</h3>
+            <p>Because the record says it did. The status went to Completed, the settlement looks ordinary, and one late transfer at a time is indistinguishable from a normal bank delay.</p>
           </article>
           <article class="signal-island signal-island--ops reveal reveal-delay-2">
-            <span>Operations sees</span><h3>An order that is moving fine.</h3>
-            <p>Because it is. It is on schedule and the status is correct. It just lives somewhere the customer cannot look, and it changes hands twice on the way.</p>
+            <span>Engineering sees</span><h3>No error at all.</h3>
+            <p>The provider returned success and the system recorded success. Nothing threw, nothing alerted, nothing failed. That is exactly why it survived so long.</p>
           </article>
           <article class="signal-island signal-island--lead reveal reveal-delay-3">
             <span>Management sees</span><h3>A headcount request.</h3>
-            <p>Support volume is up, so support needs people. It is the obvious read. It is also the one read that costs money and changes nothing.</p>
+            <p>Support volume is up, so support needs people. It is the obvious read, and the only one that costs real money while changing nothing.</p>
           </article>
-          <div class="signal-map__core"><strong>Expectation + visibility + ownership</strong><small>The operating constraint</small></div>
+          <div class="signal-map__core"><strong>The record and the reality had drifted apart</strong><small>Everyone downstream trusted the record</small></div>
         </div>
       </div>
     </section>
 
-    <section class="decision-section zone-night" id="how-home">
-      <div class="wrap decision-shell">
+    {/* THE CASE.
+
+        This replaces a six-step method list — Read the raw / Find the promise /
+        Ask what disappears / Write it down / Hand it over / Check honestly. Six
+        verbs are a claim about how someone thinks. A case is the evidence, and
+        it does the method's job without asking anyone to take it on faith.
+
+        Every beat here is Ahmed's own account, in his own detail. Nothing is
+        invented and nothing is rounded up. The one place a number appears —
+        five hundred people producing nine hundred contacts — is his arithmetic
+        about repeat rate, not a measurement from a specific month, and it is
+        framed as the mechanism rather than a result. */}
+    <section class="case-section zone-night" id="how-home">
+      <div class="wrap case-shell">
         <header class="section-head reveal">
-          <div><span class="eyebrow">From signal to decision</span><h2>Trace the pattern before fixing the symptom.</h2></div>
-          <p>My role sits between evidence and execution: make the problem clear, connect the people involved and define a move the business can defend.</p>
+          <div><span class="eyebrow">The same failure, seven times</span><h2>A company does not run on what is happening. It runs on what it has written down about what is happening.</h2></div>
+          <p>Every expensive problem I have found started as a small gap between those two. Here is one category — withdrawals — followed from the first ticket down to the line that was lying. The beats are in the order I found them.</p>
         </header>
 
-        {/* These were Understand / Diagnose / Prioritize / Define / Coordinate /
-            Measure — the same six words every consultant on earth prints. Same
-            structure, but each one now says something only he would say. */}
-        <ol class="decision-path reveal">
-          <li><span>01</span><h3>Read the raw</h3><p>The actual conversations, not the summary. A summary is already somebody's interpretation of what matters.</p></li>
-          <li><span>02</span><h3>Find the promise</h3><p>Someone upstream promised, implied, or failed to mention something. That is usually where it starts.</p></li>
-          <li><span>03</span><h3>Ask what disappears</h3><p>Before asking what to build: what stops existing if we change one sentence, one field, one owner?</p></li>
-          <li><span>04</span><h3>Write it down</h3><p>The outcome, the rule, the owner, the signal. If it is not written, it is a conversation, not a decision.</p></li>
-          <li><span>05</span><h3>Hand it over</h3><p>I brief the specialist who builds it. I do not pretend to be that specialist.</p></li>
-          <li><span>06</span><h3>Check honestly</h3><p>Against a baseline agreed beforehand. If it did not move, I say it did not move.</p></li>
-        </ol>
-        <div class="decision-note reveal"><strong>In this case the answer was three timed updates and one sentence moved earlier on the page. Not a chatbot, not more agents, not a tracking product. The cheapest thing that removed the reason to ask.</strong></div>
+        <div class="case-list reveal">
+          <Disclosure index="01" tone="night"
+            title="The answer was not faster replies."
+            teaser="What the customer had lost was not their money. It was any way of knowing where it was.">
+            <p>All they could see was <strong>Processing</strong>. Which does not answer: is it still with you? Has it gone to the bank? Is the bank working on it? What is the difference between Processing and Completed? And if something has gone wrong, who is watching it?</p>
+            <p>A person who cannot see their money and cannot see who is holding it does not experience a normal processing window. They experience a disappearance.</p>
+          </Disclosure>
+
+          <Disclosure index="02" tone="night"
+            title="Repeat contact is the tell, and nobody counts it."
+            teaser="Five hundred people with one unanswered question do not file five hundred tickets. They file nine hundred.">
+            <p>There are two costs in a question like this, and the visible one is the smaller one. The visible cost is ticket volume. The expensive one is that the same customer comes back — once, twice — because the first answer gave them nothing they could act on.</p>
+            <p>So I do not read a repeated question as <em>the customer did not read the FAQ</em>. Sometimes it means the product is not giving them enough certainty to stop asking. Which is a different problem, with a different owner, and no amount of headcount touches it.</p>
+          </Disclosure>
+
+          <Disclosure index="03" tone="night"
+            title="I wrote the article. I also said the article was a patch."
+            teaser="The real fix was not in the help centre. It was a status timeline inside the product.">
+            <p>I wrote the content — what the stages of a withdrawal are, what each means, how long each takes. That helps. It is also a patch: you are explaining a screen instead of fixing it.</p>
+            <p>The fix I proposed was in the product. Show the customer the actual timeline — <strong>Request received → Under review → Sent to payment provider → Completed</strong> — with the expected time on each stage and what happens next.</p>
+            <p>Afterwards the question did not disappear. But the number of customers coming back a second time dropped clearly, and that mattered more to me than first-contact volume. <strong>First contact tells you how many people asked. Repeat contact tells you how many people you failed to answer.</strong></p>
+          </Disclosure>
+
+          <Disclosure index="04" tone="night"
+            title="I did not write the easy article first. I wrote the expensive one."
+            teaser="Ranked by repeat rate, handle time, escalation rate and how angry people were — not by how easy it was to write.">
+            <p>Withdrawal questions were one of the largest contact drivers, but that is not why I started there. I started there because those tickets also had the highest repeat rate, the longest handle time, the highest escalation rate and the angriest customers in the queue. Fixing that one question would not only reduce volume — it would take pressure off the team and stop cases reaching supervisors.</p>
+            <p>And I wrote it backwards from the usual FAQ. Not a definition first, but the question actually in the customer’s head: <em>“Withdrawal late? Before you worry — find out which stage your request is at.”</em></p>
+            <p>Instead of <em>“Completed means the transaction was successfully processed by the payment provider”</em>, it said: <strong>Completed means we have finished our side. Your bank may still need extra time before the amount shows in your account.</strong></p>
+            <p>Then the part most FAQs leave out entirely — <strong>when should you contact us?</strong> An article that explains a status but never tells a person what to do has not finished its job. So it named the cases: if the normal window has not passed, wait. If it has, send the transaction ID. If it says Completed and the money is not there, check your statement, not your notifications.</p>
+          </Disclosure>
+
+          <Disclosure index="05" tone="night"
+            title="“You are a scam company and I will expose you everywhere.”"
+            teaser="The money never reached us. Telling him that would have been true, and useless.">
+            <p>That was the first message. The standard reply — <em>“We apologise for the inconvenience, please send the transaction ID”</em> — would have made it worse. It answers the procedure and ignores the person, and he would have heard a template.</p>
+            <p>What I sent instead: <em>“I understand that what you can see right now is that the amount left your account and the service did not happen — and it makes sense that it feels like your money is gone. Let me check the actual transaction rather than give you a general answer. Send me the last four digits of the payment method and roughly when it happened, and I will tell you whether the amount was really taken or whether it is a temporary hold from your bank, and what happens next.”</em></p>
+            <p>I did not tell him he was wrong and I did not start by defending the company. The first thing to give back to someone in that state is not an apology — it is the sense that somebody has understood the problem and owns it.</p>
+            <p>It was an <strong>authorisation hold</strong>. The transaction had failed before completing; the money never reached us at all. The bank had simply reserved it.</p>
+            <p>The useless version of that answer is <em>“that is your bank’s problem, call your bank.”</em> What I sent was: the amount did not reach us, here is the transaction reference and its status so you do not have to explain from zero if you call them, this normally releases automatically within the bank’s window — and if it has not come back by that date, reply here and I will escalate it to the payments team.</p>
+            <p>He came back two days later to confirm it had returned, and apologised for how he had opened. The apology is not the win. The win is moving someone from <em>my money has vanished and nobody is responsible</em> to: this is what happened, this person is holding it, this is when it resolves, and this is what happens if it does not.</p>
+          </Disclosure>
+
+          <Disclosure index="06" tone="night"
+            title="Then I got the team. The first thing I changed was not the scripts."
+            teaser="It was the categories — because every decision after that is made on top of them.">
+            <p>Not headcount, not SLAs, not macros. Ticket taxonomy and problem ownership.</p>
+            <p>What I inherited was: Payment Issue. Technical Issue. Account Issue. Other. Categories that make a report look organised and teach you nothing. <strong>Payment Issue</strong> contained late withdrawals, deposits not showing, declined transactions, duplicate charges, temporary bank holds, wrong beneficiary details, and a problem with one specific provider. In the report, all of that was one bar — so we could not tell whether the problem was the product, the bank, the provider or our own instructions.</p>
+            <p>I rebuilt it so every ticket carried: the reason for contact, the actual cause after investigation, the product or feature affected, the stage of the customer journey, the department that owns the origin, and whether the contact was preventable at all.</p>
+            <p><strong>Reason for contact is not the same thing as cause, and the difference is where the money is.</strong> A customer writes in because a withdrawal is late. Investigation shows their bank details were incomplete. Log it as “late withdrawal” and you go and put pressure on the payments team — while the real problem is sitting in a data-entry screen.</p>
+            <p>I started with categories because every decision downstream stands on them. If the data says thirty per cent payment problems but not which kind, I cannot tell you whether to hire agents, fix a bug, change a sentence in the product or renegotiate with a provider. I would just be guessing with a chart open.</p>
+          </Disclosure>
+
+          <Disclosure index="07" tone="night"
+            title="Every number was green. The customer was not."
+            teaser="First response time was excellent because agents were replying with nothing.">
+            <p>Metrics said the team was performing; the experience said otherwise. First response time was excellent. Tickets resolved was high. Then I read what the replies actually said. <em>“We have received your request and it is under review.”</em> Sent fast, SLA met, zero information given.</p>
+            <p>Some tickets were closed early to bring the backlog down. The customer would reply and the ticket reopened. Visible backlog low; reopen rate and repeat contact rate both high.</p>
+            <p>And the macros were not unified, so the same problem got three different answers from three agents. One said two to three days. One said five. One told the customer to contact their bank immediately. <strong>A customer who writes in twice and gets two different answers has not received two answers. They have received evidence that nobody knows.</strong></p>
+            <p>So I stopped measuring adherence and started reviewing the decision: did the agent reach the correct information, did they explain it in a way this customer could use, did they name the next step, and was the cause recorded so it stops happening? An agent can be perfectly polite, hit every required phrase, and still send someone in the wrong direction and leave the problem with no owner.</p>
+            <p>And I separated <strong>ticket resolution</strong> from <strong>problem resolution</strong>. An agent can close a ticket while the problem stays exactly where it is and produces a hundred more tomorrow. My job was not to confirm tickets were closed. It was to know why they opened.</p>
+          </Disclosure>
+
+          <Disclosure index="08" tone="night"
+            title="And then: “Completed” did not mean completed."
+            teaser="We were telling customers their money had arrived. It had not.">
+            <p>A small number of withdrawals were showing <strong>Completed</strong>, and some of those customers were telling us the money had not arrived. One at a time, each case is explainable as an ordinary bank delay. That is exactly why it survived. It only becomes visible if you refuse to look at them one at a time.</p>
+            <p>Grouped, there was a pattern: all inside one time window, all on the same payment provider, and all with the status flipping to Completed suspiciously soon after the request was sent.</p>
+            <p>So I did not escalate nine separate tickets. I wrote one incident summary — customers affected, total amounts, timing of each transaction, our status, the provider’s status, expected behaviour against actual. Then Payments Operations, to check the settlement files. Then Engineering, for the webhook and the status mapping. Then Finance, to confirm whether the money had actually left the settlement account.</p>
+            <p>The cause: our system was treating the provider’s first response as final success. That response means <em>accepted for processing</em>. It does not mean the transfer happened. We had collapsed two different things into one word — <strong>accepted for processing is not successfully settled</strong>. A tiny percentage of transactions, and the most dangerous thing in the queue, because we were telling people their money had arrived while it was still in flight.</p>
+            <p>Three fixes: the status only becomes Completed after final settlement confirmation; a real intermediate state — <strong>Sent to provider</strong> — so the truth has somewhere to live; and every affected transaction pulled and reviewed proactively rather than waiting for each customer to notice.</p>
+            <p>The customers did not get <em>“we are experiencing a technical delay.”</em> They got: <em>“We reviewed your withdrawal and found the status showed as completed before the final confirmation arrived from the payment provider. The transaction is not lost — it is still processing, and we are tracking it as a priority. Your next update will come before [date], even if nothing has changed.”</em></p>
+            <p><strong>Even if nothing has changed.</strong> That clause is the whole thing. The biggest mistake in escalation management is contacting the customer only when you have a solution. People can tolerate a delay. They cannot tolerate silence and not knowing whether anyone is holding it.</p>
+            <p>And we did not close the bug and move on. We added a monitoring alert for when the share of transactions sitting in the intermediate state crossed a threshold, and a playbook for when support converts a cluster of tickets into an incident instead of working them individually.</p>
+          </Disclosure>
+
+          <Disclosure index="09" tone="night"
+            title="This is one category, in one company. The shape does not change."
+            teaser="Read it back. Every layer is the same failure wearing different clothes.">
+            <p>A status that reported a state instead of a truth. An article that explained a definition instead of a decision. A word — Completed — that meant one thing to us and another to the customer. A category that replaced the fact it was supposed to describe. A metric that was satisfied while the customer was not. A backlog that fell while the work did not. A status mapping that was, in plain terms, wrong.</p>
+            <p>Every one of those is a gap between what was happening and what the company had written down about what was happening.</p>
+            <p><strong>And the gap does not grow in a straight line as a company grows. It compounds</strong> — because everything downstream is decided on the record rather than the reality. A wrong status generates a contact. A wrong category generates a wrong report. A wrong report generates a headcount decision. And now you are paying salaries to answer a question that should not exist, and the report says support is busy. Which it is.</p>
+            <p>That is the real cost in operations. Not one big failure — a thousand small drifts, each individually defensible, all being multiplied by growth.</p>
+            <p>Which is why I do not think support is a department that answers questions. <strong>It is the only place in the building where you can see the difference between what a company believes about itself and what is actually true.</strong></p>
+          </Disclosure>
+        </div>
       </div>
     </section>
 
     <section class="impact-section zone-paper">
       <div class="wrap">
         <header class="section-head reveal">
-          <div><span class="eyebrow">What that actually changed</span><h2>Three timed updates and one moved sentence. Here is who felt it — and who paid for it.</h2></div>
-          <p>Most fixes move a cost rather than remove it. Support goes quiet because operations quietly starts doing the chasing. The only honest test is whether the total work went down — not whether it moved somewhere you stopped measuring.</p>
+          <div><span class="eyebrow">What was left behind</span><h2>None of it was a chatbot, more agents, or a tracking product.</h2></div>
+          <p>The test I hold myself to is not whether the queue went quiet. A queue goes quiet when the work moves somewhere nobody is measuring. The test is whether the reason to ask was removed, and whether the thing that caused it can come back without anyone noticing.</p>
         </header>
 
-        {/* Every department improving by exactly one tidy sentence is a
-            consultant's slide, not an outcome. Real changes have a loser.
-            Naming ours is the only reason to believe the rest. */}
+        {/* The outcome of a real case, so it names what it cannot claim. Ahmed
+            has no exported dashboard and will not invent one, so the honest
+            statement is which direction moved and which number he refused to
+            chase — not a percentage nobody can source. */}
         <div class="impact-system">
-          <article class="impact-petal impact-petal--support reveal"><span>Customer support</span><h3>The question mostly stops.</h3><p>Not because agents got faster. Because the customer already had the answer before they thought to ask for it.</p></article>
-          <article class="impact-petal impact-petal--sales reveal reveal-delay-1"><span>Sales</span><h3>The comfortable sentence goes away.</h3><p>“Quick delivery” becomes a specific number. That is a harder thing to say on a call — and it is the part of this that sales genuinely lost.</p></article>
-          <article class="impact-petal impact-petal--ops reveal reveal-delay-2"><span>Operations</span><h3>Three moments that belong to someone.</h3><p>Ownership stops being ambient and becomes a named person at a named point. That is new work. It is also why the rest of the work disappears.</p></article>
-          <article class="impact-petal impact-petal--lead reveal reveal-delay-3"><span>Leadership</span><h3>The headcount request never arrives.</h3><p>Not approved, not rejected — no longer a question. Which is a genuinely awkward win to present, because it looks like nothing happened.</p></article>
-          <div class="impact-core"><span>The net</span><strong>Less work overall. One team lost something.</strong></div>
+          <article class="impact-petal impact-petal--support reveal"><span>The customer</span><h3>A timeline instead of a word.</h3><p>Request received → under review → sent to payment provider → completed, each with an expected time. Not a faster answer. No reason to ask.</p></article>
+          <article class="impact-petal impact-petal--sales reveal reveal-delay-1"><span>The data</span><h3>Cause recorded apart from complaint.</h3><p>Every ticket now carries what the customer said and what was actually wrong. Those two were one field before, and that single missing distinction had been aiming every decision at the wrong department.</p></article>
+          <article class="impact-petal impact-petal--ops reveal reveal-delay-2"><span>The system</span><h3>A status that stopped lying.</h3><p>Completed only after settlement confirms, a real intermediate state so the truth has somewhere to live, and a monitoring alert so it cannot drift back quietly.</p></article>
+          <article class="impact-petal impact-petal--lead reveal reveal-delay-3"><span>The team</span><h3>Quality became the decision, not the script.</h3><p>Thirteen people, reviewed on whether the customer could act on the answer rather than whether the phrasing was approved. An agent can hit every required word and still leave a problem with no owner.</p></article>
+          <div class="impact-core"><span>Measured on</span><strong>Repeat contact, not first response</strong></div>
         </div>
       </div>
     </section>
@@ -469,6 +563,15 @@ const lenses = [
   .journey__glow { fill: none; stroke: rgba(17,125,108,.07); stroke-width: 55; stroke-linecap: round; }
   .journey__line { fill: none; stroke: url(#journey-gradient); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 8 14; animation: dash 22s linear infinite; }
   .journey__spine circle { fill: var(--paper); stroke-width: 3; }
+  /* THE CASE — the spine of the page. Nine disclosures, and the collapsed
+     titles alone tell the whole story: "the answer was not faster replies" →
+     "repeat contact is the tell" → "the article was a patch" → … → "Completed
+     did not mean completed". A reader who never opens one has still read it. */
+  .case-section { position: relative; z-index: 4; padding: 1.4rem 0; background: transparent; }
+  .case-shell { padding: clamp(2.2rem,5vw,4rem) clamp(1.6rem,4vw,3.4rem); border-radius: 72px 22px 82px 30px; background: radial-gradient(circle at 8% 12%,rgba(72,224,187,.12),transparent 22rem),radial-gradient(circle at 92% 84%,rgba(121,183,255,.13),transparent 24rem),var(--night); box-shadow: var(--shadow-deep); }
+  .case-shell .section-head { margin-bottom: 1.6rem; }
+  .case-list { margin-top: .5rem; }
+
   .signal-section, .impact-section { position: relative; z-index: 3; padding: 2.2rem 0 2.8rem; }
   .scenario-label { display: inline-block; margin-top: .9rem; color: #5c6e75; /* not --slate-soft: that token is 3.47 here. It stays as-is because the night zones need it light. */ font: 750 .62rem var(--font-head); letter-spacing: .1em; text-transform: uppercase; }
   /* THE FOUR-ACTOR DIAGRAM — used twice: what each team sees, then what each
@@ -506,20 +609,6 @@ const lenses = [
   .signal-map__core { position: absolute; z-index: 5; left: 50%; top: 50%; width: 180px; height: 180px; display: grid; place-content: center; padding: 1.4rem; text-align: center; border-radius: 50%; background: var(--acid); box-shadow: 0 24px 58px rgba(77,105,27,.2),0 0 0 18px rgba(201,243,111,.15); transform: translate(-50%,-50%); }
   .signal-map__core strong { font: 800 1rem/1.25 var(--font-head); }
   .signal-map__core small { margin-top: .5rem; color: rgba(7,26,36,.72); font: 800 .55rem var(--font-head); letter-spacing: .12em; text-transform: uppercase; }
-  .decision-section { position: relative; z-index: 4; padding: 1.4rem 0; background: transparent; }
-  .decision-shell { padding: clamp(2.6rem,6vw,5rem); border-radius: 72px 22px 82px 30px; background: radial-gradient(circle at 8% 45%,rgba(72,224,187,.12),transparent 20rem),radial-gradient(circle at 90% 80%,rgba(121,183,255,.13),transparent 23rem),var(--night); box-shadow: var(--shadow-deep); }
-  .decision-path { position: relative; display: grid; grid-template-columns: repeat(6,1fr); gap: 1rem; }
-  .decision-path::before { content: ''; position: absolute; left: 3%; right: 3%; top: 21px; height: 2px; background: linear-gradient(90deg,var(--coral),var(--violet),var(--acid),var(--sky),var(--signal)); }
-  .decision-path li { position: relative; z-index: 2; padding-right: .7rem; }
-  .decision-path span { width: 43px; height: 43px; display: grid; place-items: center; margin-bottom: 1.25rem; color: var(--ink); border-radius: 52% 48% 40% 60% / 45% 58% 42% 55%; background: var(--signal); box-shadow: 0 0 0 8px rgba(255,255,255,.04); font: 850 .62rem var(--font-head); }
-  .decision-path li:nth-child(1) span { background: var(--coral); }
-  .decision-path li:nth-child(2) span { background: var(--violet); }
-  .decision-path li:nth-child(3) span { background: var(--acid); }
-  .decision-path li:nth-child(4) span { background: var(--sky); }
-  .decision-path li:nth-child(6) span { background: var(--acid); }
-  .decision-path h3 { font-size: 1.05rem; }
-  .decision-path p { margin-top: .6rem; color: var(--slate); font-size: .74rem; line-height: 1.6; }
-  .decision-note { max-width: 900px; margin: 2.5rem auto 0; padding: 1.2rem 1.5rem; color: var(--ink); border-radius: 28px 9px 30px 12px; background: var(--acid); text-align: center; font-size: .86rem; }
   .impact-section { padding-top: 2.6rem; padding-bottom: 3rem; }
   .impact-petal { position: relative; min-height: 190px; padding: 3rem 4.25rem; box-shadow: var(--shadow-soft); }
   .impact-petal span { color: rgba(7,26,36,.68); font: 850 .58rem var(--font-head); letter-spacing: .14em; text-transform: uppercase; }
@@ -555,9 +644,9 @@ const lenses = [
      changes per capability — the structure stays identical, because four
      differently-shaped panels would be decoration, not information. */
   .cap-body { --cap: var(--signal-deep); }
-  .cap-body--sky { --cap: #2f6fb0; }
-  .cap-body--violet { --cap: #6b55b8; }
-  .cap-body--coral { --cap: #c0492f; }
+  .cap-body--sky { --cap: #2c65a6; }    /* 5.25 on paper; #2f6fb0 was 4.4 */
+  .cap-body--violet { --cap: #6b52b8; } /* 5.24 on paper */
+  .cap-body--coral { --cap: #b8432d; }  /* 4.76 on paper; #c0492f was 4.2 */
   .cap-body__k {
     margin: 2rem 0 .9rem !important;
     color: var(--cap) !important;
@@ -575,7 +664,7 @@ const lenses = [
   .cap-body__proof {
     margin: 0 !important; padding-top: 1rem;
     border-top: 1px solid var(--paper-line);
-    color: var(--slate-soft) !important;
+    color: #5c6e75 /* --slate-soft is 3.47 on paper; the token stays light for the night zones */ !important;
     font: 750 .68rem var(--font-head) !important; letter-spacing: .04em;
   }
   .capability-row { --cap: var(--signal); display: grid; grid-template-columns: minmax(280px,.8fr) minmax(300px,1fr) minmax(220px,.72fr); gap: clamp(1.5rem,4vw,3.5rem); align-items: start; padding: 2rem 0; border-bottom: 1px solid var(--paper-line); }
@@ -669,8 +758,6 @@ const lenses = [
     .hero { min-height: auto; }
     .hero__grid { grid-template-columns: 1fr; }
     .system-lens { width: min(100%,620px); margin-inline: auto; }
-    .decision-path { grid-template-columns: repeat(3,1fr); gap: 2rem 1rem; }
-    .decision-path::before { display: none; }
     .proof-grid { grid-template-columns: 1fr; }
     .capability-row { grid-template-columns: 1fr 1fr; }
     .capability-row ul { grid-column: 2; }
@@ -690,8 +777,6 @@ const lenses = [
     .journey__spine { opacity: .28; }
     /* One column: the core drops to the bottom, so nothing has to dodge it. */
     .signal-map__core { top: auto; bottom: 0; width: 128px; height: 128px; transform: translate(-50%,0); }
-    .decision-shell { padding: 2.3rem 1.3rem; border-radius: 44px 18px 50px 21px; }
-    .decision-path { grid-template-columns: 1fr 1fr; }
     .capability-row { grid-template-columns: 1fr; gap: 1rem; }
     .capability-row ul { grid-column: auto; }
     .alpha-proof { border-radius: 48px 18px 54px 21px; }
@@ -709,7 +794,6 @@ const lenses = [
     .system-lens { min-height: 415px; }
     .portrait-frame { width: 205px; height: 285px; }
     .orbit-node--ops { left: -2%; }
-    .decision-path { grid-template-columns: 1fr; }
     .build-rule { grid-template-columns: auto auto auto; }
     .build-rule span:nth-of-type(3), .build-rule i:nth-of-type(2) { margin-top: .4rem; }
   }
