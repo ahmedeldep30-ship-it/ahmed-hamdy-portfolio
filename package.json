@@ -29,7 +29,8 @@
     "shots": "node scripts/shots.mjs",
     "shots:review": "node scripts/shots-review.mjs",
     "record": "node scripts/record-motion.mjs",
-    "verify:controls": "node scripts/verify-visible-controls.mjs"
+    "verify:controls": "node scripts/verify-visible-controls.mjs",
+    "build:cv": "node scripts/build-cv.mjs"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.6",
