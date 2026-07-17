@@ -1,6 +1,6 @@
 # Project status — the single source of "where are we"
 
-**Updated:** 2026-07-16 · commit `bdfa50b`
+**Updated:** 2026-07-16 · positioning recalibration in progress
 **Read this first.** The other docs in `docs/` are a historical record of decisions;
 where they conflict with this file, this file wins.
 
@@ -12,8 +12,8 @@ where they conflict with this file, this file wins.
 |---|---|
 | **Live (provisional)** | https://ahmedeldep30-ship-it.github.io/ahmed-hamdy-portfolio/ |
 | **Indexing** | **OFF** — `noindex` site-wide until Gate 4. Deliberate. |
-| **Current gate** | **Gate 2 — NOT approved.** Visual direction rejected, reworked, awaiting review. |
-| **Phase 4+** | **Not started.** Blocked on Gate 2 approval. |
+| **Current gate** | **Gate 2.3 — direction locked; implementation pending.** The V4 positioning and content architecture now govern the refactor; visual direction remains unapproved. |
+| **Phase 4+** | **Not started.** Blocked on Gate 2.3 implementation and Gate 2 visual approval. |
 | **Routes live** | 6 public + 1 review + generated artefacts (§4) |
 | **Repo** | `ahmedeldep30-ship-it/ahmed-hamdy-portfolio`, branch `main` |
 
@@ -26,6 +26,7 @@ where they conflict with this file, this file wins.
 | **Gate 2** — home + Formula4You | ❌ **Rejected on visuals** | Engineering accepted. Design rejected: *"feels like a dashboard… dull, unappealing, lifeless"*, no portrait, animation too simple. |
 | **Gate 2.1** — visual proposal | ⏳ Built, **unreviewed** | `/review/gate-2-1` — editorial hero, fixed CTA, button system, F4U evidence at scale, card reduction, before/after. |
 | **Gate 2.2** — direction decisions | ✅ **Decided** | Depth without WebGL · portrait beside headline · diagnosis moved below the intro. **Implemented on the home page.** |
+| **Gate 2.3** — positioning and content direction | ✅ **Direction locked; implementation pending** | Keep Business Growth & Operations Specialist; make CX, Support Operations, Process Improvement, Team Development, and Service Quality the proven depth; bound technical-adjacent capabilities as supporting business lenses. See `04-PORTFOLIO-DIRECTION-V4.md`. |
 | **Gate 3** — PDFs | ⛔ Not reached | |
 | **Gate 4** — publish | ⛔ Not reached | Flips `canonicalApproved` → indexing on. |
 
@@ -77,6 +78,8 @@ where they conflict with this file, this file wins.
 | Search Console / Bing onboarding, IndexNow | 10 |
 
 ### Known, accepted, not yet addressed
+- **The capability hierarchy is too broad.** The current site presents nine domains and ten capabilities at near-equal weight. This creates incorrect expectations around UI/UX, advanced analytics, product management, AI architecture, and consulting depth. V4 replaces this with four core capability groups plus bounded supporting lenses.
+- **The two audience pathways remain.** They will become real employer and business decision paths, not duplicate decorative choices. Employer ordering prioritizes Alpha Capital; business ordering prioritizes Formula4You.
 - **The page is visually uneven.** The Intro is the new editorial language; sections 2–10 are still the older card-and-border language Ahmed objected to. **This is the largest outstanding visual debt.**
 - **Home length:** 12,476px ≈ 13.9 screens at 1440 (was 13,180px). Mobile 21,201px ≈ 25 screens. Long. Shortening further should come from making sections *feel* different, not from cutting capability coverage.
 - `/review/gate-2-1` still contains the older `SeamHeroV2` prototype. Delete or promote once Gate 2 closes.
@@ -134,19 +137,19 @@ npm run verify:all       # everything except Lighthouse
 
 ---
 
-## 6. Outstanding — needs Ahmed
+## 6. Outstanding
 
-### Decisions
-1. **Gate 2 visual approval** — is the new Intro right? Everything else is blocked on this.
-2. **Roll the editorial language through sections 2–10?** The page is uneven until this happens.
-3. **Was "depth without WebGL" enough?** If not, the WebGL hero costs ~150KB and drops perf to ~70–85.
-4. `/audits` treatment — method page vs. omit until the first audit ships. (Plan D-1, still open.)
+### Implementation and review
+1. **Implement Gate 2.3** — apply the V4 hierarchy, terminology, case order, contribution model, and two-audience architecture to the existing site.
+2. **Gate 2 visual approval** — review the new Intro together with the reworked content sections rather than approving the Intro in isolation.
+3. **Roll the editorial language through sections 2–10** while the V4 content refactor is implemented.
+4. **Audits:** V4 resolves the launch decision — omit the public route until the first complete sourced audit exists; keep the method inside How I Work / Insights.
 
 ### Evidence — see `02-EVIDENCE-REGISTER.md`
 Still missing and therefore **not published**: Employee of the Month proof · Trustpilot/300+ reviews proof · defensible completed-order totals · Formula4You logo · Formula4You roadmap/user stories/QA plan · anonymized client screens · testimonials · audit research.
 
 ### Flagged, unresolved
-- **Alpha Capital formal job title** — case-study framing was given at Gate 1 §5, but the actual contractual title is still unrecorded. Needed before the Phase 4 case study.
+- **Alpha Capital title and progression proof** — Ahmed states that he worked as Customer Support Specialist and was promoted after two years to Customer Manager. Drafting may use this as user-confirmed experience; documentary proof is still needed for Verified Evidence treatment and exact dates.
 - **CV vs site conflict (C2)** — the approved CV states "thousands of completed orders"; the site uses the safe fallback. A recruiter reads both. Unresolved.
 - **ORion** — used only as evidence of a storefront built on Formula4You, never named as Ahmed's project. The brief excludes "ORion" from V1 as a project; confirm the overlap is understood.
 
@@ -160,5 +163,7 @@ Still missing and therefore **not published**: Employee of the Month proof · Tr
 | `01-PLAN.md` | Phase 0/1 plan | **Historical.** Its light-theme palette and D-1…D-5 decisions were superseded at Gate 1/2.2. |
 | `02-EVIDENCE-REGISTER.md` | Claims, gaps, conflicts | Current |
 | `03-GATE-2-REPORT.md` | Gate 2 submission | **Historical.** Predates deployment, fonts, the merge, and the visual rework. |
+| `04-PORTFOLIO-DIRECTION-V4.md` | **Current positioning, content hierarchy, scope language, routes, and implementation sequence.** | Current and binding. |
+| `05-DESIGN-AND-VOICE-SYSTEM.md` | **Current visual direction, Formula4You weighting, human-voice rules, and experience-quality bar.** | Current and binding. |
 | `phase-1/gate-1-creative-direction.html` | Gate 1 artefact | Historical |
 | `README.md` | Setup, architecture, deployment | Current |

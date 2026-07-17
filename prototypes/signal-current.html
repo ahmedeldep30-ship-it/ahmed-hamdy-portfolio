@@ -1,0 +1,1176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Ahmed Hamdy — Business Growth and Operations. A visual journey from customer signals to better business decisions." />
+  <title>Ahmed Hamdy — The Signal Current</title>
+  <style>
+    @font-face {
+      font-family: "Manrope";
+      src: url("../public/fonts/manrope-latin-wght-normal.woff2") format("woff2");
+      font-weight: 200 800;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Inter";
+      src: url("../public/fonts/inter-latin-wght-normal.woff2") format("woff2");
+      font-weight: 200 800;
+      font-display: swap;
+    }
+
+    :root {
+      --night: #061822;
+      --night-2: #0a2632;
+      --night-3: #0f3440;
+      --cream: #f4f0e7;
+      --cream-2: #e9e3d8;
+      --white: #fff;
+      --ink: #071a24;
+      --muted: #69777c;
+      --aqua: #48e0bb;
+      --aqua-deep: #168c79;
+      --sky: #79b7ff;
+      --coral: #ff7a61;
+      --acid: #c9f36f;
+      --violet: #bba5ff;
+      --line: rgba(7, 26, 36, .13);
+      --line-light: rgba(255, 255, 255, .13);
+      --max: 1240px;
+      --shadow: 0 30px 90px rgba(1, 12, 18, .28);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      color: var(--ink);
+      background: var(--night);
+      font-family: "Inter", Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+
+    .shell {
+      width: min(calc(100% - 44px), var(--max));
+      margin-inline: auto;
+    }
+
+    .site-header {
+      position: absolute;
+      z-index: 50;
+      top: 0;
+      left: 0;
+      width: 100%;
+      color: var(--white);
+    }
+    .header-inner {
+      min-height: 88px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 58% 42% 65% 35% / 55% 60% 40% 45%;
+      background: rgba(255,255,255,.08);
+      box-shadow: inset 0 0 24px rgba(72,224,187,.1), 0 12px 30px rgba(0,0,0,.18);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: -.05em;
+      animation: breathe-shape 8s ease-in-out infinite;
+    }
+    .brand-copy strong { display: block; font-size: 13px; }
+    .brand-copy span { display: block; margin-top: 4px; color: rgba(255,255,255,.48); font-size: 8px; text-transform: uppercase; letter-spacing: .17em; }
+
+    .nav { display: flex; align-items: center; gap: 28px; color: rgba(255,255,255,.7); font-size: 12px; font-weight: 700; }
+    .nav a { transition: color 180ms ease; }
+    .nav a:hover { color: var(--white); }
+    .nav .contact-link {
+      position: relative;
+      min-width: 144px;
+      padding: 13px 20px;
+      color: var(--ink);
+      text-align: center;
+      border-radius: 999px 999px 999px 17px;
+      background: var(--aqua);
+      box-shadow: 0 15px 34px rgba(72,224,187,.18);
+    }
+    .nav .contact-link::after {
+      content: "";
+      position: absolute;
+      left: -8px;
+      bottom: -7px;
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      background: var(--aqua);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 930px;
+      padding: 168px 0 190px;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 84% 22%, rgba(121,183,255,.19), transparent 23rem),
+        radial-gradient(circle at 8% 80%, rgba(72,224,187,.13), transparent 25rem),
+        linear-gradient(135deg, #051620 0%, #092633 62%, #0b303a 100%);
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .2;
+      background-image: radial-gradient(rgba(255,255,255,.26) .7px, transparent .7px);
+      background-size: 24px 24px;
+      mask-image: radial-gradient(circle at 38% 40%, black, transparent 65%);
+    }
+    .hero-wave {
+      position: absolute;
+      z-index: 5;
+      left: -2%;
+      bottom: -2px;
+      width: 104%;
+      height: 155px;
+      filter: drop-shadow(0 -20px 35px rgba(0,0,0,.08));
+    }
+
+    .hero-grid {
+      position: relative;
+      z-index: 4;
+      display: grid;
+      grid-template-columns: minmax(0, .98fr) minmax(480px, 1.02fr);
+      align-items: center;
+      gap: clamp(60px, 7vw, 105px);
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      margin-bottom: 28px;
+      color: rgba(255,255,255,.6);
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--coral);
+      box-shadow: 0 0 0 7px rgba(255,122,97,.1), 0 0 24px rgba(255,122,97,.85);
+    }
+    h1 {
+      max-width: 720px;
+      margin: 0;
+      font-size: clamp(60px, 7.1vw, 96px);
+      line-height: .96;
+      letter-spacing: -.068em;
+      font-weight: 690;
+    }
+    h1 .signal-word {
+      position: relative;
+      display: inline-block;
+      color: var(--aqua);
+    }
+    h1 .signal-word::after {
+      content: "";
+      position: absolute;
+      left: 4%;
+      bottom: -.05em;
+      width: 104%;
+      height: 13px;
+      border-radius: 50%;
+      border-top: 3px solid var(--coral);
+      transform: rotate(-2deg);
+    }
+    .hero-copy {
+      max-width: 620px;
+      margin: 30px 0 0;
+      color: rgba(255,255,255,.66);
+      font-size: clamp(16px, 1.45vw, 19px);
+      line-height: 1.75;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 13px; margin-top: 35px; }
+    .flow-button {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 54px;
+      padding: 0 22px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 999px 999px 999px 18px;
+      background: rgba(255,255,255,.06);
+      backdrop-filter: blur(14px);
+      font-size: 12px;
+      font-weight: 800;
+      transition: translate 180ms ease, background 180ms ease;
+    }
+    .flow-button:hover { translate: 0 -3px; background: rgba(255,255,255,.1); }
+    .flow-button.primary { color: var(--ink); border-color: transparent; background: var(--aqua); box-shadow: 0 16px 38px rgba(72,224,187,.2); }
+    .flow-button::after { content: ""; position: absolute; left: -7px; bottom: -6px; width: 15px; height: 15px; border-radius: 50%; background: inherit; }
+
+    .system-lens {
+      position: relative;
+      min-height: 590px;
+      transform-style: preserve-3d;
+    }
+    .lens-orbit {
+      position: absolute;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 48% 52% 57% 43% / 54% 44% 56% 46%;
+      animation: orbit-shape 11s ease-in-out infinite alternate;
+    }
+    .lens-orbit.one { inset: 35px 4px 15px 5px; transform: rotate(12deg); }
+    .lens-orbit.two { inset: 95px 65px 78px 50px; border-color: rgba(72,224,187,.25); transform: rotate(-17deg); animation-delay: -4s; }
+    .lens-orbit.three { inset: 150px 132px 130px 115px; border-style: dashed; border-color: rgba(121,183,255,.3); animation-delay: -7s; }
+    .portrait-blob {
+      position: absolute;
+      z-index: 4;
+      left: 50%;
+      top: 48%;
+      width: 290px;
+      height: 390px;
+      overflow: hidden;
+      border: 7px solid rgba(255,255,255,.12);
+      border-radius: 54% 46% 63% 37% / 40% 59% 41% 60%;
+      box-shadow: 0 35px 90px rgba(0,0,0,.45), inset 0 0 30px rgba(255,255,255,.08);
+      transform: translate(-50%, -50%) rotate(3deg);
+      animation: portrait-morph 12s ease-in-out infinite alternate;
+    }
+    .portrait-blob img { width: 100%; height: 100%; object-fit: cover; object-position: center 18%; filter: saturate(.82) contrast(1.05); }
+    .lens-core {
+      position: absolute;
+      z-index: 6;
+      left: 68%;
+      top: 64%;
+      width: 114px;
+      height: 114px;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      color: var(--ink);
+      text-align: center;
+      border-radius: 48% 52% 43% 57% / 58% 41% 59% 42%;
+      background: var(--acid);
+      box-shadow: 0 18px 45px rgba(0,0,0,.32), 0 0 0 13px rgba(201,243,111,.08);
+      transform: translate(-50%, -50%);
+      font-size: 10px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .09em;
+      animation: core-pulse 3.5s ease-in-out infinite;
+    }
+    .orbit-node {
+      position: absolute;
+      z-index: 7;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 13px 16px;
+      border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px 999px 999px 14px;
+      color: rgba(255,255,255,.83);
+      background: rgba(6,24,34,.72);
+      box-shadow: 0 18px 36px rgba(0,0,0,.28);
+      backdrop-filter: blur(16px);
+      font-size: 10px;
+      font-weight: 760;
+      letter-spacing: .03em;
+      animation: node-float 5s ease-in-out infinite;
+    }
+    .orbit-node::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--node-color, var(--aqua)); box-shadow: 0 0 16px var(--node-color, var(--aqua)); }
+    .orbit-node.support { --node-color: var(--aqua); left: 0; top: 22%; }
+    .orbit-node.sales { --node-color: var(--coral); right: -2%; top: 28%; animation-delay: -1.4s; }
+    .orbit-node.operations { --node-color: var(--sky); left: 8%; bottom: 8%; animation-delay: -2.6s; }
+    .orbit-node.customer { --node-color: var(--violet); right: 2%; bottom: 12%; animation-delay: -3.5s; }
+
+    .current-section {
+      position: relative;
+      z-index: 8;
+      margin-top: -2px;
+      padding: 45px 0 110px;
+      color: var(--ink);
+      background: var(--cream);
+    }
+    .section-intro {
+      position: relative;
+      z-index: 5;
+      display: grid;
+      grid-template-columns: 1fr .8fr;
+      align-items: end;
+      gap: 60px;
+      padding-top: 48px;
+    }
+    .section-kicker { color: var(--aqua-deep); font-size: 10px; font-weight: 850; text-transform: uppercase; letter-spacing: .18em; }
+    .section-title { max-width: 760px; margin: 13px 0 0; font-size: clamp(46px, 6.3vw, 80px); line-height: 1; letter-spacing: -.065em; font-weight: 680; }
+    .section-copy { max-width: 510px; margin: 0 0 6px auto; color: var(--muted); font-size: 16px; line-height: 1.78; }
+
+    .signal-field {
+      position: relative;
+      min-height: 650px;
+      margin-top: 24px;
+    }
+    .field-current {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+    .field-current .wide { stroke: rgba(22,140,121,.08); stroke-width: 46; fill: none; stroke-linecap: round; }
+    .field-current .fine { stroke: url(#fieldGradient); stroke-width: 3; fill: none; stroke-linecap: round; stroke-dasharray: 8 13; animation: current-dash 18s linear infinite; }
+    .signal-island {
+      position: absolute;
+      z-index: 3;
+      width: 285px;
+      min-height: 190px;
+      padding: 30px;
+      border: 1px solid rgba(7,26,36,.08);
+      background: rgba(255,255,255,.72);
+      box-shadow: 0 24px 60px rgba(7,26,36,.1);
+      backdrop-filter: blur(12px);
+      transition: translate 220ms ease, box-shadow 220ms ease;
+    }
+    .signal-island:hover { translate: 0 -7px; box-shadow: 0 34px 72px rgba(7,26,36,.14); }
+    .signal-island.support { left: 3%; top: 2%; border-radius: 68% 32% 55% 45% / 46% 58% 42% 54%; }
+    .signal-island.sales { right: 5%; top: 12%; border-radius: 39% 61% 67% 33% / 60% 39% 61% 40%; }
+    .signal-island.operations { left: 13%; bottom: 1%; border-radius: 44% 56% 35% 65% / 55% 44% 56% 45%; }
+    .signal-island.business { right: 12%; bottom: 2%; color: var(--white); border-color: transparent; border-radius: 60% 40% 43% 57% / 36% 62% 38% 64%; background: var(--night-2); box-shadow: 0 30px 75px rgba(7,26,36,.25); }
+    .island-label { display: inline-flex; align-items: center; gap: 8px; color: var(--aqua-deep); font-size: 9px; font-weight: 850; text-transform: uppercase; letter-spacing: .15em; }
+    .island-label::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+    .signal-island.sales .island-label { color: #d6533d; }
+    .signal-island.operations .island-label { color: #367cc9; }
+    .signal-island.business .island-label { color: var(--acid); }
+    .signal-island h3 { margin: 34px 0 10px; font-size: 23px; line-height: 1.2; letter-spacing: -.042em; }
+    .signal-island p { margin: 0; color: var(--muted); font-size: 13px; line-height: 1.65; }
+    .signal-island.business p { color: rgba(255,255,255,.58); }
+    .centre-diagnosis {
+      position: absolute;
+      z-index: 5;
+      left: 50%;
+      top: 48%;
+      width: 190px;
+      height: 190px;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      color: var(--ink);
+      text-align: center;
+      border-radius: 50%;
+      background: var(--acid);
+      box-shadow: 0 25px 60px rgba(86,116,27,.2), 0 0 0 18px rgba(201,243,111,.17), 0 0 0 38px rgba(201,243,111,.08);
+      transform: translate(-50%, -50%);
+    }
+    .centre-diagnosis strong { font-size: 19px; line-height: 1.25; letter-spacing: -.04em; }
+    .centre-diagnosis small { display: block; margin-top: 9px; font-size: 8px; text-transform: uppercase; letter-spacing: .15em; }
+
+    .decision-zone {
+      position: relative;
+      z-index: 10;
+      padding: 160px 0 145px;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 12% 45%, rgba(72,224,187,.13), transparent 22rem),
+        radial-gradient(circle at 88% 72%, rgba(121,183,255,.15), transparent 26rem),
+        var(--night);
+    }
+    .decision-zone::before,
+    .decision-zone::after {
+      content: none;
+      position: absolute;
+      z-index: 2;
+      left: -3%;
+      width: 106%;
+      height: 150px;
+      background: var(--cream);
+      clip-path: polygon(0 0, 100% 0, 100% 18%, 89% 40%, 76% 22%, 63% 52%, 50% 30%, 36% 62%, 22% 34%, 10% 65%, 0 43%);
+    }
+    .decision-edge {
+      position: absolute;
+      z-index: 2;
+      left: -1%;
+      width: 102%;
+      height: 125px;
+      pointer-events: none;
+    }
+    .decision-edge.top { top: -2px; }
+    .decision-edge.bottom { bottom: -2px; }
+    .decision-content { position: relative; z-index: 4; }
+    .decision-zone .section-kicker { color: var(--aqua); }
+    .decision-zone .section-copy { color: rgba(255,255,255,.58); }
+
+    .decision-path {
+      position: relative;
+      min-height: 570px;
+      margin-top: 52px;
+    }
+    .decision-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+    .decision-svg .river { fill: none; stroke: rgba(72,224,187,.09); stroke-width: 70; stroke-linecap: round; }
+    .decision-svg .line { fill: none; stroke: url(#decisionGradient); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw-path 3s ease forwards paused; }
+    .decision-path.is-visible .decision-svg .line { animation-play-state: running; }
+    .decision-step {
+      position: absolute;
+      z-index: 4;
+      width: 215px;
+      color: rgba(255,255,255,.62);
+    }
+    .decision-step::before {
+      content: attr(data-step);
+      display: grid;
+      place-items: center;
+      width: 43px;
+      height: 43px;
+      margin-bottom: 18px;
+      color: var(--ink);
+      border-radius: 52% 48% 40% 60% / 45% 58% 42% 55%;
+      background: var(--step-color, var(--aqua));
+      box-shadow: 0 0 0 9px rgba(255,255,255,.035), 0 14px 28px rgba(0,0,0,.25);
+      font-size: 10px;
+      font-weight: 850;
+    }
+    .decision-step h3 { margin: 0 0 9px; color: var(--white); font-size: 23px; letter-spacing: -.04em; }
+    .decision-step p { margin: 0; font-size: 12px; line-height: 1.65; }
+    .decision-step.listen { --step-color: var(--coral); left: 2%; top: 54%; }
+    .decision-step.connect { --step-color: var(--violet); left: 23%; top: 12%; }
+    .decision-step.diagnose { --step-color: var(--acid); left: 45%; top: 48%; }
+    .decision-step.prioritise { --step-color: var(--sky); right: 17%; top: 10%; }
+    .decision-step.define { --step-color: var(--aqua); right: 0; top: 53%; }
+
+    .impact-zone {
+      position: relative;
+      z-index: 12;
+      padding: 125px 0 100px;
+      color: var(--ink);
+      background: var(--cream);
+    }
+    .impact-system {
+      position: relative;
+      min-height: 610px;
+      margin-top: 48px;
+    }
+    .impact-core {
+      position: absolute;
+      z-index: 5;
+      left: 50%;
+      top: 49%;
+      width: 235px;
+      height: 235px;
+      display: grid;
+      place-items: center;
+      padding: 35px;
+      text-align: center;
+      border-radius: 52% 48% 55% 45% / 43% 60% 40% 57%;
+      background: var(--night-2);
+      color: var(--white);
+      box-shadow: 0 35px 80px rgba(7,26,36,.27), 0 0 0 22px rgba(7,26,36,.035);
+      transform: translate(-50%, -50%);
+      animation: breathe-shape 9s ease-in-out infinite;
+    }
+    .impact-core span { color: var(--aqua); font-size: 9px; font-weight: 850; text-transform: uppercase; letter-spacing: .15em; }
+    .impact-core strong { display: block; margin-top: 12px; font-size: 25px; line-height: 1.2; letter-spacing: -.045em; }
+    .impact-petal {
+      position: absolute;
+      z-index: 3;
+      width: 330px;
+      min-height: 255px;
+      padding: 42px;
+      box-shadow: 0 28px 70px rgba(7,26,36,.12);
+      transition: translate 240ms ease;
+    }
+    .impact-petal:hover { translate: 0 -8px; }
+    .impact-petal.support { left: 4%; top: 5%; border-radius: 72% 28% 58% 42% / 39% 67% 33% 61%; background: #d8f7ee; }
+    .impact-petal.sales { right: 3%; top: 14%; border-radius: 40% 60% 70% 30% / 65% 38% 62% 35%; background: #ffe0d8; }
+    .impact-petal.operations { left: 29%; bottom: 0; border-radius: 37% 63% 45% 55% / 55% 37% 63% 45%; background: #dcecff; }
+    .impact-petal .petal-index { color: rgba(7,26,36,.45); font-size: 9px; font-weight: 850; text-transform: uppercase; letter-spacing: .15em; }
+    .impact-petal h3 { margin: 42px 0 12px; font-size: 30px; letter-spacing: -.05em; }
+    .impact-petal p { margin: 0; color: #52646c; font-size: 13px; line-height: 1.7; }
+    .impact-connectors { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .impact-connectors path { fill: none; stroke: rgba(22,140,121,.24); stroke-width: 2; stroke-dasharray: 8 10; animation: current-dash 18s linear infinite; }
+
+    .proof-zone {
+      position: relative;
+      z-index: 14;
+      padding: 135px 0 130px;
+      overflow: hidden;
+      color: var(--white);
+      background:
+        radial-gradient(circle at 8% 20%, rgba(187,165,255,.16), transparent 24rem),
+        radial-gradient(circle at 87% 75%, rgba(72,224,187,.13), transparent 25rem),
+        var(--night-2);
+    }
+    .proof-zone::before {
+      content: "";
+      position: absolute;
+      left: -5%;
+      top: -78px;
+      width: 110%;
+      height: 145px;
+      border-radius: 0 0 50% 50%;
+      background: var(--cream);
+    }
+    .proof-zone .section-kicker { color: var(--violet); }
+    .proof-zone .section-copy { color: rgba(255,255,255,.57); }
+    .proof-flow {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 34px;
+      align-items: center;
+      margin-top: 52px;
+    }
+    .alpha-proof {
+      position: relative;
+      min-height: 500px;
+      padding: 58px;
+      overflow: hidden;
+      color: var(--ink);
+      border-radius: 14% 6% 15% 5% / 11% 16% 8% 14%;
+      background: var(--cream);
+      box-shadow: var(--shadow);
+    }
+    .alpha-proof::after {
+      content: "";
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      right: -160px;
+      bottom: -150px;
+      border: 1px solid rgba(22,140,121,.22);
+      border-radius: 50%;
+      box-shadow: 0 0 0 50px rgba(22,140,121,.035), 0 0 0 100px rgba(22,140,121,.022);
+    }
+    .proof-label { color: var(--aqua-deep); font-size: 9px; font-weight: 850; text-transform: uppercase; letter-spacing: .16em; }
+    .alpha-proof h3 { max-width: 680px; margin: 22px 0 20px; font-size: clamp(38px, 4.8vw, 64px); line-height: 1.02; letter-spacing: -.06em; }
+    .alpha-proof p { max-width: 650px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.75; }
+    .proof-facts { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 48px; }
+    .proof-fact {
+      min-width: 145px;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 999px 999px 999px 16px;
+      background: rgba(255,255,255,.6);
+    }
+    .proof-fact strong { display: block; font-size: 22px; letter-spacing: -.045em; }
+    .proof-fact span { display: block; margin-top: 7px; color: var(--muted); font-size: 8px; line-height: 1.45; text-transform: uppercase; letter-spacing: .11em; }
+    .founder-proof { position: relative; min-height: 500px; }
+    .formula-image {
+      position: absolute;
+      z-index: 2;
+      inset: 0 0 125px 18px;
+      overflow: hidden;
+      border: 7px solid rgba(255,255,255,.12);
+      border-radius: 39% 61% 44% 56% / 55% 38% 62% 45%;
+      box-shadow: 0 30px 70px rgba(0,0,0,.36);
+      transform: rotate(2deg);
+    }
+    .formula-image img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    .formula-note {
+      position: absolute;
+      z-index: 4;
+      left: 0;
+      right: 25px;
+      bottom: 0;
+      padding: 28px 30px;
+      color: var(--ink);
+      border-radius: 32px 70px 28px 70px;
+      background: var(--acid);
+      box-shadow: 0 24px 60px rgba(0,0,0,.28);
+      transform: rotate(-1.4deg);
+    }
+    .formula-note strong { display: block; font-size: 19px; letter-spacing: -.04em; }
+    .formula-note p { margin: 8px 0 0; font-size: 11px; line-height: 1.6; }
+
+    .routes-zone {
+      position: relative;
+      z-index: 16;
+      padding: 135px 0 80px;
+      overflow: hidden;
+      background: var(--cream);
+    }
+    .routes-zone::before {
+      content: "";
+      position: absolute;
+      left: -4%;
+      top: -95px;
+      width: 108%;
+      height: 170px;
+      border-radius: 0 0 55% 45%;
+      background: var(--night-2);
+    }
+    .route-fork {
+      position: relative;
+      min-height: 520px;
+      margin-top: 48px;
+    }
+    .route-fork svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+    .route-fork path { fill: none; stroke: rgba(22,140,121,.2); stroke-width: 3; stroke-dasharray: 8 11; animation: current-dash 18s linear infinite; }
+    .route-island {
+      position: absolute;
+      z-index: 3;
+      width: 420px;
+      min-height: 300px;
+      padding: 52px;
+      box-shadow: 0 30px 80px rgba(7,26,36,.13);
+      transition: translate 220ms ease;
+    }
+    .route-island:hover { translate: 0 -8px; }
+    .route-island.employers { left: 3%; top: 0; border-radius: 68% 32% 52% 48% / 41% 62% 38% 59%; background: #d8f7ee; }
+    .route-island.businesses { right: 3%; top: 9%; border-radius: 40% 60% 69% 31% / 61% 37% 63% 39%; background: #dcecff; }
+    .route-island span { color: var(--aqua-deep); font-size: 9px; font-weight: 850; text-transform: uppercase; letter-spacing: .15em; }
+    .route-island.businesses span { color: #367cc9; }
+    .route-island h3 { margin: 45px 0 13px; font-size: 32px; line-height: 1.1; letter-spacing: -.05em; }
+    .route-island p { margin: 0; color: #53656d; font-size: 13px; line-height: 1.7; }
+    .route-island b { display: inline-flex; margin-top: 24px; font-size: 11px; }
+    .contact-core {
+      position: absolute;
+      z-index: 5;
+      left: 50%;
+      bottom: 2%;
+      width: 150px;
+      height: 150px;
+      display: grid;
+      place-items: center;
+      padding: 25px;
+      color: var(--white);
+      text-align: center;
+      border-radius: 50%;
+      background: var(--night-2);
+      box-shadow: 0 25px 60px rgba(7,26,36,.28), 0 0 0 15px rgba(7,26,36,.045);
+      transform: translateX(-50%);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.4;
+      animation: core-pulse 4s ease-in-out infinite;
+    }
+    .contact-core::after { content: "↗"; display: block; margin-top: 5px; color: var(--aqua); font-size: 17px; }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 34px 0 45px;
+      border-top: 1px solid var(--line);
+      color: #7a8589;
+      font-size: 10px;
+    }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 750ms ease, transform 750ms cubic-bezier(.2,.72,.2,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 90ms; }
+    .reveal-delay-2 { transition-delay: 180ms; }
+    .reveal-delay-3 { transition-delay: 270ms; }
+
+    @keyframes current-dash { to { stroke-dashoffset: -420; } }
+    @keyframes draw-path { to { stroke-dashoffset: 0; } }
+    @keyframes node-float { 0%,100% { translate: 0 0; } 50% { translate: 0 -8px; } }
+    @keyframes core-pulse { 0%,100% { scale: 1; } 50% { scale: 1.045; } }
+    @keyframes orbit-shape {
+      0% { border-radius: 48% 52% 57% 43% / 54% 44% 56% 46%; rotate: 0deg; }
+      100% { border-radius: 58% 42% 44% 56% / 46% 61% 39% 54%; rotate: 5deg; }
+    }
+    @keyframes portrait-morph {
+      0% { border-radius: 54% 46% 63% 37% / 40% 59% 41% 60%; }
+      100% { border-radius: 44% 56% 38% 62% / 59% 43% 57% 41%; }
+    }
+    @keyframes breathe-shape {
+      0%,100% { border-radius: 58% 42% 65% 35% / 55% 60% 40% 45%; }
+      50% { border-radius: 44% 56% 38% 62% / 63% 39% 61% 37%; }
+    }
+
+    /* Compact connected-system direction */
+    .compact-system h1,
+    .compact-system h2,
+    .compact-system h3,
+    .compact-system .brand-copy strong {
+      font-family: "Manrope", "Inter", Arial, sans-serif;
+    }
+    .compact-system .hero {
+      min-height: 790px;
+      padding: 138px 0 145px;
+    }
+    .compact-system .hero-grid {
+      grid-template-columns: minmax(0, 1.08fr) minmax(440px, .92fr);
+      gap: clamp(42px, 5vw, 76px);
+    }
+    .compact-system h1 {
+      max-width: 720px;
+      font-size: clamp(54px, 5.85vw, 78px);
+      line-height: 1.01;
+      letter-spacing: -.058em;
+    }
+    .compact-system h1 .signal-word { display: inline; }
+    .compact-system h1 .signal-word::after { bottom: -.02em; height: 10px; }
+    .compact-system .hero-copy { max-width: 650px; margin-top: 24px; }
+    .compact-system .system-lens { min-height: 505px; }
+    .compact-system .portrait-blob {
+      width: 320px;
+      height: 400px;
+      border: 1px solid rgba(255,255,255,.23);
+      border-radius: 30px;
+      box-shadow: 0 35px 90px rgba(0,0,0,.43), 0 0 0 10px rgba(255,255,255,.035);
+      transform: translate(-50%, -50%);
+      animation: none;
+    }
+    .compact-system .lens-orbit {
+      border-radius: 50%;
+      animation: spin-orbit 26s linear infinite;
+    }
+    .compact-system .lens-orbit.one { inset: 18px 0; transform: rotate(8deg); }
+    .compact-system .lens-orbit.two { inset: 72px 54px; transform: rotate(-13deg); animation-direction: reverse; animation-duration: 21s; }
+    .compact-system .lens-orbit.three { inset: 125px 112px; animation-duration: 18s; }
+    .compact-system .lens-core {
+      left: 27%;
+      top: 74%;
+      width: 108px;
+      height: 108px;
+      border-radius: 999px 999px 999px 25px;
+      transform: translate(-50%, -50%);
+    }
+    .compact-system .orbit-node { border-radius: 999px 999px 999px 12px; }
+    .compact-system .orbit-node.support { left: 0; top: 21%; }
+    .compact-system .orbit-node.sales { right: -1%; top: 25%; }
+    .compact-system .orbit-node.operations { left: 4%; bottom: 8%; }
+    .compact-system .orbit-node.customer { right: 1%; bottom: 10%; }
+
+    .journey-canvas {
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      background: var(--cream);
+    }
+    .journey-spine {
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .journey-spine .spine-glow { fill: none; stroke: rgba(22,140,121,.055); stroke-width: 64; stroke-linecap: round; }
+    .journey-spine .spine-line { fill: none; stroke: url(#journeyGradient); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 9 13; animation: current-dash 22s linear infinite; }
+    .journey-node { fill: var(--cream); stroke-width: 4; filter: drop-shadow(0 8px 16px rgba(7,26,36,.15)); }
+
+    .compact-system .current-section,
+    .compact-system .decision-zone,
+    .compact-system .impact-zone {
+      position: relative;
+      z-index: 3;
+      background: transparent;
+    }
+    .compact-system .section-intro {
+      grid-template-columns: .9fr 1.1fr;
+      gap: 42px;
+      padding-top: 0;
+    }
+    .compact-system .section-title {
+      max-width: 690px;
+      font-size: clamp(38px, 4.5vw, 58px);
+      line-height: 1.04;
+      letter-spacing: -.054em;
+    }
+    .compact-system .section-copy { max-width: 570px; font-size: 14px; line-height: 1.7; }
+    .compact-system .current-section { padding: 60px 0 76px; }
+    .compact-system .signal-field { min-height: 560px; margin-top: 18px; }
+    .compact-system .signal-island {
+      width: 255px;
+      min-height: 165px;
+      padding: 25px;
+    }
+    .compact-system .signal-island h3 { margin: 24px 0 8px; font-size: 20px; }
+    .compact-system .signal-island p { font-size: 11.5px; }
+    .compact-system .signal-island.support { left: 1%; top: 3%; }
+    .compact-system .signal-island.sales { right: 2%; top: 8%; }
+    .compact-system .signal-island.operations { left: 10%; bottom: 1%; }
+    .compact-system .signal-island.business { right: 10%; bottom: 0; }
+    .compact-system .centre-diagnosis {
+      width: 168px;
+      height: 168px;
+      box-shadow: 0 20px 45px rgba(86,116,27,.18), 0 0 0 13px rgba(201,243,111,.14), 0 0 0 28px rgba(201,243,111,.065);
+    }
+
+    .compact-system .decision-zone { padding: 54px 0 64px; color: var(--white); }
+    .compact-system .decision-edge { display: none; }
+    .compact-system .decision-content {
+      padding: 66px 68px 58px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.09);
+      border-radius: 78px 30px 86px 38px;
+      background:
+        radial-gradient(circle at 14% 25%, rgba(72,224,187,.11), transparent 18rem),
+        radial-gradient(circle at 88% 70%, rgba(121,183,255,.12), transparent 20rem),
+        var(--night);
+      box-shadow: 0 36px 90px rgba(7,26,36,.23);
+    }
+    .compact-system .decision-content::before,
+    .compact-system .decision-content::after {
+      content: "";
+      position: absolute;
+      z-index: 8;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--aqua);
+      box-shadow: 0 0 0 9px rgba(72,224,187,.1), 0 0 24px rgba(72,224,187,.55);
+    }
+    .compact-system .decision-content::before { top: -12px; left: 18%; }
+    .compact-system .decision-content::after { right: 16%; bottom: -12px; }
+    .compact-system .decision-zone .section-title { max-width: 620px; }
+    .compact-system .decision-path { min-height: 465px; margin-top: 34px; }
+    .compact-system .decision-step { width: 175px; }
+    .compact-system .decision-step h3 { font-size: 19px; }
+    .compact-system .decision-step p { font-size: 10.5px; }
+    .compact-system .decision-step.listen { left: 1%; top: 53%; }
+    .compact-system .decision-step.connect { left: 21%; top: 10%; }
+    .compact-system .decision-step.diagnose { left: 43%; top: 47%; }
+    .compact-system .decision-step.prioritise { right: 17%; top: 9%; }
+    .compact-system .decision-step.define { right: 0; top: 52%; }
+
+    .compact-system .impact-zone { padding: 74px 0 92px; }
+    .compact-system .impact-system { min-height: 520px; margin-top: 28px; }
+    .compact-system .impact-petal { width: 290px; min-height: 205px; padding: 32px; }
+    .compact-system .impact-petal h3 { margin: 28px 0 9px; font-size: 25px; }
+    .compact-system .impact-petal p { font-size: 11.5px; }
+    .compact-system .impact-petal.support { left: 2%; top: 3%; }
+    .compact-system .impact-petal.sales { right: 2%; top: 9%; }
+    .compact-system .impact-petal.operations { left: 30%; bottom: 0; }
+    .compact-system .impact-core { width: 188px; height: 188px; }
+    .compact-system .impact-core strong { font-size: 21px; }
+    .compact-system .proof-zone { padding: 88px 0 92px; }
+    .compact-system .proof-flow { margin-top: 36px; }
+    .compact-system .alpha-proof { min-height: 440px; padding: 50px; }
+    .compact-system .founder-proof { min-height: 445px; }
+    .compact-system .routes-zone { padding: 88px 0 60px; }
+    .compact-system .route-fork { min-height: 430px; margin-top: 28px; }
+    .compact-system .route-island { min-height: 260px; padding: 44px; }
+
+    @keyframes spin-orbit {
+      to { rotate: 360deg; }
+    }
+
+    @media (max-width: 1020px) {
+      .hero { padding-top: 145px; }
+      .hero-grid { grid-template-columns: 1fr; }
+      .hero-copy { max-width: 720px; }
+      .system-lens { max-width: 620px; width: 100%; margin-inline: auto; }
+      .section-intro, .proof-flow { grid-template-columns: 1fr; }
+      .section-copy { margin-left: 0; }
+      .proof-flow { gap: 70px; }
+      .founder-proof { max-width: 680px; width: 100%; margin-inline: auto; }
+      .impact-petal.operations { left: 21%; }
+      .route-island { width: 380px; }
+      .compact-system .hero { min-height: auto; padding: 124px 0 138px; }
+      .compact-system .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+      .compact-system .system-lens { min-height: 485px; margin-top: 8px; }
+      .compact-system .section-intro { grid-template-columns: 1fr; gap: 18px; }
+      .compact-system .section-copy { margin-left: 0; }
+      .compact-system .decision-content { padding: 58px 50px 48px; }
+    }
+
+    @media (max-width: 760px) {
+      .shell { width: min(calc(100% - 24px), var(--max)); }
+      .header-inner { min-height: 72px; }
+      .brand-copy { display: none; }
+      .nav a:not(.contact-link) { display: none; }
+      .nav .contact-link { min-width: 92px; padding: 11px 13px; font-size: 0; }
+      .nav .contact-link::before { content: "Contact ↗"; font-size: 10px; }
+      .hero { min-height: auto; padding: 122px 0 145px; }
+      h1 { overflow-wrap: anywhere; font-size: clamp(47px, 13.2vw, 61px); letter-spacing: -.058em; }
+      .hero-copy { font-size: 15px; }
+      .system-lens { min-height: 500px; margin-top: 45px; }
+      .portrait-blob { width: 230px; height: 320px; }
+      .lens-core { width: 92px; height: 92px; font-size: 8px; }
+      .orbit-node { padding: 11px 13px; font-size: 9px; }
+      .orbit-node.support { left: 1%; }
+      .orbit-node.sales { right: 0; }
+      .orbit-node.operations { left: 0; bottom: 8%; }
+      .orbit-node.customer { right: 0; bottom: 12%; }
+      .section-intro { gap: 26px; }
+      .section-title { font-size: clamp(42px, 12vw, 58px); }
+      .section-copy { font-size: 14px; }
+      .current-section { padding-bottom: 110px; }
+      .signal-field { display: grid; gap: 18px; min-height: auto; margin-top: 55px; padding-bottom: 185px; }
+      .field-current { display: none; }
+      .signal-island { position: relative; inset: auto !important; width: 100%; min-height: 175px; padding: 30px; }
+      .signal-island:nth-of-type(even) { margin-left: 8%; width: 92%; }
+      .centre-diagnosis { top: auto; bottom: 0; width: 145px; height: 145px; transform: translate(-50%, 0); }
+      .decision-zone { padding: 160px 0 145px; }
+      .decision-zone::before, .decision-zone::after { height: 95px; }
+      .decision-path { min-height: auto; display: grid; gap: 34px; margin-top: 60px; padding-left: 38px; }
+      .decision-svg { left: 2px; width: 34px; }
+      .decision-svg .river { stroke-width: 25; }
+      .decision-step { position: relative; inset: auto !important; width: 100%; padding-left: 15px; }
+      .impact-zone { padding: 120px 0 100px; }
+      .impact-system { display: grid; gap: 18px; min-height: auto; padding-bottom: 190px; }
+      .impact-petal { position: relative; inset: auto !important; width: 100%; min-height: 220px; padding: 38px; }
+      .impact-petal:nth-of-type(even) { margin-left: 7%; width: 93%; }
+      .impact-core { top: auto; bottom: 0; width: 160px; height: 160px; transform: translate(-50%, 0); }
+      .impact-connectors { display: none; }
+      .proof-zone { padding: 140px 0 120px; }
+      .alpha-proof { min-height: auto; padding: 38px 26px; border-radius: 52px 24px 58px 28px; }
+      .alpha-proof h3 { font-size: 42px; }
+      .proof-facts { display: grid; }
+      .founder-proof { min-height: 480px; }
+      .formula-image { inset: 0 0 135px 0; }
+      .routes-zone { padding: 140px 0 80px; }
+      .route-fork { display: grid; gap: 20px; min-height: auto; padding-bottom: 190px; }
+      .route-fork svg { display: none; }
+      .route-island { position: relative; inset: auto !important; width: 100%; min-height: 260px; padding: 42px 36px; }
+      .route-island.businesses { margin-left: 6%; width: 94%; }
+      .contact-core { bottom: 0; }
+      .footer { flex-direction: column; }
+      .compact-system .hero { padding: 108px 0 125px; }
+      .compact-system h1 { font-size: clamp(41px, 11.8vw, 50px); line-height: 1.04; }
+      .compact-system .hero-copy { font-size: 14px; }
+      .compact-system .system-lens { min-height: 430px; margin-top: 20px; }
+      .compact-system .portrait-blob { width: 220px; height: 290px; border-radius: 24px; }
+      .compact-system .lens-core { left: 24%; top: 76%; width: 86px; height: 86px; }
+      .compact-system .orbit-node { padding: 10px 12px; font-size: 8px; }
+      .compact-system .journey-spine { opacity: .48; }
+      .compact-system .section-title { font-size: clamp(34px, 9.8vw, 44px); }
+      .compact-system .current-section { padding: 38px 0 52px; }
+      .compact-system .signal-field { margin-top: 30px; padding-bottom: 158px; }
+      .compact-system .signal-island { width: 100%; min-height: 150px; padding: 26px; }
+      .compact-system .decision-zone { padding: 32px 0 40px; }
+      .compact-system .decision-content { padding: 44px 24px 38px; border-radius: 45px 20px 52px 24px; }
+      .compact-system .decision-path { margin-top: 35px; }
+      .compact-system .impact-zone { padding: 45px 0 65px; }
+      .compact-system .impact-system { margin-top: 28px; }
+      .compact-system .impact-petal { min-height: 190px; padding: 32px; }
+      .compact-system .proof-zone { padding: 105px 0 90px; }
+      .compact-system .routes-zone { padding: 100px 0 65px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+      .reveal { opacity: 1; transform: none; }
+      .decision-svg .line { stroke-dashoffset: 0; }
+    }
+  </style>
+</head>
+  <body class="compact-system">
+  <header class="site-header">
+    <div class="shell header-inner">
+      <a class="brand" href="#top" aria-label="Ahmed Hamdy home">
+        <span class="brand-mark">AH</span>
+        <span class="brand-copy"><strong>Ahmed Hamdy</strong><span>Business Growth &amp; Operations</span></span>
+      </a>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#current">The current</a>
+        <a href="#decision">How I work</a>
+        <a href="#proof">Evidence</a>
+        <a href="#routes">Choose a route</a>
+        <a class="contact-link" href="#routes">Start a conversation ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="reveal is-visible">
+          <span class="eyebrow">Ahmed Hamdy · Business Growth &amp; Operations</span>
+          <h1>Different teams see different problems.<br /><span class="signal-word">I connect the pattern.</span></h1>
+          <p class="hero-copy">A problem may appear in support, slow down sales and begin inside an operating process. I trace the signals across the business before deciding what should change.</p>
+          <div class="hero-actions">
+            <a class="flow-button primary" href="#current">Follow the signal ↓</a>
+            <a class="flow-button" href="#proof">See the evidence →</a>
+          </div>
+        </div>
+
+        <div class="system-lens" aria-label="Support, sales, operations and customer signals converging on a root cause">
+          <span class="lens-orbit one"></span>
+          <span class="lens-orbit two"></span>
+          <span class="lens-orbit three"></span>
+          <div class="portrait-blob" data-parallax="-0.4"><img src="../src/assets/portrait/ahmed-hamdy-portrait-approved.webp" alt="Ahmed Hamdy" /></div>
+          <div class="lens-core">Root cause</div>
+          <span class="orbit-node support" data-parallax="0.7">Support signal</span>
+          <span class="orbit-node sales" data-parallax="-0.5">Sales friction</span>
+          <span class="orbit-node operations" data-parallax="0.45">Operating constraint</span>
+          <span class="orbit-node customer" data-parallax="-0.7">Customer behaviour</span>
+        </div>
+      </div>
+      <svg class="hero-wave" viewBox="0 0 1440 170" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 82C149 132 269 138 408 91C555 42 659 50 782 104C937 172 1076 151 1190 97C1295 48 1375 52 1440 75V170H0V82Z" fill="#f4f0e7" />
+      </svg>
+    </section>
+
+    <div class="journey-canvas">
+      <svg class="journey-spine" viewBox="0 0 1440 2350" preserveAspectRatio="none" aria-hidden="true">
+        <defs><linearGradient id="journeyGradient" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#48e0bb"/><stop offset=".34" stop-color="#ff7a61"/><stop offset=".67" stop-color="#79b7ff"/><stop offset="1" stop-color="#48e0bb"/></linearGradient></defs>
+        <path class="spine-glow" d="M740 0C730 145 1020 215 922 405C815 612 475 512 514 760C551 994 1041 880 967 1175C909 1404 449 1332 518 1634C569 1855 918 1809 803 2350" />
+        <path class="spine-line" d="M740 0C730 145 1020 215 922 405C815 612 475 512 514 760C551 994 1041 880 967 1175C909 1404 449 1332 518 1634C569 1855 918 1809 803 2350" />
+        <circle class="journey-node" cx="922" cy="405" r="13" stroke="#ff7a61" />
+        <circle class="journey-node" cx="514" cy="760" r="13" stroke="#c9f36f" />
+        <circle class="journey-node" cx="967" cy="1175" r="13" stroke="#79b7ff" />
+        <circle class="journey-node" cx="518" cy="1634" r="13" stroke="#48e0bb" />
+      </svg>
+
+    <section id="current" class="current-section">
+      <div class="shell">
+        <header class="section-intro reveal">
+          <div><span class="section-kicker">The signal current</span><h2 class="section-title">A problem can surface in one team and start in another.</h2></div>
+          <p class="section-copy">Management may see pressure inside support. The source may be an unclear promise, a broken handoff or a process customers were never meant to understand.</p>
+        </header>
+
+        <div class="signal-field">
+          <svg class="field-current" viewBox="0 0 1200 760" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="fieldGradient" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#48e0bb"/><stop offset=".48" stop-color="#ff7a61"/><stop offset="1" stop-color="#79b7ff"/></linearGradient></defs>
+            <path class="wide" d="M88 155C255 114 285 320 495 336C708 352 741 116 1019 198C1129 231 1056 433 878 502C677 580 569 484 436 585C326 669 205 631 132 555" />
+            <path class="fine" d="M88 155C255 114 285 320 495 336C708 352 741 116 1019 198C1129 231 1056 433 878 502C677 580 569 484 436 585C326 669 205 631 132 555" />
+          </svg>
+
+          <article class="signal-island support reveal"><span class="island-label">Support sees</span><h3>The same question, again.</h3><p>A repeated contact may be a communication gap, an onboarding gap or an operating rule customers cannot understand.</p></article>
+          <article class="signal-island sales reveal reveal-delay-1"><span class="island-label">Sales sees</span><h3>Interest without a decision.</h3><p>Hesitation can begin before the sales conversation: unclear value, weak trust or a journey that asks for too much too soon.</p></article>
+          <article class="signal-island operations reveal reveal-delay-2"><span class="island-label">Operations sees</span><h3>A workaround that became normal.</h3><p>Manual steps, unclear ownership and hidden handoffs quietly consume time long after the original reason has disappeared.</p></article>
+          <article class="signal-island business reveal reveal-delay-3"><span class="island-label">Management sees</span><h3>A support problem.</h3><p>The pressure is visible here. That does not mean the cause began here.</p></article>
+          <div class="centre-diagnosis"><div><strong>The hidden constraint</strong><small>Promise · handoff · ownership</small></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="decision" class="decision-zone">
+      <svg class="decision-edge top" viewBox="0 0 1440 125" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 0H1440V37C1320 84 1205 61 1085 89C945 122 836 77 697 96C543 118 441 65 300 89C178 110 83 87 0 52V0Z" fill="#f4f0e7" />
+      </svg>
+      <div class="shell decision-content">
+        <header class="section-intro reveal">
+          <div><span class="section-kicker">From signal to decision</span><h2 class="section-title">Trace the pattern before fixing the symptom.</h2></div>
+          <p class="section-copy">My role sits between the evidence and the execution: make the problem clear, connect the people involved and define a next move the business can defend.</p>
+        </header>
+
+        <div class="decision-path reveal">
+          <svg class="decision-svg" viewBox="0 0 1200 650" preserveAspectRatio="none" aria-hidden="true">
+            <defs><linearGradient id="decisionGradient" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ff7a61"/><stop offset=".28" stop-color="#bba5ff"/><stop offset=".55" stop-color="#c9f36f"/><stop offset=".78" stop-color="#79b7ff"/><stop offset="1" stop-color="#48e0bb"/></linearGradient></defs>
+            <path class="river" d="M40 430C171 459 186 86 355 130C493 166 458 532 636 449C776 383 718 77 904 131C1051 174 1023 465 1170 432" />
+            <path class="line" pathLength="1" d="M40 430C171 459 186 86 355 130C493 166 458 532 636 449C776 383 718 77 904 131C1051 174 1023 465 1170 432" />
+          </svg>
+          <article class="decision-step listen" data-step="01"><h3>Listen</h3><p>Start with the customer, the team and the work as it actually happens.</p></article>
+          <article class="decision-step connect" data-step="02"><h3>Connect</h3><p>Trace the signal across departments, systems and handoffs.</p></article>
+          <article class="decision-step diagnose" data-step="03"><h3>Diagnose</h3><p>Separate the visible symptom from the constraint producing it.</p></article>
+          <article class="decision-step prioritise" data-step="04"><h3>Prioritise</h3><p>Weigh customer impact, commercial value, effort and risk.</p></article>
+          <article class="decision-step define" data-step="05"><h3>Define</h3><p>Set out the workflow, requirement or decision that should move next.</p></article>
+        </div>
+      </div>
+      <svg class="decision-edge bottom" viewBox="0 0 1440 125" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M0 76C133 38 242 70 375 46C520 20 635 69 780 45C918 22 1030 67 1168 43C1286 22 1376 38 1440 64V125H0V76Z" fill="#f4f0e7" />
+      </svg>
+    </section>
+
+    <section id="impact" class="impact-zone">
+      <div class="shell">
+        <header class="section-intro reveal">
+          <div><span class="section-kicker">One system, several outcomes</span><h2 class="section-title">One fix should improve the whole operating system.</h2></div>
+          <p class="section-copy">The aim is not to optimise one department at the expense of another. The strongest changes improve the customer journey and the way the company delivers it.</p>
+        </header>
+
+        <div class="impact-system">
+          <svg class="impact-connectors" viewBox="0 0 1200 700" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M600 350C430 301 344 178 250 177M600 350C776 318 860 223 982 236M600 350C590 490 531 548 463 593" />
+          </svg>
+          <article class="impact-petal support reveal"><span class="petal-index">Customer support</span><h3>Fewer avoidable contacts.</h3><p>Clearer information, stronger knowledge, better escalation paths and more consistent customer handling.</p></article>
+          <article class="impact-petal sales reveal reveal-delay-1"><span class="petal-index">Sales</span><h3>Less friction before the decision.</h3><p>Stronger trust, clearer offers and better handoffs between the promise and the experience that follows.</p></article>
+          <article class="impact-petal operations reveal reveal-delay-2"><span class="petal-index">Operations</span><h3>Work that is easier to own.</h3><p>Fewer hidden steps, clearer responsibilities and workflows designed around the outcome rather than the habit.</p></article>
+          <div class="impact-core"><div><span>Shared result</span><strong>A clearer business system</strong></div></div>
+        </div>
+      </div>
+    </section>
+    </div>
+
+    <section id="proof" class="proof-zone">
+      <div class="shell">
+        <header class="section-intro reveal">
+          <div><span class="section-kicker">Evidence behind the thinking</span><h2 class="section-title">This approach was built in real customer and business work.</h2></div>
+          <p class="section-copy">Alpha Capital shows the depth of my customer and operating work. Formula4You adds a different kind of evidence: market judgment, ownership and execution across a live business.</p>
+        </header>
+
+        <div class="proof-flow">
+          <article class="alpha-proof reveal">
+            <span class="proof-label">Alpha Capital Group · United Kingdom</span>
+            <h3>Customer patterns became operating judgment.</h3>
+            <p>High-volume Arabic and English customer work built a detailed view of trust, recurring friction and escalation risk. That foundation led to progression from customer support into a Customer Manager role.</p>
+            <div class="proof-facts">
+              <div class="proof-fact"><strong>300+</strong><span>Verified five-star reviews</span></div>
+              <div class="proof-fact"><strong>2 years</strong><span>Before career progression</span></div>
+              <div class="proof-fact"><strong>UK · Remote</strong><span>Arabic-market experience</span></div>
+            </div>
+          </article>
+
+          <aside class="founder-proof reveal reveal-delay-2">
+            <div class="formula-image"><img src="../src/assets/formula4you/formula4you-platform-home.webp" alt="Formula4You live platform homepage" /></div>
+            <div class="formula-note"><strong>Formula4You · Founder-led evidence</strong><p>A live specialist commerce platform shaped from a market gap into a business model, participant journeys, operating rules and product priorities.</p></div>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section id="routes" class="routes-zone">
+      <div class="shell">
+        <header class="section-intro reveal">
+          <div><span class="section-kicker">Continue from here</span><h2 class="section-title">Choose the question you came to answer.</h2></div>
+          <p class="section-copy">The journey stays connected, but employers and business owners need different evidence before they decide to speak.</p>
+        </header>
+
+        <div class="route-fork">
+          <svg viewBox="0 0 1200 570" preserveAspectRatio="none" aria-hidden="true"><path d="M600 542C596 445 503 420 338 375C171 330 117 206 215 121M600 542C611 432 703 413 861 371C1035 326 1077 202 990 127" /></svg>
+          <a class="route-island employers reveal" href="#proof"><span>For employers</span><h3>Can Ahmed add value inside the team?</h3><p>See career evidence, business judgment, scope of contribution and the problems I am equipped to own.</p><b>Follow the employer route →</b></a>
+          <a class="route-island businesses reveal reveal-delay-1" href="#current"><span>For businesses</span><h3>Is the visible problem the real problem?</h3><p>Start with a focused diagnostic around customer friction, growth constraints or operating work that no longer makes sense.</p><b>Follow the business route →</b></a>
+          <a class="contact-core" href="mailto:ahmedeldep30@gmail.com">Start a conversation</a>
+        </div>
+
+        <footer class="footer"><span>Ahmed Hamdy · Business Growth &amp; Operations Specialist</span><span>Alexandria, Egypt · Available for roles and selected business engagements</span></footer>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (!reducedMotion) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.16 });
+
+      document.querySelectorAll(".reveal:not(.is-visible)").forEach((element) => observer.observe(element));
+
+      const lens = document.querySelector(".system-lens");
+      const parallaxItems = lens.querySelectorAll("[data-parallax]");
+      lens.addEventListener("pointermove", (event) => {
+        const bounds = lens.getBoundingClientRect();
+        const x = (event.clientX - bounds.left) / bounds.width - .5;
+        const y = (event.clientY - bounds.top) / bounds.height - .5;
+        parallaxItems.forEach((item) => {
+          const depth = Number(item.dataset.parallax);
+          item.style.translate = `${x * 18 * depth}px ${y * 18 * depth}px`;
+        });
+      });
+      lens.addEventListener("pointerleave", () => parallaxItems.forEach((item) => { item.style.translate = "0 0"; }));
+    }
+  </script>
+</body>
+</html>

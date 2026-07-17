@@ -1,0 +1,492 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '@/assets/portrait/ahmed-hamdy-portrait-approved.webp';
+import formulaHome from '@/assets/formula4you/formula4you-platform-home.webp';
+import { external, withBase } from '@config/site';
+
+const capabilities = [
+  {
+    index: '01',
+    title: 'Customer Experience & Support Operations',
+    observation: 'Repeated contacts are rarely just a queue problem. They often point to unclear expectations, weak knowledge, a broken handoff or a journey customers cannot follow.',
+    outputs: ['Contact-driver map', 'Escalation path', 'Knowledge and communication standards', 'Customer-risk signals'],
+    proof: 'Alpha Capital · customer-facing and management experience',
+    color: 'signal',
+  },
+  {
+    index: '02',
+    title: 'Process & Workflow Improvement',
+    observation: 'I map how work actually moves—who owns it, where it waits, what gets repeated and which exceptions keep pulling people back into manual work.',
+    outputs: ['Current and future-state workflow', 'Ownership map', 'Exception rules', 'Practical SOP or brief'],
+    proof: 'Business operations and founder-led platform work',
+    color: 'sky',
+  },
+  {
+    index: '03',
+    title: 'Team Development & Service Quality',
+    observation: 'A quality problem is not always an employee problem. The guidance, tools, workload, policy and feedback loop around the employee matter just as much.',
+    outputs: ['Quality review structure', 'Case-calibration method', 'Coaching priorities', 'Service consistency standards'],
+    proof: 'Case guidance, knowledge sharing and service-quality contribution',
+    color: 'violet',
+  },
+  {
+    index: '04',
+    title: 'Customer-Led Business Improvement',
+    observation: 'Questions, objections, abandoned journeys and repeated complaints can guide decisions in content, policy, product requirements, sales and operations.',
+    outputs: ['Voice-of-customer themes', 'Risk and opportunity register', 'Priority decisions', 'Cross-functional action plan'],
+    proof: 'Customer evidence translated into business recommendations',
+    color: 'coral',
+  },
+];
+
+const lenses = [
+  ['Customer Journey & Conversion Review', 'I review clarity, trust, timing and unnecessary decisions—then define what the journey needs to solve.'],
+  ['Business Performance & Decision Support', 'I start with the business question, choose useful indicators and translate patterns into a decision or test.'],
+  ['Product Requirements & Prioritization', 'I define the problem, user need, operating consequence, requirement and acceptance logic before something is built.'],
+  ['AI-Aware Workflow Decisions', 'I decide where simplification, automation or human judgment belongs—and where an AI feature would add cost without fixing the cause.'],
+  ['Digital Commerce & Platform Operations', 'I bring founder-led experience in participant journeys, onboarding, trust, operating rules and implementation coordination.'],
+];
+---
+
+<div class="home">
+  <section class="hero" aria-labelledby="home-title">
+    <div class="wrap hero__grid">
+      <div class="hero__copy reveal is-visible">
+        <p class="eyebrow">Ahmed Hamdy · Business Growth &amp; Operations Specialist</p>
+        <h1 id="home-title">Different teams see different problems. <span>I connect the pattern.</span></h1>
+        <p class="hero__lede">A problem may appear in support, slow down sales and begin inside an operating process. I trace the signals across the business before deciding what should change.</p>
+        <p class="hero__depth">Customer Experience · Support Operations · Process Improvement · Team Development · Service Quality</p>
+        <div class="cluster hero__actions">
+          <a class="btn btn--primary" href="#diagnosis">Follow the signal <span class="btn__arrow" aria-hidden="true">↓</span></a>
+          <a class="btn" href={withBase('/work')}>View selected work <span class="btn__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <div class="system-lens" aria-label="Customer, support, sales and operations signals converging around Ahmed's portrait">
+        <span class="lens-orbit lens-orbit--one"></span>
+        <span class="lens-orbit lens-orbit--two"></span>
+        <span class="lens-orbit lens-orbit--three"></span>
+        <div class="portrait-frame" data-parallax="-0.35">
+          <Image src={portrait} alt="Ahmed Hamdy" widths={[360, 540, 720]} sizes="(max-width: 760px) 230px, 300px" loading="eager" />
+          <span>Business signal → operating decision</span>
+        </div>
+        <span class="lens-core">Root cause</span>
+        <span class="orbit-node orbit-node--support" data-parallax="0.65">Support signal</span>
+        <span class="orbit-node orbit-node--sales" data-parallax="-0.45">Sales friction</span>
+        <span class="orbit-node orbit-node--ops" data-parallax="0.5">Operating constraint</span>
+        <span class="orbit-node orbit-node--customer" data-parallax="-0.6">Customer behaviour</span>
+      </div>
+    </div>
+  </section>
+
+  <div class="journey" id="diagnosis">
+    <svg class="journey__spine" viewBox="0 0 1440 2680" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <linearGradient id="journey-gradient" x1="0" y1="0" x2="0" y2="1">
+          <stop stop-color="#48e0bb" />
+          <stop offset=".34" stop-color="#ff7a61" />
+          <stop offset=".68" stop-color="#79b7ff" />
+          <stop offset="1" stop-color="#48e0bb" />
+        </linearGradient>
+      </defs>
+      <path class="journey__glow" d="M735 0C720 185 1040 230 930 470C820 700 455 615 510 900C558 1140 1015 1040 960 1320C902 1610 445 1500 520 1810C582 2070 970 1980 814 2680" />
+      <path class="journey__line" d="M735 0C720 185 1040 230 930 470C820 700 455 615 510 900C558 1140 1015 1040 960 1320C902 1610 445 1500 520 1810C582 2070 970 1980 814 2680" />
+      <circle cx="930" cy="470" r="11" stroke="#ff7a61" />
+      <circle cx="510" cy="900" r="11" stroke="#c9f36f" />
+      <circle cx="960" cy="1320" r="11" stroke="#79b7ff" />
+      <circle cx="520" cy="1810" r="11" stroke="#48e0bb" />
+    </svg>
+
+    <section class="signal-section zone-paper">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <div><span class="eyebrow">A worked diagnosis</span><h2>The question reaches support. The cause may sit somewhere else.</h2></div>
+          <div><p>Consider a customer asking, “Where is my order?” The answer can close one ticket. The pattern behind the question tells the business what needs to change.</p><span class="scenario-label">Illustrative operating pattern</span></div>
+        </header>
+
+        <div class="signal-map">
+          <article class="signal-island signal-island--support reveal">
+            <span>Support sees</span><h3>The same question, again.</h3>
+            <p>Agents repeat the same explanation and the queue grows, even when each conversation is handled well.</p>
+          </article>
+          <article class="signal-island signal-island--sales reveal reveal-delay-1">
+            <span>Sales sees</span><h3>A promise that helped close the order.</h3>
+            <p>The offer sounds fast and simple, but the delivery expectation is not specific enough to survive the handoff.</p>
+          </article>
+          <article class="signal-island signal-island--ops reveal reveal-delay-2">
+            <span>Operations sees</span><h3>Status lives inside the team.</h3>
+            <p>The order is moving, but the customer cannot see the same information and ownership changes between steps.</p>
+          </article>
+          <article class="signal-island signal-island--lead reveal reveal-delay-3">
+            <span>Management sees</span><h3>A support-volume problem.</h3>
+            <p>The pressure is visible in support. That does not mean it started there.</p>
+          </article>
+          <div class="signal-map__core"><strong>Expectation + visibility + ownership</strong><small>The operating constraint</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="decision-section zone-night" id="how-home">
+      <div class="wrap decision-shell">
+        <header class="section-head reveal">
+          <div><span class="eyebrow">From signal to decision</span><h2>Trace the pattern before fixing the symptom.</h2></div>
+          <p>My role sits between evidence and execution: make the problem clear, connect the people involved and define a move the business can defend.</p>
+        </header>
+
+        <ol class="decision-path reveal">
+          <li><span>01</span><h3>Understand</h3><p>Start with the customer, team, process, goal and available evidence.</p></li>
+          <li><span>02</span><h3>Diagnose</h3><p>Separate the visible symptom from the constraint producing it.</p></li>
+          <li><span>03</span><h3>Prioritize</h3><p>Weigh recurrence, customer impact, business value, effort and risk.</p></li>
+          <li><span>04</span><h3>Define</h3><p>Set out the outcome, workflow, requirement, owner and success signal.</p></li>
+          <li><span>05</span><h3>Coordinate</h3><p>Give the relevant specialists a clear brief and shared decision context.</p></li>
+          <li><span>06</span><h3>Measure</h3><p>Compare what changed against a baseline instead of assuming the fix worked.</p></li>
+        </ol>
+        <div class="decision-note reveal"><strong>In this example, the next move may be a clearer delivery promise, a shared status update and explicit ownership—not another support script.</strong></div>
+      </div>
+    </section>
+
+    <section class="impact-section zone-paper">
+      <div class="wrap">
+        <header class="section-head reveal">
+          <div><span class="eyebrow">One system, several outcomes</span><h2>A useful fix improves more than the department where the problem appeared.</h2></div>
+          <p>The aim is not to optimize support at the expense of sales, or sales at the expense of operations. The change should strengthen the promise and the way the company delivers it.</p>
+        </header>
+
+        <div class="impact-system">
+          <article class="impact-petal impact-petal--support reveal"><span>Customer support</span><h3>Fewer avoidable contacts.</h3><p>Agents spend less time explaining information the journey should already provide.</p></article>
+          <article class="impact-petal impact-petal--sales reveal reveal-delay-1"><span>Sales</span><h3>A promise that survives the handoff.</h3><p>Expectation-setting becomes part of trust, not something operations has to repair later.</p></article>
+          <article class="impact-petal impact-petal--ops reveal reveal-delay-2"><span>Operations</span><h3>Work that is easier to own.</h3><p>Status, exceptions and responsibility are clearer across the complete flow.</p></article>
+          <article class="impact-petal impact-petal--lead reveal reveal-delay-3"><span>Leadership</span><h3>Better decisions from the same signals.</h3><p>Recurring demand becomes evidence for process, policy, product and capacity decisions.</p></article>
+          <div class="impact-core"><span>Shared result</span><strong>A clearer operating system</strong></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <section class="capability-section zone-paper" id="capabilities">
+    <div class="wrap">
+      <header class="section-head reveal">
+        <div><span class="eyebrow">Where I add depth</span><h2>Four connected capabilities. Each leaves something the business can use.</h2></div>
+        <p>This is the core of my work. The wider product, journey, data and automation lenses support these capabilities; they do not replace them.</p>
+      </header>
+
+      <div class="capability-list">
+        {capabilities.map((capability) => (
+          <article class={`capability-row capability-row--${capability.color} reveal`}>
+            <div class="capability-row__title"><span>{capability.index}</span><h3>{capability.title}</h3><small>{capability.proof}</small></div>
+            <p class="capability-row__observation">{capability.observation}</p>
+            <ul>{capability.outputs.map((output) => <li>{output}</li>)}</ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="proof-section zone-raised" id="evidence">
+    <div class="wrap">
+      <header class="section-head reveal">
+        <div><span class="eyebrow">Evidence behind the thinking</span><h2>Two different environments shaped the same operating judgment.</h2></div>
+        <p>Alpha Capital comes first because it shows customer depth and career progression inside an international company. Formula4You follows as founder-led evidence of ownership and wider business decisions.</p>
+      </header>
+
+      <div class="proof-grid">
+        <article class="alpha-proof reveal">
+          <span class="proof-label">User-confirmed career experience · UK remote fintech</span>
+          <h3>From individual conversations to patterns the business could act on.</h3>
+          <p>At Alpha Capital Group, I worked closely with Arabic-speaking customers in a high-volume environment and progressed from Customer Support Specialist to Customer Manager after two years. The work sharpened my judgment around trust, sensitive cases, escalation, service consistency and the difference between a one-off problem and a process that will keep producing the same problem.</p>
+          <div class="alpha-proof__flow">
+            <span>Customer evidence</span><i></i><span>Recurring pattern</span><i></i><span>Operating recommendation</span>
+          </div>
+          <ul>
+            <li>Arabic-market communication and relationship building</li>
+            <li>Complex-case ownership and cross-functional follow-up</li>
+            <li>Knowledge sharing, case guidance and service-quality contribution</li>
+            <li>Hundreds of five-star customer reviews, using the safe public wording while exact evidence is not published</li>
+          </ul>
+          <a href={withBase('/work/alpha-capital')}>Read the Alpha Capital case <span aria-hidden="true">→</span></a>
+        </article>
+
+        <article class="formula-proof reveal reveal-delay-1">
+          <div class="formula-proof__image"><Image src={formulaHome} alt="The live Formula4You specialist fragrance-commerce platform" widths={[520, 760, 1040]} sizes="(max-width: 900px) 100vw, 42vw" /></div>
+          <div class="formula-proof__copy">
+            <span class="proof-label">Verified live platform · founder-led work</span>
+            <h3>A market gap turned into a working business system.</h3>
+            <p>Formula4You proves a different part of the role: market diagnosis, participant journeys, onboarding, trust, operating rules, priorities and coordination across a live specialist platform.</p>
+            <p class="formula-proof__role">Founder — Business Growth, Customer Experience &amp; Platform Operations</p>
+            <div class="cluster">
+              <a class="btn btn--primary" href={withBase('/work/formula4you')}>Read the case</a>
+              <a class="btn" href={external.formula4you} rel="noopener">Visit live platform ↗</a>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="lenses-section zone-paper">
+    <div class="wrap">
+      <header class="section-head reveal">
+        <div><span class="eyebrow">Supporting business lenses</span><h2>I can work next to technical specialists without pretending to be one.</h2></div>
+        <p>I define the business question, customer need, workflow, priority and success criteria. Designers, engineers and data specialists retain ownership of their craft.</p>
+      </header>
+      <div class="lens-list">
+        {lenses.map(([title, copy], index) => (
+          <article class="lens-row reveal">
+            <span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{copy}</p>
+          </article>
+        ))}
+      </div>
+      <div class="build-rule reveal">
+        <span>Simplify</span><i>→</i><span>Automate</span><i>→</i><span>Build</span>
+        <p>Building is the last option, not the first reaction. A clearer sentence, fewer fields or better ownership may solve more than a new feature.</p>
+        <a href={withBase('/how-i-work')}>See the full working method →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="about-strip zone-night">
+    <div class="wrap about-strip__grid">
+      <div class="about-strip__quote reveal">
+        <span class="eyebrow">Why I see problems this way</span>
+        <blockquote>When the same question appears hundreds of times, I do not see hundreds of separate problems. I see one part of the system speaking through customers.</blockquote>
+      </div>
+      <div class="about-strip__copy reveal reveal-delay-1">
+        <p>My customer-facing foundation still shapes how I work. It helps me connect customer behaviour, team performance, operating processes and wider business decisions instead of treating each problem in isolation.</p>
+        <a href={withBase('/about')}>Read the career story →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="routes-section zone-paper">
+    <div class="wrap">
+      <header class="section-head reveal">
+        <div><span class="eyebrow">Continue from here</span><h2>Choose the question you came to answer.</h2></div>
+        <p>The same evidence is organized differently for an employer and for a business owner. The route changes; the professional identity does not.</p>
+      </header>
+
+      <div class="route-fork">
+        <a class="route-card route-card--employer reveal" href={withBase('/for-employers')}>
+          <span>For employers</span><h3>Can Ahmed add value inside the team?</h3><p>See role fit, career evidence, contribution boundaries and the problems I am equipped to own.</p><b>Follow the employer route →</b>
+        </a>
+        <div class="route-core">One evidence base</div>
+        <a class="route-card route-card--business reveal reveal-delay-1" href={withBase('/for-businesses')}>
+          <span>For businesses</span><h3>Is the visible problem the real problem?</h3><p>See what I diagnose, the evidence I review, the outputs you receive and where implementation responsibility begins.</p><b>Follow the business route →</b>
+        </a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .hero { position: relative; min-height: 860px; padding: 9.5rem 0 9rem; overflow: hidden; color: var(--white); background: radial-gradient(circle at 84% 22%, rgba(121,183,255,.18), transparent 24rem), radial-gradient(circle at 7% 80%, rgba(72,224,187,.12), transparent 25rem), linear-gradient(135deg,#04151e 0%,#082632 63%,#0a303a 100%); }
+  .hero::before { content: ''; position: absolute; inset: 0; opacity: .19; background-image: radial-gradient(rgba(255,255,255,.28) .7px, transparent .7px); background-size: 24px 24px; mask-image: radial-gradient(circle at 36% 36%,black,transparent 66%); }
+  .hero::after { content: ''; position: absolute; z-index: 3; left: -5%; right: -5%; bottom: -95px; height: 180px; border-radius: 52% 48% 0 0 / 58% 65% 0 0; background: var(--paper); transform: rotate(-1.2deg); box-shadow: 0 -22px 45px rgba(0,0,0,.08); }
+  .hero__grid { position: relative; z-index: 4; display: grid; grid-template-columns: minmax(0,1.02fr) minmax(450px,.98fr); align-items: center; gap: clamp(3rem,7vw,6.5rem); }
+  .hero__copy h1 { max-width: 780px; margin-top: 1.25rem; font-size: var(--fs-display); line-height: .98; letter-spacing: -.068em; }
+  .hero__copy h1 span { position: relative; display: inline; color: var(--signal); }
+  .hero__copy h1 span::after { content: ''; position: absolute; left: 1%; right: -3%; bottom: -.12em; height: 12px; border-radius: 50%; border-top: 3px solid var(--coral); transform: rotate(-1.2deg); }
+  .hero__lede { max-width: 650px; margin-top: 1.7rem; color: rgba(255,255,255,.68); font-size: clamp(1rem,.96rem + .3vw,1.2rem); }
+  .hero__depth { max-width: 660px; margin-top: 1.3rem; color: rgba(255,255,255,.45); font: 750 .7rem/1.7 var(--font-head); letter-spacing: .08em; text-transform: uppercase; }
+  .hero__actions { margin-top: 2rem; }
+  .system-lens { position: relative; min-height: 535px; }
+  .lens-orbit { position: absolute; border: 1px solid rgba(255,255,255,.14); border-radius: 48% 52% 57% 43% / 54% 44% 56% 46%; animation: orbit-shape 11s ease-in-out infinite alternate; }
+  .lens-orbit--one { inset: 20px 0 5px 5px; transform: rotate(12deg); }
+  .lens-orbit--two { inset: 76px 55px 58px 50px; border-color: rgba(72,224,187,.25); transform: rotate(-17deg); animation-delay: -4s; }
+  .lens-orbit--three { inset: 132px 115px 108px 105px; border-style: dashed; border-color: rgba(121,183,255,.3); animation-delay: -7s; }
+  .portrait-frame { position: absolute; z-index: 4; left: 50%; top: 48%; width: 290px; height: 380px; overflow: hidden; border: 6px solid rgba(255,255,255,.12); border-radius: 28px 12px 36px 16px; background: var(--night-soft); box-shadow: 0 35px 90px rgba(0,0,0,.45), inset 0 0 30px rgba(255,255,255,.08); transform: translate(-50%,-50%) rotate(1.2deg); }
+  .portrait-frame img { width: 100%; height: 100%; object-fit: cover; object-position: center 17%; filter: saturate(.84) contrast(1.04); }
+  .portrait-frame span { position: absolute; left: 12px; right: 12px; bottom: 12px; padding: .7rem .9rem; color: rgba(255,255,255,.72); border: 1px solid rgba(255,255,255,.14); border-radius: 14px 6px 16px 8px; background: rgba(4,21,30,.78); backdrop-filter: blur(10px); font: 750 .58rem var(--font-head); letter-spacing: .08em; text-transform: uppercase; }
+  .lens-core { position: absolute; z-index: 6; left: 70%; top: 67%; width: 104px; height: 104px; display: grid; place-items: center; color: var(--ink); border-radius: 48% 52% 43% 57% / 58% 41% 59% 42%; background: var(--acid); box-shadow: 0 18px 45px rgba(0,0,0,.32),0 0 0 13px rgba(201,243,111,.08); transform: translate(-50%,-50%); font: 850 .58rem var(--font-head); letter-spacing: .09em; text-transform: uppercase; animation: core-pulse 3.5s ease-in-out infinite; }
+  .orbit-node { position: absolute; z-index: 7; display: flex; align-items: center; gap: .55rem; padding: .75rem .95rem; color: rgba(255,255,255,.82); border: 1px solid rgba(255,255,255,.16); border-radius: var(--shape-pill); background: rgba(6,24,34,.74); box-shadow: 0 18px 36px rgba(0,0,0,.28); backdrop-filter: blur(15px); font: 760 .63rem var(--font-head); }
+  .orbit-node::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--node,var(--signal)); box-shadow: 0 0 15px var(--node,var(--signal)); }
+  .orbit-node--support { left: 0; top: 20%; }
+  .orbit-node--sales { --node: var(--coral); right: -2%; top: 29%; }
+  .orbit-node--ops { --node: var(--sky); left: 7%; bottom: 6%; }
+  .orbit-node--customer { --node: var(--violet); right: 1%; bottom: 10%; }
+  .journey { position: relative; color: var(--ink); background: var(--paper); }
+  .journey__spine { position: absolute; z-index: 2; inset: 0; width: 100%; height: 100%; pointer-events: none; opacity: .55; }
+  .journey__glow { fill: none; stroke: rgba(17,125,108,.07); stroke-width: 55; stroke-linecap: round; }
+  .journey__line { fill: none; stroke: url(#journey-gradient); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 8 14; animation: dash 22s linear infinite; }
+  .journey__spine circle { fill: var(--paper); stroke-width: 3; }
+  .signal-section, .impact-section { position: relative; z-index: 3; padding: 3.5rem 0 5rem; }
+  .scenario-label { display: inline-block; margin-top: .9rem; color: var(--slate-soft); font: 750 .62rem var(--font-head); letter-spacing: .1em; text-transform: uppercase; }
+  .signal-map { position: relative; min-height: 600px; }
+  .signal-island { position: absolute; z-index: 3; width: 285px; min-height: 176px; padding: 1.8rem; border: 1px solid var(--paper-line); background: rgba(255,255,255,.77); box-shadow: var(--shadow-soft); backdrop-filter: blur(12px); }
+  .signal-island span { color: var(--signal-deep); font: 850 .58rem var(--font-head); letter-spacing: .14em; text-transform: uppercase; }
+  .signal-island h3 { margin: 1.7rem 0 .65rem; font-size: 1.35rem; }
+  .signal-island p { color: var(--ink-soft); font-size: .84rem; }
+  .signal-island--support { left: 2%; top: 3%; border-radius: 64% 36% 54% 46% / 43% 60% 40% 57%; }
+  .signal-island--sales { right: 4%; top: 13%; border-radius: 38% 62% 66% 34% / 61% 38% 62% 39%; }
+  .signal-island--sales span { color: #c84b38; }
+  .signal-island--ops { left: 12%; bottom: 0; border-radius: 43% 57% 34% 66% / 55% 43% 57% 45%; }
+  .signal-island--ops span { color: #286cb5; }
+  .signal-island--lead { right: 11%; bottom: 1%; color: var(--white); border-color: transparent; border-radius: 59% 41% 44% 56% / 37% 63% 37% 63%; background: var(--night-soft); box-shadow: var(--shadow-deep); }
+  .signal-island--lead span { color: var(--acid); }
+  .signal-island--lead p { color: rgba(255,255,255,.6); }
+  .signal-map__core { position: absolute; z-index: 5; left: 50%; top: 48%; width: 180px; height: 180px; display: grid; place-content: center; padding: 1.5rem; text-align: center; border-radius: 50%; background: var(--acid); box-shadow: 0 24px 58px rgba(77,105,27,.2),0 0 0 18px rgba(201,243,111,.15); transform: translate(-50%,-50%); }
+  .signal-map__core strong { font: 800 1rem/1.25 var(--font-head); }
+  .signal-map__core small { margin-top: .5rem; color: rgba(7,26,36,.58); font: 800 .55rem var(--font-head); letter-spacing: .12em; text-transform: uppercase; }
+  .decision-section { position: relative; z-index: 4; padding: 2.5rem 0; background: transparent; }
+  .decision-shell { padding: clamp(2.6rem,6vw,5rem); border-radius: 72px 22px 82px 30px; background: radial-gradient(circle at 8% 45%,rgba(72,224,187,.12),transparent 20rem),radial-gradient(circle at 90% 80%,rgba(121,183,255,.13),transparent 23rem),var(--night); box-shadow: var(--shadow-deep); }
+  .decision-path { position: relative; display: grid; grid-template-columns: repeat(6,1fr); gap: 1rem; }
+  .decision-path::before { content: ''; position: absolute; left: 3%; right: 3%; top: 21px; height: 2px; background: linear-gradient(90deg,var(--coral),var(--violet),var(--acid),var(--sky),var(--signal)); }
+  .decision-path li { position: relative; z-index: 2; padding-right: .7rem; }
+  .decision-path span { width: 43px; height: 43px; display: grid; place-items: center; margin-bottom: 1.25rem; color: var(--ink); border-radius: 52% 48% 40% 60% / 45% 58% 42% 55%; background: var(--signal); box-shadow: 0 0 0 8px rgba(255,255,255,.04); font: 850 .62rem var(--font-head); }
+  .decision-path li:nth-child(1) span { background: var(--coral); }
+  .decision-path li:nth-child(2) span { background: var(--violet); }
+  .decision-path li:nth-child(3) span { background: var(--acid); }
+  .decision-path li:nth-child(4) span { background: var(--sky); }
+  .decision-path li:nth-child(6) span { background: var(--acid); }
+  .decision-path h3 { font-size: 1.05rem; }
+  .decision-path p { margin-top: .6rem; color: var(--slate); font-size: .74rem; line-height: 1.6; }
+  .decision-note { max-width: 900px; margin: 2.5rem auto 0; padding: 1.2rem 1.5rem; color: var(--ink); border-radius: 28px 9px 30px 12px; background: var(--acid); text-align: center; font-size: .86rem; }
+  .impact-section { padding-top: 4.5rem; padding-bottom: 5.5rem; }
+  .impact-system { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; padding: 0 3rem; }
+  .impact-petal { position: relative; min-height: 205px; padding: 2.1rem; box-shadow: var(--shadow-soft); }
+  .impact-petal span { color: rgba(7,26,36,.49); font: 850 .58rem var(--font-head); letter-spacing: .14em; text-transform: uppercase; }
+  .impact-petal h3 { margin: 2rem 0 .7rem; font-size: 1.65rem; }
+  .impact-petal p { color: var(--ink-soft); font-size: .84rem; }
+  .impact-petal--support { border-radius: 70% 30% 55% 45% / 39% 66% 34% 61%; background: var(--signal-soft); }
+  .impact-petal--sales { border-radius: 39% 61% 69% 31% / 64% 38% 62% 36%; background: var(--coral-soft); }
+  .impact-petal--ops { border-radius: 40% 60% 36% 64% / 57% 39% 61% 43%; background: var(--sky-soft); }
+  .impact-petal--lead { border-radius: 62% 38% 47% 53% / 42% 61% 39% 58%; background: #ece4ff; }
+  .impact-core { position: absolute; z-index: 4; left: 50%; top: 50%; width: 178px; height: 178px; display: grid; place-content: center; padding: 1.5rem; color: var(--white); border-radius: 52% 48% 55% 45% / 43% 60% 40% 57%; background: var(--night-soft); box-shadow: 0 25px 60px rgba(7,26,36,.28),0 0 0 17px rgba(7,26,36,.04); text-align: center; transform: translate(-50%,-50%); }
+  .impact-core span { color: var(--signal); font: 850 .55rem var(--font-head); letter-spacing: .13em; text-transform: uppercase; }
+  .impact-core strong { margin-top: .7rem; font: 780 1.1rem/1.25 var(--font-head); }
+  .capability-section { padding: 4.5rem 0 6rem; }
+  .capability-list { border-top: 1px solid var(--paper-line); }
+  .capability-row { --cap: var(--signal); display: grid; grid-template-columns: minmax(280px,.8fr) minmax(300px,1fr) minmax(220px,.72fr); gap: clamp(1.5rem,4vw,3.5rem); align-items: start; padding: 2rem 0; border-bottom: 1px solid var(--paper-line); }
+  .capability-row--sky { --cap: #458bd8; }
+  .capability-row--violet { --cap: #8069cc; }
+  .capability-row--coral { --cap: #cb503a; }
+  .capability-row__title > span { color: var(--cap); font: 850 .62rem var(--font-head); letter-spacing: .12em; }
+  .capability-row h3 { margin-top: .5rem; font-size: 1.4rem; }
+  .capability-row small { display: block; margin-top: .65rem; color: var(--slate-soft); font-size: .68rem; }
+  .capability-row__observation { color: var(--ink-soft); font-size: .9rem; }
+  .capability-row ul { display: grid; gap: .35rem; }
+  .capability-row li { position: relative; padding-left: 1rem; color: var(--ink-soft); font-size: .76rem; }
+  .capability-row li::before { content: ''; position: absolute; left: 0; top: .65em; width: .38rem; height: .38rem; border-radius: 50%; background: var(--cap); }
+  .proof-section { position: relative; padding: 7rem 0; overflow: hidden; }
+  .proof-section::before { content: ''; position: absolute; left: -4%; right: -4%; top: -78px; height: 128px; border-radius: 0 0 52% 48%; background: var(--paper); }
+  .proof-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 1.8rem; align-items: stretch; }
+  .alpha-proof { padding: clamp(2rem,4.5vw,3.8rem); color: var(--ink); border-radius: 74px 24px 84px 28px; background: var(--paper); box-shadow: var(--shadow-deep); }
+  .alpha-proof h3 { max-width: 650px; margin: 1.4rem 0 1rem; font-size: clamp(2rem,3.3vw,3.4rem); }
+  .alpha-proof > p { color: var(--ink-soft); }
+  .alpha-proof__flow { display: flex; align-items: center; gap: .75rem; margin: 2rem 0; color: var(--signal-deep); font: 850 .62rem var(--font-head); letter-spacing: .08em; text-transform: uppercase; }
+  .alpha-proof__flow i { flex: 1; min-width: 20px; height: 1px; background: var(--paper-line-strong); }
+  .alpha-proof ul { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem 1.4rem; }
+  .alpha-proof li { position: relative; padding-left: 1rem; color: var(--ink-soft); font-size: .78rem; }
+  .alpha-proof li::before { content: ''; position: absolute; left: 0; top: .6em; width: .4rem; height: .4rem; border-radius: 50%; background: var(--signal-deep); }
+  .alpha-proof > a { display: inline-block; margin-top: 1.8rem; color: var(--signal-deep); font: 850 .82rem var(--font-head); text-decoration: none; }
+  .formula-proof { overflow: hidden; border: 1px solid var(--hairline); border-radius: 26px 72px 30px 82px; background: rgba(255,255,255,.055); box-shadow: var(--shadow-deep); }
+  .formula-proof__image { position: relative; height: 290px; overflow: hidden; }
+  .formula-proof__image::after { content: ''; position: absolute; inset: auto 0 0; height: 55%; background: linear-gradient(transparent,var(--night-soft)); }
+  .formula-proof__image img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+  .formula-proof__copy { padding: 2rem; }
+  .formula-proof h3 { margin: 1rem 0 .75rem; font-size: 1.9rem; }
+  .formula-proof p { color: var(--slate); font-size: .86rem; }
+  .formula-proof__role { margin: 1rem 0 1.5rem; color: var(--signal) !important; font: 800 .7rem var(--font-head); }
+  .formula-proof .btn { min-height: 42px; font-size: .72rem; }
+  .lenses-section { padding: 6.5rem 0; }
+  .lens-list { border-top: 1px solid var(--paper-line); }
+  .lens-row { display: grid; grid-template-columns: 55px minmax(250px,.72fr) minmax(320px,1fr); gap: 1.5rem; padding: 1.4rem 0; border-bottom: 1px solid var(--paper-line); align-items: baseline; }
+  .lens-row > span { color: var(--signal-deep); font: 850 .62rem var(--font-head); }
+  .lens-row h3 { font-size: 1.1rem; }
+  .lens-row p { color: var(--ink-soft); font-size: .84rem; }
+  .build-rule { display: grid; grid-template-columns: auto auto auto auto auto minmax(260px,1fr) auto; align-items: center; gap: 1rem; margin-top: 3rem; padding: 1.5rem 1.8rem; color: var(--white); border-radius: 36px 13px 40px 16px; background: var(--night-soft); box-shadow: var(--shadow-soft); }
+  .build-rule > span { color: var(--acid); font: 850 .8rem var(--font-head); }
+  .build-rule i { color: var(--slate); font-style: normal; }
+  .build-rule p { color: var(--slate); font-size: .78rem; }
+  .build-rule a { color: var(--signal); font: 850 .72rem var(--font-head); text-decoration: none; white-space: nowrap; }
+  .about-strip { padding: 6rem 0; background: radial-gradient(circle at 10% 40%,rgba(187,165,255,.13),transparent 22rem),var(--night); }
+  .about-strip__grid { display: grid; grid-template-columns: 1.2fr .65fr; gap: clamp(3rem,9vw,8rem); align-items: center; }
+  .about-strip blockquote { margin-top: 1.4rem; font: italic clamp(2rem,3.5vw,3.8rem)/1.15 var(--font-serif); letter-spacing: -.025em; }
+  .about-strip__copy p { color: var(--slate); }
+  .about-strip__copy a { display: inline-block; margin-top: 1.4rem; color: var(--signal); font: 850 .82rem var(--font-head); text-decoration: none; }
+  .routes-section { padding: 6rem 0 7rem; }
+  .route-fork { position: relative; display: grid; grid-template-columns: 1fr 135px 1fr; gap: 1.2rem; align-items: center; }
+  .route-card { min-height: 310px; display: flex; flex-direction: column; justify-content: center; padding: clamp(2rem,4vw,3.3rem); color: var(--ink); text-decoration: none; box-shadow: var(--shadow-soft); transition: transform var(--dur-mid) var(--ease); }
+  .route-card:hover { transform: translateY(-7px); }
+  .route-card > span { color: var(--signal-deep); font: 850 .62rem var(--font-head); letter-spacing: .14em; text-transform: uppercase; }
+  .route-card h3 { margin: 1.3rem 0 .75rem; font-size: 2rem; }
+  .route-card p { color: var(--ink-soft); font-size: .86rem; }
+  .route-card b { margin-top: 1.6rem; color: var(--signal-deep); font: 850 .76rem var(--font-head); }
+  .route-card--employer { border-radius: 74% 26% 44% 56% / 38% 64% 36% 62%; background: var(--signal-soft); }
+  .route-card--business { border-radius: 36% 64% 72% 28% / 65% 37% 63% 35%; background: var(--coral-soft); }
+  .route-core { width: 125px; height: 125px; display: grid; place-items: center; padding: 1rem; color: var(--white); border-radius: 50%; background: var(--night-soft); box-shadow: var(--shadow-soft),0 0 0 16px rgba(7,26,36,.04); text-align: center; font: 850 .66rem/1.3 var(--font-head); text-transform: uppercase; }
+  @keyframes dash { to { stroke-dashoffset: -220; } }
+  @keyframes orbit-shape { to { border-radius: 54% 46% 44% 56% / 47% 57% 43% 53%; transform: rotate(-7deg) scale(1.02); } }
+  @keyframes core-pulse { 50% { box-shadow: 0 18px 45px rgba(0,0,0,.32),0 0 0 20px rgba(201,243,111,.04); transform: translate(-50%,-50%) scale(1.03); } }
+  @media (max-width: 1020px) {
+    .hero { min-height: auto; }
+    .hero__grid { grid-template-columns: 1fr; }
+    .system-lens { width: min(100%,620px); margin-inline: auto; }
+    .decision-path { grid-template-columns: repeat(3,1fr); gap: 2rem 1rem; }
+    .decision-path::before { display: none; }
+    .proof-grid { grid-template-columns: 1fr; }
+    .capability-row { grid-template-columns: 1fr 1fr; }
+    .capability-row ul { grid-column: 2; }
+    .build-rule { grid-template-columns: repeat(5,auto); }
+    .build-rule p, .build-rule a { grid-column: 1 / -1; }
+  }
+  @media (max-width: 760px) {
+    .hero { padding: 7.4rem 0 7.2rem; }
+    .hero__copy h1 { font-size: clamp(2.8rem,13vw,4.3rem); }
+    .system-lens { min-height: 450px; }
+    .portrait-frame { width: 230px; height: 315px; }
+    .lens-core { left: 73%; top: 70%; width: 86px; height: 86px; }
+    .orbit-node { font-size: .54rem; padding: .62rem .7rem; }
+    .orbit-node--support { left: -1%; }
+    .orbit-node--sales { right: -1%; }
+    .signal-section, .impact-section { padding-top: 2.4rem; }
+    .journey__spine { opacity: .28; }
+    .signal-map { display: grid; gap: 1rem; min-height: auto; padding-bottom: 155px; }
+    .signal-island { position: relative; inset: auto !important; width: 100%; min-height: 150px; padding: 1.5rem; }
+    .signal-island:nth-child(even) { width: 94%; margin-left: 6%; }
+    .signal-map__core { top: auto; bottom: 0; width: 128px; height: 128px; transform: translate(-50%,0); }
+    .decision-shell { padding: 2.3rem 1.3rem; border-radius: 44px 18px 50px 21px; }
+    .decision-path { grid-template-columns: 1fr 1fr; }
+    .impact-system { grid-template-columns: 1fr; padding: 0 0 160px; }
+    .impact-petal { min-height: 175px; }
+    .impact-petal:nth-child(even) { width: 94%; margin-left: 6%; }
+    .impact-core { top: auto; bottom: 0; width: 135px; height: 135px; transform: translate(-50%,0); }
+    .capability-row { grid-template-columns: 1fr; gap: 1rem; }
+    .capability-row ul { grid-column: auto; }
+    .alpha-proof { border-radius: 48px 18px 54px 21px; }
+    .alpha-proof ul { grid-template-columns: 1fr; }
+    .alpha-proof__flow { flex-wrap: wrap; }
+    .lens-row { grid-template-columns: 38px 1fr; }
+    .lens-row p { grid-column: 2; }
+    .about-strip__grid { grid-template-columns: 1fr; }
+    .route-fork { grid-template-columns: 1fr; padding-bottom: 145px; }
+    .route-core { position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); }
+    .route-card { min-height: 260px; }
+  }
+  @media (max-width: 480px) {
+    .hero__depth { font-size: .6rem; }
+    .system-lens { min-height: 415px; }
+    .portrait-frame { width: 205px; height: 285px; }
+    .orbit-node--ops { left: -2%; }
+    .decision-path { grid-template-columns: 1fr; }
+    .build-rule { grid-template-columns: auto auto auto; }
+    .build-rule span:nth-of-type(3), .build-rule i:nth-of-type(2) { margin-top: .4rem; }
+  }
+</style>
+
+<script>
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) {
+    const lens = document.querySelector<HTMLElement>('.system-lens');
+    const items = lens?.querySelectorAll<HTMLElement>('[data-parallax]');
+    lens?.addEventListener('pointermove', (event) => {
+      const bounds = lens.getBoundingClientRect();
+      const x = (event.clientX - bounds.left) / bounds.width - .5;
+      const y = (event.clientY - bounds.top) / bounds.height - .5;
+      items?.forEach((item) => {
+        const depth = Number(item.dataset.parallax ?? 0);
+        item.style.translate = `${x * 18 * depth}px ${y * 18 * depth}px`;
+      });
+    });
+    lens?.addEventListener('pointerleave', () => items?.forEach((item) => { item.style.translate = '0 0'; }));
+  }
+</script>

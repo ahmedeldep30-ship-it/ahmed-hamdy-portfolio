@@ -1,197 +1,89 @@
 ---
-import { withBase, cta } from '@config/site';
+import { withBase } from '@config/site';
 
 interface Props { path: string }
 const { path } = Astro.props;
-
-/**
- * Five primary links + audience switch + one contextual CTA (Gate 1 §8).
- *
- * Playbooks / Insights / How I Work point at home-page previews until their
- * full routes ship in Phase 4–5. Nothing links to a page that does not exist.
- */
+const isHome = path === '/';
 const links = [
   { label: 'Work', href: '/work' },
-  // Playbooks merged into the capability section at Gate 2 — each capability
-  // now names the playbook behind it. The label stays (it is what people look
-  // for); the destination is the merged section.
-  { label: 'Playbooks', href: '/#capabilities' },
-  { label: 'Insights', href: '/#insights' },
-  { label: 'How I Work', href: '/#how-i-work' },
-  { label: 'About', href: '/#about' },
+  { label: 'How I Work', href: '/how-i-work' },
+  { label: 'Insights', href: '/insights' },
+  { label: 'About', href: '/about' },
 ];
-const isActive = (href: string) => href === '/work' && path.startsWith('/work');
+const active = (href: string) => path === href || (href !== '/' && path.startsWith(`${href}/`));
 ---
 
-<header class="hdr">
-  <div class="wrap hdr__in">
-    <a class="hdr__brand" href={withBase('/')}>
-      <span class="hdr__name">Ahmed Hamdy</span>
-      <span class="hdr__role">Business Growth &amp; Operations</span>
+<header class:list={['hdr', { 'hdr--home': isHome }]}>
+  <div class="wrap hdr__inner">
+    <a class="hdr__brand" href={withBase('/')} aria-label="Ahmed Hamdy, home">
+      <span class="hdr__mark">AH</span>
+      <span>
+        <strong>Ahmed Hamdy</strong>
+        <small>Business Growth &amp; Operations</small>
+      </span>
     </a>
 
-    <nav class="hdr__nav" aria-label="Primary">
-      {links.map((l) => (
-        <a
-          href={l.href.startsWith('/#') ? withBase('/') + l.href.slice(1) : withBase(l.href)}
-          aria-current={isActive(l.href) ? 'page' : undefined}
-        >{l.label}</a>
+    <nav class="hdr__nav" aria-label="Primary navigation">
+      {links.map((link) => (
+        <a href={withBase(link.href)} aria-current={active(link.href) ? 'page' : undefined}>{link.label}</a>
       ))}
     </nav>
 
-    <div class="hdr__right">
-      <!-- Curates labels + CTA only. Never gates content or alters crawler access. -->
-      <div class="aud no-js-hide" role="group" aria-label="Choose your path">
-        <button type="button" data-aud="business" aria-pressed="true">For Businesses</button>
-        <button type="button" data-aud="employer" aria-pressed="false">For Employers</button>
-      </div>
-      {/*
-        Fixed CTA shell. Both labels are rendered and stacked; only opacity
-        crossfades. The shell is sized by the LONGER label held in the layout by
-        an invisible sizer, so the button's external dimensions — and therefore
-        every nav item's position — never move between audience states.
-        Previously "Request a Business Diagnostic" vs "Discuss a Role" resized
-        the button and shifted the whole header.
-      */}
-      <a class="btn btn--primary cta-shell" href={withBase(cta.business.href)} data-cta-shell>
-        <span class="cta-shell__stack">
-          {/* Sizer and both labels share ONE grid cell: the cell sizes to the
-              widest (the sizer), the labels overlay it. If the sizer sat beside
-              the labels it would ADD its width instead of defining it. */}
-          <span class="cta-shell__sizer" aria-hidden="true">{cta.business.label}</span>
-          <span class="cta-shell__label is-on" data-cta-label="business">{cta.business.label}</span>
-          <span class="cta-shell__label" data-cta-label="employer" aria-hidden="true">{cta.employer.label}</span>
-        </span>
-        <svg class="cta-shell__arrow" viewBox="0 0 14 10" width="14" height="10" aria-hidden="true">
-          <path d="M0 5h12M8.5 1.5 12 5l-3.5 3.5" fill="none" stroke="currentColor"
-                stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </a>
+    <div class="hdr__routes">
+      <a href={withBase('/for-employers')}>For employers</a>
+      <a href={withBase('/for-businesses')}>For businesses</a>
+      <a class="hdr__contact" href={withBase('/contact')}>Talk to me <span aria-hidden="true">↗</span></a>
     </div>
 
-    <button class="hdr__burger no-js-hide" type="button" aria-expanded="false" aria-controls="hdr-m">
-      <span class="visually-hidden">Menu</span>
-      <svg viewBox="0 0 20 14" aria-hidden="true" width="20" height="14">
-        <path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.6" fill="none" />
-      </svg>
+    <button class="hdr__burger no-js-hide" type="button" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="visually-hidden">Open navigation</span>
+      <span></span><span></span>
     </button>
   </div>
 
-  <div class="hdr__m" id="hdr-m" hidden>
-    <div class="wrap stack">
-      {links.map((l) => (
-        <a href={l.href.startsWith('/#') ? withBase('/') + l.href.slice(1) : withBase(l.href)}>{l.label}</a>
-      ))}
-      <hr class="resolve-rule" />
-      <div class="aud aud--m" role="group" aria-label="Choose your path">
-        <button type="button" data-aud="business" aria-pressed="true">For Businesses</button>
-        <button type="button" data-aud="employer" aria-pressed="false">For Employers</button>
-      </div>
-      <a class="btn btn--primary" href={withBase(cta.business.href)} data-cta>{cta.business.label}</a>
-    </div>
+  <div class="hdr__mobile" id="mobile-menu" hidden>
+    <nav class="wrap" aria-label="Mobile navigation">
+      {links.map((link) => <a href={withBase(link.href)}>{link.label}</a>)}
+      <a href={withBase('/for-employers')}>For employers</a>
+      <a href={withBase('/for-businesses')}>For businesses</a>
+      <a class="btn btn--primary" href={withBase('/contact')}>Start a conversation</a>
+    </nav>
   </div>
 </header>
 
 <style>
-  .hdr {
-    position: sticky; top: 0; z-index: 50;
-    background: color-mix(in srgb, var(--surface-deep) 88%, transparent);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--hairline);
-  }
-  .hdr__in { display: flex; align-items: center; gap: var(--s5); min-height: 66px; }
-  .hdr__brand { display: flex; flex-direction: column; text-decoration: none; color: var(--text); flex: none; }
-  .hdr__name { font-family: var(--font-head); font-weight: 700; font-size: 1rem; letter-spacing: -0.01em; }
-  .hdr__role { font-size: 0.6875rem; color: var(--text-faint); letter-spacing: 0.04em; }
-
-  .hdr__nav { display: flex; gap: var(--s5); margin-inline-start: auto; flex: none; }
-  .hdr__nav a {
-    position: relative;
-    font-family: var(--font-head); font-size: var(--fs-small); font-weight: 600;
-    color: var(--text-muted); text-decoration: none; padding: 0.4rem 0;
-    white-space: nowrap;              /* "How I Work" must never wrap to 3 lines */
-    transition: color var(--dur-fast) var(--ease);
-  }
-  /* Underline grows from the left rather than appearing — a movement, not a flash. */
-  .hdr__nav a::after {
-    content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px;
-    background: var(--teal-signal);
-    transform: scaleX(0); transform-origin: left center;
-    transition: transform var(--dur-mid) var(--ease-out);
-  }
-  .hdr__nav a:hover, .hdr__nav a:focus-visible { color: var(--text); }
-  .hdr__nav a:hover::after, .hdr__nav a:focus-visible::after { transform: scaleX(1); }
-  .hdr__nav a[aria-current='page']::after { transform: scaleX(1); background: var(--teal-bright); }
-  @media (prefers-reduced-motion: reduce) { .hdr__nav a::after { transition: none; } }
-  .hdr__nav a[aria-current='page'] { color: var(--teal-bright); }
-
-  .hdr__right { display: flex; align-items: center; gap: var(--s3); flex: none; }
-
-  .aud { display: inline-flex; padding: 3px; gap: 2px; border: 1px solid var(--border-control); border-radius: 999px; }
-  .aud button {
-    font-family: var(--font-head); font-size: 0.75rem; font-weight: 600;
-    background: none; border: 0; color: var(--text-muted); cursor: pointer;
-    padding: 0.35rem 0.7rem; border-radius: 999px; white-space: nowrap;
-    transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
-  }
-  .aud button[aria-pressed='true'] { background: var(--teal-bright); color: var(--surface-deep); }
-
-  .hdr__burger, .hdr__m { display: none; }
-  .hdr__burger { background: none; border: 1px solid var(--border-control); border-radius: var(--r-sm); padding: 0.5rem; color: var(--text); cursor: pointer; }
-
-  @media (max-width: 1080px) {
-    .hdr__nav, .hdr__right { display: none; }
-    .hdr__burger { display: block; margin-inline-start: auto; }
-    .hdr__m { display: block; border-top: 1px solid var(--hairline); padding-block: var(--s4) var(--s5); background: var(--surface-deep); }
-    .hdr__m[hidden] { display: none; }
-    .hdr__m .wrap { --stack-gap: var(--s4); }
-    .hdr__m a:not(.btn) { font-family: var(--font-head); font-weight: 600; color: var(--text); text-decoration: none; padding: 0.35rem 0; }
-    .aud--m { align-self: flex-start; }
-  }
+  .hdr { position: sticky; z-index: 100; top: 0; color: var(--chalk); border-bottom: 1px solid var(--hairline); background: color-mix(in srgb, var(--night) 91%, transparent); backdrop-filter: blur(18px); }
+  .hdr--home { position: absolute; width: 100%; background: linear-gradient(to bottom, rgba(2,16,23,.62), transparent); border-bottom-color: transparent; }
+  .hdr__inner { min-height: 82px; display: flex; align-items: center; gap: 1.6rem; }
+  .hdr__brand { display: flex; align-items: center; gap: .75rem; flex: none; color: inherit; text-decoration: none; }
+  .hdr__mark { width: 42px; height: 42px; display: grid; place-items: center; border: 1px solid var(--hairline-strong); border-radius: 58% 42% 65% 35% / 55% 60% 40% 45%; background: rgba(255,255,255,.07); box-shadow: inset 0 0 22px rgba(72,224,187,.08); font: 800 .75rem var(--font-head); letter-spacing: -.04em; }
+  .hdr__brand strong, .hdr__brand small { display: block; }
+  .hdr__brand strong { font: 800 .82rem var(--font-head); }
+  .hdr__brand small { margin-top: .17rem; color: rgba(255,255,255,.47); font: 700 .48rem var(--font-head); letter-spacing: .14em; text-transform: uppercase; }
+  .hdr__nav { display: flex; gap: 1.55rem; margin-left: auto; }
+  .hdr__nav a, .hdr__routes > a:not(.hdr__contact) { position: relative; color: rgba(255,255,255,.67); font: 750 .72rem var(--font-head); text-decoration: none; white-space: nowrap; }
+  .hdr__nav a::after { content: ''; position: absolute; left: 0; right: 0; bottom: -.65rem; height: 2px; border-radius: 2px; background: var(--signal); transform: scaleX(0); transform-origin: left; transition: transform var(--dur-mid) var(--ease); }
+  .hdr__nav a:hover, .hdr__nav a[aria-current='page'], .hdr__routes a:hover { color: var(--white); }
+  .hdr__nav a:hover::after, .hdr__nav a[aria-current='page']::after { transform: scaleX(1); }
+  .hdr__routes { display: flex; align-items: center; gap: 1rem; padding-left: 1.25rem; border-left: 1px solid var(--hairline); }
+  .hdr__contact { position: relative; min-height: 42px; display: inline-flex; align-items: center; padding: 0 1rem; color: var(--ink); border-radius: var(--shape-pill); background: var(--signal); font: 800 .72rem var(--font-head); text-decoration: none; }
+  .hdr__contact::after { content: ''; position: absolute; left: -.3rem; bottom: -.28rem; width: .7rem; height: .7rem; border-radius: 50%; background: var(--signal); }
+  .hdr__burger { display: none; width: 44px; height: 42px; margin-left: auto; padding: 0; border: 1px solid var(--hairline-strong); border-radius: var(--shape-sm); background: rgba(255,255,255,.06); }
+  .hdr__burger span:not(.visually-hidden) { display: block; width: 18px; height: 1px; margin: 5px auto; background: var(--white); }
+  .hdr__mobile { padding: 1.2rem 0 1.5rem; border-top: 1px solid var(--hairline); background: var(--night); }
+  .hdr__mobile nav { display: grid; gap: .3rem; }
+  .hdr__mobile nav > a:not(.btn) { padding: .65rem 0; color: var(--chalk); font: 750 .92rem var(--font-head); text-decoration: none; border-bottom: 1px solid var(--hairline); }
+  .hdr__mobile .btn { margin-top: 1rem; justify-self: start; }
+  @media (max-width: 1110px) { .hdr__nav, .hdr__routes { display: none; } .hdr__burger { display: block; } }
+  @media (max-width: 560px) { .hdr__brand small { display: none; } .hdr__inner { min-height: 70px; } }
 </style>
 
 <script>
-  import { getAudience, setAudience, onAudience, CTA_COPY } from '@/scripts/audience';
-
-  const burger = document.querySelector<HTMLButtonElement>('.hdr__burger');
-  const menu = document.getElementById('hdr-m');
-  burger?.addEventListener('click', () => {
-    const open = burger.getAttribute('aria-expanded') === 'true';
-    burger.setAttribute('aria-expanded', String(!open));
+  const trigger = document.querySelector<HTMLButtonElement>('.hdr__burger');
+  const menu = document.getElementById('mobile-menu');
+  trigger?.addEventListener('click', () => {
+    const open = trigger.getAttribute('aria-expanded') === 'true';
+    trigger.setAttribute('aria-expanded', String(!open));
     if (menu) menu.hidden = open;
   });
-
-  function paint(aud: 'business' | 'employer') {
-    document.querySelectorAll<HTMLButtonElement>('.aud button').forEach((b) => {
-      b.setAttribute('aria-pressed', String(b.dataset.aud === aud));
-    });
-
-    // Stable shells: crossfade the stacked labels. Never write textContent —
-    // that resizes the button and shifts the whole header.
-    document.querySelectorAll<HTMLAnchorElement>('[data-cta-shell]').forEach((a) => {
-      a.setAttribute('href', CTA_COPY[aud].href);
-      a.querySelectorAll<HTMLElement>('[data-cta-label]').forEach((l) => {
-        const on = l.dataset.ctaLabel === aud;
-        l.classList.toggle('is-on', on);
-        // The hidden label must not be announced twice.
-        if (on) l.removeAttribute('aria-hidden');
-        else l.setAttribute('aria-hidden', 'true');
-      });
-      a.setAttribute('aria-label', CTA_COPY[aud].label);
-    });
-
-    // Plain CTAs elsewhere on the page are free to resize — they are not in a
-    // fixed composition.
-    document.querySelectorAll<HTMLAnchorElement>('[data-cta]').forEach((a) => {
-      a.textContent = CTA_COPY[aud].label;
-      a.setAttribute('href', CTA_COPY[aud].href);
-    });
-  }
-
-  document.querySelectorAll<HTMLButtonElement>('.aud button').forEach((b) => {
-    b.addEventListener('click', () => setAudience(b.dataset.aud as 'business' | 'employer'));
-  });
-
-  paint(getAudience());
-  onAudience(paint);
 </script>

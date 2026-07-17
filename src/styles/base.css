@@ -1,18 +1,4 @@
-/* ============================================================================
-   BASE — reset, typography, layout primitives, shared components.
-   Hand-authored. No utility framework: the rendered result must read as
-   authored, not generated.
-   ============================================================================ */
-
-/**
- * Layer order matters and is load-bearing.
- *
- * `zones` MUST come after `components`: the light-stone zone re-points text and
- * accent tokens to their accessible light-surface variants, and if it lost to
- * `components` the dark-surface colours would render on stone at failing
- * contrast. Do not reorder without re-running scripts/verify-a11y.mjs.
- */
-@layer reset, base, layout, components, zones, utilities;
+@layer reset, base, layout, components, utilities;
 
 @layer reset {
   *, *::before, *::after { box-sizing: border-box; }
@@ -21,299 +7,97 @@
   body { -webkit-font-smoothing: antialiased; }
   img, picture, svg, video { display: block; max-width: 100%; }
   input, button, textarea, select { font: inherit; color: inherit; }
-  p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; }
+  p, h1, h2, h3, h4 { overflow-wrap: break-word; }
   h1, h2, h3, h4 { text-wrap: balance; }
   p { text-wrap: pretty; }
   ul[class], ol[class] { list-style: none; padding: 0; }
-
-  /* Any `display` declaration beats the UA's [hidden] rule, so a component with
-     display:flex ignores hidden entirely — panels render when they should not.
-     This makes the attribute authoritative. */
   [hidden] { display: none !important; }
 }
 
 @layer base {
-  html { scroll-behavior: smooth; }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
-
-  body {
-    background: var(--surface);
-    color: var(--text);
-    font-family: var(--font-body);
-    font-size: var(--fs-body);
-    line-height: var(--lh-body);
-    min-height: 100vh;
-  }
-
-  h1, h2, h3, h4 { font-family: var(--font-head); color: var(--text); font-weight: 700; }
-  h1 { font-size: var(--fs-h1); line-height: var(--lh-tight); letter-spacing: -0.022em; }
-  h2 { font-size: var(--fs-h2); line-height: var(--lh-head); letter-spacing: -0.016em; }
-  h3 { font-size: var(--fs-h3); line-height: 1.3; letter-spacing: -0.01em; font-weight: 600; }
-  h4 { font-size: var(--fs-h4); line-height: 1.4; font-weight: 600; }
-
-  a { color: var(--teal-bright); text-underline-offset: 0.2em; }
-  a:hover { text-decoration-thickness: 2px; }
-
-  :focus-visible {
-    outline: 2px solid var(--focus-dark);
-    outline-offset: 2px;
-    border-radius: 3px;
-  }
-  .on-stone :focus-visible { outline-color: var(--focus-light); }
-
-  ::selection { background: var(--teal-signal); color: #fff; }
-
-  /* Skip link — first tab stop. */
-  .skip {
-    position: absolute; top: -100px; left: var(--s4); z-index: 100;
-    background: var(--teal-deep); color: #fff; padding: var(--s3) var(--s4);
-    border-radius: var(--r-sm); font-family: var(--font-head); font-weight: 700;
-  }
-  .skip:focus { top: var(--s4); }
+  html { scroll-behavior: smooth; background: var(--night); }
+  body { min-height: 100vh; overflow-x: hidden; color: var(--chalk); background: var(--night); font-family: var(--font-body); font-size: var(--fs-body); line-height: 1.68; }
+  h1, h2, h3, h4 { color: inherit; font-family: var(--font-head); line-height: 1.08; letter-spacing: -0.045em; }
+  a { color: inherit; text-underline-offset: 0.22em; }
+  :focus-visible { outline: 3px solid var(--acid); outline-offset: 4px; }
+  ::selection { color: var(--ink); background: var(--signal); }
+  .skip { position: fixed; z-index: 200; left: 1rem; top: -6rem; padding: 0.75rem 1rem; color: var(--ink); background: var(--acid); border-radius: var(--shape-sm); font-family: var(--font-head); font-weight: 800; }
+  .skip:focus { top: 1rem; }
 }
 
 @layer layout {
-  .wrap { width: 100%; max-width: var(--page); margin-inline: auto; padding-inline: var(--gutter); }
+  .wrap { width: min(100% - (2 * var(--gutter)), var(--page)); margin-inline: auto; }
   .measure { max-width: var(--measure); }
-  .section { padding-block: var(--section-y); }
-
-  .zone-deep { background: var(--surface-deep); }
-
+  .section { position: relative; padding-block: var(--section-y); }
+  .zone-paper { color: var(--ink); background: var(--paper); }
+  .zone-night { color: var(--chalk); background: var(--night); }
+  .zone-raised { color: var(--chalk); background: var(--night-soft); }
   .stack { display: flex; flex-direction: column; gap: var(--stack-gap, var(--s4)); }
-  .cluster { display: flex; flex-wrap: wrap; gap: var(--cluster-gap, var(--s3)); align-items: center; }
-  .grid-auto {
-    display: grid; gap: var(--s4);
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--col, 260px)), 1fr));
-  }
-  /* Wide content never scrolls the page sideways. */
-  .scroll-x { overflow-x: auto; overscroll-behavior-x: contain; }
+  .cluster { display: flex; flex-wrap: wrap; align-items: center; gap: var(--cluster-gap, var(--s3)); }
+  .grid-auto { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: var(--s5); }
 }
 
 @layer components {
-  .eyebrow {
-    font-family: var(--font-head);
-    font-size: var(--fs-label);
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--teal-bright);
-  }
-  .muted { color: var(--text-muted); }
-  .faint { color: var(--text-faint); font-size: var(--fs-caption); }
-  .lede { font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem); color: var(--text-muted); }
+  .eyebrow { display: inline-flex; align-items: center; gap: 0.65rem; color: var(--signal); font-family: var(--font-head); font-size: var(--fs-label); font-weight: 800; letter-spacing: 0.17em; text-transform: uppercase; }
+  .eyebrow::before { content: ''; width: 0.55rem; height: 0.55rem; flex: none; border-radius: 50%; background: currentColor; box-shadow: 0 0 0 7px color-mix(in srgb, currentColor 12%, transparent); }
+  .zone-paper .eyebrow { color: var(--signal-deep); }
+  .muted { color: var(--slate); }
+  .faint { color: var(--slate-soft); font-size: var(--fs-caption); }
+  .zone-paper .muted { color: var(--ink-soft); }
+  .zone-paper .faint { color: var(--slate-soft); }
+  .lede { max-width: var(--measure); color: var(--slate); font-size: clamp(1rem, 0.94rem + 0.3vw, 1.18rem); }
+  .zone-paper .lede { color: var(--ink-soft); }
 
-  .statement {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: clamp(1.375rem, 1.1rem + 1.2vw, 2rem);
-    line-height: 1.35;
-    color: var(--text);
-  }
+  .section-head { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.72fr); align-items: end; gap: clamp(2rem, 7vw, 6rem); margin-bottom: clamp(2.4rem, 5vw, 4.5rem); }
+  .section-head h1, .section-head h2 { margin-top: 0.85rem; font-size: var(--fs-h2); }
+  .section-head p { color: var(--slate); }
+  .zone-paper .section-head p { color: var(--ink-soft); }
 
-  /* ── Buttons ───────────────────────────────────────────────────────────
-     One authored system. Stable box, restrained fill, intentional arrow.
-     Nothing here animates width, and nothing glows.                        */
-  .btn {
-    position: relative;
-    display: inline-flex; align-items: center; justify-content: center;
-    gap: 0.6em;
-    font-family: var(--font-head); font-size: var(--fs-small); font-weight: 700;
-    letter-spacing: -0.005em;
-    /* Fixed vertical rhythm: height never depends on the label. */
-    min-height: 44px;                 /* also the touch-target floor */
-    padding: 0 1.15rem;
-    border-radius: var(--r-sm);
-    border: 1px solid transparent;
-    cursor: pointer; text-decoration: none;
-    overflow: hidden;                 /* clips the travelling fill */
-    isolation: isolate;
-    transition: color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease);
-  }
-  .btn__arrow {
-    flex: none;
-    transition: transform var(--dur-mid) var(--ease-out);
-  }
-  /* The directional response: the arrow moves, the box does not. */
-  .btn:hover .btn__arrow,
-  .btn:focus-visible .btn__arrow { transform: translateX(3px); }
+  .btn { position: relative; isolation: isolate; display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; min-height: 48px; padding: 0 1.2rem; overflow: visible; border: 1px solid var(--hairline-strong); border-radius: var(--shape-pill); color: var(--chalk); background: rgba(255,255,255,0.055); font-family: var(--font-head); font-size: var(--fs-small); font-weight: 800; text-decoration: none; cursor: pointer; transition: transform var(--dur-fast) var(--ease), border-color var(--dur-fast) ease, background var(--dur-fast) ease; }
+  .btn::after { content: ''; position: absolute; z-index: -1; left: -0.38rem; bottom: -0.35rem; width: 0.82rem; height: 0.82rem; border-radius: 50%; background: inherit; }
+  .btn:hover { transform: translateY(-2px); border-color: var(--signal); }
+  .btn--primary { color: var(--ink); border-color: transparent; background: var(--signal); box-shadow: 0 14px 34px rgba(72,224,187,0.19); }
+  .btn--primary:hover { background: var(--acid); border-color: transparent; }
+  .btn--paper { color: var(--ink); border-color: var(--paper-line-strong); background: var(--paper-bright); }
+  .zone-paper .btn--ghost { color: var(--ink); border-color: var(--paper-line-strong); background: rgba(255,255,255,0.45); }
+  .btn__arrow { transition: transform var(--dur-fast) var(--ease); }
+  .btn:hover .btn__arrow { transform: translateX(4px); }
 
-  /* A fill travels through the button instead of a colour flash. */
-  .btn::before {
-    content: ''; position: absolute; inset: 0; z-index: -1;
-    transform: scaleX(0); transform-origin: left center;
-    transition: transform var(--dur-slow) var(--ease-out);
-  }
-  .btn:hover::before, .btn:focus-visible::before { transform: scaleX(1); }
-  @media (prefers-reduced-motion: reduce) {
-    .btn::before { transition: none; }
-    .btn:hover .btn__arrow, .btn:focus-visible .btn__arrow { transform: none; }
-  }
+  .organic-panel { border: 1px solid var(--hairline); border-radius: var(--shape-md); background: rgba(255,255,255,0.055); box-shadow: var(--shadow-soft); }
+  .zone-paper .organic-panel { border-color: var(--paper-line); background: rgba(255,255,255,0.62); }
+  .proof-label { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--slate); font-family: var(--font-head); font-size: 0.7rem; font-weight: 800; letter-spacing: 0.11em; text-transform: uppercase; }
+  .proof-label::before { content: ''; width: 1.6rem; height: 1px; background: currentColor; }
+  .zone-paper .proof-label { color: var(--signal-deep); }
 
-  /* Primary — 8.44:1 deep ink on bright teal. */
-  .btn--primary { background: var(--teal-bright); color: var(--surface-deep); }
-  .btn--primary::before { background: var(--focus-dark); }
+  .page-hero { position: relative; padding: clamp(8.5rem, 14vw, 12rem) 0 clamp(5rem, 9vw, 8rem); overflow: hidden; }
+  .page-hero::before { content: ''; position: absolute; inset: 0; opacity: 0.16; pointer-events: none; background-image: radial-gradient(rgba(255,255,255,0.34) 0.7px, transparent 0.7px); background-size: 25px 25px; mask-image: radial-gradient(circle at 35% 25%, black, transparent 68%); }
+  .page-hero__grid { position: relative; display: grid; grid-template-columns: minmax(0,1.08fr) minmax(280px,0.62fr); gap: clamp(2.5rem,8vw,7rem); align-items: end; }
+  .page-hero h1 { margin-top: 1rem; font-size: var(--fs-page); }
+  .page-hero__copy { color: var(--slate); font-size: clamp(1rem,0.95rem + .3vw,1.18rem); max-width: 60ch; }
+  .page-hero__note { padding: 1.75rem; border-left: 2px solid var(--signal); color: var(--slate); }
 
-  /* Secondary — clearly related, deliberately quieter: same box, no fill,
-     the teal arrives only on the border and the travelling wash. */
-  .btn--ghost { border-color: var(--border-control); color: var(--text); background: transparent; }
-  .btn--ghost::before { background: var(--tint-teal); }
-  .btn--ghost:hover, .btn--ghost:focus-visible { border-color: var(--teal-bright); color: var(--teal-bright); }
-
-  /* Light zone — 5.22:1 stone on deep teal. */
-  .zone-stone .btn--primary { background: var(--teal-deep); color: var(--surface-stone); }
-  .zone-stone .btn--primary::before { background: var(--stone-ink); }
-  .zone-stone .btn--ghost { border-color: var(--border-stone); color: var(--stone-ink); background: transparent; }
-  .zone-stone .btn--ghost::before { background: rgba(8, 113, 109, 0.08); }
-  .zone-stone .btn--ghost:hover, .zone-stone .btn--ghost:focus-visible { border-color: var(--teal-deep); color: var(--teal-deep); }
-
-  /* ── Fixed-width audience CTA shell ────────────────────────────────────
-     The sizer reserves the wider label's width permanently; the two real
-     labels are stacked and crossfade. The box never resizes, so no nav item
-     moves and no layout shift is possible between audience states.         */
-  .cta-shell { padding-inline: 1.15rem; flex: none; }
-  .cta-shell__stack {
-    display: grid;
-    grid-template-areas: 'label';
-    place-items: center;
-  }
-  /* Sizer + both labels occupy the SAME grid cell. The cell sizes to the widest
-     item (the sizer), and the labels overlay it. `visibility: hidden` keeps the
-     sizer contributing width while staying invisible and unreadable to AT. */
-  .cta-shell__sizer {
-    grid-area: label;
-    visibility: hidden; white-space: nowrap; pointer-events: none;
-  }
-  .cta-shell__label {
-    grid-area: label; white-space: nowrap;
-    opacity: 0; transition: opacity var(--dur-mid) var(--ease);
-  }
-  .cta-shell__label.is-on { opacity: 1; }
-  .cta-shell__arrow { flex: none; transition: transform var(--dur-mid) var(--ease-out); }
-  .cta-shell:hover .cta-shell__arrow, .cta-shell:focus-visible .cta-shell__arrow { transform: translateX(3px); }
-  @media (prefers-reduced-motion: reduce) {
-    .cta-shell__label { transition: none; }
-    .cta-shell:hover .cta-shell__arrow { transform: none; }
-  }
-
-  /* ── Panels ──────────────────────────────────────────────────────────── */
-  .panel {
-    background: var(--surface-raise);
-    border: 1px solid var(--hairline);
-    border-radius: var(--r-lg);
-    padding: var(--s5);
-  }
-  .zone-stone .panel {
-    background: #fff;
-    border-color: var(--hairline-stone);
-  }
-
-  /* ── Claim badges — public editorial labels ──────────────────────────── */
-  .badge {
-    display: inline-flex; align-items: center; gap: 0.4em;
-    font-family: var(--font-head); font-size: var(--fs-label); font-weight: 700;
-    letter-spacing: 0.08em; text-transform: uppercase;
-    padding: 0.25em 0.6em; border-radius: 999px; white-space: nowrap;
-  }
-  .badge--verified   { background: var(--tint-teal);  color: var(--teal-bright);  border: 1px solid rgba(61,194,186,.4); }
-  .badge--founder    { background: var(--tint-teal);  color: var(--teal-bright);  border: 1px solid rgba(61,194,186,.4); }
-  .badge--anonymized { background: var(--tint-raise); color: var(--text-muted);   border: 1px solid var(--hairline-strong); }
-  .badge--illustrative { background: var(--tint-coral); color: var(--coral-bright); border: 1px solid rgba(224,132,117,.4); }
-  .badge--independent  { background: var(--tint-raise); color: var(--text-muted); border: 1px solid var(--hairline-strong); }
-  .badge--confidential { background: var(--tint-raise); color: var(--text-faint); border: 1px solid var(--hairline-strong); }
-
-  .zone-stone .badge--verified,
-  .zone-stone .badge--founder { color: var(--teal-deep); background: rgba(8,113,109,.08); border-color: rgba(8,113,109,.35); }
-  .zone-stone .badge--illustrative { color: var(--coral-deep); background: rgba(180,70,54,.08); border-color: rgba(180,70,54,.35); }
-  .zone-stone .badge--anonymized,
-  .zone-stone .badge--independent,
-  .zone-stone .badge--confidential { color: var(--stone-muted); background: rgba(16,42,67,.05); border-color: var(--hairline-stone); }
-
-  /* ── Section heading block ───────────────────────────────────────────── */
-  .sec-head { display: flex; flex-direction: column; gap: var(--s3); margin-bottom: var(--s7); max-width: 62ch; }
-  .sec-head__q { font-size: var(--fs-h2); }
-
-  /* ── Hairline rule that resolves left→right: the noise-to-system motif ─ */
-  .resolve-rule {
-    height: 1px; border: 0; margin: 0;
-    background: linear-gradient(to right,
-      transparent 0, var(--hairline) 6%, transparent 9%,
-      var(--hairline) 14%, transparent 17%, var(--hairline) 26%,
-      var(--hairline-strong) 45%, var(--hairline-strong) 100%);
-  }
-  .zone-stone .resolve-rule {
-    background: linear-gradient(to right,
-      transparent 0, var(--hairline-stone) 6%, transparent 9%,
-      var(--hairline-stone) 14%, transparent 17%, var(--hairline-stone) 26%,
-      rgba(16,42,67,.22) 45%, rgba(16,42,67,.22) 100%);
-  }
-}
-
-/* ============================================================================
-   ZONES — must win over `components`.
-   The light evidence zone re-points every text/accent token to its measured
-   light-surface variant. Alternates by narrative need, never zebra-striping.
-   ============================================================================ */
-@layer zones {
-  .zone-stone {
-    background: var(--surface-stone);
-    color: var(--stone-body);
-  }
-  .zone-stone h1, .zone-stone h2, .zone-stone h3, .zone-stone h4 { color: var(--stone-ink); }
-  .zone-stone p { color: var(--stone-body); }
-  /* :not(.btn) is load-bearing. Buttons carry their own fill and label colour;
-     a blanket `a` rule here outranks the button rules in `components` and
-     paints a teal label onto a teal fill — invisible text that axe does not
-     reliably flag. Caught by eye, not by the audit. */
-  .zone-stone a:not(.btn) { color: var(--teal-deep); }    /* 5.22 on stone */
-
-  /* Buttons in the light zone, restated in this layer so they cannot lose. */
-  .zone-stone .btn--primary { background: var(--teal-deep); color: var(--surface-stone); }  /* 5.22 */
-  .zone-stone .btn--primary:hover { background: var(--stone-ink); color: var(--surface-stone); }
-  .zone-stone .btn--ghost { border-color: var(--border-stone); color: var(--stone-ink); background: transparent; }
-  .zone-stone .btn--ghost:hover { border-color: var(--teal-deep); color: var(--teal-deep); }
-  .zone-stone .eyebrow { color: var(--teal-deep); }       /* 5.22 — NOT teal-bright (2.2) */
-  .zone-stone .muted { color: var(--stone-muted); }       /* 4.92 — NOT text-muted (1.9) */
-  .zone-stone .faint { color: var(--stone-muted); }       /* 4.92 — NOT text-faint */
-  .zone-stone .lede { color: var(--stone-muted); }
-  .zone-stone .statement { color: var(--stone-ink); }
-  .zone-stone .resolve-rule { border: 0; }
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 700ms var(--ease), transform 700ms var(--ease); }
+  .reveal.is-visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 100ms; }
+  .reveal-delay-2 { transition-delay: 190ms; }
+  .reveal-delay-3 { transition-delay: 280ms; }
 }
 
 @layer utilities {
-  .visually-hidden {
-    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
-    overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
-  }
-  .tnum { font-variant-numeric: tabular-nums; }
+  .visually-hidden { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
   .no-js-hide { display: none; }
   :root.js .no-js-hide { display: revert; }
   :root.js .js-hide { display: none; }
+  .tnum { font-variant-numeric: tabular-nums; }
 }
 
-/* ============================================================================
-   REDUCED MOTION — global contract.
+@media (max-width: 820px) {
+  .section-head, .page-hero__grid { grid-template-columns: 1fr; gap: 1.6rem; }
+  .page-hero { padding-top: 7.5rem; }
+}
 
-   Every diagram's BASE state is its resolved end state, so disabling animation
-   never leaves a blank frame. This kills transitions, not meaning.
-
-   `html:not([data-motion-override])` is load-bearing, not decoration.
-   "Reduce motion" means do not ambush someone with unsolicited movement. It
-   does NOT mean a control they deliberately pressed should do nothing. Without
-   this escape hatch the `!important` below also silences the Replay button, so
-   a visitor with the OS setting on sees a permanently frozen diagram and a dead
-   control — which is exactly what happened in production.
-
-   The attribute is set only for the duration of an explicitly requested replay
-   (see src/scripts/play-once.ts) and removed immediately after. Nothing
-   auto-plays for these visitors, ever.
-   ============================================================================ */
 @media (prefers-reduced-motion: reduce) {
-  html:not([data-motion-override]) *,
-  html:not([data-motion-override]) *::before,
-  html:not([data-motion-override]) *::after {
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
-    scroll-behavior: auto !important;
-  }
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; }
 }

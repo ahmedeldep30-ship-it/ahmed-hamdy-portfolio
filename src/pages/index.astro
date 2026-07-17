@@ -1,73 +1,9 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import Intro from '@components/home/Intro.astro';
-import SeamHero from '@components/home/SeamHero.astro';
-import AudienceGateway from '@components/home/AudienceGateway.astro';
-import BusinessSystem from '@components/home/BusinessSystem.astro';
-import SelectedWork from '@components/home/SelectedWork.astro';
-import CapabilityMap from '@components/home/CapabilityMap.astro';
-import AuditsAndInsights from '@components/home/AuditsAndInsights.astro';
-import HowIWork from '@components/home/HowIWork.astro';
-import Credibility from '@components/home/Credibility.astro';
-import About from '@components/home/About.astro';
-import ContactCta from '@components/home/ContactCta.astro';
-import { site, absoluteUrl } from '@config/site';
-
-/**
- * Home — a curated decision page.
- *
- * Each section answers one question and points to deeper evidence. It is not a
- * summary of every case study and playbook: it should create enough confidence
- * to open the real pages, and no more.
- *
- * Section order + dominant domain (balance rule: no two consecutive sections
- * share a dominant functional domain):
- *   1 Hero .......................... positioning
- *   2 Audience gateway .............. routing
- *   3 Business system ............... cross-functional / system
- *   4 Selected work ................. market · product · CX · growth
- *   5 Capabilities + playbooks ...... all (the map itself)   ← merged at Gate 2
- *   6 Audit method + Insights ....... market strategy · judgment · AI decisions
- *   7 How I work + SAB .............. execution · measurement
- *   8 Credibility ................... proof
- *   9 About ......................... narrative
- *  10 Contact CTA ................... conversion
- *
- * Gate 2 merge: the Capability Proof Map absorbed Transformation Playbooks.
- * They answered nearly the same question ("what can he do?" / "how would he do
- * it?") from adjacent sections. Merged, each capability now names the work that
- * proves it AND the playbook that operationalises it.
- *
- * Credibility and About stay separate deliberately: Credibility is
- * evidence-led and intentionally unimpressive; About is narrative. Merging
- * would let the narrative soften the evidence discipline.
- */
+import HomePage from '@/components/home/HomePage.astro';
+import { site } from '@config/site';
 ---
 
-<BaseLayout
-  title={site.title}
-  description={site.description}
-  path="/"
-  type="profile"
-  jsonLd={[
-    {
-      '@type': 'ProfilePage',
-      '@id': `${absoluteUrl('/')}#profilepage`,
-      mainEntity: { '@id': `${site.url}#person` },
-      name: site.title,
-      description: site.description,
-    },
-  ]}
->
-  <Intro />
-  <SeamHero />
-  <AudienceGateway />
-  <BusinessSystem />
-  <SelectedWork />
-  <CapabilityMap />
-  <AuditsAndInsights />
-  <HowIWork />
-  <Credibility />
-  <About />
-  <ContactCta />
+<BaseLayout title={site.title} description={site.description} path="/">
+  <HomePage />
 </BaseLayout>

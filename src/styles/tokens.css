@@ -1,115 +1,69 @@
-/* ============================================================================
-   DESIGN TOKENS — Ahmed Hamdy Portfolio
-   Dark-leaning institutional system. Approved at Gate 1.
-
-   Every contrast ratio below was COMPUTED against the WCAG 2.2 formula
-   (sRGB→linear; L = 0.2126R + 0.7152G + 0.0722B; ratio = (L1+0.05)/(L2+0.05))
-   and re-verified against the DARK surfaces. Light-theme ratios were NOT
-   assumed to carry over — two of them did not:
-     · Signal teal #0B8F8A on ink  = 4.37  → FAILS AA. Non-text roles only.
-     · Slate      #617181 on stone = 4.48  → FAILS AA. Replaced by #5A6B7A.
-
-   Single visual world by design (Master Brief v3 §16: light institutional
-   default, no theme toggle) — reinterpreted at Gate 1 as dark-leaning.
-   There is no user-facing theme switch, so no dark/light token pairs.
-   ============================================================================ */
-
 :root {
-  /* ── SURFACES ───────────────────────────────────────────────────────────
-     Never pure black. Ink navy / deep slate, warm-biased neutrals.          */
-  --surface-deep:   #0A151F;  /* deepest — hero base, footer                 */
-  --surface:        #0E1C28;  /* main canvas                                 */
-  --surface-raise:  #14283A;  /* raised panels, cards on dark                */
-  --surface-stone:  #F4F2ED;  /* warm light evidence + reading surface       */
+  color-scheme: dark;
 
-  /* Single light text surface by decision. A second, darker stone (#E9E5DC)
-     was tested and dropped: it broke muted text (4.37) and coral (4.32).
-     Differentiate light zones with hairlines, not a second fill.            */
+  --night: #061822;
+  --night-soft: #0a2632;
+  --night-raised: #103541;
+  --paper: #f4f0e7;
+  --paper-soft: #ebe5da;
+  --paper-bright: #fffdf8;
+  --ink: #071a24;
+  --ink-soft: #3f535c;
+  --white: #ffffff;
+  --chalk: #f8f7f2;
+  --slate: #a8b8bf;
+  --slate-soft: #71838a;
 
-  /* ── TEXT ON DARK ───────────────────────────────────────────────────────*/
-  --text:           #EDEBE5;  /* 14.49 on surface · 15.45 on deep · 12.63 raise */
-  --text-muted:     #A8B6C2;  /*  8.34 on surface ·  7.27 on raise           */
-  --text-faint:     #8FA1B0;  /*  6.49 on surface — captions, ≥14px only     */
+  --signal: #48e0bb;
+  --signal-deep: #117d6c;
+  --signal-soft: #d9f8ef;
+  --sky: #79b7ff;
+  --sky-soft: #dcecff;
+  --coral: #ff7a61;
+  --coral-soft: #ffe0d8;
+  --acid: #c9f36f;
+  --violet: #bba5ff;
 
-  /* ── TEXT ON STONE ──────────────────────────────────────────────────────*/
-  --stone-ink:      #102A43;  /* 13.09 — headings on stone (midnight navy)   */
-  --stone-body:     #1D2A35;  /* 13.08 — body on stone (charcoal)            */
-  --stone-muted:    #5A6B7A;  /*  4.92 — captions on stone. NOT #617181.     */
+  --hairline: rgba(255, 255, 255, 0.13);
+  --hairline-strong: rgba(255, 255, 255, 0.22);
+  --paper-line: rgba(7, 26, 36, 0.13);
+  --paper-line-strong: rgba(7, 26, 36, 0.23);
+  --shadow-soft: 0 24px 64px rgba(2, 19, 27, 0.12);
+  --shadow-deep: 0 34px 96px rgba(0, 8, 13, 0.34);
+  --shadow-float: 0 18px 42px rgba(2, 19, 27, 0.18);
 
-  /* ── SIGNAL: TEAL — diagnosis, connection, decision, system flow ────────*/
-  --teal-bright:    #3DC2BA;  /*  7.92 on surface · 6.90 raise — TEXT on dark */
-  --teal-signal:    #0B8F8A;  /*  4.37 on surface — NON-TEXT ONLY: strokes,
-                                  fills, diagram connections. Passes 3:1 UI.  */
-  --teal-deep:      #08716D;  /*  5.22 on stone — text + buttons on light     */
+  --font-head: 'Manrope', Arial, sans-serif;
+  --font-body: 'Inter', Arial, sans-serif;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --fs-display: clamp(3rem, 2rem + 4.6vw, 6.3rem);
+  --fs-page: clamp(2.7rem, 2rem + 3.7vw, 5.4rem);
+  --fs-h2: clamp(2rem, 1.55rem + 2.3vw, 4rem);
+  --fs-h3: clamp(1.35rem, 1.12rem + 0.9vw, 2rem);
+  --fs-body: 1.0625rem;
+  --fs-small: 0.9375rem;
+  --fs-caption: 0.8125rem;
+  --fs-label: 0.6875rem;
 
-  /* ── SIGNAL: CORAL — friction, blocked path, risk. Used sparingly ───────*/
-  --coral-bright:   #E08475;  /*  6.36 on surface · 5.54 raise — TEXT on dark */
-  --coral-signal:   #D76555;  /*  4.84 on surface — strokes, risk markers     */
-  --coral-deep:     #B44636;  /*  4.85 on stone — friction text on light      */
+  --page: 1240px;
+  --measure: 67ch;
+  --gutter: clamp(1.25rem, 4vw, 2.75rem);
+  --section-y: clamp(4.5rem, 8vw, 7.5rem);
+  --s1: 0.25rem;
+  --s2: 0.5rem;
+  --s3: 0.75rem;
+  --s4: 1rem;
+  --s5: 1.5rem;
+  --s6: 2rem;
+  --s7: 3rem;
+  --s8: 4rem;
+  --s9: 6rem;
 
-  /* ── BORDERS ────────────────────────────────────────────────────────────
-     Hairlines are decorative (WCAG 1.4.11 exempt). Control borders are not —
-     they identify the control and must clear 3:1.                           */
-  --hairline:        rgba(168, 182, 194, 0.16);
-  --hairline-strong: rgba(168, 182, 194, 0.28);
-  --hairline-stone:  rgba(16, 42, 67, 0.14);
-  --border-control:  #54708A;  /* 3.34 on surface — inputs/controls on dark   */
-  --border-stone:    #8A8274;  /* 3.40 on stone  — inputs/controls on light   */
-
-  /* ── FOCUS — surface-aware. #46CFC6 on stone is 1.71 and would be invisible. */
-  --focus-dark:     #46CFC6;  /*  9.05 on surface · 7.89 raise               */
-  --focus-light:    #08716D;  /*  5.22 on stone                              */
-
-  /* ── TINTS — structure without shadow ───────────────────────────────────*/
-  --tint-teal:      rgba(61, 194, 186, 0.07);
-  --tint-coral:     rgba(224, 132, 117, 0.08);
-  --tint-raise:     rgba(168, 182, 194, 0.045);
-
-  /* ── TYPE ───────────────────────────────────────────────────────────────
-     Self-hosted (see fonts.css). The *-Fallback families are metric-matched to
-     the real faces, so `font-display: swap` swaps without reflowing the page. */
-  --font-head: 'Manrope', 'Manrope Fallback', ui-sans-serif, system-ui, sans-serif;
-  --font-body: 'Inter', 'Inter Fallback', ui-sans-serif, system-ui, sans-serif;
-  --font-serif: 'Source Serif 4', 'Source Serif Fallback', Georgia, serif;
-
-  --fs-display: clamp(2.125rem, 1.35rem + 3.4vw, 3.5rem);
-  --fs-h1:      clamp(1.875rem, 1.35rem + 2.3vw, 2.75rem);
-  --fs-h2:      clamp(1.5rem, 1.2rem + 1.35vw, 2rem);
-  --fs-h3:      clamp(1.25rem, 1.1rem + 0.6vw, 1.5rem);
-  --fs-h4:      1.125rem;
-  --fs-body:    1.0625rem;   /* 17px */
-  --fs-small:   0.9375rem;   /* 15px */
-  --fs-caption: 0.875rem;    /* 14px — slate floor, never smaller */
-  --fs-label:   0.6875rem;   /* 11px — uppercase labels only, high contrast */
-
-  --lh-tight: 1.12;
-  --lh-head:  1.22;
-  --lh-body:  1.65;
-
-  /* ── SPACE — 4px base ───────────────────────────────────────────────────*/
-  --s1: 0.25rem; --s2: 0.5rem;  --s3: 0.75rem; --s4: 1rem;   --s5: 1.5rem;
-  --s6: 2rem;    --s7: 3rem;    --s8: 4rem;    --s9: 6rem;   --s10: 8rem;
-  --section-y: clamp(3.5rem, 7vw, 7rem);
-
-  /* ── SHAPE — 10 / 12 / 16 only ──────────────────────────────────────────*/
-  --r-sm: 10px; --r-md: 12px; --r-lg: 16px;
-
-  /* ── LAYOUT ─────────────────────────────────────────────────────────────*/
-  --page: 1280px;
-  --measure: 68ch;
-  --gutter: clamp(1rem, 4vw, 2.5rem);
-
-  /* ── MOTION — 160–260ms core; hero ≤1.2s once ───────────────────────────*/
-  --dur-fast: 160ms;
-  --dur-mid:  220ms;
-  --dur-slow: 260ms;
-  --dur-hero: 1150ms;
-  --ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* The design commits to one visual world. Pin tokens so a viewer-level
-   colour-scheme preference cannot silently re-theme the evidence surfaces. */
-@media (prefers-color-scheme: light) {
-  :root { color-scheme: dark; }
+  --shape-sm: 18px 8px 20px 10px;
+  --shape-md: 34px 14px 38px 18px;
+  --shape-lg: 68px 22px 74px 28px;
+  --shape-pill: 999px 999px 999px 18px;
+  --dur-fast: 180ms;
+  --dur-mid: 320ms;
+  --dur-slow: 700ms;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }

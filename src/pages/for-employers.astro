@@ -1,0 +1,146 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { site, withBase, contact } from '@config/site';
+
+const contribution = [
+  ['Owned', 'The customer or operating problem, the business decision, the priority or the workstream I was directly responsible for.'],
+  ['Defined', 'The journey, workflow, requirements, standards, success criteria or plan needed to move the work forward.'],
+  ['Interpreted', 'Customer, team or performance evidence translated into a business implication and a practical next question.'],
+  ['Recommended', 'A change I proposed when another manager, owner or specialist retained approval and delivery ownership.'],
+  ['Coordinated', 'People, evidence, handoffs and implementation requirements brought into one shared operating context.'],
+  ['Implemented with', 'The designers, engineers, content or operational specialists who owned their technical craft.'],
+];
+---
+
+<BaseLayout title={`For Employers — ${site.name}`} description="Role fit, career evidence, contribution boundaries and operating depth for employers considering Ahmed Hamdy." path="/for-employers">
+  <section class="page-hero employer-hero">
+    <div class="wrap page-hero__grid">
+      <div class="reveal is-visible">
+        <span class="eyebrow">For employers</span>
+        <h1>A business-operations profile built from real customer evidence.</h1>
+      </div>
+      <div class="stack reveal is-visible" style="--stack-gap:1.5rem">
+        <p class="page-hero__copy">I am a Business Growth &amp; Operations Specialist with practical depth in customer experience, support operations, process improvement, team development and service quality.</p>
+        <p class="page-hero__note">The value I bring is not knowing every technical craft. It is seeing how customer, team and workflow signals connect—then giving the right specialists a clear problem to solve.</p>
+        <div class="cluster"><a class="btn btn--primary" href={withBase('/assets/ahmed-hamdy-cv.pdf')}>Download CV</a><a class="btn" href={contact.linkedin} rel="noopener">View LinkedIn ↗</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section zone-paper role-fit">
+    <div class="wrap">
+      <header class="section-head reveal">
+        <div><span class="eyebrow">Role fit</span><h2>Where this experience is most useful.</h2></div>
+        <p>The strongest fit is where customer outcomes and operating quality meet. The role title may differ; the underlying problems are consistent.</p>
+      </header>
+      <div class="fit-map">
+        <div class="fit-map__core">Business Growth &amp; Operations</div>
+        <div class="fit-map__lane fit-map__lane--one"><span>Customer Experience</span><span>Customer Operations</span><span>Support Operations</span></div>
+        <div class="fit-map__lane fit-map__lane--two"><span>Process Improvement</span><span>Service Quality</span><span>Team Development</span></div>
+        <div class="fit-map__lane fit-map__lane--three"><span>Customer Success Enablement</span><span>Voice of Customer</span><span>Marketplace Operations</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section evidence-route">
+    <div class="wrap">
+      <header class="section-head reveal">
+        <div><span class="eyebrow">The evidence route</span><h2>Customer depth first. Founder ownership second.</h2></div>
+        <p>This order is deliberate. Alpha Capital shows judgment inside an international customer environment. Formula4You shows how that judgment extends into a wider business system.</p>
+      </header>
+      <div class="evidence-steps">
+        <article class="evidence-step reveal">
+          <span>01 · Alpha Capital Group</span>
+          <h3>Customer management and operational improvement</h3>
+          <p>Remote work in a UK fintech environment, trusted relationships with Arabic-speaking customers, sensitive-case ownership, recurring-pattern analysis and progression from Customer Support Specialist to Customer Manager after two years.</p>
+          <ul><li>Relationship and expectation management</li><li>Escalation ownership and follow-up</li><li>Service consistency and case guidance</li><li>Customer evidence translated into improvement ideas</li></ul>
+          <a href={withBase('/work/alpha-capital')}>Read the case →</a>
+        </article>
+        <article class="evidence-step evidence-step--founder reveal reveal-delay-1">
+          <span>02 · Formula4You</span>
+          <h3>Founder-led business and platform operations</h3>
+          <p>A live specialist platform shaped from a market gap into participant journeys, onboarding rules, trust controls, commercial logic, product requirements and phased implementation priorities.</p>
+          <ul><li>Market diagnosis and participant needs</li><li>Customer and partner journeys</li><li>Operating rules and priorities</li><li>Cross-functional implementation coordination</li></ul>
+          <a href={withBase('/work/formula4you')}>Read the case →</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section zone-paper employer-depth">
+    <div class="wrap">
+      <header class="section-head reveal">
+        <div><span class="eyebrow">What this looks like at work</span><h2>I turn a broad problem into something a team can own.</h2></div>
+        <p>A recurring complaint is not a complete problem definition. Before proposing a fix, I trace when it happens, who is involved, what the customer expected and which decision created the gap.</p>
+      </header>
+      <div class="work-sequence reveal">
+        <div><strong>Signal</strong><p>Questions, objections, delays, escalations or a drop in service consistency.</p></div>
+        <i>→</i><div><strong>Diagnosis</strong><p>The journey stage, handoff, rule, knowledge gap or operating constraint behind the pattern.</p></div>
+        <i>→</i><div><strong>Defined work</strong><p>A workflow, ownership model, requirement, quality standard or prioritized decision.</p></div>
+        <i>→</i><div><strong>Review</strong><p>A baseline and evidence that show whether the change produced a better outcome.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contribution-section">
+    <div class="wrap">
+      <header class="section-head reveal">
+        <div><span class="eyebrow">Contribution boundaries</span><h2>Clear attribution makes breadth credible.</h2></div>
+        <p>Every case distinguishes business ownership from specialist implementation. That makes the portfolio easier to question in an interview—and easier to trust.</p>
+      </header>
+      <div class="contribution-grid">
+        {contribution.map(([label, copy], index) => <article class="reveal"><span>{String(index + 1).padStart(2,'0')}</span><h3>{label}</h3><p>{copy}</p></article>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="section zone-paper employer-cta">
+    <div class="wrap employer-cta__inner reveal">
+      <div><span class="eyebrow">Discuss a role</span><h2>If the work needs customer judgment and operating discipline, we should talk.</h2></div>
+      <div class="cluster"><a class="btn btn--primary" href={withBase('/contact?intent=role')}>Discuss a role</a><a class="btn btn--ghost" href={withBase('/work')}>View selected work</a></div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .employer-hero { background: radial-gradient(circle at 80% 30%,rgba(72,224,187,.15),transparent 25rem),radial-gradient(circle at 10% 80%,rgba(121,183,255,.12),transparent 23rem),var(--night); }
+  .role-fit { overflow: hidden; }
+  .fit-map { position: relative; min-height: 480px; display: grid; place-items: center; }
+  .fit-map::before, .fit-map::after { content: ''; position: absolute; width: 72%; height: 72%; border: 1px dashed var(--paper-line-strong); border-radius: 52% 48% 60% 40% / 42% 56% 44% 58%; transform: rotate(7deg); }
+  .fit-map::after { width: 48%; height: 48%; transform: rotate(-12deg); }
+  .fit-map__core { z-index: 3; width: 185px; height: 185px; display: grid; place-items: center; padding: 1.5rem; color: var(--white); border-radius: 52% 48% 58% 42% / 45% 61% 39% 55%; background: var(--night-soft); box-shadow: var(--shadow-deep); text-align: center; font: 800 1rem/1.25 var(--font-head); }
+  .fit-map__lane { position: absolute; z-index: 4; display: flex; gap: .75rem; }
+  .fit-map__lane span { padding: .75rem 1rem; border: 1px solid var(--paper-line); border-radius: var(--shape-pill); background: rgba(255,255,255,.78); box-shadow: var(--shadow-soft); font: 800 .72rem var(--font-head); }
+  .fit-map__lane--one { top: 8%; left: 10%; }
+  .fit-map__lane--two { right: 7%; top: 38%; }
+  .fit-map__lane--three { left: 16%; bottom: 8%; }
+  .evidence-route { background: radial-gradient(circle at 13% 20%,rgba(187,165,255,.12),transparent 23rem),var(--night-soft); }
+  .evidence-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .evidence-step { padding: clamp(2rem,4vw,3.5rem); color: var(--ink); border-radius: 72px 24px 78px 30px; background: var(--paper); box-shadow: var(--shadow-deep); }
+  .evidence-step--founder { color: var(--chalk); border: 1px solid var(--hairline); border-radius: 24px 74px 30px 80px; background: rgba(255,255,255,.055); }
+  .evidence-step > span { color: var(--signal-deep); font: 850 .62rem var(--font-head); letter-spacing: .12em; text-transform: uppercase; }
+  .evidence-step--founder > span { color: var(--signal); }
+  .evidence-step h3 { margin: 1.2rem 0 .85rem; font-size: 2rem; }
+  .evidence-step p, .evidence-step li { color: var(--ink-soft); font-size: .86rem; }
+  .evidence-step--founder p, .evidence-step--founder li { color: var(--slate); }
+  .evidence-step ul { display: grid; gap: .45rem; margin-top: 1.4rem; }
+  .evidence-step li { position: relative; padding-left: 1rem; }
+  .evidence-step li::before { content: ''; position: absolute; left: 0; top: .65em; width: .38rem; height: .38rem; border-radius: 50%; background: var(--signal); }
+  .evidence-step a { display: inline-block; margin-top: 1.6rem; color: var(--signal-deep); font: 850 .8rem var(--font-head); text-decoration: none; }
+  .evidence-step--founder a { color: var(--signal); }
+  .work-sequence { display: grid; grid-template-columns: repeat(7,auto); gap: 1rem; align-items: center; }
+  .work-sequence div { min-height: 160px; padding: 1.4rem; border: 1px solid var(--paper-line); border-radius: var(--shape-md); background: rgba(255,255,255,.62); box-shadow: var(--shadow-soft); }
+  .work-sequence strong { color: var(--signal-deep); font: 850 .78rem var(--font-head); }
+  .work-sequence p { margin-top: .65rem; color: var(--ink-soft); font-size: .76rem; }
+  .work-sequence i { color: var(--signal-deep); font-style: normal; }
+  .contribution-section { background: var(--night); }
+  .contribution-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1rem; }
+  .contribution-grid article { min-height: 210px; padding: 1.6rem; border: 1px solid var(--hairline); border-radius: var(--shape-md); background: rgba(255,255,255,.045); }
+  .contribution-grid span { color: var(--signal); font: 850 .6rem var(--font-head); }
+  .contribution-grid h3 { margin: 1.4rem 0 .65rem; }
+  .contribution-grid p { color: var(--slate); font-size: .8rem; }
+  .employer-cta__inner { display: grid; grid-template-columns: 1fr auto; gap: 2rem; align-items: center; padding: clamp(2rem,5vw,4rem); border-radius: var(--shape-lg); background: var(--signal-soft); box-shadow: var(--shadow-soft); }
+  .employer-cta h2 { max-width: 760px; margin-top: .8rem; font-size: var(--fs-h2); }
+  @media(max-width:900px){.fit-map__lane{position:relative;inset:auto!important;flex-wrap:wrap;justify-content:center}.fit-map{display:flex;flex-direction:column;gap:1rem;min-height:auto}.fit-map::before,.fit-map::after{display:none}.evidence-steps,.employer-cta__inner{grid-template-columns:1fr}.work-sequence{grid-template-columns:1fr}.work-sequence i{transform:rotate(90deg);justify-self:center}.contribution-grid{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.contribution-grid{grid-template-columns:1fr}.fit-map__lane{display:grid;width:100%}.fit-map__lane span{text-align:center}}
+</style>

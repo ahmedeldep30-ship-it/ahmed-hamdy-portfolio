@@ -18,7 +18,7 @@
 | A5 | **GitHub account + repo + URL** | ✅ **RESOLVED** — `ahmedeldep30-ship-it` / `ahmed-hamdy-portfolio` | Project-site base path configured; deploying. Provisional until Gate 4. |
 | A6 | **Alpha Capital — Employee of the Month proof** | ❌ **Still missing** | Claim is `EVIDENCE REQUIRED`. **Omitted entirely** — not softened. |
 | A7 | **Alpha Capital — Trustpilot / 300+ reviews proof** | ❌ **Still missing** | Fallback in use verbatim: **"hundreds of five-star reviews"** — no number, no metric card. |
-| A8 | **Alpha Capital — actual formal job title** | ⚠️ **Partially resolved** | Gate 1 §5 supplied the *case-study framing* ("Operational, Growth & Customer Experience Contributions") and confirmed "Business Operations Specialist" must not be presented as a documented title. **The actual contractual title is still unrecorded.** Needed before the Phase 4 case study. |
+| A8 | **Alpha Capital — actual formal job titles and progression** | ⚠️ **User asserted; proof pending** | Ahmed states that he worked first as **Customer Support Specialist** and was promoted after two years to **Customer Manager**. These titles and dates may guide drafting but remain `user_asserted` until the recommendation letter, contract, HR record, or another suitable source is supplied. The case-study framing must not replace the employment titles. |
 
 ---
 
@@ -42,12 +42,12 @@ Every item below is `EVIDENCE REQUIRED`. Each needs **source + baseline + date r
 
 ## C. Conflicts found between sources — need your decision
 
-### C1 — Alpha Capital job title *(highest-impact conflict)*
-- **CV says:** *"Business Operations & Customer Experience Improvement Contributions | Remote, United Kingdom"*
-- **Brief §11 says:** *"Operational and customer-experience contribution, **not a claim that Business Operations was the formal job title**."*
-- **Prompt says:** *"Do not imply Business Operations was Ahmed's formal title if it was not."*
+### C1 — Alpha Capital job title and case framing *(partially resolved)*
+- **Current user statement:** Customer Support Specialist, then promoted after two years to Customer Manager.
+- **Earlier CV heading:** *"Business Operations & Customer Experience Improvement Contributions | Remote, United Kingdom"*.
+- **V4 case framing:** *"Customer Management, Experience & Operational Improvement — Alpha Capital Group"*.
 
-The approved CV's own heading reads as a title line. The brief forbids the site from implying it. **What was the actual formal title?** The site will use contribution framing regardless; I need the real title on record so the site and the downloadable CV don't contradict each other in front of the same recruiter.
+The case-study heading describes the contribution; it is not an employment title. The employment history must show the two user-asserted titles separately. Before a Verified Evidence badge or permanent public timeline is used, obtain a suitable source for the titles, dates, and promotion.
 
 ### C2 — "Thousands of completed orders" appears unqualified in the approved CV
 - **CV, Selected Business Impact:** *"Contributed to retail and e-commerce initiatives that collectively generated thousands of completed orders…"*
@@ -66,7 +66,7 @@ Resolved automatically by supplying A6/A7. Otherwise same three options as C2.
 ✅ **RESOLVED.** Confirmed at Gate 1 §4: **`ahmedeldep30@gmail.com`** is the published address. In use across the site, JSON-LD, and both PDFs when they ship.
 
 ### C5 — `/audits` has nothing publishable at launch
-⏳ **Still open.** Zero eligible content (Amouage is research-concept-only and must stay noindex). Gate 1 §7 decided the Strategic Audit Method may be reached via Insights/Playbooks and **must not be presented as a populated audit library** — implemented. The remaining question is whether `/audits` ships as a method page or waits for the first real audit. See Plan **D-1**.
+✅ **Resolved by V4.** Do not publish the route at launch. Keep the audit method inside How I Work or Insights. Publish `/audits` only when the first complete, dated, sourced, unaffiliated audit is ready.
 
 ### C6 — Capability 10 ("AI-aware business and product decision-making") had no proof surface
 ✅ **RESOLVED.** Gate 1 §11 approved the **Simplify → Automate → Build** framework. Implemented on the home page with all ten evaluation criteria, plus Intervention Compression, in which the chatbot is rejected on evidence. The restraint is the proof. Nothing invented.
@@ -141,7 +141,7 @@ consistently until proof arrives.
 | 1 | Employee of the Month proof *(A6)* | Currently **omitted entirely** |
 | 2 | Trustpilot / 300+ reviews proof *(A7)* | Unlocks the number; today it reads "hundreds of five-star reviews" |
 | 3 | Defensible completed-order totals *(B)* | Unlocks the claim and resolves **C2** |
-| 4 | Alpha Capital contractual job title *(A8)* | Blocks the Phase 4 case study |
+| 4 | Alpha Capital title and promotion proof *(A8)* | Drafting may use the user-asserted titles; proof is required before Verified Evidence treatment |
 | 5 | Formula4You logo *(A3)* | Low impact — text treatment in use |
 | 6 | Formula4You roadmap / user stories / QA plan *(D)* | **The single best evidence for the product-strategy claim** |
 | 7 | Anonymized client screens, campaign evidence, objection patterns *(D)* | Phase 4 case studies |
@@ -149,7 +149,7 @@ consistently until proof arrives.
 | 9 | Audit research *(D)* | Nothing publishable in `/audits` — see **C5** |
 | 10 | Playbook scenarios: real / composite / illustrative *(D)* | Default remains **all illustrative**, visibly labelled |
 
-**Decisions still open:** **C2** (CV vs site conflict) · **C5 / Plan D-1** (`/audits` treatment).
+**Decisions still open:** **C2** (CV vs site conflict). **C5 is resolved by V4.**
 
 **Governing behaviour, unchanged:** where evidence is missing the approved fallback is used
 verbatim, the evidence slot ships visibly empty rather than filled with invention, and the

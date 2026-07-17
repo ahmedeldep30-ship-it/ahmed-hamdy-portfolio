@@ -100,7 +100,7 @@ const graph: Record<string, unknown>[] = [
     <meta name="twitter:card" content="summary_large_image" />
 
     <meta name="author" content={site.name} />
-    <meta name="theme-color" content="#0E1C28" />
+    <meta name="theme-color" content="#061822" />
     <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
 
     {/*
@@ -145,5 +145,21 @@ const graph: Record<string, unknown>[] = [
       <slot />
     </main>
     <Footer />
+    <script is:inline>
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (!reduced) {
+        const observer = new IntersectionObserver((entries) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
+            }
+          }
+        }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+        document.querySelectorAll('.reveal:not(.is-visible)').forEach((node) => observer.observe(node));
+      } else {
+        document.querySelectorAll('.reveal').forEach((node) => node.classList.add('is-visible'));
+      }
+    </script>
   </body>
 </html>

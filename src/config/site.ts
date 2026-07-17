@@ -22,9 +22,9 @@ export const site = {
   title: 'Ahmed Hamdy — Business Growth & Operations Specialist',
   role: 'Business Growth & Operations Specialist',
   supportingLine:
-    'Business Strategy | Operations | Customer Experience | Conversion & Product Optimization',
+    'Customer Experience | Support Operations | Process Improvement | Team Development | Service Quality',
   description:
-    'I trace the system behind a business problem, find the root cause, and design the simplest intervention that stops the loss — across market strategy, operations, customer experience, conversion, and product.',
+    'I connect customer, team, workflow, and performance signals to find the operating problem behind the visible symptom — then define a practical path forward.',
   locale: 'en',
   location: {
     city: 'Alexandria',

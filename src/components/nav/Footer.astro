@@ -1,62 +1,55 @@
 ---
-import { contact, external, withBase, site } from '@config/site';
-
+import { contact, withBase, site } from '@config/site';
 const year = new Date().getFullYear();
-const channels = [
-  { label: 'WhatsApp', href: contact.whatsapp, note: 'Fastest route' },
-  { label: 'Email', href: contact.emailHref, note: contact.email },
-  { label: 'Phone', href: contact.phoneHref, note: contact.phoneDisplay },
-  { label: 'LinkedIn', href: contact.linkedin, note: 'Professional profile' },
-  { label: 'Facebook', href: contact.facebook, note: 'Arabic-language content' },
-];
 ---
 
-<footer class="ft zone-deep">
-  <div class="wrap">
-    <div class="ft__top">
-      <div class="stack" style="--stack-gap: var(--s3)">
-        <span class="ft__name">Ahmed Hamdy</span>
-        <p class="faint">{site.role} · {site.location.city}, {site.location.country}</p>
-        <p class="faint">Available for roles and business-diagnostic engagements.</p>
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div class="footer__identity">
+      <span class="footer__mark">AH</span>
+      <div>
+        <strong>Ahmed Hamdy</strong>
+        <p>{site.role} · Alexandria, Egypt</p>
       </div>
-
-      <nav class="ft__chan" aria-label="Contact channels">
-        {channels.map((c) => (
-          <a href={c.href} rel={c.href.startsWith('http') ? 'noopener' : undefined}>
-            <span class="ft__chan-l">{c.label}</span>
-            <span class="faint">{c.note}</span>
-          </a>
-        ))}
-      </nav>
-
-      <nav class="ft__links" aria-label="Site">
-        <a href={withBase('/work')}>Work</a>
-        <a href={withBase('/work/formula4you')}>Formula4You</a>
-        <a href={withBase('/contact')}>Contact</a>
-        <a href={external.formula4you} rel="noopener">formula4you.com ↗</a>
-      </nav>
     </div>
 
-    <hr class="resolve-rule" />
-
-    <div class="ft__bot">
-      <p class="faint">© {year} Ahmed Hamdy. Built as a static site — no tracking, no third-party data collection.</p>
-      <p class="faint">No response-time is promised. Messages are read personally.</p>
-    </div>
+    <nav aria-label="Portfolio">
+      <span>Explore</span>
+      <a href={withBase('/work')}>Selected work</a>
+      <a href={withBase('/how-i-work')}>How I work</a>
+      <a href={withBase('/about')}>About</a>
+    </nav>
+    <nav aria-label="Audience routes">
+      <span>Choose a route</span>
+      <a href={withBase('/for-employers')}>For employers</a>
+      <a href={withBase('/for-businesses')}>For businesses</a>
+      <a href={withBase('/contact')}>Contact</a>
+    </nav>
+    <nav aria-label="Direct contact">
+      <span>Go direct</span>
+      <a href={contact.linkedin} rel="noopener">LinkedIn ↗</a>
+      <a href={contact.emailHref}>Email</a>
+      <a href={contact.whatsapp} rel="noopener">WhatsApp</a>
+    </nav>
+  </div>
+  <div class="wrap footer__bottom">
+    <p>© {year} Ahmed Hamdy. Built to show the work, the reasoning and the boundary of each contribution.</p>
+    <p>Messages are read and answered personally.</p>
   </div>
 </footer>
 
 <style>
-  .ft { border-top: 1px solid var(--hairline); padding-block: var(--s8) var(--s6); }
-  .ft__top { display: grid; gap: var(--s7); grid-template-columns: 1.2fr 1fr auto; margin-bottom: var(--s6); }
-  .ft__name { font-family: var(--font-head); font-weight: 700; font-size: 1.125rem; }
-  .ft__chan { display: grid; gap: var(--s3); }
-  .ft__chan a { display: flex; flex-direction: column; text-decoration: none; color: var(--text); }
-  .ft__chan a:hover .ft__chan-l { color: var(--teal-bright); }
-  .ft__chan-l { font-family: var(--font-head); font-weight: 600; font-size: var(--fs-small); }
-  .ft__links { display: flex; flex-direction: column; gap: var(--s3); }
-  .ft__links a { font-family: var(--font-head); font-size: var(--fs-small); font-weight: 600; color: var(--text-muted); text-decoration: none; }
-  .ft__links a:hover { color: var(--teal-bright); }
-  .ft__bot { display: flex; justify-content: space-between; gap: var(--s4); flex-wrap: wrap; margin-top: var(--s5); }
-  @media (max-width: 860px) { .ft__top { grid-template-columns: 1fr; gap: var(--s6); } }
+  .footer { padding: 4.5rem 0 2rem; color: var(--chalk); border-top: 1px solid var(--hairline); background: #04131b; }
+  .footer__grid { display: grid; grid-template-columns: minmax(260px,1.6fr) repeat(3,minmax(130px,.55fr)); gap: 2.5rem; }
+  .footer__identity { display: flex; align-items: center; gap: 1rem; }
+  .footer__mark { width: 52px; height: 52px; display: grid; place-items: center; border: 1px solid var(--hairline-strong); border-radius: 60% 40% 67% 33% / 48% 62% 38% 52%; color: var(--signal); font: 850 .8rem var(--font-head); }
+  .footer__identity strong { font: 800 1rem var(--font-head); }
+  .footer__identity p, .footer__bottom { color: var(--slate-soft); font-size: .75rem; }
+  .footer nav { display: flex; flex-direction: column; gap: .48rem; }
+  .footer nav span { margin-bottom: .35rem; color: var(--slate-soft); font: 800 .62rem var(--font-head); letter-spacing: .13em; text-transform: uppercase; }
+  .footer nav a { color: var(--chalk); font: 650 .82rem var(--font-head); text-decoration: none; }
+  .footer nav a:hover { color: var(--signal); }
+  .footer__bottom { display: flex; justify-content: space-between; gap: 1.5rem; margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--hairline); }
+  @media (max-width: 850px) { .footer__grid { grid-template-columns: 1fr 1fr; } .footer__identity { grid-column: 1 / -1; } }
+  @media (max-width: 520px) { .footer__grid { grid-template-columns: 1fr; } .footer__identity { grid-column: auto; } .footer__bottom { flex-direction: column; } }
 </style>
