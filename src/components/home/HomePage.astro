@@ -384,82 +384,48 @@ const lenses = [
   <section class="proof-section zone-raised" id="evidence">
     <div class="wrap">
       <header class="section-head reveal">
-        <div><span class="eyebrow">Evidence behind the thinking</span><h2>Two different environments shaped the same operating judgment.</h2></div>
-        <p>Alpha Capital comes first because it shows customer depth and career progression inside an international company. Formula4You follows as founder-led evidence of ownership and wider business decisions.</p>
+        <div><span class="eyebrow">The one I own</span><h2>The gap was not a missing product. It was a missing place.</h2></div>
+        <p>Both of those cases were other people’s companies, and a consultant can always leave. This is the one where the decision was mine, there was nobody above me to sign it off, and I am the person who answers for it.</p>
       </header>
 
-      <div class="proof-grid">
-        {/* The link here pointed at /work/alpha-capital, which does not exist —
-            a 404 in the proof section, of all places. On a single-page site the
-            depth belongs in a disclosure, not another route. */}
-        <article class="alpha-proof reveal">
-          <span class="proof-label">Alpha Capital Group · UK fintech, remote · 2024 — present</span>
-          <h3>I did not start as the manager. That is the whole point.</h3>
-          <p>Consulting shows you a company for a few months, from the outside, with everyone on their best behaviour. This was the opposite. The five-star reviews on my name are not a manager's metric — they are two years of being the person a frustrated customer actually reached, in Arabic, at the moment they were losing patience. You cannot delegate that view of a company. You have to sit in it.</p>
-          <div class="alpha-proof__flow">
-            <span>Answered it</span><i></i><span>Noticed the pattern</span><i></i><span>Built the system</span>
-          </div>
+      <div class="gap-grid">
+        <figure class="gap-shot reveal">
+          <Image src={formulaHome} alt="The live Formula4You specialist fragrance-commerce platform" widths={[520, 760, 1040]} sizes="(max-width: 900px) 100vw, 46vw" />
+          <figcaption>Formula4You · live · founder</figcaption>
+        </figure>
 
-          <Disclosure
-            index="→"
-            title="What I actually built there"
-            teaser="Not articles. A reason for the question to stop being asked."
-            tone="paper"
-          >
-            <p><strong>The knowledge base.</strong> Not "content" — answers written in the words customers actually used, placed at the moment of doubt rather than filed where only staff could find them. An article titled in company language is an article nobody finds.</p>
-            <p><strong>Escalation paths.</strong> Who decides, not just who replies. Most escalations are not hard cases; they are cases where nobody owns the exception, so the whole thing stops until a manager is interrupted.</p>
-            <p><strong>Response standards.</strong> So the answer is the same whoever gives it. Inconsistency is not a people problem — it is a governance problem wearing a people problem's clothes.</p>
-            <p><strong>The part that mattered most:</strong> working across sales, operations and product, because that is where the causes were. Support was where the failure arrived. It was almost never where it started.</p>
-            <p class="alpha-note">
-              <strong>Evidence status.</strong> The title Support Team Manager and the progression into it are my own statement — recorded as user-asserted until documentary proof is attached. Employee of the Month and the exact review count are held back until the certificate and review evidence exist; the site says "hundreds of five-star reviews" and no number until then.
-            </p>
-          </Disclosure>
-        </article>
-
-        <article class="formula-proof reveal reveal-delay-1">
-          <div class="formula-proof__image"><Image src={formulaHome} alt="The live Formula4You specialist fragrance-commerce platform" widths={[520, 760, 1040]} sizes="(max-width: 900px) 100vw, 42vw" /></div>
-          <div class="formula-proof__copy">
-            <span class="proof-label">Verified live platform · founder-led work</span>
-            <h3>The other half of the job: deciding what gets built at all.</h3>
-            <p>Alpha Capital shows I can read a system from inside it. This shows the harder half — that when the decision is mine and there is nobody to escalate to, I still pick the boring correct thing over the impressive one.</p>
-            <p>Live, with real participants: who may list, what happens when a listing is wrong, what a buyer is owed, who fixes it. Operating rules are not documentation. They are what the business does at 2am when nobody is watching.</p>
-            <p class="formula-proof__role">Founder — Business Growth, Customer Experience &amp; Platform Operations</p>
-
-            <div class="cluster">
-              <a class="btn btn--primary" href={withBase('/work/formula4you')}>Read the case</a>
-              <a class="btn" href={external.formula4you} rel="noopener">Visit live platform ↗</a>
-            </div>
-          </div>
-        </article>
+        <div class="gap-read reveal reveal-delay-1">
+          <p>Egypt’s fragrance market was never short of people. Suppliers, manufacturers, sellers and buyers were all already there — and all of them were working through tools built for selling anything at all.</p>
+          <p>A general storefront does not know how a fragrance gets chosen, what makes a supplier believable, or which facts a buyer needs before they will trust a bottle they cannot smell. So the market was not fragmented because it was small. It was fragmented because nothing had been built for the way it actually works.</p>
+          <p><strong>The gap was not a product nobody was selling. It was a market with no place built for it.</strong></p>
+          <p>I mapped the participants, reviewed what already existed, and put that against what I already knew from being inside the category. Then I made three decisions, and the whole thing rests on them.</p>
+        </div>
       </div>
 
-      {/* THE CONSULTING TRACK — the widest part of the record and, until now,
-          absent from the site entirely, which is why the page read as a
-          two-year support career.
+      <ol class="calls">
+        <li class="call reveal">
+          <span class="call__n">01</span>
+          <h3>Specialist, not general.</h3>
+          <p>A general online store competes with everyone alive on price and delivery — and both of those are won by whoever has the most money to lose. A platform built for one category competes on relevance instead. Relevance is the only advantage that compounds rather than being outspent.</p>
+        </li>
+        <li class="call reveal reveal-delay-1">
+          <span class="call__n">02</span>
+          <h3>Supply before demand.</h3>
+          <p>The acquisition plan was ready. I did not run it. The tempting order is to buy attention and hope supply catches up, because a traffic chart is a thing you can show people. I went credible suppliers first, then data structure, then inventory worth arriving for — and customers last. Every step before that looked slower and less impressive. <strong>An empty marketplace does not fail quietly: it teaches the first wave that you have nothing, and they do not come back to check.</strong></p>
+        </li>
+        <li class="call reveal reveal-delay-2">
+          <span class="call__n">03</span>
+          <h3>Rules before features.</h3>
+          <p>Who may list. What happens when a listing is wrong. What a buyer is owed and who fixes it. Renewals, expired accounts, review controls, what an admin can and cannot override. None of it demos well and all of it decides whether the place is still trustworthy in year two — operating rules are not documentation, they are what a business does when something breaks at 2am and nobody is watching.</p>
+        </li>
+      </ol>
 
-          Engagements were project-based, not employment, and the copy says so:
-          "consulted for", never "worked at". The sectors are described rather
-          than named — Ahmed's call, and the right one. A named employer is a
-          claim a recruiter can phone up and disprove; "a national telecom
-          operator" carries the same scale, needs no letter of proof, and cannot
-          blow up the rest of the page if it goes unanswered. */}
-      <div class="field-notes reveal">
-        <span class="proof-label">Independent consulting · project-based · sectors described, not named</span>
-        <h3>The support team was one room. Most of the work was in other people’s buildings.</h3>
-        <div class="field-notes__grid">
-          <div class="field-notes__say">
-            <p>Project engagements, not jobs: a national telecom operator and one of Egypt’s largest steel manufacturers on business operations; a state petroleum distributor and an academic institute on IT and service desk. Under that, a long tail of small Egyptian businesses — founder-led, where the whole operating model is one person’s working memory.</p>
-            <p>I describe them rather than name them. That is deliberate: a named client is a claim you would have to take on trust, and I would rather you did not have to. The sector tells you the scale, which is the only part that matters for whether the pattern transfers.</p>
-            <p>And it does transfer. A telecom and a five-person business fail in the same shapes, at different volumes:</p>
-          </div>
-          <ul class="field-notes__list">
-            <li>The process exists. It lives in one person’s head — and the bigger the company, the more heads it is scattered across.</li>
-            <li>Nobody is confused about the goal. They are confused about who decides.</li>
-            <li>“Your prices are too high” almost always means “I don’t understand what I’m getting.”</li>
-            <li>Everyone already knows what is broken. There is no room in which saying it out loud is safe.</li>
-          </ul>
+      <div class="gap-close reveal">
+        <p class="formula-proof__role">Founder — Business Growth, Customer Experience &amp; Platform Operations</p>
+        <div class="cluster">
+          <a class="btn btn--primary" href={withBase('/work/formula4you')}>Read the full case</a>
+          <a class="btn" href={external.formula4you} rel="noopener">Visit the live platform ↗</a>
         </div>
-        <p class="field-notes__rule">I am not attaching numbers to any of this. I did not keep the records, and a figure I cannot source is a guess in a better suit. What I kept is the judgment — and that is the thing you would actually be hiring.</p>
       </div>
     </div>
   </section>
@@ -717,41 +683,45 @@ const lenses = [
 
 
   .proof-section { position: relative; padding: 4.2rem 0 4rem; overflow: hidden; }
+  .gap-grid { display: grid; grid-template-columns: minmax(300px,.9fr) minmax(340px,1fr); gap: clamp(1.6rem,3.5vw,3rem); align-items: center; }
+  .gap-shot { position: relative; overflow: hidden; border: 1px solid var(--hairline); border-radius: 78px 26px 70px 30px; box-shadow: var(--shadow-deep); }
+  .gap-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+  .gap-shot figcaption { position: absolute; left: 1rem; bottom: 1rem; padding: .5rem .85rem; color: var(--chalk); border: 1px solid var(--hairline-strong); border-radius: var(--shape-pill); background: rgba(4,21,30,.82); backdrop-filter: blur(10px); font: 800 .6rem var(--font-head); letter-spacing: .1em; text-transform: uppercase; }
+  .gap-read p { margin-bottom: .9rem; color: var(--slate); font-size: .92rem; line-height: 1.7; }
+  .gap-read p:last-child { margin-bottom: 0; }
+  .gap-read strong { color: var(--white); font-weight: 700; }
+
+  /* Three decisions, not a ladder and not exhibits. The first case is a
+     descent, the second a collision; this one is a build, and a build is
+     remembered by what its author refused. */
+  .calls { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem; margin-top: clamp(2rem,4vw,3rem); list-style: none; padding: 0; }
+  .call { padding: clamp(1.4rem,2.5vw,2rem); border: 1px solid var(--hairline); border-radius: 62px 20px 56px 24px; background: rgba(255,255,255,.04); }
+  .call:nth-child(2) { border-radius: 22px 60px 26px 66px; }
+  .call:nth-child(3) { border-radius: 58px 24px 20px 64px; }
+  .call__n { display: block; margin-bottom: .8rem; color: var(--signal); font: 850 .68rem var(--font-head); letter-spacing: .12em; font-variant-numeric: tabular-nums; }
+  .call h3 { margin-bottom: .7rem; color: var(--white); font-size: clamp(1.15rem,1rem + .5vw,1.45rem); }
+  .call p { color: var(--slate); font-size: .85rem; line-height: 1.65; }
+  .call strong { color: var(--chalk); font-weight: 700; }
+
+  .gap-close { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.2rem 2rem; margin-top: 2.2rem; padding-top: 1.6rem; border-top: 1px solid var(--hairline); }
+  .gap-close .formula-proof__role { margin: 0 !important; }
+
+  @media (max-width: 900px) {
+    .gap-grid { grid-template-columns: 1fr; }
+    .gap-shot { max-height: 280px; }
+    .calls { grid-template-columns: 1fr; }
+  }
   .proof-section::before { content: ''; position: absolute; left: -4%; right: -4%; top: -78px; height: 128px; border-radius: 0 0 52% 48%; background: var(--paper); }
-  .proof-grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: 1.8rem; align-items: stretch; }
-  .alpha-proof { padding: clamp(2rem,4.5vw,3.8rem); color: var(--ink); border-radius: 74px 24px 84px 28px; background: var(--paper); box-shadow: var(--shadow-deep); }
-  .alpha-proof h3 { max-width: 650px; margin: 1.4rem 0 1rem; font-size: clamp(2rem,3.3vw,3.4rem); }
-  .alpha-proof > p { color: var(--ink-soft); }
-  .alpha-proof__flow { display: flex; align-items: center; gap: .75rem; margin: 2rem 0; color: var(--signal-deep); font: 850 .62rem var(--font-head); letter-spacing: .08em; text-transform: uppercase; }
-  .alpha-proof__flow i { flex: 1; min-width: 20px; height: 1px; background: var(--paper-line-strong); }
-  .alpha-proof ul { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem 1.4rem; }
-  .alpha-proof li { position: relative; padding-left: 1rem; color: var(--ink-soft); font-size: .78rem; }
-  .alpha-proof li::before { content: ''; position: absolute; left: 0; top: .6em; width: .4rem; height: .4rem; border-radius: 50%; background: var(--signal-deep); }
-  .alpha-proof > a { display: inline-block; margin-top: 1.8rem; color: var(--signal-deep); font: 850 .82rem var(--font-head); text-decoration: none; }
-  .formula-proof { overflow: hidden; border: 1px solid var(--hairline); border-radius: 26px 72px 30px 82px; background: rgba(255,255,255,.055); box-shadow: var(--shadow-deep); }
-  .formula-proof__image { position: relative; height: 290px; overflow: hidden; }
-  .formula-proof__image::after { content: ''; position: absolute; inset: auto 0 0; height: 55%; background: linear-gradient(transparent,var(--night-soft)); }
-  .formula-proof__image img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-  .formula-proof__copy { padding: 2rem; }
-  .formula-proof h3 { margin: 1rem 0 .75rem; font-size: 1.9rem; }
-  .formula-proof p { margin-bottom: .8rem; color: var(--slate); font-size: .86rem; line-height: 1.62; }
+  /* One article since Alpha left — the image reads as a wide plate beside the copy
+     rather than a card stacked on top of it. */
+  @media (max-width: 860px) {
+  }
   .formula-proof__role { margin: 1rem 0 1.5rem; color: var(--signal) !important; font: 800 .7rem var(--font-head); }
-  .formula-proof .btn { min-height: 42px; font-size: .72rem; }
   .close-actions { display: flex; flex-wrap: wrap; gap: .8rem; margin-top: 2.5rem; }
   .close-note { max-width: 60ch; margin-top: 1.8rem; color: var(--slate-soft); font-size: .82rem; }
-  .alpha-note { margin-top: 1.6rem !important; padding: 1rem 1.2rem; border-left: 3px solid var(--signal-deep); background: rgba(17,125,108,.07); border-radius: 0 14px 14px 0; font-size: .8rem !important; }
 
   /* Field notes — deliberately the plainest block on the page. It is the one
      section with nothing to show, so dressing it up would undercut the point. */
-  .field-notes { margin-top: 1.8rem; padding: clamp(1.6rem,3vw,2.6rem); border: 1px dashed var(--hairline-strong); border-radius: 30px 66px 26px 70px; background: rgba(255,255,255,.03); }
-  .field-notes h3 { max-width: 30ch; margin: .9rem 0 1.6rem; color: var(--chalk); font-size: clamp(1.4rem,2.2vw,2.05rem); }
-  .field-notes__grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 1.4rem 2.6rem; align-items: start; }
-  .field-notes__say p { margin-bottom: .9rem; color: var(--slate); font-size: .87rem; line-height: 1.68; }
-  .field-notes__say p:last-child { margin-bottom: 0; }
-  .field-notes__list { display: grid; gap: .7rem; }
-  .field-notes__list li { position: relative; padding-left: 1.35rem; color: var(--chalk); font-size: .85rem; line-height: 1.55; }
-  .field-notes__list li::before { content: ''; position: absolute; left: 0; top: .62em; width: .42rem; height: .42rem; border-radius: 50%; background: var(--acid); }
-  .field-notes__rule { max-width: 78ch; margin-top: 1.7rem; padding-top: 1.3rem; border-top: 1px solid var(--hairline); color: var(--slate-soft); font-size: .82rem; line-height: 1.6; }
   @media (max-width: 780px) { .field-notes__grid { grid-template-columns: 1fr; } }
   .lenses-section { padding: 3.6rem 0; }
   .lens-list { border-top: 1px solid var(--paper-line); }
@@ -795,7 +765,6 @@ const lenses = [
     .hero { min-height: auto; }
     .hero__grid { grid-template-columns: 1fr; }
     .system-lens { width: min(100%,620px); margin-inline: auto; }
-    .proof-grid { grid-template-columns: 1fr; }
     .build-rule { grid-template-columns: repeat(5,auto); }
     .build-rule p, .build-rule a { grid-column: 1 / -1; }
   }
@@ -811,9 +780,6 @@ const lenses = [
     .journey__spine { opacity: .28; }
     /* One column: the core drops to the bottom, so nothing has to dodge it. */
     .signal-map__core { top: auto; bottom: 0; width: 128px; height: 128px; transform: translate(-50%,0); }
-    .alpha-proof { border-radius: 48px 18px 54px 21px; }
-    .alpha-proof ul { grid-template-columns: 1fr; }
-    .alpha-proof__flow { flex-wrap: wrap; }
     .lens-row { grid-template-columns: 38px 1fr; }
     .lens-row p { grid-column: 2; }
     .about-strip__grid { grid-template-columns: 1fr; }

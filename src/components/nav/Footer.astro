@@ -1,37 +1,81 @@
 ---
+import { Image } from 'astro:assets';
+import portrait from '@/assets/portrait/ahmed-hamdy-portrait-approved.webp';
 import { contact, withBase, site } from '@config/site';
 const year = new Date().getFullYear();
+
+/**
+ * A footer, not a second navigation.
+ *
+ * The old one carried three columns of links. "Selected work" pointed at a
+ * route index holding one entry that is already linked from the page. "The
+ * diagnosis", "About", "Evidence" and "What I go deep on" were anchors — on a
+ * single-page site, a link that scrolls you back up the page you are already on
+ * is furniture, and one of them pointed at a section that no longer exists.
+ *
+ * What is left is what a footer is for: who this is, how to reach him, and the
+ * one honest thing to say about it.
+ *
+ * The mark used to be his initials inside a portrait-shaped frame — a frame
+ * with no portrait in it. It has the portrait now.
+ */
+const CHANNELS = [
+  {
+    href: contact.linkedin,
+    label: 'LinkedIn',
+    external: true,
+    // Simple geometry beats a licensed brand glyph: no attribution, no CDN.
+    path: 'M4.5 3.5a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM.6 16h3.8V6.6H.6V16Zm6.3 0h3.8v-5.2c0-1.4.3-2.7 2-2.7 1.7 0 1.7 1.6 1.7 2.8V16H18v-5.9c0-3.3-.7-5.8-4.5-5.8-1.8 0-3 1-3.5 1.9h-.1V6.6H6.9V16Z',
+  },
+  {
+    href: contact.emailHref,
+    label: 'Email',
+    external: false,
+    path: 'M1.6 3h14.8c.9 0 1.6.7 1.6 1.6v8.8c0 .9-.7 1.6-1.6 1.6H1.6C.7 15 0 14.3 0 13.4V4.6C0 3.7.7 3 1.6 3Zm7.4 6.3 6.6-4.1H2.4L9 9.3Zm0 1.8L1.6 6.5v6.9h14.8V6.5L9 11.1Z',
+  },
+  {
+    href: contact.whatsapp,
+    label: 'WhatsApp',
+    external: true,
+    path: 'M9 0a8.9 8.9 0 0 0-7.6 13.6L0 18l4.5-1.4A8.9 8.9 0 1 0 9 0Zm0 16.2a7.2 7.2 0 0 1-3.7-1l-.3-.2-2.7.8.8-2.6-.2-.3A7.3 7.3 0 1 1 9 16.2Zm4-5.4c-.2-.1-1.3-.7-1.5-.8-.2-.1-.4-.1-.5.1l-.7.9c-.1.2-.3.2-.5.1a6 6 0 0 1-3-2.6c-.2-.3.1-.4.3-.7l.3-.5v-.5l-.6-1.5c-.2-.4-.4-.3-.5-.3h-.5c-.2 0-.5.1-.7.3-.3.3-.9.9-.9 2.1s.9 2.5 1 2.6a9.4 9.4 0 0 0 3.7 3.3c1.3.5 1.6.4 1.9.4.4 0 1.3-.5 1.5-1 .2-.6.2-1 .1-1.1l-.4-.2Z',
+  },
+];
 ---
 
 <footer class="footer">
   <div class="wrap footer__grid">
     <div class="footer__identity">
-      <span class="footer__mark">AH</span>
+      <span class="footer__mark">
+        <Image src={portrait} alt="" widths={[104, 156]} sizes="52px" loading="lazy" />
+      </span>
       <div>
-        <strong>Ahmed Hamdy</strong>
+        <a class="footer__name" href={withBase('/')}>Ahmed Hamdy</a>
         <p>{site.role} · Alexandria, Egypt</p>
       </div>
     </div>
 
-    <nav aria-label="Portfolio">
-      <span>Explore</span>
-      <a href={withBase('/work')}>Selected work</a>
-      <a href={withBase('/') + '#diagnosis'}>The diagnosis</a>
-      <a href={withBase('/') + '#about'}>About</a>
-    </nav>
-    <nav aria-label="Audience routes">
-      <span>Choose a route</span>
-      <a href={withBase('/') + '#capabilities'}>What I go deep on</a>
-      <a href={withBase('/') + '#evidence'}>Evidence</a>
-      <a href={withBase('/contact')}>Contact</a>
-    </nav>
-    <nav aria-label="Direct contact">
-      <span>Go direct</span>
-      <a href={contact.linkedin} rel="noopener">LinkedIn ↗</a>
-      <a href={contact.emailHref}>Email</a>
-      <a href={contact.whatsapp} rel="noopener">WhatsApp</a>
+    <nav class="footer__channels" aria-label="Direct contact">
+      <span class="footer__k">Reach me directly</span>
+      <ul>
+        {CHANNELS.map((c) => (
+          <li>
+            <a
+              class="chan"
+              href={c.href}
+              aria-label={c.label}
+              rel={c.external ? 'noopener' : undefined}
+            >
+              <svg viewBox="0 0 18 18" width="18" height="18" aria-hidden="true" focusable="false">
+                <path d={c.path} fill="currentColor" />
+              </svg>
+              <span class="chan__t">{c.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
     </nav>
   </div>
+
   <div class="wrap footer__bottom">
     <p>© {year} Ahmed Hamdy. Built to show the work, the reasoning and the boundary of each contribution.</p>
     <p>Messages are read and answered personally.</p>
@@ -39,17 +83,37 @@ const year = new Date().getFullYear();
 </footer>
 
 <style>
-  .footer { padding: 4.5rem 0 2rem; color: var(--chalk); border-top: 1px solid var(--hairline); background: #04131b; }
-  .footer__grid { display: grid; grid-template-columns: minmax(260px,1.6fr) repeat(3,minmax(130px,.55fr)); gap: 2.5rem; }
+  .footer { padding: 3.4rem 0 1.8rem; color: var(--chalk); border-top: 1px solid var(--hairline); background: #04131b; }
+  .footer__grid { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem 3rem; align-items: center; }
   .footer__identity { display: flex; align-items: center; gap: 1rem; }
-  .footer__mark { width: 52px; height: 52px; display: grid; place-items: center; border: 1px solid var(--hairline-strong); border-radius: 60% 40% 67% 33% / 48% 62% 38% 52%; color: var(--signal); font: 850 .8rem var(--font-head); }
-  .footer__identity strong { font: 800 1rem var(--font-head); }
+  /* The portrait is 900×1125 — a 4:5 picture. A 52px square cropped a fifth of
+     it away, so the frame takes the picture's own proportions instead and the
+     whole thing survives. */
+  .footer__mark { width: 50px; aspect-ratio: 4 / 5; flex: none; overflow: hidden; border: 1px solid var(--hairline-strong); border-radius: 60% 40% 67% 33% / 48% 62% 38% 52%; }
+  .footer__mark img { width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .footer__name { display: block; color: var(--chalk); font: 800 1rem var(--font-head); text-decoration: none; }
+  .footer__name:hover { color: var(--signal); }
   .footer__identity p, .footer__bottom { color: var(--slate-soft); font-size: .75rem; }
-  .footer nav { display: flex; flex-direction: column; gap: .48rem; }
-  .footer nav span { margin-bottom: .35rem; color: var(--slate-soft); font: 800 .62rem var(--font-head); letter-spacing: .13em; text-transform: uppercase; }
-  .footer nav a { color: var(--chalk); font: 650 .82rem var(--font-head); text-decoration: none; }
-  .footer nav a:hover { color: var(--signal); }
-  .footer__bottom { display: flex; justify-content: space-between; gap: 1.5rem; margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--hairline); }
-  @media (max-width: 850px) { .footer__grid { grid-template-columns: 1fr 1fr; } .footer__identity { grid-column: 1 / -1; } }
-  @media (max-width: 520px) { .footer__grid { grid-template-columns: 1fr; } .footer__identity { grid-column: auto; } .footer__bottom { flex-direction: column; } }
+  .footer__identity p { margin-top: .15rem; }
+
+  .footer__k { display: block; margin-bottom: .7rem; color: var(--slate-soft); font: 800 .62rem var(--font-head); letter-spacing: .13em; text-transform: uppercase; }
+  .footer__channels ul { display: flex; flex-wrap: wrap; gap: .6rem; list-style: none; margin: 0; padding: 0; }
+  /* Icon plus word. An icon alone is a guessing game, and the label is what an
+     assistive reader and a hurried human both need. */
+  .chan { display: inline-flex; align-items: center; gap: .55rem; min-height: 44px; padding: 0 1rem; color: var(--chalk); border: 1px solid var(--hairline-strong); border-radius: var(--shape-pill); background: rgba(255,255,255,.04); text-decoration: none; font: 750 .78rem var(--font-head); transition: border-color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease); }
+  .chan svg { flex: none; color: var(--signal); transition: color var(--dur-fast) var(--ease); }
+  .chan:hover { color: var(--ink); border-color: transparent; background: var(--signal); }
+  .chan:hover svg { color: var(--ink); }
+  .chan:focus-visible { outline: 2px solid var(--acid); outline-offset: 3px; }
+
+  .footer__bottom { display: flex; justify-content: space-between; gap: 1.5rem; margin-top: 2.4rem; padding-top: 1.2rem; border-top: 1px solid var(--hairline); }
+
+  @media (max-width: 620px) {
+    .footer__grid { flex-direction: column; align-items: flex-start; }
+    .footer__bottom { flex-direction: column; }
+    .chan__t { display: none; }
+    .chan { padding: 0; width: 44px; justify-content: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) { .chan, .chan svg { transition: none; } }
 </style>
