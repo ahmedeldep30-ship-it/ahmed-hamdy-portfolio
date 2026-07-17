@@ -18,18 +18,6 @@ import Disclosure from '@/components/Disclosure.astro';
  */
 
 
-/**
- * The boundary section. This exists because a portfolio that claims everything
- * proves nothing — and because a company that hires him expecting a designer or
- * a data engineer will be disappointed, which serves nobody.
- */
-const lenses = [
-  ['Customer Journey & Conversion Review', 'I can tell you where a journey loses people and why — information arriving too late, a decision that needs making twice, a trust signal that is missing. I write the requirement. I do not open Figma and design the screen.'],
-  ['Business Performance Interpretation', 'I start from the business question, pick the indicator that actually answers it, and read what the pattern means. I am not a data engineer and I do not build the pipeline.'],
-  ['Product Requirements & Prioritization', 'I define the problem, the need, the acceptance logic, and whether building is warranted at all. The architecture and the code belong to engineers.'],
-  ['AI-Aware Workflow Decisions', 'I decide where to simplify, where to automate, and where an AI feature would add cost without touching the cause. Knowing when not to build it is the skill. I am not an ML engineer.'],
-  ['Digital Commerce & Platform Operations', 'Founder-led: participant journeys, onboarding, trust, operating rules, and coordinating the people who implement. I am not the developer who shipped it.'],
-];
 ---
 
 <div class="home">
@@ -65,9 +53,9 @@ const lenses = [
             and whether it is worth their time. */}
         <nav class="hero__index" aria-label="On this page">
           {[
-            ['01', 'The diagnosis', '#diagnosis'],
-            ['02', 'The evidence', '#dossier'],
-            ['03', 'Evidence', '#evidence'],
+            ['01', 'The withdrawal case', '#diagnosis'],
+            ['02', 'The documents case', '#dossier'],
+            ['03', 'The platform I own', '#evidence'],
             ['04', 'Where I stop', '#boundary'],
             ['05', 'Why I see it this way', '#about'],
             ['06', 'Talk', '#talk'],
@@ -138,7 +126,7 @@ const lenses = [
         <div class="signal-map">
           <article class="signal-island signal-island--support reveal">
             <span><i class="isle__n">01</i>Support sees</span><h3>The same person, twice.</h3>
-            <p>Not just the same question — the same customer coming back to ask it again, because the first answer gave them nothing they could act on. Volume is the visible cost. Repeat contact is the real one.</p>
+            <p>Not just the same question — the same customer coming back to ask it again, because the first answer gave them nothing they could act on. That second contact is the one nobody counts.</p>
           </article>
           <article class="signal-island signal-island--sales reveal reveal-delay-1">
             <span><i class="isle__n">02</i>Payments sees</span><h3>A transaction that completed.</h3>
@@ -232,7 +220,7 @@ const lenses = [
           <Disclosure index="07" tone="night"
             title="Every number was green. The customer was not."
             teaser="First response time was excellent because agents were replying with nothing.">
-            <p>Metrics said the team was performing; the experience said otherwise. First response time was excellent. Tickets resolved was high. Then I read what the replies actually said. <em>“We have received your request and it is under review.”</em> Sent fast, SLA met, zero information given.</p>
+            <p>Metrics said the team was performing and the experience said otherwise. Tickets resolved was high, the SLA was green, and then I read what the replies actually said. <em>“We have received your request and it is under review.”</em> Sent fast, SLA met, zero information given.</p>
             <p>Some tickets were closed early to bring the backlog down. The customer would reply and the ticket reopened. Visible backlog low; reopen rate and repeat contact rate both high.</p>
             <p>And the macros were not unified, so the same problem got three different answers from three agents. One said two to three days. One said five. One told the customer to contact their bank immediately. <strong>A customer who writes in twice and gets two different answers has not received two answers. They have received evidence that nobody knows.</strong></p>
             <p>So I stopped measuring adherence and started reviewing the decision: did the agent reach the correct information, did they explain it in a way this customer could use, did they name the next step, and was the cause recorded so it stops happening? An agent can be perfectly polite, hit every required phrase, and still send someone in the wrong direction and leave the problem with no owner.</p>
@@ -244,7 +232,7 @@ const lenses = [
             teaser="We were telling customers their money had arrived. It had not.">
             <p>A small number of withdrawals were showing <strong>Completed</strong>, and some of those customers were telling us the money had not arrived. One at a time, each case is explainable as an ordinary bank delay. That is exactly why it survived. It only becomes visible if you refuse to look at them one at a time.</p>
             <p>Grouped, there was a pattern: all inside one time window, all on the same payment provider, and all with the status flipping to Completed suspiciously soon after the request was sent.</p>
-            <p>So I did not escalate nine separate tickets. I wrote one incident summary — customers affected, total amounts, timing of each transaction, our status, the provider’s status, expected behaviour against actual. Then Payments Operations, to check the settlement files. Then Engineering, for the webhook and the status mapping. Then Finance, to confirm whether the money had actually left the settlement account.</p>
+            <p>So I did not escalate them one at a time. I wrote one incident summary — customers affected, total amounts, timing of each transaction, our status, the provider’s status, expected behaviour against actual. Then Payments Operations, to check the settlement files. Then Engineering, for the webhook and the status mapping. Then Finance, to confirm whether the money had actually left the settlement account.</p>
             <p>The cause: our system was treating the provider’s first response as final success. That response means <em>accepted for processing</em>. It does not mean the transfer happened. We had collapsed two different things into one word — <strong>accepted for processing is not successfully settled</strong>. A tiny percentage of transactions, and the most dangerous thing in the queue, because we were telling people their money had arrived while it was still in flight.</p>
             <p>Three fixes: the status only becomes Completed after final settlement confirmation; a real intermediate state — <strong>Sent to provider</strong> — so the truth has somewhere to live; and every affected transaction pulled and reviewed proactively rather than waiting for each customer to notice.</p>
             <p>The customers did not get <em>“we are experiencing a technical delay.”</em> They got: <em>“We reviewed your withdrawal and found the status showed as completed before the final confirmation arrived from the payment provider. The transaction is not lost — it is still processing, and we are tracking it as a priority. Your next update will come before [date], even if nothing has changed.”</em></p>
@@ -277,7 +265,7 @@ const lenses = [
             statement is which direction moved and which number he refused to
             chase — not a percentage nobody can source. */}
         <div class="impact-system">
-          <article class="impact-petal impact-petal--support reveal"><span><i class="isle__n">01</i>The customer</span><h3>A timeline instead of a word.</h3><p>Request received → under review → sent to payment provider → completed, each with an expected time. Not a faster answer. No reason to ask.</p></article>
+          <article class="impact-petal impact-petal--support reveal"><span><i class="isle__n">01</i>The customer</span><h3>A timeline instead of a word.</h3><p>Four stages the customer can watch, each with the time it should take. Not a faster answer — no reason to ask for one.</p></article>
           <article class="impact-petal impact-petal--sales reveal reveal-delay-1"><span><i class="isle__n">02</i>The data</span><h3>Cause recorded apart from complaint.</h3><p>Every ticket now carries what the customer said and what was actually wrong. Those two were one field before, and that single missing distinction had been aiming every decision at the wrong department.</p></article>
           <article class="impact-petal impact-petal--ops reveal reveal-delay-2"><span><i class="isle__n">03</i>The system</span><h3>A status that stopped lying.</h3><p>Completed only after settlement confirms, a real intermediate state so the truth has somewhere to live, and a monitoring alert so it cannot drift back quietly.</p></article>
           <article class="impact-petal impact-petal--lead reveal reveal-delay-3"><span><i class="isle__n">04</i>The team</span><h3>Quality became the decision, not the script.</h3><p>Thirteen people, reviewed on whether the customer could act on the answer rather than whether the phrasing was approved. An agent can hit every required word and still leave a problem with no owner.</p></article>
@@ -348,7 +336,7 @@ const lenses = [
       <div class="exhibit-pair">
         <article class="exhibit reveal">
           <span class="exhibit__tag">Exhibit B</span>
-          <h3>“Customer changed their mind.”</h3>
+          <h3>The cancellation that was not one.</h3>
           <dl class="exhibit__rows">
             <div><dt>What the report said</dt><dd>“Customer changed their mind.”</dd></div>
             <div><dt>What the conversation said</dt><dd>We called two days later to say the colour was out of stock and offered a substitute. They said no.</dd></div>
@@ -359,11 +347,11 @@ const lenses = [
 
         <article class="exhibit exhibit--dark reveal reveal-delay-1">
           <span class="exhibit__tag">Exhibit C</span>
-          <h3>One word. Three meanings.</h3>
+          <h3>“Confirmed.” One word, three meanings.</h3>
           <dl class="exhibit__rows">
-            <div><dt>Sales meant</dt><dd>the customer said yes.</dd></div>
-            <div><dt>The warehouse meant</dt><dd>we checked, and the stock is real.</dd></div>
-            <div><dt>Management read it as</dt><dd>ready to enter fulfilment.</dd></div>
+            <div><dt>To sales it meant</dt><dd>the customer said yes.</dd></div>
+            <div><dt>To the warehouse</dt><dd>we checked, and the stock is real.</dd></div>
+            <div><dt>To management</dt><dd>ready to enter fulfilment.</dd></div>
           </dl>
           <p class="exhibit__note">The smallest document in the pile — a plain order-tracking sheet — and the one that broke the case open. An order could sit in management’s report as confirmed while nobody had looked in the warehouse. Support could tell a customer their order was confirmed and discover the next day that the product did not exist.</p>
           <p class="exhibit__note"><strong>The company did not have a definition of the truth. It had one per department, and was reading them as if they were the same one.</strong></p>
@@ -385,7 +373,6 @@ const lenses = [
           teaser="Training someone on a system that is not clear only teaches them to explain the chaos more politely."
           tone="paper"
         >
-          <p><strong>Not a training day.</strong> Training someone on a system that is not clear only teaches them to explain the chaos more politely.</p>
           <p>I rebuilt the order journey into stages that admit exactly one reading — received, awaiting stock check, stock confirmed, confirmed with the customer, preparing, ready for the carrier, collected, out for delivery, delivered, failed, return requested, return under review, returned, refunded. Every stage got five things: a definition, the department that owns it, how long it is normal to sit there, the next action, and who moves when it overruns.</p>
           <p>Complaints stopped being recorded as outcomes and started carrying three fields: what the customer said, what was actually wrong, and which stage produced it. <em>Late delivery / warehouse backlog / fulfilment</em> is a completely different instruction to a business than <em>late delivery</em>. The reports changed shape overnight — a share of the cancellations turned out to be our own errors, and part of the delay the carrier was being blamed for had happened before the carrier ever touched the parcel.</p>
           <p>Escalations stopped being “can someone look at this order?” in a group chat and started arriving as a case ready for a decision: order number, expected behaviour, what actually happened, current stage, the department that must act, the specific action, the priority, and when the update is due. Support stopped throwing problems over a wall, and the other side stopped receiving them without an owner or a deadline.</p>
@@ -414,7 +401,7 @@ const lenses = [
       <div class="gap-grid">
         <figure class="gap-shot reveal">
           <Image src={formulaHome} alt="The live Formula4You specialist fragrance-commerce platform" widths={[520, 760, 1040]} sizes="(max-width: 900px) 100vw, 46vw" />
-          <figcaption>Formula4You · live · founder</figcaption>
+          <figcaption>The live platform</figcaption>
         </figure>
 
         <div class="gap-read reveal reveal-delay-1">
@@ -453,23 +440,40 @@ const lenses = [
     </div>
   </section>
 
+  {/* This was five rows of Title Case Capability Names — "Business Performance
+      Interpretation", "AI-Aware Workflow Decisions" — each ending on the same
+      "I am not an X" beat. Nobody talks like that, and I had just deleted the
+      capability essays for the identical crime while leaving their twin
+      standing. The boundary earns its place; the parade did not. */}
   <section class="lenses-section zone-paper" id="boundary">
     <div class="wrap">
       <header class="section-head reveal">
-        <div><span class="eyebrow">Supporting business lenses</span><h2>I can work next to technical specialists without pretending to be one.</h2></div>
-        <p>I define the business question, customer need, workflow, priority and success criteria. Designers, engineers and data specialists retain ownership of their craft.</p>
+        <div><span class="eyebrow">Where I stop</span><h2>Every fix in those three cases was built by somebody better at it than me.</h2></div>
+        <p>The status mapping was an engineer’s. The timeline screen was a designer’s. Formula4You is a developer’s. My part was deciding what needed to exist and why, writing it down clearly enough that they did not have to guess — and saying out loud when the answer was that nothing should be built at all.</p>
       </header>
+
       <div class="lens-list">
-        {lenses.map(([title, copy], index) => (
-          <article class="lens-row reveal">
-            <span>{String(index + 1).padStart(2, '0')}</span><h3>{title}</h3><p>{copy}</p>
-          </article>
-        ))}
+        <article class="lens-row reveal">
+          <span>01</span><h3>Where a journey leaks</h3>
+          <p>I can tell you which sentence is costing you the order and roughly what it costs. I cannot design the screen that fixes it — I write the requirement and hand it to someone who can.</p>
+        </article>
+        <article class="lens-row reveal">
+          <span>02</span><h3>Reading the numbers</h3>
+          <p>Start from the business question, not the dashboard: pick the indicator that actually answers it, then read what the pattern means. I have never built a data pipeline and would be slow and wrong if I tried.</p>
+        </article>
+        <article class="lens-row reveal">
+          <span>03</span><h3>Deciding what gets built</h3>
+          <p>The problem, the need, the acceptance logic, and whether building is warranted at all. Architecture belongs to engineers. A manager who pretends otherwise is how a team ends up building the same thing twice.</p>
+        </article>
+        <article class="lens-row reveal">
+          <span>04</span><h3>Whether AI helps</h3>
+          <p>Usually it would add cost without touching the cause — which is a less popular answer than it should be. Knowing when not to build a thing is most of what I am for.</p>
+        </article>
       </div>
+
       <div class="build-rule reveal">
         <span>Simplify</span><i>→</i><span>Automate</span><i>→</i><span>Build</span>
-        <p>Building is the last option, not the first reaction. A clearer sentence, fewer fields or better ownership may solve more than a new feature.</p>
-        
+        <p>Building is the last option, not the first reaction. A clearer sentence, one fewer field, or a named owner will often outperform a feature — and all three are cheaper to undo.</p>
       </div>
     </div>
   </section>
@@ -517,7 +521,7 @@ const lenses = [
         <a class="btn" href={withBase('/work/formula4you')}>Read the Formula4You case <span class="btn__arrow" aria-hidden="true">→</span></a>
         <a class="btn" href={withBase('/assets/ahmed-hamdy-cv.pdf')}>Download the CV <span class="btn__arrow" aria-hidden="true">↓</span></a>
       </div>
-      <p class="close-note reveal">Messages are read and answered personally. No response time is promised, because I will not promise one I cannot keep.</p>
+      <p class="close-note reveal">No response time is promised, because I will not promise one I cannot keep.</p>
     </div>
   </section>
 </div>
