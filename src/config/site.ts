@@ -21,9 +21,10 @@ export const site = {
   name: 'Ahmed Hamdy',
   /**
    * "Business Growth & Operations Specialist" was the wrong door. It described
-   * the two years at Alpha Capital and nothing else — so the whole site read as
-   * a support career, when the consulting work across telecom, steel, petroleum
-   * and education is the wider half of it. Consultant is the accurate word.
+   * the two years at Alpha Capital and nothing else, when the consulting work —
+   * a discipline (business growth, market positioning, sales, support and
+   * root-cause diagnosis), not an industry — is the wider half. Consultant is
+   * the accurate word.
    */
   title: 'Ahmed Hamdy — Business Operations & Process Improvement Consultant',
   role: 'Business Operations & Process Improvement Consultant',
