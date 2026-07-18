@@ -30,7 +30,7 @@ import Disclosure from '@/components/Disclosure.astro';
             consultant, which is why it read as generated. This one names three
             departments (the breadth) and lands on the insight that is actually
             his. */}
-        <h1 id="home-title">It shows up in support. It slows down sales. <span>It started somewhere else.</span></h1>
+        <h1 id="home-title">It slows down sales. It shows up in support. <span>It started somewhere else.</span></h1>
         {/* The hero sheds its bio into the About section directly below it — the
             visitor gets the shape of the page first, then the substance. One
             line stays, because the headline earns a single answer. The old two
@@ -81,19 +81,19 @@ import Disclosure from '@/components/Disclosure.astro';
     <div class="wrap who__grid">
       <div class="who__lead reveal">
         <span class="eyebrow">Who I am</span>
-        <h2>I have been the manager a company is trying to hire, and the founder deciding whether an outside opinion is worth the hour.</h2>
-        <p>I joined a UK fintech on the frontline, answering customers in Arabic. Six months later I was running the function — a thirteen-person team on Intercom, Discord and email. I did not inherit a team that worked. I inherited categories that hid the real problem, a knowledge base that explained broken screens instead of fixing them, and metrics that were green while the customer was not.</p>
-        <p>The thing I am actually good at is finding where a problem lives. The same question arriving hundreds of times is not hundreds of problems; it is one thing upstream nobody fixed. I found a payment status telling customers their money had arrived while it was still in flight, and I did not escalate it one ticket at a time — I wrote a single incident and pulled payments, engineering and finance onto it together.</p>
-        <p>Since 2022 I have advised other people's businesses — from early-stage founders to large organisations — mostly on how to grow without simply buying the growth. I am blunt about it: a lower price is not a strategy, and more agents is not a fix. I tell a founder where they are genuinely different from the competitor beside them, and, just as often, that the honest answer is to build nothing at all.</p>
-        <p>I read a sales site the way the customer buying from it does, not the way the developer who built it does — I want to know where the experience breaks, not whether the code is clean. And I run my own: Formula4You, a specialist fragrance-commerce platform I built after spotting a structural gap in a fragmented market, where every operating decision is mine and I am the one who lives with it.</p>
-        <p class="who__close">So I sit on both sides of the same table. Whatever is breaking, I run the same move on it: find where it actually started, name who owns it, and change the smallest thing that fixes it — and I say plainly where the evidence stops.</p>
+        <h2>Bring me something that is not working, and I will tell you where it actually started.</h2>
+        <p>That is most of what I do, and it is the same move whether the thing in front of me is a support queue, a launch that stalled, a sales number that stopped moving, or a checkout people quietly abandon. Businesses are usually very good at describing the symptom and very bad at locating the cause — and the two are almost never in the same department.</p>
+        <p>I start at the raw material rather than the summary: the actual conversations, the actual cancelled orders, the actual page somebody gave up on. By the time a problem reaches a meeting it has been summarised twice, and the detail that would have told you where it began is the first thing summarising removes.</p>
+        <p>Since 2022 people have brought me whatever was wrong — how to grow profit without simply buying the growth, where they are genuinely different from the competitor beside them, why a team is not performing, whether a site loses the order long before the checkout. I am blunt about the answers: a lower price is not a strategy, more agents is not a fix, and sometimes the honest answer is that nothing should be built at all.</p>
+        <p>None of that came from books. I spent two years inside a UK fintech's support function, promoted from the frontline to running the team, where every failure in the business eventually arrived at my desk as somebody's complaint. I run my own platform, Formula4You, where the operating decisions are mine and I am the one who lives with them. And I have worked from the outside of other people's businesses, from early-stage founders to large organisations, where judgement is the only thing I bring in the door.</p>
+        <p class="who__close">Whatever is breaking, I run the same move on it: find where it actually started, name who owns it, change the smallest thing that fixes it — and say plainly where the evidence stops.</p>
       </div>
 
       <aside class="who__strengths reveal reveal-delay-1" aria-label="What I am good at">
         <span class="who__k">What I am good at</span>
         <ul>
           <li>I find where a problem actually lives — usually a process nobody owns, or a handoff nobody thought was theirs — instead of treating the place it surfaces.</li>
-          <li>I lead a team from having done its work: promoted into a thirteen-person support function within six months, not placed above it.</li>
+          <li>I lead a team from having done its work — I was promoted into running one from the frontline, not placed above it.</li>
           <li>I tell founders how to grow on relevance rather than price, and where they are genuinely different from whoever is beside them.</li>
           <li>I review a sales or e-commerce site as the customer buying from it, and point to the exact step where the order is lost.</li>
           <li>I say when nothing should be built — usually the least popular answer in the room, and often the correct one.</li>
@@ -102,12 +102,23 @@ import Disclosure from '@/components/Disclosure.astro';
     </div>
   </section>
 
+  {/* The cases are three organisations, which made the page read as "these
+      three places are my whole career". They are examples of one method, and
+      most of the work they illustrate belongs to clients and stays with them.
+      Saying that out loud costs nothing and is true. */}
+  <section class="examples zone-paper">
+    <div class="wrap examples__row">
+      <span class="eyebrow">Worked examples</span>
+      <p>Three I can walk through end to end. Most of what I have done belongs to other people and stays with them — these are the ones I am free to show in detail. Open whichever is closest to your problem.</p>
+    </div>
+  </section>
+
   <details class="case" id="diagnosis" data-case>
     <summary class="case__head">
       <span class="case__n">Case 01</span>
       <span class="case__titles">
         <span class="case__t">A question that would not stop being asked.</span>
-        <span class="case__ctx">Alpha Capital Group · UK fintech · support team of 13 on Intercom</span>
+        <span class="case__ctx">Alpha Capital Group · UK fintech · support operations</span>
       </span>
       <span class="case__open">Read the case</span>
       <span class="case__chev" aria-hidden="true"><svg viewBox="0 0 16 10" width="16" height="10"><path d="M1 1l7 7 7-7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg></span>
@@ -574,6 +585,13 @@ import Disclosure from '@/components/Disclosure.astro';
     .who__grid { grid-template-columns: 1fr; }
     .who__strengths { position: static; }
   }
+
+  /* The frame around the cases — one line that stops three organisations from
+     reading as a complete career file. */
+  .examples { padding: clamp(2.2rem, 4vw, 3.2rem) 0 clamp(1rem, 2vw, 1.4rem); background: var(--paper); }
+  .examples__row { display: grid; grid-template-columns: minmax(0, .28fr) minmax(0, 1fr); gap: clamp(1rem, 3vw, 2.2rem); align-items: baseline; }
+  .examples__row p { max-width: 68ch; color: var(--ink-soft); font-size: clamp(.92rem, .88rem + .25vw, 1.02rem); line-height: 1.65; }
+  @media (max-width: 720px) { .examples__row { grid-template-columns: 1fr; gap: .6rem; } }
 
   /* THE CASE PANELS — the spine of the page, collapsed by default.
      Each case is a <details>; the <summary> is a full-width paper header bar
