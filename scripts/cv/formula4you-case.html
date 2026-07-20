@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Ahmed Hamdy — Formula4You: Go-to-Market &amp; Marketplace Growth</title>
+<!--
+  THE FORMULA4YOU CASE STUDY, as a sendable document.
+
+  This is not the public site case (which deliberately publishes no numbers,
+  because none had a source attached). This is a direct application document —
+  Ahmed hands it to an employer who asked for a portfolio file — and the numbers
+  in it are his own platform metrics, which he stands behind and can defend in
+  an interview. That is the line: a private document he sends can carry figures
+  he owns; the public, indexed site does not, until he chooses to.
+
+  Same stylesheet as the CVs, so every document he sends is one visual system.
+  A case study is a narrative, not a parser target, so it is free to use the
+  stat row and the decision callout that a CV cannot.
+
+  Regenerate:  node scripts/build-case.mjs
+-->
+<link rel="stylesheet" href="cv.css" />
+<style>
+  .id__role { color: var(--accent); }
+  .lede b, .lede strong { color: var(--ink); }
+
+  /* The decision callout — the one bet the whole thing turned on. */
+  .bet {
+    margin-top: 8pt; padding: 9pt 12pt;
+    border-left: 3pt solid var(--accent);
+    background: #f3f7f6;
+    border-radius: 0 4pt 4pt 0;
+  }
+  .bet b { color: var(--ink); }
+  .bet .vs { color: var(--faint); }
+
+  /* The results row. A CV cannot use a grid; a case study can. */
+  .stats {
+    margin-top: 9pt;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 7pt;
+  }
+  .stat {
+    padding: 8pt 10pt; border: 1pt solid var(--rule); border-radius: 6pt;
+    background: #fafbfb;
+  }
+  .stat .n { font-family: Manrope, sans-serif; font-size: 17pt; font-weight: 800; letter-spacing: -0.02em; color: var(--accent); line-height: 1; }
+  .stat .l { margin-top: 3pt; font-size: 8.4pt; color: var(--soft); line-height: 1.3; }
+
+  .metrics { margin-top: 7pt; font-size: 8.8pt; color: var(--faint); }
+  .metrics b { color: var(--soft); font-weight: 600; }
+
+  /* The forward-looking close, set apart. */
+  .vision { margin-top: 9pt; padding-top: 8pt; border-top: 1pt solid var(--rule); }
+  .vision h2 { border: 0; padding: 0; margin-bottom: 4pt; }
+  .close { margin-top: 8pt; font-family: Manrope, sans-serif; font-size: 11pt; font-weight: 700; color: var(--ink); letter-spacing: -0.01em; line-height: 1.3; }
+</style>
+</head>
+<body>
+
+<header class="id">
+  <h1>Ahmed Hamdy</h1>
+  <p class="id__role">Formula4You — Go-to-Market Strategy &amp; Two-Sided Marketplace Growth</p>
+  <p class="id__contact">
+    Founder-led case study · Egypt's fragrance market (~$870M, 2025)<br />
+    ahmedeldep30@gmail.com · linkedin.com/in/ahmed-hamdy-growth-operations · ahmed-hamdy-ops.github.io
+  </p>
+</header>
+
+<section>
+  <h2>The opportunity</h2>
+  <p class="lede">
+    Egypt's fragrance market is large and active — oil suppliers, manufacturers, independent brands and
+    retail sellers all trading — but it runs on WhatsApp threads and social pages, not infrastructure.
+    Through <b>direct market mapping, competitor analysis and conversations with merchants and
+    suppliers</b>, I found that roughly <b>80–90% of the businesses I reviewed had no dedicated online
+    store</b>. The barrier was not demand or product. It was the perceived cost and complexity of going
+    online, thin technical knowledge, fragmented supplier relationships, fulfilment friction, and no
+    practical content showing these businesses how digital commerce would actually help them grow.
+  </p>
+</section>
+
+<section>
+  <h2>The strategic bet</h2>
+  <p class="role__note">
+    I defined two interconnected ideal customer profiles: <b>independent merchants</b> who want an
+    affordable way to sell online, and <b>fragrance suppliers</b> who want visibility and recurring B2B
+    demand. Rather than position Formula4You as another website builder or supplier directory, I built it
+    around one promise — <b>launch, source, operate and grow from one connected platform</b>. Merchants
+    get a low-friction storefront plus a built-in supplier network they can source from in the same
+    dashboard; suppliers get a professional storefront, aggregated demand and industry visibility.
+  </p>
+  <div class="bet">
+    <b>The decision:</b> a specialist category platform, not a generic store builder.
+    <span class="vs">A store builder competes on price and features against companies a thousand times its
+    size. A category platform competes on relevance — and, over time, on data nobody else holds.</span>
+  </div>
+</section>
+
+<section>
+  <h2>Go-to-market execution</h2>
+  <ul>
+    <li>
+      <strong>Supply-first sequencing.</strong> I onboarded and organised suppliers before courting
+      merchants, so a merchant arriving on day one found a stocked, useful platform rather than an empty
+      one — an empty marketplace teaches its first users there is nothing there, and they do not come back.
+    </li>
+    <li>
+      <strong>Segmented merchant acquisition.</strong> Direct outreach to defined segments, industry-specific
+      landing pages, educational content, referrals, and an onboarding journey engineered to move a user from
+      registration to an active storefront with minimal friction.
+    </li>
+    <li>
+      <strong>Pricing as a market-entry lever.</strong> An affordable subscription to lower the adoption
+      barrier for small businesses, rather than maximising revenue per customer up front. The long-term model
+      compounds: recurring revenue from retained merchants and suppliers as network and transaction volume grow.
+    </li>
+    <li>
+      <strong>A fulfilment model built for small merchants.</strong> With supplier support, a merchant can
+      order using the end customer's delivery details and have the supplier ship direct — so a small merchant
+      operates with low upfront inventory and less fulfilment risk.
+    </li>
+    <li>
+      <strong>A designed two-sided growth loop.</strong> More suppliers raise sourcing value for merchants;
+      more merchants raise order volume and exposure for suppliers. Each side pulls the other.
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>Results — first month of execution</h2>
+  <div class="stats">
+    <div class="stat"><div class="n">42</div><div class="l">suppliers onboarded</div></div>
+    <div class="stat"><div class="n">55</div><div class="l">merchant stores activated</div></div>
+    <div class="stat"><div class="n">97</div><div class="l">industry businesses networked</div></div>
+    <div class="stat"><div class="n">~400</div><div class="l">orders processed in one month</div></div>
+    <div class="stat"><div class="n">7.3</div><div class="l">avg. orders per onboarded merchant</div></div>
+    <div class="stat"><div class="n">1 : 1.3</div><div class="l">supplier-to-merchant ratio</div></div>
+  </div>
+  <p class="metrics">
+    <b>Tracked throughout:</b> supplier and merchant activation · onboarding completion · active storefronts
+    · first-order conversion · monthly order volume · repeat ordering · registration-to-active-usage conversion.
+    These validated both the market need and the two-sided model, and established a repeatable acquisition
+    and liquidity foundation.
+  </p>
+</section>
+
+<section class="vision">
+  <h2>Where it is going</h2>
+  <p class="role__note">
+    The orders prove the model works; the <b>data</b> is the real asset. Every listing, supplier and
+    transaction builds a structured index of Egypt's fragrance industry — brands, materials, prices,
+    availability — that no chat thread or social page can match. The direction is to become
+    <b>the reference marketplace for Egyptian perfume</b>: a place where a buyer anywhere in the world can
+    browse every Egyptian brand and fragrance in one catalogue, and where the accumulated data becomes the
+    moat no new entrant can copy. Supply-first was never only a launch tactic — it was the first step in
+    building that index.
+  </p>
+  <p class="close">
+    I don't build features. I build the smallest system that makes a market legible — then let the network compound.
+  </p>
+</section>
+
+</body>
+</html>

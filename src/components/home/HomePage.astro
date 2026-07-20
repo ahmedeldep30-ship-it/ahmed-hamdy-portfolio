@@ -506,6 +506,19 @@ import Disclosure from '@/components/Disclosure.astro';
         </li>
       </ol>
 
+      {/* The three decisions are the strategy; these are what it produced. Real
+          platform counts, not estimates — the one figure I could not stand
+          behind stays out of the case, which is what makes these believable. */}
+      <div class="gap-nums reveal">
+        <p class="gap-nums__intro">I ran it supply-first and held the acquisition spend until the platform was worth arriving for. The first month of execution:</p>
+        <div class="gap-nums__grid">
+          <div class="gap-num"><span class="gap-num__n">42</span><span class="gap-num__l">suppliers onboarded</span></div>
+          <div class="gap-num"><span class="gap-num__n">55</span><span class="gap-num__l">merchant stores activated</span></div>
+          <div class="gap-num"><span class="gap-num__n">~400</span><span class="gap-num__l">orders in the first month</span></div>
+          <div class="gap-num"><span class="gap-num__n">7.3</span><span class="gap-num__l">orders per merchant</span></div>
+        </div>
+      </div>
+
       <div class="gap-close reveal">
         <p class="formula-proof__role">Founder — Business Growth, Customer Experience &amp; Platform Operations</p>
         <div class="cluster">
@@ -921,6 +934,16 @@ import Disclosure from '@/components/Disclosure.astro';
   .call h3 { margin-bottom: .7rem; color: var(--white); font-size: clamp(1.15rem,1rem + .5vw,1.45rem); }
   .call p { color: var(--slate); font-size: .85rem; line-height: 1.65; }
   .call strong { color: var(--chalk); font-weight: 700; }
+
+  /* The results strip. Real counts, styled as instrument readings rather than
+     marketing — signal-green figures, small muted labels, on the dark zone. */
+  .gap-nums { margin-top: clamp(1.8rem,3.5vw,2.6rem); }
+  .gap-nums__intro { max-width: 62ch; margin-bottom: 1.1rem; color: var(--slate); font-size: .9rem; line-height: 1.65; }
+  .gap-nums__grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1rem; }
+  .gap-num { padding: 1.1rem 1.2rem; border: 1px solid var(--hairline); border-radius: 18px 8px 20px 10px; background: rgba(72,224,187,.05); }
+  .gap-num__n { display: block; color: var(--signal); font: 800 clamp(1.7rem,1.3rem + 1.4vw,2.3rem)/1 var(--font-head); letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+  .gap-num__l { display: block; margin-top: .5rem; color: var(--slate); font-size: .74rem; line-height: 1.35; }
+  @media (max-width: 720px) { .gap-nums__grid { grid-template-columns: repeat(2,1fr); } }
 
   .gap-close { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.2rem 2rem; margin-top: 2.2rem; padding-top: 1.6rem; border-top: 1px solid var(--hairline); }
   .gap-close .formula-proof__role { margin: 0 !important; }
